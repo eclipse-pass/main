@@ -26,7 +26,7 @@ PASS was created by the Sheridan Libraries at Johns Hopkins University, in colla
 
 ## Current Status
 
-The [PASS project](https://projects.eclipse.org/projects/technology.pass) is currently in the Incubation phase at an Eclipse Foundation. Code for the project can be found in the GitHub organization: [https://github.com/eclipse-pass].
+PASS is currently in the [Incubation phase as an Eclipse Foundation project](https://projects.eclipse.org/projects/technology.pass). Code for the project can be found in the [eclipse-pass](https://github.com/eclipse-pass) GitHub organization.
 
 ## Documentation
 
