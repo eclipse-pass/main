@@ -30,4 +30,10 @@ PASS is currently in the [Incubation phase as an Eclipse Foundation project](htt
 
 ## Documentation
 
-Documentation for the PASS project is currently in development and will be added to this repository as it is created.
+The [PASS Documentation](/docs/README.md) will be managed in this [main repo](https://github.com/eclipse-pass/main)
+and it will link out to other projects (listed below), other websites as well as other cloud storages (e.g. Google Docs).
+
+| Component | Summary |
+| --- | --- |
+| Playground | A collection of small `hello-world` like applications written in the technologies being used with eclipse-pass. <ul><li>Repo: [/eclipse-pass/playground](https://github.com/eclipse-pass/playground)</li><li>Docs: [/docs/playground.md](/docs/playground.md) |
+
