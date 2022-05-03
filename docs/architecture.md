@@ -65,7 +65,7 @@ Our team is looking to replace Fedora is just Postgres, as well
 as moving our Data Loaders to integrate with JSON and cloud
 storage (e.g. S3).
 
-![PASS Architecture V2](/docs/assets/architecture/overview_v1.png)
+![PASS Architecture V2](/docs/assets/architecture/overview_v2.png)
 
 ### On-Prem Kubernetes Cluster
 
