@@ -7,7 +7,7 @@ a production running application.
 | --- | --- | --- | --- | --- |
 | [pass-authz](https://github.com/eclipse-pass/pass-authz) | ❓ | ❓ | ❓ | Working on running tests and making deployable entity |
 | [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
-| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ❓ | ❓ | The user interface written in Ember |
+| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❓ | The user interface written in Ember |
 | [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❓ | ❓ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
 | [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❓| Adapter for interacting with the Fedora repository |
 | [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ❓ | ❓ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
@@ -51,6 +51,7 @@ The following repositories have been forked from others
 
 | Project | Command | Dependencies |
 | --- | --- | --- |
+| pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPN, Yarn, Ember.js
 | pass-ember-adapter | npm test<br>ember test<br>ember test --server | Ember.js Ember CLI
 
 ## Building
