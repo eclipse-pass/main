@@ -76,6 +76,33 @@ And then you can visit http://127.0.0.1:4200
 
 ![EmberJS App running in browser](/docs/assets/emberjs_app.png)
 
+### Testing the application
+
+To run the tests, run the following
+
+```bash
+cd emberjs-app && \
+  ember test
+```
+
+The results should look like the following
+
+```bash
+Environment: test
+cleaning up...
+Built project successfully. Stored in "/var/folders/0_/c1nz9syd7svd18qms5rf1_1h0000gn/T/tests-dist-2022411-68622-1286wzc.cayu".
+ok 1 Chrome 101.0 - [1 ms] - ember-qunit: Ember.onerror validation: Ember.onerror is functioning properly
+
+1..1
+# tests 1
+# pass  1
+# skip  0
+# todo  0
+# fail  0
+
+# ok
+```
+
 ## Maven JAR
 
 The [maven-jar](https://github.com/eclipse-pass/playground/tree/main/maven-jar) is a bare-bones Java executable (jar)
