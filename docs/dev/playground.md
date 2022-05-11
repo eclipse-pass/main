@@ -7,7 +7,7 @@ from issues with the underlying projects.
 
 ## HTML Application (Via Docker)
 
-The [html-app](/html-app) is a bare-bones HTML website
+The [html-app](https://github.com/eclipse-pass/playground/tree/main/html-app) is a bare-bones HTML website
 that is launched through docker (internally running nginx).
 This aligns with [pass-offline-docker](https://github.com/OA-PASS/pass-offline-docker)
 as a site that `hosts a single HTML file that displays that PASS is offline.`
@@ -31,7 +31,7 @@ And then you can visit http://127.0.0.1:8080
 
 ## Maven JAR
 
-The [maven-jar](/maven-jar) is a bare-bones Java executable (jar)
+The [maven-jar](https://github.com/eclipse-pass/playground/tree/main/maven-jar) is a bare-bones Java executable (jar)
 This aligns with [deposit-services](https://github.com/OA-PASS/deposit-services)
 as `Deposit Services' primary artifact is a single self-executing jar.`
 
@@ -104,7 +104,7 @@ Welcome to a maven executable
 
 ## Maven Service
 
-The [maven-service](/maven-service) is a bare-bones Java service (
+The [maven-service](https://github.com/eclipse-pass/playground/tree/main/maven-service) is a bare-bones Java service (
 as an executable jar).  This project also aligns with the
 [deposit-services](https://github.com/OA-PASS/deposit-services)
 with an additional _feature_.  The application will run forever
@@ -116,7 +116,7 @@ To build the application locally you will need
 * [Maven](https://maven.apache.org/install.html), installabl with `brew install maven`
 * [Java](https://openjdk.java.net)
 
-Similar mechanism to build and test as [maven-jav](/maven-jav) project.  This
+Similar mechanism to build and test as [maven-jav](https://github.com/eclipse-pass/playground/tree/main/maven-jav) project.  This
 service will run forever.
 
 ### Running the application
