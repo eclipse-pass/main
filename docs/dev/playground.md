@@ -49,6 +49,33 @@ The application itself was built by running
 ember new emberjs-app --lang en
 ```
 
+### Running (Via Docker)
+
+The application can also be run via Docker.
+
+To build the application locally you will need [Docker Deskop](https://www.docker.com/products/developer-tools/)
+
+```bash
+cd emberjs-app && \
+  docker build -t emberjs-app .
+```
+
+To launch a build container, run
+
+```bash
+docker run -p 8080:80 emberjs-app
+```
+
+And then you can visit http://127.0.0.1:8080
+
+#### Troubleshooting Docker
+
+To troubleshoot the container, run
+
+```bash
+docker run -p 8080:80 -it --entrypoint sh emberjs-app
+```
+
 ### Running (bare metal)
 
 To launch the emberjs-app, run the following
