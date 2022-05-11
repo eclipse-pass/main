@@ -9,6 +9,27 @@ Developer focused documentation should be written in this `docs/dev/` directory.
 | Playground | A collection of small `hello-world` like applications written in the technologies being used with eclipse-pass | [/eclipse-pass/playground](https://github.com/eclipse-pass/playground) | [/docs/playground.md](/docs/dev/playground.md) |
 | Pass UI | The PASS web application | [/eclipse-pass/pass-ui](https://github.com/eclipse-pass/pass-ui) | [/docs/pass-ui.md](/docs/dev/pass-ui.md) |
 
+## Development Guidelines
+
+### Committers and Contributors
+
+Only Committers on the PASS Eclipse project are able to make changes to the code repositories, however contributions from non-committers are welcome and encouraged. These contributions should be made in the form of a Pull Request (PR) on the appropriate GitHub repository.
+
+### Contribution Guidelines
+
+- All code changes should be submitted in the form of a Pull Request (PR).
+- PRs should be associated with an existing GitHub issue and the issue should be linked in the PR description.
+- PRs should be reviewed by at least one committer that is not the PR author before merging.
+- The PR author is responsible for ensuring the PR gets reviewed, updates get made, and a merge is completed.
+  - When creating a PR, either request a review directly in the PR, or request a review in the Eclipse PASS project slack with a link to the PR.
+- For PRs created by committers, the PR author is expected to perform the PR merge after another committer has approved the PR.
+- For PRs created by contributors, the committer reviewing the PR is responsible for merging the PR after approval.
+- Merges from the `main` branch into a development branch should be avoided. Instead, the development branch should be rebased onto `main` so that the final result in a PR is always displaying PR changes directly following the commits currently on `main`.
+- A PR should not be merged until all automated checks pass.
+- When merging, ensure that the end result will maintain a clean git history.
+  - If commits in the PR are well organized and commit messages provide appropriate detail about changes made, using "Rebase and merge" is preferred.
+  - If commits in the PR don't meet the criteria for a "Rebase and merge" (e.g. there are many commits and/or commit messages are not descriptive), use "Squash and merge" and provide a commit message which describes the changes made in the PR as a whole.
+
 ## Troubleshooting
 
 ### Committer Email Address
