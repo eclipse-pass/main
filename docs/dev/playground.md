@@ -16,13 +16,13 @@ To build the application locally you will need [Docker Deskop](https://www.docke
 
 ```bash
 cd html-app && \
-  docker build -t hello-world .
+  docker build -t html-app .
 ```
 
 To launch a build container, run
 
 ```bash
-docker run -p 8080:80 hello-world
+docker run -p 8080:80 html-app
 ```
 
 And then you can visit http://127.0.0.1:8080
