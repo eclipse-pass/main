@@ -29,6 +29,53 @@ And then you can visit http://127.0.0.1:8080
 
 ![HTML App running in browser](/docs/assets/html_app_nginx.png)
 
+## EmberJS Application
+
+The [emberjs-app](https://github.com/eclipse-pass/playground/tree/main/emberjs-app)
+is a hello-worl web app using [EmberJS](https://emberjs.com/).
+
+### Requirments
+
+This requires `node`, `npm` and `emberjs` and can be installed with [homebrew](https://brew.sh) on a mac.
+
+```bash
+brew install node
+npm install -g ember-cli
+```
+
+The application itself was built by running
+
+```bash
+ember new emberjs-app --lang en
+```
+
+### Running (bare metal)
+
+To launch the emberjs-app, run the following
+
+```bash
+cd emberjs-app && \
+  ember serve
+````
+
+The output should look similar to
+
+```bash
+Build successful (4818ms) – Serving on http://localhost:4200/
+
+Slowest Nodes (totalTime >= 5%)               | Total (avg)
+----------------------------------------------+------------
+Babel: @ember/test-helpers (1)                | 1134ms
+ember-auto-import-webpack (1)                 | 687ms
+BroccoliRollup (6)                            | 396ms (66 ms)
+Rollup (2)                                    | 378ms (189 ms)
+Babel: @ember-data/store (2)                  | 279ms (139 ms)
+```
+
+And then you can visit http://127.0.0.1:4200
+
+![EmberJS App running in browser](/docs/assets/emberjs_app.png)
+
 ## Maven JAR
 
 The [maven-jar](https://github.com/eclipse-pass/playground/tree/main/maven-jar) is a bare-bones Java executable (jar)
