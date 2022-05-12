@@ -1,0 +1,61 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.eclipse.pass</groupId>
+  <artifactId>Eclipse-PASS Parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Eclipse-PASS Parent</name>
+  <url>https://github.com/eclipse-pass/main</url>
+
+  <properties>
+    <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
+  </properties>
+
+  <build>
+  <plugins>
+    <!-- Used to validate all code style rules in source code using Checkstyle -->
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-checkstyle-plugin</artifactId>
+      <version>3.1.0</version>
+      <executions>
+        <execution>
+          <id>verify-style</id>
+          <!-- Bind to verify so it runs after package & unit tests, but before install -->
+          <phase>verify</phase>
+          <goals>
+            <goal>check</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <configLocation>https://github.com/duraspace/codestyle/blob/master/src/main/resources/duraspace-checkstyle/checkstyle.xml</configLocation>
+        <suppressionsLocation>https://github.com/duraspace/codestyle/blob/master/src/main/resources/duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+        <encoding>UTF-8</encoding>
+        <consoleOutput>true</consoleOutput>
+        <logViolationsToConsole>true</logViolationsToConsole>
+        <failOnViolation>true</failOnViolation>
+        <includeTestSourceDirectory>true</includeTestSourceDirectory>
+      </configuration>
+      <dependencies>
+        <dependency>
+          <groupId>org.duraspace</groupId>
+          <artifactId>codestyle</artifactId>
+          <version>${duraspace-codestyle.version}</version>
+        </dependency>
+        <!-- Override dependencies to use latest version of checkstyle -->
+        <dependency>
+          <groupId>com.puppycrawl.tools</groupId>
+          <artifactId>checkstyle</artifactId>
+          <version>8.29</version>
+        </dependency>
+      </dependencies>
+    </plugin>
+  </plugins>
+  </build>
+</project>
