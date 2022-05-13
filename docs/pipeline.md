@@ -5,7 +5,7 @@ a production running application.
 
 | Project | Build | Tests | Deploy | Notes |
 | --- | --- | --- | --- | --- |
-| [pass-authz](https://github.com/eclipse-pass/pass-authz) | ❓ | ❓ | ❓ | Working on running tests and making deployable entity |
+| [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ❓ | Various authz related components including a user service for dermining the logged in user (included in fcrepo image by pass-docker) and a service for automatically updating the permission on fcrepo objects (authz image in pass-docker) |
 | [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
 | [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❓ | The user interface written in Ember |
 | [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❓ | ❓ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
@@ -17,7 +17,7 @@ a production running application.
 | [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ❓ | ❓ | ❓ | PASS download service
 | [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ❓ | ❓ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
 | [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ❓ | ❓ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
-| [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ❓ | ❓ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories.
+| [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ❓ | ❓ | ❓ | A simple check of the indexer before kicking off a push for a loader
 | [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ❓ | ❓ | ❓ | Traverses a Fedora repository containing PASS resources, and for each resource, determines if a duplicate exists
 
@@ -30,7 +30,7 @@ part of the core application.
 | [playground](https://github.com/eclipse-pass/playground) | An collection of small hello-world like applications written in the technologies being used with eclipse-pass so that we can isolate, build, deploy and troubleshoot ops procedures separate from issues with the underlying projects. |
 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) | Java client for managing interactions with the PASS data in Fedora.
 | [pass-messaging-support](https://github.com/eclipse-pass/pass-messaging-support) | N/A
-| [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | N/A
+| [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | Contains support for pass-deposit-services to package deposits for various repositories. Also has Dockerfiles which add provider support by extending pass-deposit-services image.
 
 The following application help load data into PASS
 
@@ -53,12 +53,16 @@ The following repositories have been forked from others
 | --- | --- | --- |
 | pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPN, Yarn, Ember.js
 | pass-ember-adapter | npm test<br>ember test<br>ember test --server | Ember.js Ember CLI
+| pass-deposit-services | mvn test<br>mvn verify | Maven, Java, Docker
+| pass-authz | mvn test<br>mvn verify | Maven, Java, Docker
 
 ## Building
 
 | Project | Command | Dependencies |
 | --- | --- | --- |
 | pass-ember-adapter | npm install | npm
+| pass-deposit-services | mvn install | Maven, Java, Docker
+| pass-authz | mvn install | Maven, Java, Docker
 
 ## Dependencies
 
@@ -75,6 +79,7 @@ The following repositories have been forked from others
 | Shibboleth | 2 | [3.3.0](https://shibboleth.atlassian.net/wiki/spaces/SP3/pages/2065335693/ReleaseNotes) | Authentication
 | Ember.js | 3.8 | [3.28.8](https://github.com/emberjs/ember.js/releases) | The user interface
 | Ember CLI | 2.13 | [4.3.0](https://github.com/ember-cli/ember-cli/releases) | CLI for managing an ember application |
+| Docker Compose | 1.29.2 | [2.5.0](https://github.com/docker/compose/releases) | CLI for managing docker containers |
 
 ## References
 
