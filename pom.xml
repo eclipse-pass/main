@@ -41,49 +41,51 @@
   </developers>
 
   <properties>
+    <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
+    <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
   </properties>
 
   <build>
-  <plugins>
-    <!-- Used to validate all code style rules in source code using Checkstyle -->
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-checkstyle-plugin</artifactId>
-      <version>3.1.0</version>
-      <executions>
-        <execution>
-          <id>verify-style</id>
-          <!-- Bind to verify so it runs after package & unit tests, but before install -->
-          <phase>verify</phase>
-          <goals>
-            <goal>check</goal>
-          </goals>
-        </execution>
-      </executions>
-      <configuration>
-        <configLocation>duraspace-checkstyle/checkstyle.xml</configLocation>
-        <suppressionsLocation>duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-        <encoding>UTF-8</encoding>
-        <consoleOutput>true</consoleOutput>
-        <logViolationsToConsole>true</logViolationsToConsole>
-        <failOnViolation>true</failOnViolation>
-        <includeTestSourceDirectory>true</includeTestSourceDirectory>
-      </configuration>
-      <dependencies>
-        <dependency>
-          <groupId>org.duraspace</groupId>
-          <artifactId>codestyle</artifactId>
-          <version>${duraspace-codestyle.version}</version>
-        </dependency>
-        <!-- Override dependencies to use latest version of checkstyle -->
-        <dependency>
-          <groupId>com.puppycrawl.tools</groupId>
-          <artifactId>checkstyle</artifactId>
-          <version>8.29</version>
-        </dependency>
-      </dependencies>
-    </plugin>
-  </plugins>
+    <plugins>
+      <!-- Used to validate all code style rules in source code using Checkstyle -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>verify-style</id>
+            <!-- Bind to verify so it runs after package & unit tests, but before install -->
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <configLocation>duraspace-checkstyle/checkstyle.xml</configLocation>
+          <suppressionsLocation>duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+          <encoding>UTF-8</encoding>
+          <consoleOutput>true</consoleOutput>
+          <logViolationsToConsole>true</logViolationsToConsole>
+          <failOnViolation>true</failOnViolation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.duraspace</groupId>
+            <artifactId>codestyle</artifactId>
+            <version>${duraspace-codestyle.version}</version>
+          </dependency>
+          <!-- Override dependencies to use latest version of checkstyle -->
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
   </build>
 </project>
