@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.eclipse.pass</groupId>
+  <artifactId>eclipse-pass-parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>Eclipse-PASS Parent</name>
+  <url>https://github.com/eclipse-pass/main</url>
+
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Jim Martino</name>
+      <email>jrm.jhu@jhu.edu</email>
+      <organization>The Sheridan Libraries, Johns Hopkins Univeristy</organization>
+      <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
+    </developer>
+    <developer>
+      <name>Mark Patton</name>
+      <email>mpatton@jhu.edu</email>
+      <organization>The Sheridan Libraries, Johns Hopkins Univeristy</organization>
+      <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
+    </developer>
+    <developer>
+      <name>John Abrahams</name>
+      <email>jabrah20@jhu.edu</email>
+      <organization>The Sheridan Libraries, Johns Hopkins Univeristy</organization>
+      <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
+    </developer>
+  </developers>
+
+  <properties>
+    <checkstyle.version>8.41.1</checkstyle.version>
+    <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
+    <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- Used to validate all code style rules in source code using Checkstyle -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven.checkstyle.plugin.version}</version>
+        <executions>
+          <execution>
+            <id>verify-style</id>
+            <!-- Bind to verify so it runs after package & unit tests, but before install -->
+            <phase>verify</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <configLocation>duraspace-checkstyle/checkstyle.xml</configLocation>
+          <suppressionsLocation>duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+          <encoding>UTF-8</encoding>
+          <consoleOutput>true</consoleOutput>
+          <logViolationsToConsole>true</logViolationsToConsole>
+          <failOnViolation>true</failOnViolation>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.duraspace</groupId>
+            <artifactId>codestyle</artifactId>
+            <version>${duraspace-codestyle.version}</version>
+          </dependency>
+          <!-- Override dependencies to use latest version of checkstyle -->
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>${checkstyle.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+</project>
