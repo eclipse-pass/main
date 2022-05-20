@@ -3,23 +3,23 @@
 This will document the progression from source code commits to
 a production running application.
 
-| Project | Build | Tests | Deploy | Notes |
+| Project | Build | UTs |ITs | Deploy | Notes |
 | --- | --- | --- | --- | --- |
-| [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ❓ | Various authz related components including a user service for dermining the logged in user (included in fcrepo image by pass-docker) and a service for automatically updating the permission on fcrepo objects (authz image in pass-docker) |
-| [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
-| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❓ | The user interface written in Ember |
-| [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❓ | ❓ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
-| [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❓| Adapter for interacting with the Fedora repository |
-| [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ❓ | ❓ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
-| [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ❓ | ❓ | ❓ | HTTP API for determining the policies applicable to a given Submission
-| [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❓ | ❓ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
-| [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ❓ | ❓ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
-| [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ❓ | ❓ | ❓ | PASS download service
-| [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ❓ | ❓ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
-| [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ❓ | ❓ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
-| [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
-| [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ❓ | ❓ | ❓ | A simple check of the indexer before kicking off a push for a loader
-| [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ❓ | ❓ | ❓ | Traverses a Fedora repository containing PASS resources, and for each resource, determines if a duplicate exists
+| [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ❎ | ❓ | Various authz related components including a user service for dermining the logged in user (included in fcrepo image by pass-docker) and a service for automatically updating the permission on fcrepo objects (authz image in pass-docker) |
+| [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
+| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❌ |❓ | The user interface written in Ember |
+| [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❓ | ❓ | ❓ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
+| [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓| Adapter for interacting with the Fedora repository |
+| [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ❓ | ❓ | ❓ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
+| [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ❓ | ❓ | ❓ | ❓ | HTTP API for determining the policies applicable to a given Submission
+| [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❓ | ❓ | ❓ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
+| [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ❓ | ❓ | ❓ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
+| [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ❓ | ❓ | ❓ | ❓ | PASS download service
+| [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ❓ | ❓ | ❓ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
+| [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ❓ | ❓ | ❓ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
+| [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ❎ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
+| [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ❓ | ❓ | ❓ | ❓ | A simple check of the indexer before kicking off a push for a loader
+| [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ❓ | ❓ | ❓ | ❓ | Traverses a Fedora repository containing PASS resources, and for each resource, determines if a duplicate exists
 
 There are a few additional project that help support Eclipse PASS but are not
 part of the core application.
@@ -47,14 +47,24 @@ The following repositories have been forked from others
 | [modeshape](https://github.com/eclipse-pass/modeshape) | [ModeShape](https://github.com/ModeShape/modeshape) | N/A
 | [pass-fcrepo-module-auth-rbacl](https://github.com/eclipse-pass/pass-fcrepo-module-auth-rbacl) | [birkland](https://github.com/birkland/fcrepo-module-auth-rbacl) | Role Based Authorization Delegate Module for the Fedora 4 Repository
 
-## Testing
+## Unit Testing
 
 | Project | Command | Dependencies |
 | --- | --- | --- |
 | pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPN, Yarn, Ember.js
 | pass-ember-adapter | npm test<br>ember test<br>ember test --server | Ember.js Ember CLI
-| pass-deposit-services | mvn test<br>mvn verify | Maven, Java, Docker
-| pass-authz | mvn test<br>mvn verify | Maven, Java, Docker
+| pass-deposit-services | mvn test | Maven, Java
+| pass-authz | mvn -pl -pass-authz-integration clean test | Maven, Java 8
+| pass-ember-adapter | export FEDORA_ADAPTER_INTEGRATION_TEST=1<br>ember test | Ember.js Ember
+
+## Integration Testing
+
+| Project | Command | Dependencies |
+| --- | --- | --- |
+| pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPN, Yarn, Ember.js
+| pass-deposit-services | mvn verify | Maven, Java, Docker
+| pass-authz | cd pass-authz-integration && mvn cargo:run -Pstandard<br>mvn verify | Maven, Java 8, Docker
+| pass-ember-adapter | docker-compose up -d<br>yarn install<br>ember test | Ember.js Ember Docker
 
 ## Building
 
@@ -63,6 +73,7 @@ The following repositories have been forked from others
 | pass-ember-adapter | npm install | npm
 | pass-deposit-services | mvn install | Maven, Java, Docker
 | pass-authz | mvn install | Maven, Java, Docker
+| pass-ember-adapter | yarn install<br>ember build | Ember.js Ember
 
 ## Dependencies
 
@@ -72,7 +83,7 @@ The following repositories have been forked from others
 | Java | 11 | [22](https://www.java.com/releases/) | Programming language
 | Fedora | 4.7.5 | [6.1.1](https://github.com/fcrepo/fcrepo/releases) | Document store (database) for PASS
 | Postgres | 13.3 | [14.2](https://www.postgresql.org/docs/release/) | Underlying storage of Fedora
-| Node |  | [18.x](https://nodejs.org/en/about/releases/) | JavaScript runtime, unconfirmed on desired version
+| Node |  | [14.x](https://nodejs.org/en/about/releases/) | JavaScript runtime, unconfirmed on desired version
 | Npm |  | [6.14.8](https://github.com/npm/npm/releases) | Package manager for node |
 | Maven | 3.6.3 | [3.8.5](https://maven.apache.org/docs/history.html) | Java Package manager
 | ElasticSearch| 7.13.3 | [8.1.3](https://github.com/elastic/elasticsearch/releases) | Search / indexing
