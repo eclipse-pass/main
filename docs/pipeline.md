@@ -4,7 +4,7 @@ This will document the progression from source code commits to
 a production running application.
 
 | Project | Build | UTs |ITs | Deploy | Notes |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ❎ | ❓ | Various authz related components including a user service for dermining the logged in user (included in fcrepo image by pass-docker) and a service for automatically updating the permission on fcrepo objects (authz image in pass-docker) |
 | [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
 | [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❌ |❓ | The user interface written in Ember |
