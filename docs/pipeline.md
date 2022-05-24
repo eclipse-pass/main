@@ -52,7 +52,7 @@ The following repositories have been forked from others
 
 | Project | Command | Dependencies |
 | --- | --- | --- |
-| pass-ember-adapter | export FEDORA_ADAPTER_INTEGRATION_TEST=1<br>ember test | Ember.js Ember
+| pass-ember-adapter | export FEDORA_ADAPTER_INTEGRATION_TEST=0<br>ember test | Ember.js Ember
 | pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPN, Yarn, Ember.js
 | pass-deposit-services | mvn test | Maven, Java
 | pass-authz | mvn -pl -pass-authz-integration test | Maven, Java 8
