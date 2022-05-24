@@ -9,7 +9,7 @@ a production running application.
 | [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
 | [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❌ | ❓ | The user interface written in Ember |
 | [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❓ | ❓ | ❓ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
-| [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ✅ | ❓| Adapter for interacting with the Fedora repository |
+| [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓| Adapter for interacting with the Fedora repository |
 | [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ❓ | ❓ | ❓ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
 | [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ❓ | ❓ | ❓ | ❓ | HTTP API for determining the policies applicable to a given Submission
 | [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❓ | ❓ | ❓ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
