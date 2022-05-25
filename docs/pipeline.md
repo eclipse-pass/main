@@ -11,7 +11,7 @@ a production running application.
 | [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❌ | ❌ | ❌ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
 | [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓| Adapter for interacting with the Fedora repository |
 | [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ✅ | ✅ | ✅ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
-| [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ❓ | ❓ | ❓ | ❓ | HTTP API for determining the policies applicable to a given Submission
+| [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ✅ | ✅ | ✅ | ❓ | HTTP API for determining the policies applicable to a given Submission
 | [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❓ | ❓ | ❓ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
 | [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ❓ | ❓ | ❓ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
 | [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ❓ | ❓ | ❓ | ❓ | PASS download service
@@ -58,6 +58,7 @@ The following repositories have been forked from others
 | pass-authz | mvn -pl -pass-authz-integration test | Maven, Java 8
 | pass-java-client |  mvn test -DskipITs=true | Java
 | pass-indexer | mvn test -DskipITs=true | Java
+| pass-policy-service | go test ./... | Go
 
 ## Integration Testing
 
@@ -68,6 +69,7 @@ The following repositories have been forked from others
 | pass-authz | mvn verify | Maven, Java 8, Docker
 | pass-java-client | mvn verify | Java, Docker
 | pass-indexer | docker-compose up -d<br>mvn verify | Java, Docker
+| pass-policy-service | docker-compose up -d<br>go test -tags=integration ./... | Go
 
 ## Building
 
@@ -79,6 +81,7 @@ The following repositories have been forked from others
 | pass-authz | mvn install | Maven, Java 8, Docker
 | pass-java-client | mvn install | Java, Docker
 | pass-indexer | docker-compose up -d<br>mvn install | Java, Docker
+| pass-policy-service | go generate ./...<br>go build ./cmd/pass-policy-service | Go
 
 ## Dependencies
 
