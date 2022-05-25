@@ -6,11 +6,11 @@ a production running application.
 | Project | Build | UTs |ITs | Deploy | Notes |
 | --- | --- | --- | --- | --- | --- |
 | [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ❎ | ❓ | Various authz related components including a user service for dermining the logged in user (included in fcrepo image by pass-docker) and a service for automatically updating the permission on fcrepo objects (authz image in pass-docker) |
-| [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❓ | ❓ | ❓ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
-| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ❓ | ✅ | ❌ | ❓ | The user interface written in Ember |
-| [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❓ | ❓ | ❓ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
+| [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❌ | ❌ | ❌ | ❓ | `JSON-LD` [contexts](https://oa-pass.github.io/pass-data-model/src/main/resources/context.jsonld) | URLs need updating to eclipse-pass |
+| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ✅ | ✅ | ❌ | ❓ | The user interface written in Ember |
+| [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❌ | ❌ | ❌ | ❓ | Holds most of the static assets used by the [pass-ui](https://github.com/eclipse-pass/pass-ui) |
 | [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓| Adapter for interacting with the Fedora repository |
-| [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ❓ | ❓ | ❓ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
+| [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ✅ | ✅ | ✅ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
 | [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ❓ | ❓ | ❓ | ❓ | HTTP API for determining the policies applicable to a given Submission
 | [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❓ | ❓ | ❓ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
 | [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ❓ | ❓ | ❓ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
@@ -52,11 +52,12 @@ The following repositories have been forked from others
 
 | Project | Command | Dependencies |
 | --- | --- | --- |
-| pass-ember-adapter | export FEDORA_ADAPTER_INTEGRATION_TEST=0<br>ember test | Ember.js Ember
+| pass-ember-adapter | export FEDORA_ADAPTER_INTEGRATION_TEST=0<br>yarn install<br>ember test | Ember.js Ember
 | pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPN, Yarn, Ember.js
 | pass-deposit-services | mvn test | Maven, Java
 | pass-authz | mvn -pl -pass-authz-integration test | Maven, Java 8
-| pass-java-client | mvn -pl -pass-client-integration test | Java
+| pass-java-client |  mvn test -DskipITs=true | Java
+| pass-indexer | mvn test -DskipITs=true | Java
 
 ## Integration Testing
 
@@ -65,7 +66,8 @@ The following repositories have been forked from others
 | pass-ember-adapter | docker-compose up -d<br>yarn install<br>ember test | Ember.js Ember Docker
 | pass-deposit-services | mvn verify | Maven, Java, Docker
 | pass-authz | mvn verify | Maven, Java 8, Docker
-| pass-java-client | cd pass-client-integration && mvn docker:run -Pstandard<br>mvn verify | Java, Docker
+| pass-java-client | mvn verify | Java, Docker
+| pass-indexer | docker-compose up -d<br>mvn verify | Java, Docker
 
 ## Building
 
@@ -75,8 +77,8 @@ The following repositories have been forked from others
 | pass-ui | yarn install<br>ember build | Ember.js Ember
 | pass-deposit-services | mvn install | Maven, Java, Docker
 | pass-authz | mvn install | Maven, Java 8, Docker
-| pass-java-client | cd pass-client-integration && mvn docker:run -Pstandard | Java, Docker
-
+| pass-java-client | mvn install | Java, Docker
+| pass-indexer | docker-compose up -d<br>mvn install | Java, Docker
 
 ## Dependencies
 
