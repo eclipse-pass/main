@@ -15,11 +15,11 @@ a production running application.
 | [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❎ | ❌ | ❌ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
 | [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ✅ | ✅ | ❌ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
 | [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ✅ | ❎ | ❎ | ❓ | PASS download service
-| [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ❓ | ❓ | ❓ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
-| [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ❓ | ❓ | ❓ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
+| [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ✅ | ✅ | ❎ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
+| [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ✅ | ✅ | ❎ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ✅ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
-| [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ❓ | ❓ | ❓ | ❓ | A simple check of the indexer before kicking off a push for a loader
-| [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ❓ | ❓ | ❓ | ❓ | Traverses a Fedora repository containing PASS resources, and for each resource, determines if a duplicate exists
+| [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ✅ | ✅ | ✅ | ❓ | A simple check of the indexer before kicking off a push for a loader
+| [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ✅ | ✅ | ❌ | ❓ | Traverses a Fedora repository containing PASS resources, and for each resource, determines if a duplicate exists
 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) | ✅ | ✅ | ❎ | ❓ | Java library for interacting with PASS data
 
 There are a few additional project that help support Eclipse PASS but are not
@@ -61,6 +61,10 @@ The following repositories have been forked from others
 | pass-policy-service | go test ./... | Go
 | pass-metadata-schemas | go test ./... | Go
 | pass-download-service | go test ./... | Go
+| pass-notification-services | mvn test | Java
+| pass-doi-service | mvn test | Java
+| pass-indexer-checker | mvn test | Java
+| pass-dupe-checker | go test | Go
 
 ## Integration Testing
 
@@ -73,6 +77,9 @@ The following repositories have been forked from others
 | pass-indexer | docker-compose up -d<br>mvn verify | Java, Docker
 | pass-policy-service | docker-compose up -d<br>go test -tags=integration ./... | Go
 | pass-download-service | docker-compose up -d<br>go test -tags=integration ./... | Go
+| pass-notification-services | mvn verify | Java, Docker
+| pass-doi-service | mvn verify | Java, Docker
+| pass-indexer-checker | mvn verify | Java, Docker
 
 ## Building
 
@@ -88,6 +95,10 @@ The following repositories have been forked from others
 | pass-docker-mailserver | docker build -t oapass/docker-mailserver:DATE . | Docker
 | pass-metadata-schemas | go build ./cmd/pass-schema-service | Go
 | pass-download-service | go build | Go
+| pass-notification-services | mvn install | Java, Docker
+| pass-doi-service | mvn install | Java, Docker
+| pass-indexer-checker | mvn install | Java, Docker
+| pass-dupe-checker | go build | Go
 
 ## Dependencies
 
