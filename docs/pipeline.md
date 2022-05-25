@@ -12,9 +12,9 @@ a production running application.
 | [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓| Adapter for interacting with the Fedora repository |
 | [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ✅ | ✅ | ✅ | ❓ | The pass-indexer keeps an Elasticsearch index up to date with resources in a Fedora repository.
 | [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ✅ | ✅ | ✅ | ❓ | HTTP API for determining the policies applicable to a given Submission
-| [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❓ | ❓ | ❓ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
-| [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ❓ | ❓ | ❓ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
-| [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ❓ | ❓ | ❓ | ❓ | PASS download service
+| [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❎ | ❌ | ❌ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
+| [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ✅ | ✅ | ❌ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
+| [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ✅ | ❎ | ❎ | ❓ | PASS download service
 | [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ❓ | ❓ | ❓ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
 | [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ❓ | ❓ | ❓ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ✅ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
@@ -59,6 +59,8 @@ The following repositories have been forked from others
 | pass-java-client |  mvn test -DskipITs=true | Java
 | pass-indexer | mvn test -DskipITs=true | Java
 | pass-policy-service | go test ./... | Go
+| pass-metadata-schemas | go test ./... | Go
+| pass-download-service | go test ./... | Go
 
 ## Integration Testing
 
@@ -70,6 +72,7 @@ The following repositories have been forked from others
 | pass-java-client | mvn verify | Java, Docker
 | pass-indexer | docker-compose up -d<br>mvn verify | Java, Docker
 | pass-policy-service | docker-compose up -d<br>go test -tags=integration ./... | Go
+| pass-download-service | docker-compose up -d<br>go test -tags=integration ./... | Go
 
 ## Building
 
@@ -82,6 +85,9 @@ The following repositories have been forked from others
 | pass-java-client | mvn install | Java, Docker
 | pass-indexer | docker-compose up -d<br>mvn install | Java, Docker
 | pass-policy-service | go generate ./...<br>go build ./cmd/pass-policy-service | Go
+| pass-docker-mailserver | docker build -t oapass/docker-mailserver:DATE . | Docker
+| pass-metadata-schemas | go build ./cmd/pass-schema-service | Go
+| pass-download-service | go build | Go
 
 ## Dependencies
 
