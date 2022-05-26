@@ -29,7 +29,6 @@ part of the core application.
 | --- | --- | --- | --- | --- | --- |
 | [pass-docker](https://github.com/eclipse-pass/pass-docker) | ❌ | ❌ | ❌ | ❓ | The canonical environment for demonstrating integration of the [PASS UI application](https://github.com/eclipse-pass/pass-ui)
 | [playground](https://github.com/eclipse-pass/playground) | ❌ | ❌ | ❌ | ❓ | An collection of small hello-world like applications written in the technologies being used with eclipse-pass so that we can isolate, build, deploy and troubleshoot ops procedures separate from issues with the underlying projects. |
-
 | [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ✅ | ✅ | ❌ | ❓ | Traverses a Fedora repository containing PASS resources, and for each resource, determines if a duplicate exists
 | [pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver) | ❎ | ❌ | ❌ | ❓ | This fork of docker-mailserver is purpose-built to support integration testing of PASS components
 
@@ -87,9 +86,9 @@ The following repositories have been forked from others
 | pass-indexer-checker | mvn verify | Java, Docker
 | pass-package-providers | mvn verify | Java, Docker
 | pass-messaging-support | mvn verify | Java, Docker
-| pass-nihms-loader | mvn verify | Java
-| pass-grant-loader | mvn verify | Java
-| pass-journal-loader | mvn verify | Java
+| pass-nihms-loader | mvn verify | Java, Docker
+| pass-grant-loader | mvn verify | Java, Docker
+| pass-journal-loader | mvn verify | Java, Docker
 
 ## Building
 
@@ -111,9 +110,9 @@ The following repositories have been forked from others
 | pass-dupe-checker | go build | Go
 | pass-package-providers | mvn install | Java, Docker
 | pass-messaging-support | mvn install | Java, Docker
-| pass-nihms-loader | mvn install | Java
-| pass-grant-loader | mvn install | Java
-| pass-journal-loader | mvn install | Java
+| pass-nihms-loader | mvn install | Java, Docker
+| pass-grant-loader | mvn install | Java, Docker
+| pass-journal-loader | mvn install | Java, Docker
 
 ## Dependencies
 
