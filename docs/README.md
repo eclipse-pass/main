@@ -10,5 +10,5 @@ any relevant websites, external references, and other cloud storages (e.g. Googl
 
 *Please remove the `.gitkeep` files as documentation pages are added to the currently empty directories.*
 
-Learn more about the [PASS Architecture](/docs/architecture.md) and [code delivery pipeline](/docs/pipeline.md) as we go from
+Learn more about the [PASS Architecture](/docs/architecture.md) and [code delivery pipeline](/docs/deploy/pipeline.md) as we go from
 source code to deployed application.
