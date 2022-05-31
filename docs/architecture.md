@@ -57,7 +57,7 @@ We run a number of Shibboleth service providers, one for each environment.
 As we move towards an Eclipse Foundation hosted Open-Access PASS there will be
 changes to the PASS architecture, changes to the infrasture and the
 deployment process.   This will be documented here, as well as within our
-[PASS Development Pipeline](/docs/pipeline.md).
+[PASS Development Pipeline](/docs/deploy/pipeline.md).
 
 ### Architecture V2
 
