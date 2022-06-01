@@ -2,11 +2,13 @@
 
 GitHub secrets are intended for use by GitHub Actions workflows. If you want a workflow to interact with something that requires authentication, you will likely need to create a secret which will allow authentication to happen securely without making any private information available to anybody having access to the repositories.
 
-There are two levels that GitHub secrets can exist at: organization and repo.
+There are three levels that GitHub secrets can exist at: organization, repo, and environment.
 
 An organization secret belongs to the `eclipse-pass` organization and is available to workflows that are part of any repository that exists under the `eclipse-pass` organization. Secrets that will be used across many repositories should be placed here to prevent duplication.
 
 A repository secret exists within that repository and can only be used by workflows belonging to that repository.
+
+An environment secret exists within a specific environment within a repository. It can only be used by workflows belonging to that repository and the workflow must specify the environment that it's using.
 
 ### Creating Secrets
 
@@ -16,9 +18,9 @@ The GitHub UI requires that a person creating a secret have admin privileges for
 
 Oddly, the GitHub API allows the creation of repository secrets with `repo` privileges. All members of the PASS project should have sufficient privileges to do so.
 
-To create a repository secret, use the [github_secrets.py script](/tools/github_secrets.py) in this repo like so:
+To create a repository or environment secret, use the [github_secrets.py script](/tools/github_secrets.py) in this repo like so:
 ```
-    python github_secrets.py -u <username> -t <token> -r <repo> -n <name> -v <value>
+    python github_secrets.py -u <username> -t <token> -r <repo> -n <name> -v <value> [-e <environment>]
 ```
 * username: Your GitHub username
 * token: A GitHub personal access token with 'repo' access
