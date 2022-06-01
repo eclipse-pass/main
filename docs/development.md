@@ -37,20 +37,29 @@ Only Committers on the PASS Eclipse project are able to make changes to the code
 For official committers, make sure that you configure all eclipse-pass
 repos against your contributor email.
 
-For example (please replace with your email)
+For example (please replace with your email):
 
 ```bash
 git config user.email "jane.url@eclipse-foundation.org"
 ```
 
+If you have multiple GitHub accounts, you may need to specify the GitHub
+username you'd like to use with the repo.
+
+For example (please replace with your GitHub username):
+
+```bash
+git config credential.username "jane-doe"
+```
+
 If you already have commits against a separate email address, then you
-can rebase those commits and change the email
+can rebase those commits and change the email:
 
 ```bash
 git rebase -i origin/main
 ```
 
-This will show all commits
+This will show all commits:
 
 ```bash
 pick bb697d0 Migrate playground docs into main
@@ -81,20 +90,20 @@ pick bb697d0 Migrate playground docs into main
 #
 ```
 
-Change `pick` to `edit`.  In the example above
+Change `pick` to `edit`.  In the example above:
 
 ```bash
 edit bb697d0 Migrate playground docs into main
 ```
 
-And then for each commit change the email (please replace with your email).
+And then for each commit change the email (please replace with your email):
 
 ```bash
 git commit --amend --no-edit --author="Jane Url <jane.url@eclipse-foundation.org>"
 git rebase --continue
 ```
 
-And finally, push your changes
+And finally, push your changes:
 
 ```bash
 git push --force-with-lease
