@@ -54,29 +54,6 @@ We run a number of Shibboleth service providers, one for each environment.
 
 ### Build Artifacts:
 
-=== Notes ===
-
-* UI: Docker image, Nginx w/web app
-* Ember assets: Docker image, Nginx w/web app
-* Apache HTTPd reverse proxy: `pass-docker`, Docker image, Apache server
-* pass-authz-listener (`pass-authz/pass-authz-listener`, Maven build, Maven Central release)
-* pass-indexer: JAR; Maven build, file attached to GH release. Included in a Docker image (`pass-docker`)
-* deposit services, ultimately a single image, composed of several intermediate images:
-  * Maven creates a set of Docker images for package providers, deposit services core
-  * `pass-docker` pulls these images together into a new image
-* "Fedora": Docker image, Tomcat server. Uses base Fedora WAR file from Maven central (`https://repo1.maven.org/maven2/org/fcrepo/fcrepo-webapp-plus/${FCREPO_VERSION}/fcrepo-webapp-plus-${FCREPO_VERSION}.war`), then replaces pieces inside the WAR 
-  * "Authorization" handled by authz/ACL dependencies
-  * jsonld-addon-filters-${JSONLD_ADDON_VERSION}-shaded.jar (`pass-fcrepo-jsonld` repo, Maven build and release to Maven Central)
-  * pass-authz-core-${PASS_AUTHZ_VERSION}-shaded.jar (`pass-authz/pass-authz-core`, Maven build and release to Maven Central)
-  * pass-authz-roles-${PASS_AUTHZ_VERSION}.jar (`pass-authz/pass-user-roles`, release to Maven Central)
-  * pass-user-service.war (`pass-authz/pass-user-service` Maven build and Maven Central release)
-  * jms-addon-${JMS_ADDON_VERSION}.jar (`pass-fcrepo-jms`, Maven build, file attached to GH release)
-  * modeshape-jcr-5.4.0.Final.jar (from `eclipse-pass/modeshape`, Maven build, file attached to GH release)
-    - Contains a single bug fix, not actively developed/maintained, so no automation
-  * fcrepo-auth-roles-common.4.7.5-fixes-01.jar (`pass-fcrepo-module-rbacl`, file attached to GH release)
-
-===  ===
-
 _I don't have much insight on the workings of the deployed/production infrastructure, which from my understanding is different from our local dev environment created in `pass-docker`_
 
 | Component | Artifact | Source repo | Notes |
@@ -87,10 +64,16 @@ _I don't have much insight on the workings of the deployed/production infrastruc
 | Async Service: `pass-indexer` | JAR / Docker image | `pass-indexer` GH repo. Maven build, file attached to a GH release |  |
 | Async Service: deposit services | Docker image, multiple intermediate Docker images (not deployed) | `pass-deposit-services`, `pass-package-providers` (intermediate) | Maven builds intermediate Docker images, `pass-docker` builds final image |
 | Async service: `pass-authz-listener` | Docker image (`authz`) | `pass-authz/pass-authz-listener` | Maven build, release to Maven Central |
+| Async service: notification services | Docker image  | `pass-notification-services` | Docker image created in `pass-docker` from Spring Boot JAR created by Maven build in `pass-notification-services`, released to Sonatype |
+| Sync service: DOI service | Docker image (`oapass/doi-service`) | `pass-doi-service` |  |
+| Sync service: Policy service | Docker image (`oapass/policy-service`) | `pass-policy-service` |  |
+| Sync service: Metadata schema service | Docker image (`oapass/schema-service`) | `pass-metadata-schemas` |  |
+| Sync service: Download service | Docker image (`oapass/download-service`) | `pass-download-service` |  |
 | Fedora | Docker image compiles many Java project artifacts | Docker image created in `pass-docker`, other dependnecies: `pass-authz`, `pass-fcrepo-jms`, `eclipse-pass/modeshape` (fork), `pass-fcrepo-module-rbacl`, `pass-fcrepo-jsonld` | Base `fcrepo` WAR from the Fedora project is unpacked, select pieces added or substituted |
-| Batch service: COEUS | Executable JAR | `pass-grant-loader` | Task run manually or cron job |
-| Batch service: NIHMS loader (formerly NIHMS ETL) | Executable JAR | `pass-nihms-loader` | Task run manually or cron job |
-
+| Batch service: COEUS | JAR | `pass-grant-loader` | Task run manually or cron job |
+| Batch service: NIHMS loader (formerly NIHMS ETL) | JAR | `pass-nihms-loader` | Task run manually or cron job |
+| Batch service: Journal loader | JAR | `pass-journal-loader` | Task run manually or cron job |
+| Tool: Dupe checker | JAR | `pass-dupe-checker` | Run manually |
 
 ## Going Forward
 
