@@ -54,6 +54,8 @@ We run a number of Shibboleth service providers, one for each environment.
 
 ### Build Artifacts:
 
+=== Notes ===
+
 * UI: Docker image, Nginx w/web app
 * Ember assets: Docker image, Nginx w/web app
 * Apache HTTPd reverse proxy: `pass-docker`, Docker image, Apache server
@@ -72,6 +74,23 @@ We run a number of Shibboleth service providers, one for each environment.
   * modeshape-jcr-5.4.0.Final.jar (from `eclipse-pass/modeshape`, Maven build, file attached to GH release)
     - Contains a single bug fix, not actively developed/maintained, so no automation
   * fcrepo-auth-roles-common.4.7.5-fixes-01.jar (`pass-fcrepo-module-rbacl`, file attached to GH release)
+
+===  ===
+
+_I don't have much insight on the workings of the deployed/production infrastructure, which from my understanding is different from our local dev environment created in `pass-docker`_
+
+| Component | Artifact | Source repo | Notes |
+| --- | --- | --- | --- |
+| UI | Docker image, Nginx w/web app | Source code from `pass-ui`, artifact created in `pass-docker` | Includes NPM package we publish from `pass-emnber-adapter` |
+| Ember assets | Docker image, Nginx | Source code from `pass-ui-public`, artifact created in `pass-docker` |  |
+| Apache HTTPd reverse proxy | Docker image, Apache | `pass-docker` |  |
+| Async Service: `pass-indexer` | JAR / Docker image | `pass-indexer` GH repo. Maven build, file attached to a GH release |  |
+| Async Service: deposit services | Docker image, multiple intermediate Docker images (not deployed) | `pass-deposit-services`, `pass-package-providers` (intermediate) | Maven builds intermediate Docker images, `pass-docker` builds final image |
+| Async service: `pass-authz-listener` | Docker image (`authz`) | `pass-authz/pass-authz-listener` | Maven build, release to Maven Central |
+| Fedora | Docker image compiles many Java project artifacts | Docker image created in `pass-docker`, other dependnecies: `pass-authz`, `pass-fcrepo-jms`, `eclipse-pass/modeshape` (fork), `pass-fcrepo-module-rbacl`, `pass-fcrepo-jsonld` | Base `fcrepo` WAR from the Fedora project is unpacked, select pieces added or substituted |
+| Batch service: COEUS | Executable JAR | `pass-grant-loader` | Task run manually or cron job |
+| Batch service: NIHMS loader (formerly NIHMS ETL) | Executable JAR | `pass-nihms-loader` | Task run manually or cron job |
+
 
 ## Going Forward
 
