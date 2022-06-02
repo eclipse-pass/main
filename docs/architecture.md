@@ -54,8 +54,6 @@ We run a number of Shibboleth service providers, one for each environment.
 
 ### Build Artifacts:
 
-_I don't have much insight on the workings of the deployed/production infrastructure, which from my understanding is different from our local dev environment created in `pass-docker`_
-
 | Component | Artifact | Source repo | Notes |
 | --- | --- | --- | --- |
 | UI | Docker image, Nginx w/web app | Source code from `pass-ui`, artifact created in `pass-docker` | Includes NPM package we publish from `pass-emnber-adapter` |
