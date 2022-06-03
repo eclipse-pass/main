@@ -44,48 +44,114 @@
     <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
     <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
+
+    <slf4j.version>1.7.36</slf4j.version>
+    <log4j2.version>2.14.1</log4j2.version>
+
+    <plugin.maven.enforcer.version>3.0.0</plugin.maven.enforcer.version>
   </properties>
 
   <build>
-    <plugins>
-      <!-- Used to validate all code style rules in source code using Checkstyle -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${maven.checkstyle.plugin.version}</version>
-        <executions>
-          <execution>
-            <id>verify-style</id>
-            <!-- Bind to verify so it runs after package & unit tests, but before install -->
-            <phase>verify</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <configLocation>duraspace-checkstyle/checkstyle.xml</configLocation>
-          <suppressionsLocation>duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-          <encoding>UTF-8</encoding>
-          <consoleOutput>true</consoleOutput>
-          <logViolationsToConsole>true</logViolationsToConsole>
-          <failOnViolation>true</failOnViolation>
-          <includeTestSourceDirectory>true</includeTestSourceDirectory>
-        </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>org.duraspace</groupId>
-            <artifactId>codestyle</artifactId>
-            <version>${duraspace-codestyle.version}</version>
-          </dependency>
-          <!-- Override dependencies to use latest version of checkstyle -->
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${checkstyle.version}</version>
-          </dependency>
-        </dependencies>
-      </plugin>
-    </plugins>
+    <pluginManagement>
+      <plugins>
+        <!-- Used to validate all code style rules in source code using Checkstyle -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven.checkstyle.plugin.version}</version>
+          <executions>
+            <execution>
+              <id>verify-style</id>
+              <!-- Bind to verify so it runs after package & unit tests, but before install -->
+              <phase>verify</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <configLocation>duraspace-checkstyle/checkstyle.xml</configLocation>
+            <suppressionsLocation>duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
+            <encoding>UTF-8</encoding>
+            <consoleOutput>true</consoleOutput>
+            <logViolationsToConsole>true</logViolationsToConsole>
+            <failOnViolation>true</failOnViolation>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          </configuration>
+          <dependencies>
+            <dependency>
+              <groupId>org.duraspace</groupId>
+              <artifactId>codestyle</artifactId>
+              <version>${duraspace-codestyle.version}</version>
+            </dependency>
+            <!-- Override dependencies to use latest version of checkstyle -->
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${plugin.maven.enforcer.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+<!--                  <dependencyConvergence/>-->
+                  <bannedDependencies>
+                    <searchTransitive>true</searchTransitive>
+                    <excludes>
+                      <exclude>commons-logging</exclude>
+                      <exclude>log4j</exclude>
+                      <exclude>com.springsource.org.apache.commons.logging</exclude>
+                    </excludes>
+                  </bannedDependencies>
+                  <requireMavenVersion>
+                    <version>[3.5.0,4.0.0)</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
   </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>log4j-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.logging.log4j</groupId>
+        <artifactId>log4j-to-slf4j</artifactId>
+        <version>${log4j2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>jcl-over-slf4j</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
 </project>
