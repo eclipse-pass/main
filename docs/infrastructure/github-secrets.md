@@ -20,7 +20,7 @@ Oddly, the GitHub API allows the creation of repository secrets with `repo` priv
 
 To create a repository or environment secret, use the [github_secrets.py script](/tools/github_secrets.py) in this repo like so:
 ```
-    python github_secrets.py -u <username> -t <token> -r <repo> -n <name> -v <value> [-e <environment>]
+python github_secrets.py -u <username> -t <token> -r <repo> -n <name> -v <value> [-e <environment>]
 ```
 * username: Your GitHub username
 * token: A GitHub personal access token with 'repo' access
@@ -35,3 +35,43 @@ To create an organization secret, a ticket must be opened with the [Eclipse Help
 The value of a secret can only be read by GitHub Actions workflows.
 
 The metadata associated with a secret can be retrieved with the `github_secrets.py` script by omitting the `value`. The returned data includes the secret's `name`, `created_at`, and `updated_at`. This is primarily useful for verifying that a secret exists where you expect it to be.
+
+### Secrets in GitHub Actions workflows
+
+To access a GitHub secret from a top-level workflow, you can reference it from within the secrets context like this:
+```
+${{ secrets.KUBE_CONFIG }}
+```
+
+If you want to use a secret in a reusable or "called" workflow, you must pass the secrets that will be used. To do this, when you reference the workflow you additionally provide a `secrets` property containing a list of the secrets that must be passed.
+
+In this example two secrets, KUBE_CONFIG and DIGITALOCEAN_ACCESS_TOKEN are being passed to the `html-app-publish.yml` workflow:
+
+```
+call-publish-docker:
+    name: Build and Publish Docker image
+    uses: eclipse-pass/playground/.github/workflows/html-app-publish.yml@main
+    secrets:
+    KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+    DIGITALOCEAN_ACCESS_TOKEN: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+```
+
+Within the called workflow, you must declare the secrets that can be expected like this:
+
+```
+on:
+    workflow_call:
+    secrets:
+    KUBE_CONFIG:
+        required: true
+        description: Configuration info for test k8s cluster
+    DIGITALOCEAN_ACCESS_TOKEN:
+        required: true
+        description: Access token for Digital Ocean
+```
+
+The secret can now be referenced within the workflow as it would be from a top-level workflow:
+
+```
+${{ secrets.KUBE_CONFIG }}
+```
