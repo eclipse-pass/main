@@ -7,6 +7,7 @@ any relevant websites, external references, and other cloud storages (e.g. Googl
 * [Developer documentation](/docs/development.md)
 * [Deployment documentation](/docs/deployment.md)
 * [User documentation](/docs/user.md)
+* [Working with GitHub secrets](/docs/infrastructure/github-secrets.md)
 
 *Please remove the `.gitkeep` files as documentation pages are added to the currently empty directories.*
 
