@@ -72,7 +72,8 @@ We run a number of Shibboleth service providers, one for each environment.
 | Batch service: NIHMS loader (formerly NIHMS ETL) | JAR | `pass-nihms-loader` | Task run manually or cron job |
 | Batch service: Journal loader | JAR | `pass-journal-loader` | Task run manually or cron job |
 | Tool: Dupe checker | JAR | `pass-dupe-checker` | Run manually |
-| Support: Pass messaging support | JAR | `pass-messaging-support` | Generates three JARs: <br> `org.dataconservancy.pass.support.messaging.*` - `json.jar`, `cri.jar`, `constants.jar` <br> Included in `pass-deposit-services`, `pass-notification-services` |
+| Support: Pass messaging support | JAR | `pass-messaging-support` | Generates three JARs: <br> `org.dataconservancy.pass.support.messaging.*` - `json`, `cri`, `constants` <br> Included in `pass-deposit-services`, `pass-notification-services` |
+| Support: Java client | `JAR` | `pass-java-client` | Artifacts for Java projects to interact with the data. Generates JARs: <br> `org.dataconservancy.pass`<br> `pass-json-adpater`, `pass-client-api`, `pass-data-client`, `pass-model`, `pass-status-service` |
 
 ## Going Forward
 
