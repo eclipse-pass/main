@@ -63,15 +63,16 @@ We run a number of Shibboleth service providers, one for each environment.
 | Async Service: deposit services | Docker image, multiple intermediate Docker images (not deployed) | `pass-deposit-services`, `pass-package-providers` (intermediate) | Maven builds intermediate Docker images, `pass-docker` builds final image |
 | Async service: `pass-authz-listener` | Docker image (`authz`) | `pass-authz/pass-authz-listener` | Maven build, release to Maven Central |
 | Async service: notification services | Docker image  | `pass-notification-services` | Docker image created in `pass-docker` from Spring Boot JAR created by Maven build in `pass-notification-services`, released to Sonatype |
-| Sync service: DOI service | Docker image (`oapass/doi-service`) | `pass-doi-service` |  |
-| Sync service: Policy service | Docker image (`oapass/policy-service`) | `pass-policy-service` |  |
-| Sync service: Metadata schema service | Docker image (`oapass/schema-service`) | `pass-metadata-schemas` |  |
-| Sync service: Download service | Docker image (`oapass/download-service`) | `pass-download-service` |  |
+| Sync service: DOI service | Docker image (`oapass/doi-service`) | `pass-doi-service` | Generates WAR, packaged in Docker image |
+| Sync service: Policy service | Docker image (`oapass/policy-service`) | `pass-policy-service` | Generates Go app, packaged in Docker image |
+| Sync service: Metadata schema service | Docker image (`oapass/schema-service`) | `pass-metadata-schemas` |Generates Go app, packaged in Docker image  |
+| Sync service: Download service | Docker image (`oapass/download-service`) | `pass-download-service` | Generates Go app, packaged in Docker image |
 | Fedora | Docker image compiles many Java project artifacts | Docker image created in `pass-docker`, other dependnecies: `pass-authz`, `pass-fcrepo-jms`, `eclipse-pass/modeshape` (fork), `pass-fcrepo-module-rbacl`, `pass-fcrepo-jsonld` | Base `fcrepo` WAR from the Fedora project is unpacked, select pieces added or substituted |
 | Batch service: COEUS | JAR | `pass-grant-loader` | Task run manually or cron job |
 | Batch service: NIHMS loader (formerly NIHMS ETL) | JAR | `pass-nihms-loader` | Task run manually or cron job |
 | Batch service: Journal loader | JAR | `pass-journal-loader` | Task run manually or cron job |
 | Tool: Dupe checker | JAR | `pass-dupe-checker` | Run manually |
+| Support: Pass messaging support | JAR | `pass-messaging-support` | Generates three JARs: <br> `org.dataconservancy.pass.support.messaging.*` - `json.jar`, `cri.jar`, `constants.jar` <br> Included in `pass-deposit-services`, `pass-notification-services` |
 
 ## Going Forward
 
