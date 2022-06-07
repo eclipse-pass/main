@@ -5,7 +5,7 @@ This will document how to run PASS in EC2 by reusing the existing pass-docker se
 ## Background
 
 The existing pass-docker setup is intended for local deployment. It uses a hard-coded hostname of `pass.local`. It includes a customized Service Provider and Identity Provider for authentication as well as DSpace for testing deposits. All of the other images are production images just configured for `pass.local`.
-See the [existing documentation](https://github.com/eclipse-pass/pass-docker) for more information.
+See the [pass-docker project](https://github.com/eclipse-pass/pass-docker) for more information.
 
 ## Configuration
 
@@ -15,28 +15,27 @@ The simplest way to accomplish the hostname change is to do a global string repl
 
 Bind mounts for proxy:
 ```
-  volumes:
-     - ./newhost.crt:/etc/httpd/ssl/domain.crt
-     - ./newhost.key:/etc/httpd/ssl/domain.key
-     - ./httpd-proxy/etc-httpd/conf.d/httpd.conf:/etc/httpd/conf.d/httpd.conf
+volumes:
+  - ./newhost.crt:/etc/httpd/ssl/domain.crt
+  - ./newhost.key:/etc/httpd/ssl/domain.key
+  - ./httpd-proxy/etc-httpd/conf.d/httpd.conf:/etc/httpd/conf.d/httpd.conf
 ```
 
 Bind mounts for idp:
 ```
-    volumes:
-      - ./idp/common/shibboleth-idp/conf/cas-protocol.xml:/opt/shibboleth-idp/conf/cas-protocol.xml
-      - ./idp/common/shibboleth-idp/metadata/sp-metadata.xml:/opt/shibboleth-idp/metadata/sp-metadata.xml
-      - ./idp/jhu/shibboleth-idp/conf/idp.properties:/opt/shibboleth-idp/conf/idp.properties
-      - ./idp/jhu/shibboleth-idp/metadata/idp-metadata.xml:/opt/shibboleth-idp/metadata/idp-metadata.xml
-
+ volumes:
+   - ./idp/common/shibboleth-idp/conf/cas-protocol.xml:/opt/shibboleth-idp/conf/cas-protocol.xml
+   - ./idp/common/shibboleth-idp/metadata/sp-metadata.xml:/opt/shibboleth-idp/metadata/sp-metadata.xml
+   - ./idp/jhu/shibboleth-idp/conf/idp.properties:/opt/shibboleth-idp/conf/idp.properties
+   - ./idp/jhu/shibboleth-idp/metadata/idp-metadata.xml:/opt/shibboleth-idp/metadata/idp-metadata.xml
 ```
 
 Bind mounts for sp:
 ```
-    volumes:
-      - ./sp/2.6.1/etc-httpd/conf.d/sp.conf:/etc/httpd/conf.d/sp.conf
-      - ./sp/2.6.1/etc-shibboleth/idp-metadata.xml:/etc/shibboleth/idp-metadata.xml
-      - ./sp/2.6.1/etc-shibboleth/shibboleth2.xml:/etc/shibboleth/shibboleth2.xml
+volumes:
+  - ./sp/2.6.1/etc-httpd/conf.d/sp.conf:/etc/httpd/conf.d/sp.conf
+  - ./sp/2.6.1/etc-shibboleth/idp-metadata.xml:/etc/shibboleth/idp-metadata.xml
+  - ./sp/2.6.1/etc-shibboleth/shibboleth2.xml:/etc/shibboleth/shibboleth2.xml
 ```
 
 ## Additional complications
@@ -45,6 +44,6 @@ For the moment, instead of starting from pass-docker main, you may wish to start
 
 ## Running
 
-Just do a `docker-compose up` like the standard pass-docker setup. Then you will be able to access all the url as described in the [documentation](https://github.com/eclipse-pass/pass-docker). Note that dspace is on 8181  and fcrepo is on 8080 if you want to access them.
+Just do a `docker-compose up` like the standard pass-docker setup. Then you will be able to access all the url as described in the [pass-docker project](https://github.com/eclipse-pass/pass-docker). Note that dspace is on 8181 and fcrepo is on 8080 if you want to access them.
 
 
