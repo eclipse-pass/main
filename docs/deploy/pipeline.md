@@ -20,7 +20,7 @@ a production running application.
 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ✅ | ✅ | ✅ | ❓ | A simple check of the indexer before kicking off a push for a loader
 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) | ✅ | ✅ | ❎ | ❓ | Java library for interacting with PASS data
 | [pass-messaging-support](https://github.com/eclipse-pass/pass-messaging-support) | ✅ | ✅ | ✅ | ❓ | Support library for interacting with fcrepo
-| [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | ✅ | ✅ | ✅ | ❓ | Contains support for pass-deposit-services to package deposits for various repositories. Also has Dockerfiles which add provider support by extending pass-deposit-services image. Requires max mvn version 3.8.4 which permits insecure (http) repositories (e.g. http://maven.dataconservancy.org/public/releases/org/dataconservancy/pass/mets-api/1.3.0/mets-api-1.3.0.jar)
+| [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | ✅ | ✅ | ✅ | ❓ | Contains support for pass-deposit-services to package deposits for various repositories. Also has Dockerfiles which add provider support by extending pass-deposit-services image. Requires max mvn version 3.6.3 (though seems to depend on the platform) which permits insecure (http) repositories (e.g. http://maven.dataconservancy.org/public/releases/org/dataconservancy/pass/mets-api/1.3.0/mets-api-1.3.0.jar)
 
 There are a few additional project that help support Eclipse PASS but are not
 part of the core application.
