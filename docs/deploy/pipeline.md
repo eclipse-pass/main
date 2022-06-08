@@ -64,7 +64,7 @@ The following repositories have been forked from others
 | pass-doi-service | mvn test | Java
 | pass-indexer-checker | mvn test | Java
 | pass-dupe-checker | go test | Go
-| pass-package-providers | mvn test | Java
+| pass-package-providers | mvn test | Java, Mvn 3.6.3 (depending on platform, later release might work)
 | pass-messaging-support | mvn test | Java
 | pass-nihms-loader | mvn test | Java
 | pass-grant-loader | mvn test | Java
@@ -85,7 +85,7 @@ The following repositories have been forked from others
 | pass-notification-services | mvn verify | Java, Docker
 | pass-doi-service | mvn verify | Java, Docker
 | pass-indexer-checker | mvn verify | Java, Docker
-| pass-package-providers | mvn verify | Java, Docker
+| pass-package-providers | mvn verify | Java, Docker, Mvn 3.6.3 (depending on platform, later release might work)
 | pass-messaging-support | mvn verify | Java, Docker
 | pass-nihms-loader | mvn verify | Java, Docker
 | pass-grant-loader | mvn verify | Java, Docker
