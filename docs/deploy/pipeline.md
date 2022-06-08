@@ -18,7 +18,7 @@ a production running application.
 | [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ✅ | ✅ | ❎ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ✅ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ✅ | ✅ | ✅ | ❓ | A simple check of the indexer before kicking off a push for a loader
-| [pass-java-client](https://github.com/eclipse-pass/pass-java-client) | ✅ | ✅ | ❎ | ❓ | Java library for interacting with PASS data
+| [pass-java-client](https://github.com/eclipse-pass/pass-java-client) | ✅ | ✅ | ✅ | ❓ | Java library for interacting with PASS data
 | [pass-messaging-support](https://github.com/eclipse-pass/pass-messaging-support) | ✅ | ✅ | ✅ | ❓ | Support library for interacting with fcrepo
 | [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | ✅ | ✅ | ✅ | ❓ | Contains support for pass-deposit-services to package deposits for various repositories. Also has Dockerfiles which add provider support by extending pass-deposit-services image. Requires max mvn version 3.6.3 (though seems to depend on the platform) which permits insecure (http) repositories (e.g. http://maven.dataconservancy.org/public/releases/org/dataconservancy/pass/mets-api/1.3.0/mets-api-1.3.0.jar)
 
@@ -55,7 +55,7 @@ The following repositories have been forked from others
 | pass-ui | npm config set spin false<br>yarn install<br>ember test --test-port=4200 | NPM, Yarn, Ember.js
 | pass-deposit-services | mvn test | Maven, Java
 | pass-authz | mvn -pl -pass-authz-integration test | Maven, Java 8
-| pass-java-client |  mvn test -DskipITs=true | Java
+| pass-java-client |  mvn test -DskipITs=true | Java, mvn test works if mvn package run first.
 | pass-indexer | mvn test -DskipITs=true | Java
 | pass-policy-service | go test ./... | Go
 | pass-metadata-schemas | go test ./... | Go
@@ -78,7 +78,7 @@ The following repositories have been forked from others
 | pass-ember-adapter | docker-compose up -d<br>yarn install<br>ember test | Ember.js Ember Docker
 | pass-deposit-services | mvn verify | Maven, Java, Docker
 | pass-authz | mvn verify | Maven, Java 8, Docker
-| pass-java-client | mvn verify | Java, Docker
+| pass-java-client | mvn verify | Java, Docker, mvn verify works if mvn package run first.
 | pass-indexer | docker-compose up -d<br>mvn verify | Java, Docker
 | pass-policy-service | docker-compose up -d<br>go test -tags=integration ./... | Go
 | pass-download-service | docker-compose up -d<br>go test -tags=integration ./... | Go
