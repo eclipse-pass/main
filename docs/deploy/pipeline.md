@@ -69,6 +69,7 @@ The following repositories have been forked from others
 | pass-nihms-loader | mvn test | Java
 | pass-grant-loader | mvn test | Java
 | pass-journal-loader | mvn test | Java
+| pass-fcrepo-module-auth-rbacl | mvn test | Java 8, Mvn 3.6.3 (depending on platform, later release might work)
 
 ## Integration Testing
 
@@ -89,6 +90,7 @@ The following repositories have been forked from others
 | pass-nihms-loader | mvn verify | Java, Docker
 | pass-grant-loader | mvn verify | Java, Docker
 | pass-journal-loader | mvn verify | Java, Docker
+| pass-fcrepo-module-auth-rbacl | mvn test | Java 8, Mvn 3.6.3 (depending on platform, later release might work)
 
 ## Building
 
