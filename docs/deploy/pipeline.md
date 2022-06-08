@@ -36,9 +36,9 @@ The following application help load data into PASS
 
 | Project | Build | UTs |ITs | Deploy | Notes |
 | --- | --- | --- | --- | --- | --- |
-| [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) | ✅ | ✅ | ❎ | ❓ | The NIHMS Submission ETL contains the components required to download, transform and load Submission information from NIHMS to PASS.
-| [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) | ✅ | ✅ | ❎ | ❓ | This project is comprised of code for retrieving grant data from some kind of data source, and using that data to update the PASS backend.
-| [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader) | ✅ | ✅ | ❎ | ❓ | Parses the PMC type A journal .csv file, and/or the medline database .txt file, and syncs with the repository
+| [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) | ✅ | ✅ | ✅ | ❓ | The NIHMS Submission ETL contains the components required to download, transform and load Submission information from NIHMS to PASS.
+| [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) | ✅ | ✅ | ✅ | ❓ | This project is comprised of code for retrieving grant data from some kind of data source, and using that data to update the PASS backend.
+| [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader) | ✅ | ✅ | ✅ | ❓ | Parses the PMC type A journal .csv file, and/or the medline database .txt file, and syncs with the repository
 
 The following repositories have been forked from others
 
