@@ -60,7 +60,7 @@ The following repositories have been forked from others
 | pass-policy-service | go test ./... | Go
 | pass-metadata-schemas | go test ./... | Go
 | pass-download-service | go test ./... | Go
-| pass-notification-services | mvn test | Java
+| pass-notification-services | mvn test | Java 8
 | pass-doi-service | mvn test | Java
 | pass-indexer-checker | mvn test | Java
 | pass-dupe-checker | go test | Go
@@ -82,7 +82,7 @@ The following repositories have been forked from others
 | pass-indexer | docker-compose up -d<br>mvn verify | Java, Docker
 | pass-policy-service | docker-compose up -d<br>go test -tags=integration ./... | Go
 | pass-download-service | docker-compose up -d<br>go test -tags=integration ./... | Go
-| pass-notification-services | mvn verify | Java, Docker
+| pass-notification-services | mvn verify | Java 8, Docker
 | pass-doi-service | mvn verify | Java, Docker
 | pass-indexer-checker | mvn verify | Java, Docker
 | pass-package-providers | mvn verify | Java, Docker, Mvn 3.6.3 (depending on platform, later release might work)
