@@ -10,6 +10,7 @@
   <packaging>pom</packaging>
 
   <name>Eclipse-PASS Parent</name>
+  <description>Parent POM for Eclipse-PASS projects</description>
   <url>https://github.com/eclipse-pass/main</url>
 
   <licenses>
@@ -22,35 +23,113 @@
   <developers>
     <developer>
       <name>Jim Martino</name>
-      <email>jrm.jhu@jhu.edu</email>
-      <organization>The Sheridan Libraries, Johns Hopkins Univeristy</organization>
+      <email>jrm@jhu.edu</email>
+      <organization>The Sheridan Libraries, Johns Hopkins University</organization>
       <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
     </developer>
     <developer>
       <name>Mark Patton</name>
       <email>mpatton@jhu.edu</email>
-      <organization>The Sheridan Libraries, Johns Hopkins Univeristy</organization>
+      <organization>The Sheridan Libraries, Johns Hopkins University</organization>
       <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
     </developer>
     <developer>
       <name>John Abrahams</name>
       <email>jabrah20@jhu.edu</email>
-      <organization>The Sheridan Libraries, Johns Hopkins Univeristy</organization>
+      <organization>The Sheridan Libraries, Johns Hopkins University</organization>
       <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
     </developer>
   </developers>
 
+  <scm>
+    <connection>scm:git:git://github.com/eclipse-pass/main.git</connection>
+    <developerConnection>scm:git:ssh://github.com:eclipse-pass/main.git</developerConnection>
+    <url>http://github.com/eclipse-pass/main/tree/main</url>
+  </scm>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+    <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
+    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
+    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
+    <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+
     <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
-    <maven.checkstyle.plugin.version>3.1.2</maven.checkstyle.plugin.version>
-
     <logback.version>1.2.11</logback.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j2.version>2.14.1</log4j2.version>
-
-    <plugin.maven.enforcer.version>3.0.0</plugin.maven.enforcer.version>
   </properties>
+
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <artifactId>maven-gpg-plugin</artifactId>
+              <version>${maven-gpg-plugin.version}</version>
+              <executions>
+                <execution>
+                  <id>sign-artifacts</id>
+                  <phase>verify</phase>
+                  <goals>
+                    <goal>sign</goal>
+                  </goals>
+                </execution>
+              </executions>
+              <configuration>
+                <useAgent>true</useAgent>
+              </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <version>${maven-source-plugin.version}</version>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>jar</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>${maven-javadoc-plugin.version}</version>
+              <executions>
+                <execution>
+                  <id>attach-javadocs</id>
+                  <goals>
+                    <goal>jar</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
   <build>
     <pluginManagement>
@@ -59,7 +138,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>${maven.checkstyle.plugin.version}</version>
+          <version>${maven-checkstyle-plugin.version}</version>
           <executions>
             <execution>
               <id>verify-style</id>
@@ -97,7 +176,7 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-enforcer-plugin</artifactId>
-          <version>${plugin.maven.enforcer.version}</version>
+          <version>${maven-enforcer-plugin.version}</version>
           <executions>
             <execution>
               <goals>
@@ -122,6 +201,31 @@
             </execution>
           </executions>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin.version}</version>
+          <configuration>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <pushChanges>false</pushChanges>
+            <localCheckout>true</localCheckout>
+            <preparationGoals>clean install</preparationGoals>
+            <releaseProfiles>release</releaseProfiles>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.sonatype.plugins</groupId>
+          <artifactId>nexus-staging-maven-plugin</artifactId>
+          <version>${nexus-staging-maven-plugin.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <serverId>ossrh</serverId>
+            <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+           <!-- Set this to true and the release will automatically proceed and sync to Central Repository
+           will follow  -->
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+          </configuration>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -134,6 +238,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
