@@ -14,7 +14,7 @@ a production running application.
 | [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ✅ | ✅ | ✅ | ❓ | HTTP API for determining the policies applicable to a given Submission
 | [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ✅ | ✅ | ❌ | ❓ | JSON schemas and example data intended to describe PASS submission metadata
 | [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | ✅ | ❎ | ❎ | ❓ | PASS download service
-| [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ✅ | ✅ | ❎ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
+| [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | ✅ | ✅ | ✅ | ❓ | Notification Services (NS) reacts to SubmissionEvent messages emitted by the Fedora repository by composing and dispatching notifications in the form of emails to the participants related to the event.
 | [pass-doi-service](https://github.com/eclipse-pass/pass-doi-service) | ✅ | ✅ | ❎ | ❓ | Service for accepting a DOI and returning a Journal ID and Crossref metadata for the DOI
 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) | ✅ | ✅ | ✅ | ❓ | Deposit Services are responsible for the transfer of custodial content and metadata from end users to repositories. Includes Dockerfile for service.
 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | ✅ | ✅ | ✅ | ❓ | A simple check of the indexer before kicking off a push for a loader
