@@ -5,7 +5,7 @@ or referenced here.  For example, please include links (with a small description
 any relevant websites, external references, and other cloud storages (e.g. Google Docs).
 
 * [Developer documentation](/docs/development.md)
-* [Deployment documentation](/docs/deployment.md)
+* [Deployment documentation](/docs/deploy)
 * [User documentation](/docs/user.md)
 * [Working with GitHub secrets](/docs/infrastructure/github-secrets.md)
 
