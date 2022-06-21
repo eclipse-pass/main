@@ -32,7 +32,7 @@ And then you can visit http://127.0.0.1:8080
 ## EmberJS Application
 
 The [emberjs-app](https://github.com/eclipse-pass/playground/tree/main/emberjs-app)
-is a hello-worl web app using [EmberJS](https://emberjs.com/).
+is a hello-world web app using [EmberJS](https://emberjs.com/).
 
 ### Requirments
 
