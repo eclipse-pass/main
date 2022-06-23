@@ -49,7 +49,7 @@
 
   <distributionManagement>
     <snapshotRepository>
-      <id>oss</id>
+      <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
   </distributionManagement>
@@ -219,7 +219,7 @@
           <version>${nexus-staging-maven-plugin.version}</version>
           <extensions>true</extensions>
           <configuration>
-            <serverId>oss</serverId>
+            <serverId>ossrh</serverId>
             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
            <!-- Set this to true and the release will automatically proceed and sync to Central Repository
            will follow  -->
