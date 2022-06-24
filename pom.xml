@@ -4,7 +4,7 @@
 
   <groupId>org.eclipse.pass</groupId>
   <artifactId>eclipse-pass-parent</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Eclipse-PASS Parent</name>
@@ -43,7 +43,7 @@
     <connection>scm:git:git://github.com/eclipse-pass/main.git</connection>
     <developerConnection>scm:git:ssh://github.com:eclipse-pass/main.git</developerConnection>
     <url>http://github.com/eclipse-pass/main/tree/main</url>
-    <tag>0.0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <distributionManagement>
