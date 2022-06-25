@@ -103,3 +103,4 @@ hosted by the Eclipse Foundation./
 * [Deployment Pipeline](/docs/infra/pipeline.md)
 * [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](/docs/infra/docker-composer-to-k8s-manifest.md)
 * [Working with GitHub secrets](/docs/infra/github-secrets.md)
+* [Self-Hosted GitHub Runners](/docs/infra/self_hosted_github_runners.md)
