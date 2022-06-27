@@ -1,5 +1,7 @@
 ## Current Integration Testing Docker Dependencies
 
+Java projects:
+
 | Repo | Docker image |
 | ---- | :---- |
 | [pass-authz](https://github.com/eclipse-pass/pass-authz) | <ul><li>oapass/activemq:20180618</li><li>oapass/indexer:0.0.15-3.1-SNAPSHOT</li><li>oapass/pass-authz-fcrepo:${project.version}</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li></ul> |
@@ -18,6 +20,13 @@
 | [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | <ul><li>oapass/fcrepo:4.7.5-3.4</li><li>oapass/indexer:0.0.18-3.4</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li><li>oapass/docker-mailserver:20181105</li><li>oapass/ldap:20200610-jhu</li></ul> |
 | [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | <ul><li>oapass/deposit-services-providers-its:${project.parent.version}</li><li>oapass/fcrepo@sha256:3e39b01edf56c149279cfc51b647df335c01f9ec38036f1724f337ae35d68fe8</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li><li>oapass/indexer@sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d</li></ul> |
 
+Go projects:
+
+| Repo | Docker image |
+| ---- | :---- |
+| [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | <ul><li>oapass/fcrepo:4.7.5-3.2-5</li><li>oapass/schema-service:latest (built)</li></ul> |
+| [pass-download-service](https://github.com/eclipse-pass/pass-download-service) | <ul><li>oapass/fcrepo:4.7.5-3.2-5</li><li>oapass/download-service:latest (built)</li></ul> |
+| [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | <ul><li>oapass/fcrepo:4.7.5-3.4</li><li>oapass/policy-service:latest (built)</li></ul> |
 
 ## Different view on the three major Docker images:
 
@@ -27,8 +36,8 @@
 | 4.7.5-3.1-SNAPSHOT | [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) |
 | 4.7.5-3.2-2 | [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service) |
 | 4.7.5-3.2-3 | [pass-authz](https://github.com/eclipse-pass/pass-authz) |
-| 4.7.5-3.2-5 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader), [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) |
-| 4.7.5-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) <br> [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) <br> [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) |
+| 4.7.5-3.2-5 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader) <br> [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) <br> [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) <br> [pass-download-service](https://github.com/eclipse-pass/pass-download-service) |
+| 4.7.5-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) <br> [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) <br> [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) <br> [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) |
 | 4.7.5-3.5 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) |
 | 4.7.5-3.5-1 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) |
 
