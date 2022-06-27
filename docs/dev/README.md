@@ -150,3 +150,9 @@ And finally, push your changes:
 ```bash
 git push --force-with-lease
 ```
+
+## Articles
+
+* [PASS Parent POM](/docs/dev/parent-pom.md) - Common deps between Java projects
+* [PASS Playground](/docs/dev/playground.md) - Ops playground
+* [PASS UI](/docs/dev/pass-ui.md) - PASS Ember application
