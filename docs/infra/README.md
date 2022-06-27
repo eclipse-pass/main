@@ -1,4 +1,4 @@
-# PASS Architecture
+# PASS Infrastructure
 
 The following documents aggregate documentation from Derek Belrose and Aaron Birkland at JHU.
 
@@ -80,7 +80,7 @@ We run a number of Shibboleth service providers, one for each environment.
 As we move towards an Eclipse Foundation hosted Open-Access PASS there will be
 changes to the PASS architecture, changes to the infrasture and the
 deployment process.   This will be documented here, as well as within our
-[PASS Development Pipeline](/docs/deploy/pipeline.md).
+[PASS Development Pipeline](/docs/infra/pipeline.md).
 
 ### Architecture V2
 
@@ -95,7 +95,9 @@ storage (e.g. S3).
 We are also moving off AWS and onto an on-premise Kubernetes cluster
 hosted by the Eclipse Foundation./
 
+## References
 
-
-
-
+* [Deployment Pipeline](/docs/infra/pipeline.md)
+* [Deploying pass-docker via EC2](/docs/infra/ec2.md)
+* [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](/docs/infra/docker-composer-to-k8s-manifest.md)
+* [Working with GitHub secrets](/docs/infra/github-secrets.md)
