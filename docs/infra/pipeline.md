@@ -43,7 +43,7 @@ The following application help load data into PASS
 The following repositories have been forked from others
 
 | Project | Forked From | Notes |
-| ---
+| --- | --- | --- |
 | [modeshape](https://github.com/eclipse-pass/modeshape) | [ModeShape](https://github.com/ModeShape/modeshape) |
 | [pass-fcrepo-module-auth-rbacl](https://github.com/eclipse-pass/pass-fcrepo-module-auth-rbacl) | [birkland](https://github.com/birkland/fcrepo-module-auth-rbacl) |
 
