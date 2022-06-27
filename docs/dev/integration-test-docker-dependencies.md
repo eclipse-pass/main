@@ -17,3 +17,38 @@
 | [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) | <ul><li>oapass/fcrepo:4.7.5-3.2-5</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li><li>oapass/indexer@sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d</li></ul> |
 | [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) | <ul><li>oapass/fcrepo:4.7.5-3.4</li><li>oapass/indexer:0.0.18-3.4</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li><li>oapass/docker-mailserver:20181105</li><li>oapass/ldap:20200610-jhu</li></ul> |
 | [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) | <ul><li>oapass/deposit-services-providers-its:${project.parent.version}</li><li>oapass/fcrepo@sha256:3e39b01edf56c149279cfc51b647df335c01f9ec38036f1724f337ae35d68fe8</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li><li>oapass/indexer@sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d</li></ul> |
+
+
+## Different view on the three major Docker images:
+
+### `oapass/fcrepo`
+| Version | Used in |
+| --- | --- |
+| 4.7.5-3.1-SNAPSHOT | [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) |
+| 4.7.5-3.2-2 | [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service) |
+| 4.7.5-3.2-3 | [pass-authz](https://github.com/eclipse-pass/pass-authz) |
+| 4.7.5-3.2-5 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader), [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) |
+| 4.7.5-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client), [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services), [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) |
+| 4.7.5-3.5 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services), |
+| 4.7.5-3.5-1 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) |
+
+`ospass/pass-authz-fcrepo`: Just used in [pass-authz](https://github.com/eclipse-pass/pass-authz). Built by [pass-authz](https://github.com/eclipse-pass/pass-authz) and based on  `oapass/fcrepo:4.7.5-3.2-3`. See its definition [`pass-authz/pass-authz-integration/src/test/resources/docker/Dockerfile`](https://github.com/eclipse-pass/pass-authz/blob/main/pass-authz-integration/src/test/resources/docker/Dockerfile).
+
+`oapass/fcrepo@sha256:3e39b01edf56c149279cfc51b647df335c01f9ec38036f1724f337ae35d68fe8 === 4.7.5-3.4`
+
+### `docker.elastic.co/elasticsearch/elasticsearch-oss`
+All projects use `6.2.3` 🎉
+
+### `oapass/indexer`
+| Version | Used in repo |
+| --- | --- |
+| 0.0.15-3.1-SNAPSHOT | [pass-authz](https://github.com/eclipse-pass/pass-authz), [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) |
+| 0.0.18-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client), [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services), [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service), [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader), [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers), [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) |
+| 0.0.18-3.4-1 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) |
+
+ `sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d === 0.0.18-3.4`
+
+`oapass/indexer-wrapped`: This image is used during ITs in [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) and is built by the project. The image is based on `oapass/indexer:0.0.18-3.4`. See [`pass-deposit-services/deposit-integration/src/test/resources/docker/Dockerfile-indexer`](https://github.com/eclipse-pass/pass-deposit-services/blob/main/deposit-integration/src/test/resources/docker/Dockerfile-indexer) for its definition
+
+
+
