@@ -28,12 +28,13 @@ PASS was created by the Sheridan Libraries at Johns Hopkins University, in colla
 
 PASS is currently in the [Incubation phase as an Eclipse Foundation project](https://projects.eclipse.org/projects/technology.pass). Code for the project can be found in the [eclipse-pass](https://github.com/eclipse-pass) GitHub organization.
 
-## Documentation
+# Documentation
 
-The [PASS Documentation](/docs/README.md) will be managed in this [main repo](https://github.com/eclipse-pass/main)
-and it will link out to other projects (listed below), other websites as well as other cloud storages (e.g. Google Docs).
+All documentation should be written within this [main repo](https://github.com/eclipse-pass/main),
+or referenced here.  For example, please include links (with a small description) to
+any relevant websites, external references, and other cloud storages (e.g. Google Docs).
 
-| Component | Summary |
-| --- | --- |
-| Playground | A collection of small `hello-world` like applications written in the technologies being used with eclipse-pass. <ul><li>Repo: [/eclipse-pass/playground](https://github.com/eclipse-pass/playground)</li><li>Docs: [/docs/playground.md](/docs/playground.md) |
+* [Developer documentation](/docs/dev)
+* [Deployment and Infrastructure](/docs/infra)
+* [User documentation](/docs/user)
 
