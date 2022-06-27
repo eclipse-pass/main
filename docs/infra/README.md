@@ -18,7 +18,10 @@ The following describes the current PASS Infrasture.
 
 #### EC2
 
-We are using EC2 virtual machine providing access to internal resources within the AWS VPC. Ops and devs can ssh to this server to directly talk to the resources without going through the Load Balancer.
+EC2 virtual machines provide access to internal resources within the AWS VPC.
+Ops and devs can ssh to this server to directly talk to the resources without going through the Load Balancer.
+
+Learn more about [deploying pass-docker via EC2](/docs/infra/ec2.md).
 
 #### ECS
 
@@ -98,6 +101,5 @@ hosted by the Eclipse Foundation./
 ## References
 
 * [Deployment Pipeline](/docs/infra/pipeline.md)
-* [Deploying pass-docker via EC2](/docs/infra/ec2.md)
 * [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](/docs/infra/docker-composer-to-k8s-manifest.md)
 * [Working with GitHub secrets](/docs/infra/github-secrets.md)
