@@ -28,8 +28,8 @@
 | 4.7.5-3.2-2 | [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service) |
 | 4.7.5-3.2-3 | [pass-authz](https://github.com/eclipse-pass/pass-authz) |
 | 4.7.5-3.2-5 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader), [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) |
-| 4.7.5-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client), [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services), [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) |
-| 4.7.5-3.5 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services), |
+| 4.7.5-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) <br> [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) <br> [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) |
+| 4.7.5-3.5 | [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) |
 | 4.7.5-3.5-1 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) |
 
 `ospass/pass-authz-fcrepo`: Just used in [pass-authz](https://github.com/eclipse-pass/pass-authz). Built by [pass-authz](https://github.com/eclipse-pass/pass-authz) and based on  `oapass/fcrepo:4.7.5-3.2-3`. See its definition [`pass-authz/pass-authz-integration/src/test/resources/docker/Dockerfile`](https://github.com/eclipse-pass/pass-authz/blob/main/pass-authz-integration/src/test/resources/docker/Dockerfile).
@@ -42,8 +42,8 @@ All projects use `6.2.3` 🎉
 ### `oapass/indexer`
 | Version | Used in repo |
 | --- | --- |
-| 0.0.15-3.1-SNAPSHOT | [pass-authz](https://github.com/eclipse-pass/pass-authz), [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) |
-| 0.0.18-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client), [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services), [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service), [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader), [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers), [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) |
+| 0.0.15-3.1-SNAPSHOT | [pass-authz](https://github.com/eclipse-pass/pass-authz) <br> [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) |
+| 0.0.18-3.4 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) <br> [pass-notification-services](https://github.com/eclipse-pass/pass-notification-services) <br> [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service) <br> [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) <br> [pass-package-providers](https://github.com/eclipse-pass/pass-package-providers) <br> [pass-deposit-services](https://github.com/eclipse-pass/pass-deposit-services) |
 | 0.0.18-3.4-1 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) |
 
  `sha256:e51092a9d433219d52207f1ec3f5ea7c652d51f516bcbe9434dae556b921546d === 0.0.18-3.4`
