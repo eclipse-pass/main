@@ -1,6 +1,6 @@
 # Developer Documentation
 
-Developer focused documentation should be written in this `docs/dev/` directory. Separate documentation pages can be added in this directory and referenced here. If a given component has many documentation pages, please add a directory for it within the [docs/dev/](https://github.com/eclipse-pass/main/tree/main/docs/dev) directory.
+Developer focused documentation should be written in this `docs/dev/` directory. Separate documentation pages can be added in this directory and referenced here. If a given component has many documentation pages, please add a directory for it within the [docs/dev/](/docs/dev) directory.
 
 ## Components
 
