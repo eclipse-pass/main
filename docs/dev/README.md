@@ -79,3 +79,4 @@ Only Committers on the PASS Eclipse project are able to make changes to the code
 * [PASS Playground](/docs/dev/playground.md) - Ops playground
 * [PASS UI](/docs/dev/pass-ui.md) - PASS Ember application
 * [Troubleshooting](/docs/dev/troubleshooting.md) - Common errors and how to fix them
+* [Docker Dependencies](/docs/dev/integration-test-docker-dependencies.md) - Integration Testing and Docker Dependencies
