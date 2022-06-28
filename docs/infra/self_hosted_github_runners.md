@@ -22,8 +22,9 @@ https://github.com/eclipse-pass/pass-docker/settings/actions/runners/new
 
 ![GitHub Setup Runner Code](/docs/assets/github/create_self_runner_code.png)
 
-Please refer to the latest from the settings page, but here is a (slightly modified) copy of the
-scripts.
+Please refer to the latest self-hosted action runner setup instructions directly
+from GitHub, what follows is a (slightly modified) copy of the
+those scripts on the `/settings/actions/runners/new` page.
 
 ### Download the tools
 
