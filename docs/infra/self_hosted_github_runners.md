@@ -13,11 +13,14 @@ If you can access `/settings/actions/runners` then you have the right access per
 
 ## Create Self-Hosted Runner
 
-You can add an actions runner from the settings page (change the organization/project information)
+You can get instructions on how to add a self-hosted actions runner from the settings page (change the organization/project information in the
+URL below to your organization/project).
 
 ```
-https://github.com/eclipse-pass/pass-docker/settings/actions/runners
+https://github.com/eclipse-pass/pass-docker/settings/actions/runners/new
 ```
+
+![GitHub Setup Runner Code](/docs/assets/github/create_self_runner_code.png)
 
 Please refer to the latest from the settings page, but here is a (slightly modified) copy of the
 scripts.
