@@ -102,13 +102,12 @@ export GITHUB_TOKEN=ghp_abc123def456abc123def456abc123def456
 
 If you configured the above correctly, you should now see the self-hosted runner with via the API.
 
-```
+```bash
 curl \
   -H "Accept: application/vnd.github.v3+json" \
   -H "Authorization: token $GITHUB_TOKEN" \
   https://api.github.com/repos/eclipse-pass/pass-docker/actions/runners
 ```
-
 
 ## References
 
