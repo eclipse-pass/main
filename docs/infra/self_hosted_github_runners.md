@@ -42,8 +42,11 @@ mkdir -p /opt/actions-runner
 ### Configure Runner
 
 Then we create the runner and start the configuration experience.
-The token information will be different.  We also created a
-non-sudo user `useradd githubrunner` account to act as the runner.
+The token information will be different.  GitHub self-hosted runners
+should NOT be run as root.  In our example below we are using a
+`githubrunner` user (to create that user, you can run `useradd githubrunner`).
+If you are running in a docker environment, you probably also want to
+add them to the docker group (to add that group, you can run `usermod -aG docker githubrunner`).
 
 ```bash
 sudo -u githubrunner ./config.sh \
