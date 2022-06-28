@@ -95,7 +95,7 @@ stored in an environment variable
 export GITHUB_TOKEN=ghp_abc123def456abc123def456abc123def456
 ````
 
-If you configured the above correctly, you should see the You can view existing self-hosted runners with
+If you configured the above correctly, you should now see the self-hosted runner with via the API.
 
 ```
 curl \
