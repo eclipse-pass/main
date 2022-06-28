@@ -28,7 +28,8 @@ those scripts on the `/settings/actions/runners/new` page.
 
 ### Download the tools
 
-First we need to download the latest release from GitHub
+Download the actions-runner code from GitHub, please
+refer to `/settings/actions/runners/new` for the latest URLs and checksum value.
 
 ```bash
 mkdir -p /opt/actions-runner
