@@ -6,7 +6,10 @@ This can be useful for
 * running automation scripts
 * deploying production / pre-production servers
 
-You will need to be an adminstrator to configure a self-hosted runner
+To use self-hosted runners, you will need to be an administrator of the GitHub project.
+If you can access `/settings/actions/runners` then you have the right access permissions.
+
+![GitHub Settings Runners](/docs/assets/github/github_settings_runners.png)
 
 ## Create Self-Hosted Runner
 
