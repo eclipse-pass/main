@@ -11,7 +11,7 @@ Java projects:
 | [pass-fcrepo-jsonld](https://github.com/eclipse-pass/pass-fcrepo-jsonld) |  |
 | [pass-fcrepo-module-auth-rbacl](https://github.com/eclipse-pass/pass-fcrepo-module-auth-rbacl) |  |
 | [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) | <ul><li>oapass/fcrepo:4.7.5-3.1-SNAPSHOT</li><li>oapass/indexer:0.0.15-3.1-SNAPSHOT</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li></ul> |
-| [pass-indexer](https://github.com/eclipse-pass/pass-indexer) |  |
+| [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | <ul><li>oapass/fcrepo:4.7.5-3.2</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li></ul> |
 | [pass-indexer-checker](https://github.com/eclipse-pass/pass-indexer-checker) | <ul><li>oapass/fcrepo:4.7.5-3.5-1</li><li>oapass/indexer:0.0.18-3.4-1</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li></ul> |
 | [pass-java-client](https://github.com/eclipse-pass/pass-java-client) | <ul><li>oapass/fcrepo:4.7.5-3.4</li><li>oapass/indexer:0.0.18-3.4</li><li>docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3</li></ul> |
 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader) | <ul><li>oapass/fcrepo:4.7.5-3.2-5</li></ul> |
@@ -34,6 +34,7 @@ Go projects:
 | Version | Used in |
 | --- | --- |
 | 4.7.5-3.1-SNAPSHOT | [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) |
+| 4.7.5-3.2 | [pass-indexer](https://github.com/eclipse-pass/pass-indexer)
 | 4.7.5-3.2-2 | [pass-doi-services](https://github.com/eclipse-pass/pass-doi-service) |
 | 4.7.5-3.2-3 | [pass-authz](https://github.com/eclipse-pass/pass-authz) |
 | 4.7.5-3.2-5 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader) <br> [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) <br> [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) <br> [pass-download-service](https://github.com/eclipse-pass/pass-download-service) |
