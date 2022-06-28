@@ -1,6 +1,76 @@
 # PASS Pipeline
 
-This will document the progression from source code commits to
+## Orchestration
+
+Below is an outline of how the various pieces of the PASS infrastructure will be coordinated into a release.
+Note that our approach is to start with replicated [pass-docker](https://github.com/eclipse-pass/pass-docker) and in particular one
+based on [GitHub Actions via Self-Hosted Runner](https://github.com/eclipse-pass/pass-docker/tree/178-docker-compose-gh-actions).
+
+Once branch `178-docker-compose-gh-actions`, this documentation should be updated to
+point back to the `main` branch.
+
+As different environments (cd, nightly, dev, demo, pre-production, production) are
+introduced this documentation will be updated to reflect those differences (for
+example cd, nightly, dev, demo will all use a _fake_ nihms FTP server).
+
+The [docker containers should be migrated based on eclipse-pass dependencies](/docs/dev/integration-test-docker-dependencies.md).
+
+### Core Infrastructure
+
+The following core pieces of infrastructure are required for the PASS Application.
+These pieces are more stable and will not be updated frequently.
+
+| Name | Based On | Notes |
+| --- | --- | --- |
+| fcrepo | [tomcat:8.5.40-jre8-alpine docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/fcrepo/4.7.5/Dockerfile) | Old version (4.7.5) and relies heavily on `OAPASS` instead of `eclipse-pass`
+| postgres | [postgres:10.3-alpine docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/postgres/10.3/Dockerfile) | Underlying DB for fcrepo
+| activemq | [openjdk:8-jre-alpine docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/activemq/Dockerfile) | Version 5.15.11
+| httpd-proxy | [centos docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/httpd-proxy/Dockerfile) | Orchestration between services
+| elasticsearch | [elasticsearch/elasticsearch-oss 6.2.3 docker](https://www.docker.elastic.co/r/elasticsearch/elasticsearch-oss) | [Security vulnerability to patch](https://github.com/eclipse-pass/main/issues/274)
+| mail | oapass/docker-mailserver | Should be updated to [eclipse-pass/pass-docker-mailserver](https://github.com/eclipse-pass/pass-docker-mailserver/blob/main/Dockerfile)
+
+### Third Party Data Stores
+
+The following third party data stores are configured / configurable within PASS.
+These pieces are more stable and will not be updated frequently.
+
+| Name | Based On | Notes |
+| --- | --- | --- |
+| nihms ftpserver | [stilliard/pure-ftpd docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/ftpserver/0.0.1-demo/Dockerfile) | Sample [Nimhs FTP Server](https://www.nihms.nih.gov/login/?next=/submission/)
+| dspace | [jetty:9.4.7-jre8-alpine docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/dspace/6.2/Dockerfile) | Sample [DSpace database](https://www.dspace.com/en/inc/home.cfm)
+
+### Identity Management
+
+The following core pieces manage authentication.
+These pieces are more stable and will not be updated frequently.
+
+| Name | Based On | Notes |
+| --- | --- | --- |
+| idp | [unicon/shibboleth-idp docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/idp/Dockerfile) | Based on shibboleth and configurable for common, harvard and jhu
+| ldap | [centos docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/ldap/Dockerfile) | Configured for fakek accounts on common, harvard and jhu
+| shibboleth-sp | [unicon/shibboleth-sp docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/sp/2.6.1/Dockerfile) | Core shibboleth service provider
+| authz | [openjdk:8u212-jre-alpine3.9 docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/authz/Dockerfile) | Managed via `oapass.org`
+
+### PASS Projects
+
+The following projects will manage building their own containers.
+
+| Name | Installation | Notes |
+| --- | --- | --- |
+| pass-ui | [docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/ember/Dockerfile) | Relies on `OA-PASS/pass-ember` and should be updated to `eclipse-pass/pass-ui`
+| pass-ui-static | [docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/static-html/Dockerfile) | Relies on `OA-PASS` should be updated to `eclipse-pass`
+| indexer | [openjdk:8u212-jre-alpine3.9 docker](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/indexer/0.0.18-SNAPSHOT/Dockerfile) | Relies on `OA-PASS` should be updated to `eclipse-pass`
+| assets | [alpine:3.7](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/assets/Dockerfile) | Based on [minimal assets data.tar](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/assets/data.tar) within [pass-docker](https://github.com/eclipse-pass/pass-docker)
+| deposit-services | [pass-package-providers docker](https://github.com/eclipse-pass/pass-package-providers) | Based on `oapass/deposit-services-providers` and should be moved to `eclipse-pass/pass-package-providers` Configurable for [JHU](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/deposit-services/repositories-jhu.json) or [Harvard](https://github.com/eclipse-pass/pass-docker/blob/178-docker-compose-gh-actions/deposit-services/repositories-harvard.json)
+| notification-services | notification-services/0.1.0-3.4 | Update to to [eclipse-pass/pass-notification-services](https://github.com/eclipse-pass/pass-notification-services)
+| schemaservice | oapass/schema-service:v0.6.1-3 | Update to [eclipse-pass/pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas)
+| policyservice | oapass/policy-service:v0.1.2 | Update to [eclipse-pass/pass-policy-service](https://github.com/eclipse-pass/pass-policy-service)
+| doiservice | oapass/doi-service:version1.0.0 | Update to [eclipse-pass/pass-doi-service](https://github.com/eclipse-pass/pass-doi-service)
+| downloadservice | oapass/download-service:v1.0.2 | Update to [eclipse-pass/pass-download-service](https://github.com/eclipse-pass/pass-download-service)
+
+## Component CI/CD Capabilities
+
+The table below will document the progression from source code commits to
 a production running application for the many [PASS components](/docs/dev#components).
 
 | Project | Build | UTs |ITs | Deploy | Notes |
