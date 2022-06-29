@@ -60,7 +60,15 @@ can correct grab the appropriate versions when orchestrating a release.
 
 ## Artefact Decomposition
 
-The PASS project can be viewed as a decomposition of core infrastrcture
+The PASS project can be viewed as a decomposition of
+
+* core infrastrcture (e.g. database, web servers, indexes)
+* access to third party data stores (e.g. DSpace, Nihms)
+* identify management (e.g. login, authentication, authorization)
+* PASS projects (e.g. ui, deposit services, loaders)
+
+Each decomposition will have different levels of automation and
+different release cycles.
 
 ### Core Infrastructure
 
