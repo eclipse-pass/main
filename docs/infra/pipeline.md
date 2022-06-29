@@ -128,13 +128,13 @@ The following projects will manage building their own containers.
 The table below will document the progression from source code commits to
 a production running application for the many [PASS components](/docs/dev#components).
 
-| Project | Build | UTs |ITs | Deploy | Notes |
-| --- | --- | --- | --- | --- | --- |
-| [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ✅ | ❓ |  |
-| [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❌ | ❌ | ❌ | ❓ |  |
-| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ✅ | ✅ | ❌ | ❓ |  |
-| [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❌ | ❌ | ❌ | ❓ |  |
-| [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓|  |
+| Project | Build | UTs |ITs | Deploy |
+| --- | --- | --- | --- | --- |
+| [pass-authz](https://github.com/eclipse-pass/pass-authz) | ✅ | ✅ | ✅ | ❓ |
+| [pass-data-model](https://github.com/eclipse-pass/pass-data-model) | ❌ | ❌ | ❌ | ❓ |
+| [pass-ui](https://github.com/eclipse-pass/pass-ui) | ✅ | ✅ | ❌ | ❓ |
+| [pass-ui-public](https://github.com/eclipse-pass/pass-ui-public) | ❌ | ❌ | ❌ | ❓ |
+| [pass-ember-adapter](https://github.com/eclipse-pass/pass-ember-adapter) | ✅ | ✅ | ❎ | ❓ |
 | [pass-indexer](https://github.com/eclipse-pass/pass-indexer) | ✅ | ✅ | ✅ | ❓ |
 | [pass-policy-service](https://github.com/eclipse-pass/pass-policy-service) | ✅ | ✅ | ✅ | ❓ |
 | [pass-metadata-schemas](https://github.com/eclipse-pass/pass-metadata-schemas) | ✅ | ✅ | ❌ | ❓ |
@@ -150,8 +150,8 @@ a production running application for the many [PASS components](/docs/dev#compon
 There are a few additional project that help support Eclipse PASS but are not
 part of the core application.
 
-| Project | Build | UTs |ITs | Deploy | Notes |
-| --- | --- | --- | --- | --- | --- |
+| Project | Build | UTs |ITs | Deploy |
+| --- | --- | --- | --- | --- |
 | [pass-docker](https://github.com/eclipse-pass/pass-docker) | ❌ | ❌ | ❌ | ❓ |
 | [playground](https://github.com/eclipse-pass/playground) | ❌ | ❌ | ❌ | ❓ |
 | [pass-dupe-checker](https://github.com/eclipse-pass/pass-dupe-checker) | ✅ | ✅ | ❌ | ❓ |
@@ -159,16 +159,16 @@ part of the core application.
 
 The following application help load data into PASS
 
-| Project | Build | UTs |ITs | Deploy | Notes |
-| --- | --- | --- | --- | --- | --- |
+| Project | Build | UTs |ITs | Deploy |
+| --- | --- | --- | --- | --- |
 | [pass-nihms-loader](https://github.com/eclipse-pass/pass-nihms-loader) | ✅ | ✅ | ✅ | ❓ |
 | [pass-grant-loader](https://github.com/eclipse-pass/pass-grant-loader) | ✅ | ✅ | ✅ | ❓ |
 | [pass-journal-loader](https://github.com/eclipse-pass/pass-journal-loader) | ✅ | ✅ | ✅ | ❓ |
 
 The following repositories have been forked from others
 
-| Project | Forked From | Notes |
-| --- | --- | --- |
+| Project | Forked From |
+| --- | --- |
 | [modeshape](https://github.com/eclipse-pass/modeshape) | [ModeShape](https://github.com/ModeShape/modeshape) |
 | [pass-fcrepo-module-auth-rbacl](https://github.com/eclipse-pass/pass-fcrepo-module-auth-rbacl) | [birkland](https://github.com/birkland/fcrepo-module-auth-rbacl) |
 
