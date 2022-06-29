@@ -15,6 +15,53 @@ example cd, nightly, dev, demo will all use a _fake_ nihms FTP server).
 
 The [docker containers should be migrated based on eclipse-pass dependencies](/docs/dev/integration-test-docker-dependencies.md).
 
+Also note that not all _actions_ will (yet) be automated.
+
+### Application Reposibilities
+
+The PASS application will be responsible for
+
+* Building core artefacts (e.g. customizations to the fedora images)
+* Updating environment manifests (e.g a new container image to upgrade the deposit service)
+* Deoploying to a setup environment (based on the manifest)
+
+![Application pipeline actions](/docs/assets/pipeline/pipeline_app.png)
+
+Note that the `pass-app` currently refers to the [pass-docker repo](https://github.com/eclipse-pass/pass-docker).
+The recommendation is that `pass-docker` be renamed (and enhanced) to
+capture using [infrastructure as code](https://en.wikipedia.org/wiki/Infrastructure_as_code)) all configurable environments.
+
+| Action | Trigger | Note
+| --- | --- | --- |
+| deploy_demo | GH Action Button | In development
+| update_core_versions | Manual | Manually build / publish containers, update pass-docker manifests
+| update_datastores | Manual | Same as `update_core_versions`
+| update_project | Manual | Update pass-docker manifests
+
+### Project Reposibilities
+
+The individual projects will be responsible for
+
+* Running automated quality control (aka unit and integration tests)
+* Building project artefacts (e.g. Java JARs, Docker images, Golang binaries)
+* Notifying the application of the update
+
+![Project pipeline actions](/docs/assets/pipeline/pipeline_project.png)
+
+The artefacts will be stored in a consistent manner so the application
+can correct grab the appropriate versions when orchestrating a release.
+
+| Action | Trigger | Note
+| --- | --- | --- |
+| test | GH PRs | Mostly in place for all projects
+| build | Manual | Working towards GH actions
+| notify | Manual | Notify via email/slack/carrier pigeon of update
+
+
+## Artefact Decomposition
+
+The PASS project can be viewed as a decomposition of core infrastrcture
+
 ### Core Infrastructure
 
 The following core pieces of infrastructure are required for the PASS Application.
