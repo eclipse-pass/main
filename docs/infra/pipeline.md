@@ -3,10 +3,10 @@
 ## Orchestration
 
 Below is an outline of how the various pieces of the PASS infrastructure will be coordinated into a release.
-Note that our approach is to start with replicated [pass-docker](https://github.com/eclipse-pass/pass-docker) and in particular one
+We will start with non-production-ready version using [pass-docker](https://github.com/eclipse-pass/pass-docker) and in particular one
 based on [GitHub Actions via Self-Hosted Runner](https://github.com/eclipse-pass/pass-docker/tree/178-docker-compose-gh-actions).
 
-Once branch `178-docker-compose-gh-actions`, this documentation should be updated to
+Once branch `178-docker-compose-gh-actions` is merged, this documentation should be updated to
 point back to the `main` branch.
 
 As different environments (cd, nightly, dev, demo, pre-production, production) are
@@ -14,8 +14,6 @@ introduced this documentation will be updated to reflect those differences (for
 example cd, nightly, dev, demo will all use a _fake_ nihms FTP server).
 
 The [docker containers should be migrated based on eclipse-pass dependencies](/docs/dev/integration-test-docker-dependencies.md).
-
-Also note that not all _actions_ will (yet) be automated.
 
 ### Application Reposibilities
 
@@ -30,6 +28,8 @@ The PASS application will be responsible for
 Note that the `pass-app` currently refers to the [pass-docker repo](https://github.com/eclipse-pass/pass-docker).
 The recommendation is that `pass-docker` be renamed (and enhanced) to
 capture using [infrastructure as code](https://en.wikipedia.org/wiki/Infrastructure_as_code)) all configurable environments.
+
+Here is a summary of the actions and their current triggers / implementation status (note not all _actions_ have been fully automated).
 
 | Action | Trigger | Note
 | --- | --- | --- |
