@@ -11,7 +11,7 @@ The version should be chosen based on those guidelines.
 # Process
 
 * Choose a release version that communicates the magnitude of the change.
-* Order the projects to be released by their dependencies into a list such that each project only depend on projects later in the list.
+* Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
 * For each project in the list, do the release.
 * Test the release
 * Publish release notes
