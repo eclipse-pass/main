@@ -8,6 +8,10 @@ automatically convert our `docker-compose.yml` into a `k8s-maniftest.yml`.
 Ultimately the work did not succeed and we are instead manually migrating the
 orchestration into k8s.
 
+## Manual Migration
+
+The documentation for this approach is in a [separate document](k8s-migration.md).
+
 ## Migration Scripts
 
 The following instructions are repo specific for migrating the
