@@ -71,6 +71,7 @@ Developers will need an NPM account with access to any Node packages being publi
 * Choose a release version that communicates the magnitude of the change.
 * Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
 * For each project in the list, do the release.
+* Update images in pass-docker
 * Test the release
 * Publish release notes
 
@@ -121,7 +122,7 @@ go test -tags=integration ./..
 
 Tag and push the docker image
 ```
-sh ./scripts/docker-push.sh;
+sh ./scripts/docker-push.sh
 ```
 
 ## Docker image release
@@ -140,8 +141,6 @@ Push the image:
 docker push IMAGE_NAME:VERSION
 ```
 
-Update docker.compose.yml to use newly built image and add hash to identifier. The hash can be found using docker inspect.
-
 ## Node package release
 
 Edit package.json to set the version to the release version.
@@ -157,6 +156,10 @@ Publish to the NPM registry:
 ```
 npm publish
 ```
+
+# Update pass-docker
+
+Each released image must be updated in pass-docker.yml. Each image is specified with a version and hash identifier. The versions should just be able to be updated to the new release version. The hash can be found using `docker inspect`.
 
 # Testing
 
