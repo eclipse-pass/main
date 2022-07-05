@@ -159,7 +159,7 @@ npm publish
 
 # Update pass-docker
 
-Each released image must be updated in pass-docker.yml. Each image is specified with a version and hash identifier. The versions should just be able to be updated to the new release version. The hash can be found using `docker inspect`.
+Each released image must be updated in the `pass-docker` `docker-compose.yml`. Each image is specified with a version and hash identifier. The versions should just be able to be updated to the new release version. The hash can be found using `docker inspect`.
 
 # Testing
 
