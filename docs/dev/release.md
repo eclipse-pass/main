@@ -8,49 +8,29 @@ Source code is tagged and release notes made available.
 Each release of PASS has its own version which is used by every component. PASS uses `MAJOR.MINOR.PATCH` [semantic versioning](https://semver.org/) approach.
 The version should be chosen based on those guidelines.
 
-# Process
+# Community preparation
 
-* Choose a release version that communicates the magnitude of the change.
-* Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
-* For each project in the list, do the release.
-* Test the release
-* Publish release notes
+  * Assign a Release Manager, the person who will be responsible for the release process. The Release Manager must be a PASS committer.
+  * Ensure all code commits and PRs intended for the release have been merged.
+  * Issue a code freeze statement on the Eclipse PASS slack #general channel to notify all developers that a release is imminent and that no further changes will be considered.
 
-## Dependency ordering
+# Release requirements
 
-Generally, dependencies are simple and the ordering can be figured out manually. Java project dependencies can be determined from their Maven pom. Every Java project depends on
-the main PASS project pom. The Fedora repository image depends on pass-authz, pass-java-client, pass-fcrepo-jms, and pass-fcrepo-jsonld. Pretty much every Java component depends
-on pass-java-client. The pass-package-providers library depends on pass-deposit-services. Then pass-deposit-services, pass-notification-services, and pass-package-providers
-depend on pass-messaging-support.
+Make sure the following software is installed:
 
-A complication is the dependencies introduced by integration tests. Integration tests use Docker images to setup the testing environment and should use the images corresponding to
-the current release. This introduces a new dependency on the image which introduces a dependency on the PASS component encapsulated by the image. This introduces some circular
-dependencies between Java artifacts and Docker images. For example, the fcrepo image contains a servlet filter and user service from pass-authz, and pass-authz integration tests
-use the fcrepo image. In order to get around this problem, integration tests could be run using older Docker images or integration testing could be skipped until after the Docker images in question are built.
+|Name | Version |
+| --- | --- |
+| Go  | 1.12 |
+| Java | 11 |
+| Node | 14.x | 
+| Npm | 6.14.x |
+| Maven | 3.8.x |
+| Docker | 20.10.x |
+| Docker Compose | 1.29.2 | 
 
+## Sonatype
 
-Below is an attempt at the release order which ignores circular dependencies:
-
-The main project pom, pass-java-client, pass-authz, pass-fcrepo-jms, pass-fcrepo-jsonld, fcrepo,  pass-indexer, pass-indexer-checker, pass-messaging-support, pass-doi-service, pass-download-service, pass-notification-services, pass-policy-service, pass-deposit-services, pass-grant-loader, pass-journal-loader, pass-nihms-loader, pass-metadata-schemas, pass-ember-adapter, pass-ui-public, pass-ui.
-
-## Java release
-
-The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image.
-
-Perform a release:
-```
-mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
-mvn release:perform -Dgoals=deploy 
-```
-
-Push tags and version updates to GitHub:
-```
-git push git@github.com:eclipse-pass/<PROJECT> main
-git push git@github.com:eclipse-pass/<PROJECT> --tags
-```
-
-Developers will need a Sonatype account to do the release. 
-
+Developers will need a Sonatype account to release Java projects.
 Maven must be configured to use the account by modifying your ~/.m2/settings.xml.
 
 ```
@@ -77,6 +57,57 @@ Maven must be configured to use the account by modifying your ~/.m2/settings.xml
 </settings>
 
 ```
+
+## Docker Hub
+
+Developers will need a Docker Hub account which is a member of the the oapass organization.
+
+## NPM
+
+Developers will need an NPM account with access to any Node packages being published. At the moment, this is only ember-fedora-adapter (pass-ember-adapter).
+
+# Process
+
+* Choose a release version that communicates the magnitude of the change.
+* Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
+* For each project in the list, do the release.
+* Test the release
+* Publish release notes
+
+## Dependency ordering
+
+Generally, dependencies are simple and the ordering can be figured out manually. Java project dependencies can be determined from their Maven pom. Every Java project depends on
+the main PASS project pom. The Fedora repository image depends on pass-authz, pass-java-client, pass-fcrepo-jms, and pass-fcrepo-jsonld. Pretty much every Java component depends
+on pass-java-client. The pass-package-providers library depends on pass-deposit-services. Then pass-deposit-services, pass-notification-services, and pass-package-providers
+depend on pass-messaging-support.
+
+A complication is the dependencies introduced by integration tests. Integration tests use Docker images to setup the testing environment. The images should be from the release being built. This introduces a new dependency on the image in turn adds dependency on the PASS component encapsulated by the image. Unfortunately this can cause circular
+dependencies between Java artifacts and Docker images. For example, the fcrepo image contains a servlet filter and user service from pass-authz, and pass-authz integration tests
+use the fcrepo image. In order to get around this problem, integration tests could be run using older Docker images or integration testing could be skipped until after the Docker images in question are built. The integration test dependencies could be better accounted for by adding them explicitly as test dependencies to the poms.
+
+Below is an attempt at the release order which ignores circular dependencies:
+
+The main project pom, pass-java-client, pass-authz, pass-fcrepo-jms, pass-fcrepo-jsonld, fcrepo,  pass-indexer, pass-indexer-checker, pass-messaging-support, pass-doi-service, pass-download-service, pass-notification-services, pass-policy-service, pass-deposit-services, pass-grant-loader, pass-journal-loader, pass-nihms-loader, pass-metadata-schemas, pass-ember-adapter, pass-ui-public, pass-ui.
+
+## Java release
+
+The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image.
+
+Perform a release:
+```
+mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
+mvn release:perform -Dgoals=deploy 
+```
+
+If integration tests need to be skipped, `-DskipITs=true` can be added to the commands above.
+
+Push tags and version updates to GitHub:
+```
+git push git@github.com:eclipse-pass/<PROJECT> main
+git push git@github.com:eclipse-pass/<PROJECT> --tags
+```
+
+In addition, the project may also be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
 
 ## Go
 
@@ -127,11 +158,12 @@ Publish to the NPM registry:
 npm publish
 ```
 
-# Release notes
+# Testing
 
+Manual testing can be done using the newly updated pass-docker to run the release locally.
 
+# Post Release
 
-
-
-
-
+  * Update release notes
+  * Update project documentation
+  * Deploying the release
