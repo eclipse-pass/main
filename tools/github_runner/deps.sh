@@ -18,7 +18,7 @@ function install_docker()
     touch /opt/docker.start && \
     apt-get -y update && \
     apt-get install -y gnupg2 pass docker-compose && \
-    usermod -aG docker githubrunner && \
+    (usermod -aG docker githubrunner || true) && \
     mv /opt/docker.start /opt/docker.end && \
     echo "... done installing docker"
 }
