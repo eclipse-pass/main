@@ -28,7 +28,10 @@ function install_passdocker()
   echo "installing pass-docker ..." && \
     touch /opt/pass-docker.start && \
     mkdir -p /src && \
-    (cd /src && git clone git@github.com:${PASSORG}/pass-docker.git) && \
+    (cd /src && \
+      git clone git@github.com:${PASSORG}/pass-docker.git && \
+      cd pass-docker && \
+      git checkout minimal-assets) && \
     mv /opt/pass-docker.start /opt/pass-docker.end && \
     echo "... done installing pass-docker"
 }
