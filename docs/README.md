@@ -15,3 +15,4 @@ any relevant websites, external references, and other cloud storages (e.g. Googl
 * [Troubleshooting dev issues](/docs/dev/troubleshooting.md)
 * [Deployment Pipeline](/docs/infra/pipeline.md)
 * [PASS via EC2](/docs/infra/ec2.md)
+* [PASS via Digital Ocean](/docs/infra/digitalocean.md)
