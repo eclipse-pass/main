@@ -39,6 +39,14 @@ mkdir -p /opt/actions-runner
  tar xzf ./actions-runner-linux-x64-2.293.0.tar.gz)
 ```
 
+Note that any service that you want to run on the self-hosted runner
+must be accessible via `githubrunner` group.  For example, to
+run docker commands, you will need to modify the `docker` user as follows
+
+```bash
+usermod -aG docker githubrunner
+```
+
 A helper script has been created (and tested on a Linux x64 server) to
 help you setup your self-hosted runner.  Copy and execute
 [/tools/github_runner/install.sh](/tools/github_runner/install.sh)
