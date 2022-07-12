@@ -6,8 +6,8 @@
 # To get the latest GitHub Runner version, visit
 # (change URL to your GitHub organization if you forked the application)
 # https://github.com/eclipse-pass/main/settings/actions/runners/new?arch=x64&os=linux
-GITHUB_RUNNER_VERSION=2.293.0
-GITHUB_RUNNER_CHECKSUM="06d62d551b686239a47d73e99a557d87e0e4fa62bdddcf1d74d4e6b2521f8c10"
+GITHUB_RUNNER_VERSION=2.294.0
+GITHUB_RUNNER_CHECKSUM="a19a09f4eda5716e5d48ba86b6b78fc014880c5619b9dba4a059eaf65e131780"
 
 function install_githubrunner()
 {
