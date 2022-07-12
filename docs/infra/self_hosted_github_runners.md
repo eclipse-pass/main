@@ -39,6 +39,32 @@ mkdir -p /opt/actions-runner
  tar xzf ./actions-runner-linux-x64-2.293.0.tar.gz)
 ```
 
+A helper script has been created (and tested on a Linux x64 server) to
+help you setup your self-hosted runner.  Copy and execute
+[/tools/github_runner/install.sh](/tools/github_runner/install.sh)
+on your self-hosted server.
+
+Or, you can run this directly on your server
+
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/eclipse-pass/main/main/tools/github_runner/install.sh)"
+```
+
+If the installation above worked, you should be able to run
+
+```bash
+cd /opt/githubrunner && sudo -u githubrunner ./config.sh --help
+```
+
+And see something similar to
+
+```bash
+Commands:
+ ./config.sh         Configures the runner
+ ./config.sh remove  Unconfigures the runner
+ ./run.sh            Runs the runner interactively. Does not require any options.
+```
+
 ### Configure Runner
 
 Then we create the runner and start the configuration experience.
