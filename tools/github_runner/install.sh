@@ -16,6 +16,7 @@ function install_githubrunner()
     rm -rf /opt/githubrunner && \
     mkdir /opt/githubrunner && \
     (useradd githubrunner || true) && \
+    (usermod -aG docker githubrunner || true) && \
     (cd /opt/githubrunner && \
      curl -o actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v${GITHUB_RUNNER_VERSION}/actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz && \
      echo "${GITHUB_RUNNER_CHECKSUM}  actions-runner-linux-x64-${GITHUB_RUNNER_VERSION}.tar.gz" | shasum -a 256 -c && \
