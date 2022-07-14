@@ -75,6 +75,7 @@
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
+    <spring-boot-maven-plugin.version>2.1.2.RELEASE</spring-boot-maven-plugin.version>
 
     <!-- PASS dependency versions -->
     <pass-authz.version>${project.version}</pass-authz.version>
