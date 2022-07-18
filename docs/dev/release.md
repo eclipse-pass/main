@@ -96,6 +96,15 @@ The Maven release plugin is used to perform releases. It builds, tests, and push
 
 Perform a release:
 ```
+We set the versions of the current release and the development version - for example,
+
+```
+export RELEASE=0.1.0
+export NEXT=0.2.0-SNAPSHOT
+```
+
+We first perform a release of the parent pom for the RELEASE version. After that, we should also deploy a snapshot release of the development version of the parent as well.
+```
 mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
 mvn release:perform -Dgoals=deploy 
 ```
@@ -107,6 +116,8 @@ Push tags and version updates to GitHub:
 git push git@github.com:eclipse-pass/<PROJECT> main
 git push git@github.com:eclipse-pass/<PROJECT> --tags
 ```
+
+
 
 In addition, the project may also be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
 
