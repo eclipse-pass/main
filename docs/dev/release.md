@@ -95,7 +95,7 @@ The main project pom, pass-java-client, pass-authz, pass-fcrepo-jms, pass-fcrepo
 The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image.
 
 Perform a release:
-```
+
 We set the versions of the current release and the development version - for example,
 
 ```
