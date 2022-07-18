@@ -117,6 +117,19 @@ git push git@github.com:eclipse-pass/<PROJECT> main
 git push git@github.com:eclipse-pass/<PROJECT> --tags
 ```
 
+The above instructions should be modified for releasing children of the parent, as we need to update the parent version in each of the children. Once the new parent has been deployed on Sonatype, it will be located by maven's versions plugin. We update this version in the child by:
+
+```
+mvn:versions update-parent
+```
+
+before executing 
+
+```
+mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
+mvn release:perform -Dgoals=deploy 
+```
+and so forth. Finally, we update the parent version to the development version version in the child pom, and push this to the main branch of the child.
 
 
 In addition, the project may also be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
