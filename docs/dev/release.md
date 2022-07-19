@@ -91,19 +91,21 @@ Below is an attempt at the release order which ignores circular dependencies:
 The main project pom, pass-java-client, pass-authz, pass-fcrepo-jms, pass-fcrepo-jsonld, fcrepo,  pass-indexer, pass-indexer-checker, pass-messaging-support, pass-doi-service, pass-download-service, pass-notification-services, pass-policy-service, pass-deposit-services, pass-grant-loader, pass-journal-loader, pass-nihms-loader, pass-metadata-schemas, pass-ember-adapter, pass-ui-public, pass-ui.
 
 ## Java release
-
 The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image.
+The release process is determined by the decision made to have versions for all Java artifacts be the same for a release. The parent pom in `main` sets the version to be inherited by all its children.
+This project therefore needs to be released first, as all other projects need to reference it.
+After this is released, other projects are released in an order which guarantees that all PASS dependencies for them have already been released.
 
-Perform a release:
-
-We set the versions of the current release and the development version - for example,
-
+The process itself can be described as follows: release `main`, then use the maven release and versions plugins to perform the
+process. For convenience we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
+For each of these child projects, we first clone the source from GitHub, and operating on the principal branch (usually `main`, sometimes `master` for older projects).
+We would then update the parent version in these projects by:
 ```
-export RELEASE=0.1.0
-export NEXT=0.2.0-SNAPSHOT
+mvn:versions  update-parent;
+git commit -a -m "update parent version for release";
 ```
+After this, we prepare and perform the release:
 
-We first perform a release of the parent pom for the RELEASE version. After that, we should also deploy a snapshot release of the development version of the parent as well.
 ```
 mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
 mvn release:perform -Dgoals=deploy 
@@ -111,25 +113,24 @@ mvn release:perform -Dgoals=deploy
 
 If integration tests need to be skipped, `-DskipITs=true` can be added to the commands above.
 
-Push tags and version updates to GitHub:
+Push tags to GitHub:
 ```
-git push git@github.com:eclipse-pass/<PROJECT> main
 git push git@github.com:eclipse-pass/<PROJECT> --tags
 ```
 
-The above instructions should be modified for releasing children of the parent, as we need to update the parent version in each of the children. Once the new parent has been deployed on Sonatype, it will be located by maven's versions plugin. We update this version in the child by:
+Finally, the new development code needs to be pushed to GitHub. Since we are using the `main` pom to set versions, we need to have the new development version of `main`
+deployed to Sonatype before pushing the new development version of its children. once `mvn deploy -P release` has been run on main with the new development version set,
+it will be available in Sonatype for other projects to consume. The last step for these children is to update the
+parent version from the new snapshot version of `main` - so for each child, we do
 
 ```
-mvn:versions update-parent
+mvn versions:update-parent -DallowSnapshots=true
+git push git@github.com:eclipse-pass/<PROJECT> main (or master)
+mvn deploy -P release
+
 ```
 
-before executing 
-
-```
-mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
-mvn release:perform -Dgoals=deploy 
-```
-and so forth. Finally, we update the parent version to the development version version in the child pom, and push this to the main branch of the child.
+At this point, we should have deployed the release to Sonatype (and eventually to Maven Central), pushed a tag to GitHub, and deployed the new development release to Sonatype.
 
 
 In addition, the project may also be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
