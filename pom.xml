@@ -100,6 +100,10 @@
     <logback.version>1.2.11</logback.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j2.version>2.14.1</log4j2.version>
+
+    <!-- Docker images for ITs -->
+    <it.image.fcrepo.name>oapass/fcrepo:0.1.0@sha256:749cdb6d44ed723f7bd0886a75190f79353078cf4738aa290e5ec1176a9340e4</it.image.fcrepo.name>
+    <it.image.indexer.name>oapass/indexer:0.1.0@sha256:5ad45a9d227d9e48a607d9344b72a6bf9eeb66388a8088794bdbd5e4eab5de2d</it.image.indexer.name>
   </properties>
 
   <dependencyManagement>
