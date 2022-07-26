@@ -7,6 +7,7 @@ any relevant websites, external references, and other cloud storages (e.g. Googl
 * [Developer documentation](/docs/dev)
 * [Deployment and Infrastructure](/docs/infra)
 * [User documentation](/docs/user)
+* [Project Roadmap](roadmap.md)
 
 ## Articles of Interest
 
