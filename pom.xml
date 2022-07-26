@@ -103,7 +103,7 @@
 
     <!-- Docker images for ITs -->
     <it.image.fcrepo.name>
-      oapass/fcrepo:0.1.0@sha256:d667883f2ea3c9d4235a019be4c16f8796949d864e56490c57aa896bd672027f
+      oapass/fcrepo:0.1.0@sha256:56730754843aec0a3d48bfcefd13d72f1bb34708aea9b47d2280d2da61a1eb54
     </it.image.fcrepo.name>
     <it.image.indexer.name>
       oapass/indexer:0.1.0@sha256:5ad45a9d227d9e48a607d9344b72a6bf9eeb66388a8088794bdbd5e4eab5de2d
