@@ -126,6 +126,11 @@
     <it.image.postgres.name>
       oapass/postgres:0.1.0@sha256:ace6225676b8da663fb3eff8de7b0d21ff5fec564875b108580fb16e31573711
     </it.image.postgres.name>
+    
+    <!-- Intermediate image used when creating new package-provider images -->
+    <docker.image.deposit-services-core.name>
+      oapass/deposit-services-core:0.1.0@sha256:cef627bd720350108ab3e17111d3d7513d121955f3f0cbd9180215ecd0929791
+    </docker.image.deposit-services-core.name>
   </properties>
 
   <dependencyManagement>
