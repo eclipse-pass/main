@@ -118,7 +118,7 @@
       oapass/ldap:0.1.0@sha256:fd66cb1255b81b81ae602d1ccf56d8534e80a6ee27bccc1de014efab58cbf28c
     </it.image.ldap.name>
     <it.image.ftp.name>
-      oapass/ftpserver:0.1.0@sha256:01bc71ee4cb55d8a625e2a8d33e1ba644144ece6bfa0b774b9403e3fe6c29436
+      oapass/ftpserver:0.1.0@sha256:f095b1944aca9c7dd8f68641f682dcba36a0d779b3ba8cb79475a84e4632ab57
     </it.image.ftp.name>
     <it.image.dspace.name>
       oapass/dspace:0.1.0@sha256:ffb21fc796f0ff0149fe89958c0cc425826325b96b2b8336522b9028e44876c9
