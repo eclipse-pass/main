@@ -244,21 +244,7 @@ Image depdendency / usage diagram: https://www.figma.com/file/ibkDXjJ6AkXMpvPvL9
    * `doiservice`
    * `downloadservice`
 
-Note that deposit services is missing from this list. This should be handled last, as it takes some extra steps.
-
-### Handling Deposit Services
-Assume that `fcrepo` and `indexer` have already been updated, along with `ftpserver`, `dspace`
-1. Run a Maven build against `eclipse-pass/pass-deposit-services`: `mvn clean install`
-   This will create an intermediate image: `oapass/pass-deposit-core`
-   Tag and push this image || Do a Maven release to have it tagged and pushed automatically (`mvn clean deploy -P release`)
-2. Update the `docker.image.deposit-services-core.name` to match to match what you just built and pushed
-3. Run a Maven build against `eclipse-pass/pass-package-providers`: `mvn clean install`
-   This will use the image made in the previous step to produce a new image: `oapass/deposit-service-providers`
-   Tag and push this image || Do a Maven release to have it tagged and pushed automatically (`mvn clean deploy -P release`)
-4. Move to `eclipse-pass/pass-docker`
-   * Update the following build arg in the docker-compose file: `PROVIDERS_IMAGE` . The updated value should match the tag + hash of the `oapass/deposit-service-providers` from the previous step
-   * [[#Building a single image]]
-
+Note that deposit services is missing from this list. This should be handled separately, as it takes some extra steps.
 
 ---
 
@@ -278,7 +264,7 @@ Assume that `fcrepo` and `indexer` have already been updated, along with `ftpser
 
 ## Per-image customization
 
-Here's what you need to change manually before building a new image version in order to bring in code changes. If the docker-compose service is not mentioned here, you shouldn't need to make any manual changes.
+Here's what you need to change manually before building a new image version in order to bring in code changes. If the docker-compose service is not mentioned here, you shouldn't need to make any manual changes. All images must be built manually using docker-compose, following the [docker-compose rebuilding / updating](#docker-compose-rebuilding--updating) steps.
 
 #### `fcrepo`
 A new image is required if you there are code changes to: json-ld filters, jms-addons, authz core, (authz) user service, (authz) roles
@@ -297,8 +283,7 @@ A new image is required if you there are code changes to: json-ld filters, jms-a
 			* Authz roles: [Line 81](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L81-L82) (JAR URL) && [Line 83](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L83) (sha1 hash)
 			* User service: [Line 86](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L85-L86) (WAR URL) && [Line 87](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L87) (sha1 hash)
 
-2. [[#Building a single image]]: [Line 8](https://github.com/eclipse-pass/pass-docker/blob/main/docker-compose.yml#L8)
-
+2. [Building a single image](#Building-a-single-image): [Line 8](https://github.com/eclipse-pass/pass-docker/blob/main/docker-compose.yml#L8)
 
 #### `activemq`
 Should only need to be updated if updating the ActiveMQ version, which is only referenced as an [environment variable in the Dockerfile](https://github.com/eclipse-pass/pass-docker/blob/main/activemq/Dockerfile#L3).
@@ -310,20 +295,7 @@ In `.env`, update the value of `EMBER_GIT_BRANCH`. You can use the name of a tag
 In `.env` update the `STATIC_HTML_BRANCH` value. You can use a tag or commit hash
 
 #### `ftpserver`
-Shouldn't need to update, as this is intended to be only used during integration tests. Can re-tag the image by either rebuilding from the [Dockerfile](https://github.com/eclipse-pass/pass-docker/blob/main/ftpserver/Dockerfile) or [[#Retag without rebuild]]
-
-#### `proxy`
-Should be updated if updating the base image, or updating configs.
-
-#### `idp`
-#### `ldap`
-#### `sp`
-
-#### `dspace`
-Intended as an integration test stand-in for production DSpace.
-
-#### `postgres`
-Semi-custom image that supports `dspace` image. Used for integration tests.
+Shouldn't need to update, as this is intended to be only used during integration tests. Can re-tag the image by either rebuilding from the [Dockerfile](https://github.com/eclipse-pass/pass-docker/blob/main/ftpserver/Dockerfile) or [Retag without rebuild](#retag-without-rebuild)
 
 #### `indexer`
 * Update the `PI_VERSION` var in the Dockerfile
@@ -331,14 +303,11 @@ Semi-custom image that supports `dspace` image. Used for integration tests.
 * Update [sha1 hash](https://github.com/eclipse-pass/pass-docker/blob/main/indexer/Dockerfile#L15)
 * If necessary, update the `ESCONFIG_VERSION` var in the Dockerfile.
 
-#### `elasticsearch`
-External image, no rebuilding or retagging.
-
 #### `assets`
 ??
 
 #### `deposit`
-[[#Handling Deposit Services]]
+[Handling Deposit Services](Handling-Deposit-Services)
 
 #### `authz`
 For new Authz code release:
@@ -353,11 +322,6 @@ For new Authz code release:
 * Update [`NOTIFICATION_SERVICE_VERSION` var](https://github.com/eclipse-pass/pass-docker/blob/main/notification-services/0.1.0-3.4/Dockerfile#L3)
 * Update [`JSONLD_CONTEXT_VERSION`](https://github.com/eclipse-pass/pass-docker/blob/main/notification-services/0.1.0-3.4/Dockerfile#L4) if necessary
 * Update [artifact URL](https://github.com/eclipse-pass/pass-docker/blob/main/notification-services/0.1.0-3.4/Dockerfile#L24)
-
-#### `schemaservice`
-#### `policyservice`
-#### `doiservice`
-#### `downloadservice`
 
 # Testing
 
