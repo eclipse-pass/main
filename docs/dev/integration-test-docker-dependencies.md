@@ -1,3 +1,5 @@
+**As of August 2022, all images used in ITs have been synced to the same versions: `0.1.0`**. The exception is the Elasticsearch image, which remained at `6.2.3`
+
 ## Current Integration Testing Docker Dependencies
 
 Java projects:
@@ -65,4 +67,6 @@ All projects use `6.2.3` 🎉
 Relationships for all Docker images, how they are used in various integration tests, and where they are built. Most images are built in `pass-docker` with the exception of four stand-alone services, which are built within their respective code repositories: [`pass-doi-services`](https://github.com/eclipse-pass/pass-doi-service), [`pass-metadata-schemas`](https://github.com/eclipse-pass/pass-metadata-schemas), [`pass-policy-service`](https://github.com/eclipse-pass/pass-policy-service), [`pass-download-service`](https://github.com/eclipse-pass/pass-download-service)
 
 ![Docker Image IT dependencies.png](/docs/assets/architecture/Docker%20Image%20IT%20dependencies.png)
+
+Original: https://www.figma.com/file/ibkDXjJ6AkXMpvPvL96gmi/Docker-Image-IT-dependencies?node-id=0%3A1
 
