@@ -219,9 +219,9 @@ Image depdendency / usage diagram: https://www.figma.com/file/ibkDXjJ6AkXMpvPvL9
    * `mail`
    * `postgres`
    * `static-html`
-2. The `indexer` should be updated next. ITs for this code repository only rely on `fcrepo`, but the built Docker image is used in nearly all other set of integration tests.
+2. The `indexer` should be updated next. ITs for this code repository only rely on `fcrepo`, but the built Docker image is used in nearly all other sets of integration tests.
    * The ITs for `indexer` run against a custom docker-compose environment, which must be updated manually
-   * The `indexer` image should be updated the `eclipse-pass/main` POM
+   * The `indexer` image should be updated in the `eclipse-pass/main` POM
 3. The next set of project code ITs can be run to verify. All new images up to this point can be modified from the main POM and the versions will be inherited for tests:
 	  * `eclipse-pass/pass-java-client`
 	  * `eclipse-pass/pass-nihms-loader`
@@ -229,7 +229,7 @@ Image depdendency / usage diagram: https://www.figma.com/file/ibkDXjJ6AkXMpvPvL9
 	  * `eclipse-pass/pass-grant-loader`
 	  * `eclipse-pass/pass-notification-services`
 	  * `eclipse-pass/pass-authz`
-		  * Authz is a special case. Its ITs use `fcrepo` and `indexer` images. However, it wraps `fcrepo` in a custom built image where it injects it's own updated artifacts. Sequencing the update of this repository is very tricky and may require some iteration of images
+		  * Authz is a special case. Its ITs use `fcrepo` and `indexer` images. However, it wraps `fcrepo` in a custom built image where it injects its own updated artifacts. Sequencing the update of this repository is very tricky and may require some iteration of images
 	  * `eclipse-pass/pass-doi-service`
 	  * `eclipse-pass/pass-indexer-checker`
 	* Golang projects run ITs against custom docker-compose files which will have to be updated manually:
