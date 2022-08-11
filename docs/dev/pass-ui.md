@@ -6,7 +6,7 @@ https://github.com/eclipse-pass/pass-ui
 
 ### A procedure for manually testing proxy submissions:
 
-1. Login as `nih-user`
+1. Login as `nih-user` (password `moo`)
 1. Do proxy submission on behalf of **Katrina Debnam**
     - Associate with ERIC grant
 1. Verify that:
