@@ -4,17 +4,10 @@ This roadmap defines the primary initiatives of the Eclipse PASS Project, organi
 
 If you are interested in helping to define and/or contribute to this roadmap, please get in touch. We're always happy to welcome new project contributors!
 
-# Planned Releases
-## 0.1.0
-This will be the initial release of the PASS codebase after transition to Eclipse.
-* Naming changes - updating code to transition to the Eclipse PASS name
-* Version alignment - ensuring all project components utilize a consistent versioning scheme
-* Data model alignment - ensuring all project components utilize the same version of the data model
-* Adjustments to release process - updates to allow release of Java components to Maven Central with a new groupId
-* Introduction of style guide - ensuring code conforms to consistent guidelines
-* Adjustments to testing methods - transitioning to the use of GitHub Actions for the execution of unit and integration testing
-* Initial documentation - providing a starting point for development and deployment documenatation
+# Completed Releases
+## [0.1.0](https://github.com/eclipse-pass/main/releases/tag/release-v0.1.0)
 
+# Planned Releases
 ## 0.2.0
 This release will focus on the replacement of the primary data management system used to maintain application data and state.
 * Fedora 4 replacement - update the data management layer of the stack
