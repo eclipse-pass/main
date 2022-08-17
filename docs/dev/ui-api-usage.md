@@ -1,4 +1,4 @@
-A UI centric view on PASS APIs. These are a list of services consumed by the UI along with brief descriptions of each. These descriptions do not include full configurations of the services, but includes only those configurations needed for the UI to work, typically just the URL endpoint for the services.
+A UI centric view on PASS APIs as of PASS v0.1.0. These are a list of services consumed by the UI along with brief descriptions of each. These descriptions do not include full configurations of the services, but includes only those configurations needed for the UI to work, typically just the URL endpoint for the services. This documentation is meant to describe the APIs as they were for our initial versions of PASS to inform ongoing development and not necessarily meant to be carried forward.
 
 - [Metadata Schema Service](#metadata-schema-service)
 - [DOI Service](#doi-service)
