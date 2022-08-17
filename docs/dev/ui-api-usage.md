@@ -9,6 +9,16 @@ A UI centric view on PASS APIs. These are a list of services consumed by the UI 
 - [Policy Service](#policy-service)
 	- [Policies](#policies)
 	- [Repositories](#repositories)
+- [PASS Data Entities](#pass-data-entities)
+	- [Create](#create)
+	- [Read](#read)
+		- [Single](#single)
+		- [Multiple](#multiple)
+	- [Update](#update)
+	- [Delete](#delete)
+- [Misc operations](#misc-operations)
+	- [Setup Fedora](#setup-fedora)
+	- [Clear](#clear)
 
 # Metadata Schema Service
 https://github.com/eclipse-pass/pass-metadata-schemas
@@ -284,6 +294,124 @@ Sample response:
 * `one-of` array of arrays presenting choice-sets. The submission must be deposited into at least one from each choice-set. In this example, the submission must be deposited into repository (2 OR 3) AND (4 OR 5). 
 * `optional` the submission MAY be submitted to these repositories
 
+---
 
+# PASS Data Entities
+
+All CRUD requests for PASS data entities route through the [`pass-ember-adapter`](https://github.com/eclipse-pass/pass-ember-adapter).
+
+Headers:
+* `Accept: application/ld+json; profile="http://www.w3.org/ns/json-ld#compacted"`
+* `Prefer: return=representation; omit="http://fedora.info/definitions/v4/repository#ServerManaged"`
+* `Authorization=<...>`
+
+All operations use these headers, unless otherwise specified.
+
+| Operation | Adapter Function | URL | Headers | Parameters
+| --- | --- |
+| 
+
+## Create
+
+|  |  |
+| --- | --- |
+| Adapter function | `#createRecord` |
+| URL | `<fedora_base_url>/<container_name>` |
+| Config |  |
+| Method | `POST` |
+| Parameters |  |
+| Headers | +`Content-Type: application/ld+json; charset=utf-8` |
+| Body | JSON-LD serialized data |
+| Response | Fedora responds with the newly created entity ID in the `response.Location` header |
+
+## Read
+
+### Single
+
+|  |  |
+| --- | --- |
+| Adapter function | `#findRecord` |
+| URL | Entity ID |
+| Config |  |
+| Method | `GET` |
+| Parameters |  |
+| Headers |  |
+| Body |  |
+| Response | The entity, serialized as an Ember model object |
+
+### Multiple
+
+|  |  |
+| --- | --- |
+| Adapter function | `#query` |
+| URL | `/pass/_search` |
+| Config | `FEDORA_ADAPTER_ES` |
+| Method | `POST` |
+| Parameters |  |
+| Headers | `Content-Type: application/json; charset=utf-8` |
+| Body | An Elasticsearch query in JSON format |
+| Response | List of matching entities |
+
+|  |  |
+| --- | --- |
+| Adapter function | `#findAll` |
+| URL | `/pass/_search` |
+| Config | `FEDORA_ADAPTER_ES` |
+| Method | `POST` |
+| Parameters |  |
+| Headers | `Content-Type: application/json; charset=utf-8` |
+| Body | An Elasticsearch query that will match all entities of a given model |
+| Response | List of entities |
+
+## Update
+
+|  |  |
+| --- | --- |
+| Adapter function | `#updateRecord` |
+| URL | Entity ID |
+| Config |  |
+| Method | `PATCH` |
+| Parameters |  |
+| Headers | `Content-Type: application/merge-patch+json; charset=utf-8" |
+| Body | JSON-LD serialized entity |
+| Response |  |
+
+## Delete
+
+Will delete the entity then delete it's tombstone.
+
+|  |  |
+| --- | --- |
+| Adapter function | `#deleteRecord` |
+| URL | Entity ID AND (entity_ID/fcr:tombstone) |
+| Config |  |
+| Method | `DELETE` |
+| Parameters |  |
+| Headers |  |
+| Body |  |
+| Response |  |
+
+# Misc operations
+
+## Setup Fedora
+
+`#setupFedora`
+
+Remnant of the original demo code, now only called in tests. Calls the Delete then Create functions for all known model types in order to create the fresh containers in Fedora.
+
+## Clear 
+
+Only used in testing for this adapter.
+
+|  |  |
+| --- | --- |
+| Adapter function | `#clearElasticsearch` |
+| URL | `<ES_url>/_doc/_delete_by_query?conflicts=proceed&refresh` |
+| Config |  |
+| Method | `POST` |
+| Parameters | Static/baked into URL |
+| Headers | Content-Type: application/json` |
+| Body | `{ query: { match_all: {} } }` |
+| Response |  |
 
 
