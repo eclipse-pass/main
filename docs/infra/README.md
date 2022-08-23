@@ -55,6 +55,11 @@ SSL termination and front end for the entire infrastructure. No special rules, j
 
 We run a number of Shibboleth service providers, one for each environment.
 
+#### Eclipse-PASS.org
+
+The static site hosted at [eclipse-pass.org](https://eclipse-pass.org)
+is generated using [Hugo](/docs/infra/hugo.md).
+
 ### Build Artifacts:
 
 | Component | Artifact | Source repo | Notes |
