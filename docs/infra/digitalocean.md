@@ -63,7 +63,8 @@ then run
 You can then connect the server to GitHub using the following variables
 
 ```bash
-
+PASSORG=eclipse-pass
+GITHUB_RUNNER_TOKEN=ghp_abc123def456abc123def456abc123def456
 ````
 
 To execute the following script.
