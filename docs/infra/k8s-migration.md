@@ -1,11 +1,13 @@
 # Kubernetes Manual Migration
 
-See our [initial attempt](docker-composer-to-k8s-manifest.md) to migrate our Docker compose configuration automatically to a Kubernetes configuration.
+See our [initial attempt](docker-composer-to-k8s-manifest.md) to migrate our Docker compose configuration automatically to a Kubernetes configuration. This automated conversion was used as a starting basis for
+the configuration that we now have.
 
 ## Test Cluster
 
-We are using the Kubernetes hosting service at [Digital Ocean](https://www.digitalocean.com). This is a solution to get our k8s configuration figured
-out with an environment that we have full control over. Once we have completed the configuration, we will move the configuration to a k8s cluster hosted
+We are using the Kubernetes hosting service at [Digital Ocean](https://www.digitalocean.com). This is a
+solution to get our k8s configuration figured out with an environment that we have full control over.
+Once we have completed the configuration, we will move the configuration to a k8s cluster hosted
 by the Eclipse Foundation.
 
 ## Creating and Configuring the Cluster
@@ -41,20 +43,11 @@ These are the steps to creating and configuring the test cluster:
     
     Use a personal access token with registry read access.
 
-3. Load the cluster with the pass-docker k8s configuration:
+3. Apply the Kubernetes configuration files found in the [pass-docker](https://github.com/eclipse-pass/pass-docker)
+   repo. The list of files and the order they should be run in can be found in the
+   [Kubernetes README file](https://github.com/eclipse-pass/pass-docker/tree/main/k8s/README.md).
 
-    kubectl apply -f k8s-deployment.yaml
-    
-    The next section will describe the contents of this file.
-
-4. Expose the cluster to the outside world:
-
-    kubectl expose deployment pass-docker-reg \
-      --type=LoadBalancer \
-      --port=80 \
-      --target-port=80
-
-5. Find the external IP address of the cluster:
+4. Find the external IP address of the cluster:
 
     doctl compute load-balancer list \
       --format ID,Name,Created,IP,Status
@@ -63,30 +56,27 @@ These are the steps to creating and configuring the test cluster:
 
 ### Deployment Configuration
 
-The `k8s-deployment.yaml` specifies most of the configuration for the kubernetes setup. The file specifies a kubernetes
-"Deployment". The deployment contains a pod which is monitored and will ensure that if the pod fails, it will be restarted.
-The deployment can also specify a number of replicas which should be running at the same time.
+The yaml files found in the pass-docker `k8s` folder specify the configuration for the PASS Eclipse
+kubernetes setup. Each of the services within the PASS ecosystem have a `deployment` which contains
+a `pod` which is monitored and will ensure that if the pod fails, it will be restarted. Each pod
+is a wrapper for a `container` that is a configured Docker image running a PASS Eclipse service.
 
-The majority of the file is the specification of containers. The containers correspond to the Docker images created for
-the different PASS projects.
+The images specified correspond to images pushed to either the Docker Hub oapass repository or the
+eclipse-pass GitHub Container Registry (currently done manually).
 
-The images specified correspond to images pushed to the GitHub Container Registry (currently done manually).
+Another important part of pod configuration is specifying any `persistent volumes` that will be used
+by the container. The volumes themselves are configured in their own yaml files.
 
-The containers also specify the ports they use. This will route traffic to those ports to the correct container. If there
-is any conflict where multiple containers try to use the same port, an error will occur on container startup and the
+Most deployments have a corresponding Kubernetes `service` defined that configures access to the
+pod through a load balancer. Most of the configuration in the services is specifying the ports to
+be used. This will route traffic to those ports to the correct container. If there is any conflict
+where multiple containers try to use the same port, an error will occur on container startup and the
 container will fail.
 
 ### Cluster Deletion
 
-To destroy all resources belonging to the test cluster, follow these steps:
+To destroy all resources belonging to the test cluster, run this command:
 
-1. Delete the cluster itself:
+    doctl kubernetes cluster delete pass-docker --dangerous
 
-    doctl kubernetes cluster delete pass-docker
-
-2. Delete the load balancer:
-
-    doctl compute load-balancer delete <Load balancer ID>
-
-    The load balancer ID can be obtained by running 'doctl compute load-balancer list --format ID,Name,Created,IP,Status'
-
+The `--dangerous` flag tells Kubernetes to delete all resources associated with the cluster
