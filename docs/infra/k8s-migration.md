@@ -25,22 +25,28 @@ These are the steps to creating and configuring the test cluster:
 
 1. Create the cluster:
 
+    ```bash
     doctl kubernetes cluster create pass-docker \
       --auto-upgrade=true \
       --node-pool "name=passnp;count=2;auto-scale=true;min-nodes=1;max-nodes=3;size=s-2vcpu-4gb" \
       --region tor1
-      
+    ```
+
     The available list of node sizes can be obtained by running 'doctl compute size list'
 
 2. Create a secret for accessing the GitHub Container Registry:
 
+    ```bash
+    export GITHUB_USERNAME=MyUsername
+    export GITHUB_TOKEN=MyGitHubPersonalAccessToken
     kubectl create secret docker-registry regcred \
       --docker-server=https://ghcr.io \
-      --docker-username=<GitHub username> \
-      --docker-password=<GitHub personal access token> \
-        
+      --docker-username=GITHUB_USERNAME \
+      --docker-password=GITHUB_TOKEN \
+    ```
+
     This secret is referenced in k8s-deployment.yaml.
-    
+
     Use a personal access token with registry read access.
 
 3. Apply the Kubernetes configuration files found in the [pass-docker](https://github.com/eclipse-pass/pass-docker)
@@ -49,8 +55,10 @@ These are the steps to creating and configuring the test cluster:
 
 4. Find the external IP address of the cluster:
 
+    ```bash
     doctl compute load-balancer list \
       --format ID,Name,Created,IP,Status
+    ```
 
     It can take some time before the IP address becomes available, run this command until Status is 'active'
 
@@ -77,6 +85,8 @@ container will fail.
 
 To destroy all resources belonging to the test cluster, run this command:
 
-    doctl kubernetes cluster delete pass-docker --dangerous
+```bash
+doctl kubernetes cluster delete pass-docker --dangerous
+```
 
 The `--dangerous` flag tells Kubernetes to delete all resources associated with the cluster
