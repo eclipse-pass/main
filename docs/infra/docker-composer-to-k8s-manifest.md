@@ -3,10 +3,10 @@
 The [docker-pass](https://github.com/eclipse-pass/pass-docker) is orchestrated using
 [Docker Compose](https://docs.docker.com/compose/).  The team is now moving towards
 [kubernetes](https://kubernetes.io) and this article documents our attempt to
-automatically convert our `docker-compose.yml` into a `k8s-maniftest.yml`.
+convert our `docker-compose.yml` into [Kubernetes configuration files](https://github.com/eclipse-pass/pass-docker/tree/main/k8s/).
 
-Ultimately the work did not succeed and we are instead manually migrating the
-orchestration into k8s.
+The migration was started with an automated tool named [Kompose](https://kompose.io)
+and then has continued with a manual effort.
 
 ## Migration Scripts
 
@@ -98,6 +98,29 @@ so we will just throw it out
 docker-compose config | \
   tail -n +2 > docker-compose-k8s.yaml
 ```
+
+## Post-Conversion
+
+These are issues found after using Kompose to convert the docker-compose configuration into
+Kubernetes manifests.
+
+### No external IP
+
+The service created for the httpd proxy container is generated to expose ports 80 and 443 within
+the cluster instead of making those ports accessible publicly.
+
+To fix this, I modified `proxy-service.yaml` to set the service `type` to `LoadBalancer`.
+
+### Persistent Volume Claim remains stuck in Pending state
+
+Run `kubectl describe pvc` to see the associated errors. If you see an OutOfRange warning then
+it should have a description that tells you the minimum supported volume size ('1Gi' for me).
+
+I updated all persistent volume claims to use 1Gi for storage.
+
+### Persistent Volume not found
+
+Some deployments require that a persistent volume be in place prior to their creation (e.g., assets-deployment).
 
 ## Reference
 
