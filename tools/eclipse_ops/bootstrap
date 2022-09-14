@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Remote into the box, for example
+#
+# ssh a2forward@bastion.eclipse.org -t ssh a2forward@172.30.206.14
+#
+# Configure the following secrets/configs
+# Your RUNNER TOKEN is available from /settings/actions/runners/new
+GITHUB_RUNNER_TOKEN=XXX
+
+# Adjust these as needed
+GITHUB_ORG=eclipse-pass
+GITHUB_PROJECT_URL=https://github.com/${GITHUB_ORG}/pass-docker
+GITHUB_PROJECT_GIT=https://github.com/${GITHUB_ORG}/pass-docker.git
+GITHUB_RUNNER_LABEL=passnightly
+
+# Then copy and paste the bootstrap code
+#
+# Ideally we would SCP the file, but I was not able
+# to get a two-hop working between
+# bastion.eclipse.org and the individual servers
+
+printf "%b" "
+#!/bin/bash
+
+function go() {
+  touch /opt/boostrap.start && \\
+    install_docker && \\
+    install_githubrunner && \\
+    install_passdocker && \\
+    configure_passdocker_runner && \\
+    mv /opt/boostrap.start /opt/boostrap.end
+}
+
+function install_docker() {
+  touch /opt/docker.start && \\
+    apt-get -y update && \\
+    apt-get install -y gnupg2 pass docker-compose && \\
+    mv /opt/docker.start /opt/docker.end
+}
+
+function install_githubrunner() {
+  VERSION=2.294.0
+  CHECKSUM=a19a09f4eda5716e5d48ba86b6b78fc014880c5619b9dba4a059eaf65e131780
+
+  touch /opt/githubrunner.start && \\
+    mkdir -p /opt/githubrunner && \\
+    (useradd githubrunner || true) && \\
+    usermod -aG docker githubrunner && \\
+    (cd /opt/githubrunner && \\
+      curl -o actions-runner-linux-x64-\${VERSION}.tar.gz -L https://github.com/actions/runner/releases/download/v\${VERSION}/actions-runner-linux-x64-\${VERSION}.tar.gz && \\
+      echo \"\${CHECKSUM}  actions-runner-linux-x64-\${VERSION}.tar.gz\" | shasum -a 256 -c && \\
+      tar xzf ./actions-runner-linux-x64-\${VERSION}.tar.gz) && \\
+    chown -R githubrunner:githubrunner /opt/githubrunner && \\
+    mv /opt/githubrunner.start /opt/githubrunner.end
+}
+
+function install_passdocker() {
+  touch /opt/pass-docker.start && \\
+    mkdir -p /src && \\
+    (ssh -o \"StrictHostKeyChecking=no\" github.com || true) && \\
+    (cd /src && git clone $GITHUB_PROJECT_GIT) && \\
+    mv /opt/pass-docker.start /opt/pass-docker.end
+}
+
+function configure_passdocker_runner() {
+  touch /opt/passdocker_runner.start  && \\
+  (cd /opt/githubrunner && \\
+    sudo -u githubrunner ./config.sh remove --token $GITHUB_RUNNER_TOKEN && \\
+    sudo -u githubrunner ./config.sh \\
+      --unattended \\
+      --url $GITHUB_PROJECT_URL \\
+      --token $GITHUB_RUNNER_TOKEN \\
+      --name $GITHUB_RUNNER_LABEL \\
+      --runnergroup default \\
+      --labels $GITHUB_RUNNER_LABEL \\
+      --work pass-docker \\
+      --replace && \\
+    ./svc.sh install githubrunner && \\
+    ./svc.sh start) && \\
+  mv /opt/passdocker_runner.start /opt/passdocker_runner.end
+}
+
+go
+
+" > /tmp/installer.sh
+
+chmod 755 /tmp/installer.sh
+
+/tmp/installer.sh
