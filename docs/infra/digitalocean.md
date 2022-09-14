@@ -31,7 +31,6 @@ cd /src
 git clone git@github.com:eclipse-pass/pass-docker.git
 cd pass-docker
 git checkout minimal-assets
-
 ```
 
 Or, you can run this directly on your server
