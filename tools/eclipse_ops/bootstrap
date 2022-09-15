@@ -20,9 +20,9 @@ GITHUB_RUNNER_LABEL=passnightly
 # to get a two-hop working between
 # bastion.eclipse.org and the individual servers
 
-printf "%b" "
-#!/bin/bash
+echo '#!/bin/bash' > /tmp/installer.sh
 
+printf "%b" "
 function go() {
   touch /opt/boostrap.start && \\
     install_docker && \\
@@ -83,8 +83,8 @@ function configure_passdocker_runner() {
 
 go
 
-" > /tmp/installer.sh
+" >> /tmp/installer.sh
 
 chmod 755 /tmp/installer.sh
 
-/tmp/installer.sh
+sudo /tmp/installer.sh
