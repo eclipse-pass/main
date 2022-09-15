@@ -19,3 +19,19 @@ GITHUB_RUNNER_TOKEN=XXX
 ```
 
 Learn more from the [installer script itself](/tools/eclipse_ops/bootstrap).
+
+## Run PASS
+
+To manually run the application, execute
+
+```bash
+cd /src/pass-docker && \
+  sudo docker-compose pull && \
+  sudo docker-compose up
+```
+
+If you want to run in the background then use `-d`.
+
+```bash
+sudo docker-compose up -d
+```
