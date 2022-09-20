@@ -105,3 +105,4 @@ hosted by the Eclipse Foundation./
 * [Working with GitHub secrets](/docs/infra/github-secrets.md)
 * [Self-Hosted GitHub Runners](/docs/infra/self_hosted_github_runners.md)
 * [Eclipse Foundation ops](/docs/infra/eclipseops.md)
+* [Ansible](/docs/infra/ansible.md)
