@@ -1,7 +1,6 @@
 # PASS Digital Ocean Deployment
 
 This will document how to run PASS in [Digital Ocean](https://www.digitalocean.com)
-as well as how to use [Digital Ocean](https://www.digitalocean.com) as a droplet
 as [Self-Hosted GitHub Runners](/docs/infra/self_hosted_github_runners.md).
 
 ## Create Server
