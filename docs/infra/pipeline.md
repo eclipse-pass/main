@@ -262,6 +262,7 @@ The following repositories have been forked from others
 
 * [Deploying pass-docker via EC2](/docs/infra/ec2.md)
 * [Deploying pass-docker via Digital Ocean](/docs/infra/digitalocean.md)
+* [Deploying pass-docker via Eclipse Foundation (EF)](/docs/infra/eclipseops.md)
 * [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](/docs/infra/docker-composer-to-k8s-manifest.md)
 * [Travis configs for pass-ui](https://travis-ci.org/github/OA-PASS/pass-ember/jobs/770188235/config)
 * [Coveralls for pass-ui (pass-ember URL no longer valid)](https://coveralls.io/)
