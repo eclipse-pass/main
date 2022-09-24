@@ -40,5 +40,11 @@ Date:   Wed Sep 21 10:49:42 2022 -0400
     Separate Kubernetes changes into new files
 ```
 
+## Nightly Code
+
+There is also a [nightly action](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passnightly.yml)
+that will run every night (and on every pull-request merge).
+
 For debugging changes outside of an official deploy, you can
 direclty manipulate code on the server.
+
