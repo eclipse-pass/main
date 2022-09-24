@@ -46,5 +46,53 @@ There is also a [nightly action](https://github.com/eclipse-pass/pass-docker/blo
 that will run every night (and on every pull-request merge).
 
 For debugging changes outside of an official deploy, you can
-direclty manipulate code on the server.
+direclty manipulate code on the server.  You will need to run as `githubrunner`.
 
+```bash
+# SSH into the server
+cd /opt/githubrunner/pass-docker/pass-docker/pass-docker
+sudo su githubrunner
+```
+
+And then you can run the application (if it isn't already)
+
+```bash
+docker-compose up
+```
+
+Or, perhaps change the branch and run a custom build.
+
+```bash
+git fetch
+git checkout demo-spike
+docker-compose -f demo.yml pull
+docker-compose -f demo.yml --env-file .demo_env up
+```
+
+And then you can (in a separate terminal) observe the working site
+
+```bash
+curl -k https://localhost
+```
+
+Which will return something similar to
+
+```html
+<html>
+
+<head>
+    <title>PASS docker</title>
+</head>
+
+<body>
+    PASS Docker!
+
+    <p>Apps:</p>
+    <ul>
+        <li><a href="/app/">Ember - the PASS UI</a></li>
+    </ul>
+
+</body>
+
+</html
+```
