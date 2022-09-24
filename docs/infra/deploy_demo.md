@@ -18,3 +18,27 @@ You can then [run the workflow](https://github.com/eclipse-pass/pass-docker/acti
 And watch the deploy.
 
 ![deployed actions](/docs/assets/demo/deploy_actions.png)
+
+## Demo Code
+
+The code is located in an (unfortunately) deeply nested structure at
+
+```bash
+/opt/githubrunner/pass-docker/pass-docker/pass-docker
+```
+
+The deploy will pull the latest code, as shown below
+
+```bash
+a2forward@nightly-pass:/opt/githubrunner/pass-docker/pass-docker/pass-docker$ git log -1
+commit 3766a8db3faabe4e28d0eb1ac9549d5048ec65b2 (grafted, HEAD -> main, origin/main)
+Author: Grant McSheffrey <grant.mcsheffrey@eclipse-foundation.org>
+Date:   Wed Sep 21 10:49:42 2022 -0400
+
+    Merge pull request #271 from eclipse-pass/k8s-separation
+
+    Separate Kubernetes changes into new files
+```
+
+For debugging changes outside of an official deploy, you can
+direclty manipulate code on the server.
