@@ -94,5 +94,5 @@ Which will return something similar to
 
 </body>
 
-</html
+</html>
 ```
