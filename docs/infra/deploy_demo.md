@@ -46,7 +46,7 @@ There is also a [nightly action](https://github.com/eclipse-pass/pass-docker/blo
 that will run every night (and on every pull-request merge).
 
 For debugging changes outside of an official deploy, you can
-direclty manipulate code on the server.  You will need to run as `githubrunner`.
+directly manipulate code on the server.  You will need to run as `githubrunner`.
 
 ```bash
 # SSH into the server
