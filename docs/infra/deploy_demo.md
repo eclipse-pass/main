@@ -1,33 +1,24 @@
-# Deploy to demo.eclipse-pass.org
+# Deploying a demo PASS system
 
-Our [demo.eclipse-pass.org](https://demo.eclipse-pass.org) system
-is currently not publically available.
+What follows are developer-oriented instructions about our
+[GitHub Self-Hosted Runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners)
+connected to [GitHub actions](https://github.com/features/actions)
+for automatable deploys of PASS demo system.
 
-## Deploy
+For information on actually deploying updates to a _running_ demo system
+such as [demo.eclipse-pass.org](https://demo.eclipse-pass.org)
+please refer to [Eclipse Foundation infrastructure](/docs/infra/eclipseops.md)
 
-From the [pass-docker](https://github.com/eclipse-pass/pass-docker) project
-you can view the available [actions](https://github.com/eclipse-pass/pass-docker/actions)
-including the [Deploy passdemo action](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passdemo.yml)
+## Self-Hosted Demo Code
 
-![pass-docker actions](/docs/assets/demo/passdocker_actions.png)
-
-You can then [run the workflow](https://github.com/eclipse-pass/pass-docker/actions/workflows/deploy_passdemo.yml)
-
-![run workflow](/docs/assets/demo/run_workflow.png)
-
-And watch the deploy.
-
-![deployed actions](/docs/assets/demo/deploy_actions.png)
-
-## Demo Code
-
-The code is located in an (unfortunately) deeply nested structure at
+On a self-hosted server, the code is located in an (unfortunately) deeply nested structure at
 
 ```bash
 /opt/githubrunner/pass-docker/pass-docker/pass-docker
 ```
 
-The deploy will pull the latest code, as shown below
+On a [GitHub actions](https://github.com/features/actions) deploy,
+the latest code will be available at that location, as shown below.
 
 ```bash
 a2forward@nightly-pass:/opt/githubrunner/pass-docker/pass-docker/pass-docker$ git log -1
@@ -40,13 +31,26 @@ Date:   Wed Sep 21 10:49:42 2022 -0400
     Separate Kubernetes changes into new files
 ```
 
-## Nightly Code
+## Action Triggers
 
-There is also a [nightly action](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passnightly.yml)
-that will run every night (and on every pull-request merge).
+The [GitHub actions](https://github.com/features/actions) are defined in
+[pass-docker/.github/workflows]((https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/)
+such as our [nightly action](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passnightly.yml).
 
-For debugging changes outside of an official deploy, you can
-directly manipulate code on the server.  You will need to run as `githubrunner`.
+The [nightly action](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passnightly.yml)
+will run every night (and on every pull-request merge).
+
+## Debugging On The Server
+
+Please ensure the issue is actually related to the deployed environment
+and IS NOT reproducible locally.
+
+If you are troubleshooting strange behaviour on a
+[GitHub Self-Hosted Runners](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners)
+then you can directly manipulate the code outside of an official deploy.
+
+
+For that, first SSH onto that server, and then switch to the `githubrunner` user.
 
 ```bash
 # SSH into the server
@@ -54,13 +58,23 @@ cd /opt/githubrunner/pass-docker/pass-docker/pass-docker
 sudo su githubrunner
 ```
 
-And then you can run the application (if it isn't already)
+From here, you can run the application (any version of it)
 
 ```bash
 docker-compose up
 ```
 
-Or, perhaps change the branch and run a custom build.
+Please refer to the specifics of the [clipse Foundation infrastructure](/docs/infra/eclipseops.md)
+for the actual commands to run on a specific environment.  For example, this
+is the specific script that (currently) runs [demo.eclipse-pass.org](https://demo.eclipse-pass.org)
+
+```
+docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml up
+```
+
+For debugging purposes you can also change the branch and run a
+specific build (what follows is for demonstration purposes not the
+specific commands you want to run)
 
 ```bash
 git fetch
@@ -69,7 +83,8 @@ docker-compose -f demo.yml pull
 docker-compose -f demo.yml --env-file .demo_env up
 ```
 
-And then you can (in a separate terminal) observe the working site
+If the application did launch as expected, you should be able to
+see the working site (for example using `curl`).
 
 ```bash
 curl -k https://localhost
