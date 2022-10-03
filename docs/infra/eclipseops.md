@@ -48,7 +48,7 @@ And watch the deploy.
 The [demo.eclipse-pass.org](https://demo.eclipse-pass.org) site is
 managed using [Docker Compose](https://docs.docker.com/compose/).
 
-To run locally first get a locak copy of [pass-docker](https://github.com/eclipse-pass/pass-docker)
+To run locally first get a local copy of [pass-docker](https://github.com/eclipse-pass/pass-docker)
 then run it with the following commands
 
 ```
@@ -76,7 +76,7 @@ including the [Deploy passdemo action](https://github.com/eclipse-pass/pass-dock
 The [nightly.eclipse-pass.org](https://nightly.eclipse-pass.org) site is
 managed using [Docker Compose](https://docs.docker.com/compose/).
 
-To run locally first get a locak copy of [pass-docker](https://github.com/eclipse-pass/pass-docker)
+To run locally first get a local copy of [pass-docker](https://github.com/eclipse-pass/pass-docker)
 then run it with the following commands
 
 ```
