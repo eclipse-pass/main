@@ -4,7 +4,7 @@ The following site are managed by the Eclipse Foundation.
 
 | URL | Notes | Status
 | --- | --- | --- |
-| eclipse-pass.org | Github Pages HTML / CSS | pending
+| eclipse-pass.org | Github Pages HTML / CSS | running-locally (DNS not configured)
 | demo.eclipse-pass.org | GitHub Self-Hosted Runner / Docker Compose | running
 | nightly.eclipse-pass.org | GitHub Self-Hosted Runner / Docker Compose | running-locally (DNS not configured)
 
