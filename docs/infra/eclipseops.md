@@ -5,10 +5,17 @@ The following site are managed by the Eclipse Foundation.
 | URL | Notes | Status
 | --- | --- | --- |
 | eclipse-pass.org | Github Pages HTML / CSS | pending
-| demo.eclipse-pass.org | Linux + Docker Compose | pending
-| nightly.eclipse-pass.org | Linux + Docker Compose | pending
+| demo.eclipse-pass.org | GitHub Self-Hosted Runner / Docker Compose | running
+| nightly.eclipse-pass.org | GitHub Self-Hosted Runner / Docker Compose | running-locally (DNS not configured)
 
-If you are looking for developer-oriented instructions
+The underlying infrastructure for each is documented here
+
+| Infra | User | Details
+| --- | --- | --- |
+| Github Pages HTML / CSS | N/A | [Automatic via GitHub Actions](https://pages.github.com)
+| GitHub Self-Hosted Runner / Docker Compose | githubrunner | Run from /opt/githubrunner/pass-docker/pass-docker/pass-docker
+
+If you are looking for more detailed developer-oriented instructions
 to help debug an issue with the above, please refer to
 [managing our demo servers](/docs/infra/deploy_demo.md) documentation.
 
