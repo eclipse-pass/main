@@ -176,3 +176,18 @@ For example, to stop all `demo` services run,
 ```
 docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml down
 ```
+
+### Remove Rogue Processes
+
+If the docker-compose file has drastically changed, then there migth be _rogue_ processes
+still running.  You can view them with
+
+```bash
+docker ps
+```
+
+Then grab the container IDs and manually stop them.
+
+```bash
+docker stop 03159019094f
+```
