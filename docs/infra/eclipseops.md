@@ -143,8 +143,8 @@ To access the Eclipse infrastructure you will need a `bastion.eclipse.org` login
 
 | Server | IP |
 | --- | --- |
-| nightly.eclipse-pass.org | ssh ${ME}@bastion.eclipse.org -t ssh ${ME}@172.30.206.14
-| demo.eclipse-pass.org | ssh ${ME}@bastion.eclipse.org -t ssh ${ME}@172.30.206.15
+| nightly.eclipse-pass.org | `ssh ${ME}@bastion.eclipse.org -t ssh ${ME}@172.30.206.14`
+| demo.eclipse-pass.org | `ssh ${ME}@bastion.eclipse.org -t ssh ${ME}@172.30.206.15`
 
 You will need to change `ME` to your username
 
