@@ -134,3 +134,45 @@ If you want to run in the background then use `-d`.
 ```bash
 sudo docker-compose up -d
 ```
+
+## Troubleshooting
+
+### Access Eclipse Severs
+
+To access the Eclipse infrastructure you will need a `bastion.eclipse.org` login.
+
+| Server | IP |
+| --- | --- |
+| nightly.eclipse-pass.org | ssh ${ME}@bastion.eclipse.org -t ssh ${ME}@172.30.206.14
+| demo.eclipse-pass.org | ssh ${ME}@bastion.eclipse.org -t ssh ${ME}@172.30.206.15
+
+You will need to change `ME` to your username
+
+```bash
+ME=myusername
+```
+
+Once on the server, then CD into the directory and change to the `githubrunner` user
+
+```bash
+cd /opt/githubrunner/pass-docker/pass-docker/pass-docker
+sudo su githubrunner
+```
+
+Now you have full access to the application and can run the application as shown below
+
+### Run Remote Apps
+
+From our [GitHub actions](https://github.com/features/actions) you will see
+the specifics on running the servers
+
+| Server | Configs | Runner |
+| --- | --- | --- |
+| nightly.eclipse-pass.org | `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.nightly.yml` | [nightly script](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passnightly.yml)
+| demo.eclipse-pass.org | `docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml`  | [demo script](https://github.com/eclipse-pass/pass-docker/blob/main/.github/workflows/deploy_passdemo.yml)
+
+For example, to stop all `demo` services run,
+
+```
+docker-compose -f eclipse-pass.base.yml -f eclipse-pass.demo.yml down
+```
