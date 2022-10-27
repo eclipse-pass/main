@@ -140,6 +140,9 @@ sudo docker-compose up -d
 ### Access Eclipse Servers
 
 To access the Eclipse infrastructure you will need a `bastion.eclipse.org` login.
+If you do not have a `bastion` login, then you will need to reach out to
+a [team member](https://github.com/orgs/eclipse-pass/teams/technology-pass-committers/members)
+for instructions (and permission) to get such a login.
 
 | Server | IP |
 | --- | --- |
