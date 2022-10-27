@@ -11,6 +11,7 @@ any relevant websites, external references, and other cloud storages (e.g. Googl
 
 ## Articles of Interest
 
+* [Setting up a local instance of the PASS demo](/docs/dev/local_demo.md)
 * [How to deploy to demo.eclipse-pass.org](/docs/infra/deploy_demo.md)
 * [Working with GitHub secrets](/docs/infra/github-secrets.md)
 * [Troubleshooting dev issues](/docs/dev/troubleshooting.md)
