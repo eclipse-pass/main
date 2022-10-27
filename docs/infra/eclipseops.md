@@ -137,7 +137,7 @@ sudo docker-compose up -d
 
 ## Troubleshooting
 
-### Access Eclipse Severs
+### Access Eclipse Servers
 
 To access the Eclipse infrastructure you will need a `bastion.eclipse.org` login.
 
