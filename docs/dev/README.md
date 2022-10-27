@@ -26,6 +26,7 @@ Only Committers on the PASS Eclipse project are able to make changes to the code
 
 ## Articles
 
+* [PASS Demo Setup](/docs/dev/local_demo.md) - Setting Up a Local Demo System
 * [PASS Parent POM](/docs/dev/parent-pom.md) - Common deps between Java projects
 * [PASS Playground](/docs/dev/playground.md) - Ops playground
 * [PASS UI](/docs/dev/pass-ui.md) - PASS Ember application
