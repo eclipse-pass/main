@@ -27,6 +27,7 @@ function go() {
   touch /opt/boostrap.start && \\
     install_docker && \\
     install_githubrunner && \\
+    install_tools && \\
     install_passdocker && \\
     configure_passdocker_runner && \\
     mv /opt/boostrap.start /opt/boostrap.end
@@ -53,6 +54,13 @@ function install_githubrunner() {
       tar xzf ./actions-runner-linux-x64-\${VERSION}.tar.gz) && \\
     chown -R githubrunner:githubrunner /opt/githubrunner && \\
     mv /opt/githubrunner.start /opt/githubrunner.end
+}
+
+function install_tools() {
+  touch /opt/tools.start && \\
+    apt-get -y update && \\
+    apt-get install -y jq && \\
+    mv /opt/tools.start /opt/tools.end
 }
 
 function install_passdocker() {
