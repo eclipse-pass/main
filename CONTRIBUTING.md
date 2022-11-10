@@ -2,17 +2,17 @@
 
 ### Kicking the Tires
 
-Thanks for looking at Eclipse PASS! Whether you are interested in simply improving the existing code base, or maybe even thinking about forking the project for use at your institution, it's a good idea to have a look at a running test instance and exercising the workflows. The easiest way to do this is to simply check out our [demo instance](https://demo.eclipse-pass.org/).
+Thanks for looking at Eclipse PASS! Whether you are interested in simply improving the existing code base, or maybe even thinking about forking the project for use at your institution, it's a good idea to have a look at a running test instance and exercise the workflows. The easiest way to do this is to simply check out our [demo instance](https://demo.eclipse-pass.org/).
 
 ### Reporting a bug
 
-If you've run across a bug in the Eclipse PASS application, letting us know about it is an important way to contribute. First, check to see if there's an existing ticket for the issue you have in mind by performing a search in the [issues list](https://github.com/eclipse-pass/main/issues). If you've discovered a new bug, create a new issue to tell us about it. You will need to create a GitHub account to do this, if you don't have one already.
+If you've run across a bug in the Eclipse PASS application, letting us know about it is an important, and easy, way to contribute. First, check to see if there's an existing issue for what you're observing by performing a search in the [issues list](https://github.com/eclipse-pass/main/issues). If you've discovered a new bug, create a new issue to tell us about it. You will need to create a GitHub account to do this, if you don't have one already.
 
-When creating a ticket, please provide a concise description of the issue, the steps needed to reproduce it, and a description of how the behavior differs from what you need or expect. It is also important to give details about your environment, such as the OS, build environment (Java and maven versions), etc. [Look here for additional tips to create a truly helpful bug report](https://qawerk.com/blog/how-to-write-a-good-bug-report-best-practices/).
+When creating a issue, please provide a concise description of the potential problem, the steps needed to reproduce it, and a description of how the behavior differs from what you need or expect. It is also important to give details about your environment, such as the OS, build environment (Java and Maven versions), etc. [Look here for additional tips to create a truly helpful bug report](https://qawerk.com/blog/how-to-write-a-good-bug-report-best-practices/).
 
 ### Contributing code or documentation
 
-There is always a need for fixing bugs, and we are continually looking to add new features. Contributions furthering these efforts are always welcome. It may be that you simply notice something that doesn't seem to work quite right. If so, you can check the GitHub issues to see if a ticket has already been filed. If so, you might comment on the issue if you have new information which might be helpful. If there is no existing issue, you might consider creating one (see above). The same process holds for exploring the addition of a new feature or updating documentation.
+There is always a need for fixing bugs and we are continually looking to add new features. Contributions furthering these efforts are always welcome. It may be that you simply notice something that doesn't seem to work quite right. If so, you can check the GitHub issues to see if an issue has already been opened. If so, you might comment on the issue if you have new information which might be helpful. If there is no existing issue, you might consider creating one (see above). The same process holds for exploring the addition of a new feature or updating documentation.
 
 If you are ready to contribute to the code base, you will need an account on GitHub. Further, since PASS is an Eclipse Foundation project, contributors will need to [create an Eclipse account](https://accounts.eclipse.org/) and sign a [contributor agreement](https://www.eclipse.org/legal/ECA.php). To keep things simple, the email address you use to sign up for the Eclipse account should be the same as the one you use for your GitHub account.
 
