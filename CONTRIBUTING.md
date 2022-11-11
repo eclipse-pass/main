@@ -8,7 +8,7 @@ Thanks for looking at Eclipse PASS! Whether you are interested in simply improvi
 
 If you've run across a bug in the Eclipse PASS application, letting us know about it is an important, and easy, way to contribute. First, check to see if there's an existing issue for what you're observing by performing a search in the [issues list](https://github.com/eclipse-pass/main/issues). If you've discovered a new bug, create a new issue to tell us about it. You will need to create a GitHub account to do this, if you don't have one already.
 
-When creating a issue, please provide a concise description of the potential problem, the steps needed to reproduce it, and a description of how the behavior differs from what you need or expect. It is also important to give details about your environment, such as the OS, build environment (Java and Maven versions), etc. [Look here for additional tips to create a truly helpful bug report](https://qawerk.com/blog/how-to-write-a-good-bug-report-best-practices/).
+When creating an issue, please provide a concise description of the potential problem, the steps needed to reproduce it, and a description of how the behavior differs from what you need or expect. It is also important to give details about your environment, such as the OS, build environment (Java and Maven versions), etc. [Look here for additional tips to create a truly helpful bug report](https://qawerk.com/blog/how-to-write-a-good-bug-report-best-practices/).
 
 ### Contributing code or documentation
 
