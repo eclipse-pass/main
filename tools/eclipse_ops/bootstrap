@@ -13,6 +13,7 @@ GITHUB_ORG=eclipse-pass
 GITHUB_PROJECT_URL=https://github.com/${GITHUB_ORG}/pass-docker
 GITHUB_PROJECT_GIT=https://github.com/${GITHUB_ORG}/pass-docker.git
 GITHUB_RUNNER_LABEL=passnightly
+DOCKER_COMPOSE_VERSION=2.12.2
 
 # Then copy and paste the bootstrap code
 #
@@ -36,7 +37,11 @@ function go() {
 function install_docker() {
   touch /opt/docker.start && \\
     apt-get -y update && \\
-    apt-get install -y gnupg2 pass docker-compose && \\
+    apt-get install -y gnupg2 pass docker.io && \\
+    curl -L \"https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-\$(uname -s)-\$(uname -m)\" -o /usr/local/bin/docker-compose && \\
+    chmod +x /usr/local/bin/docker-compose && \\
+    docker --version && \\
+    docker-compose --version && \\
     mv /opt/docker.start /opt/docker.end
 }
 

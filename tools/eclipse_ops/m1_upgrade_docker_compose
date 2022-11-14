@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Then copy and paste the migration code
+#
+# Ideally we would SCP the file, but I was not able
+# to get a two-hop working between
+# bastion.eclipse.org and the individual servers
+
+DOCKER_COMPOSE_VERSION=2.12.2
+
+echo '#!/bin/bash' > /tmp/m1.sh
+
+printf "%b" "
+function go() {
+  touch /opt/m1.start && \\
+    uninstall_docker_compose && \\
+    install_docker_compose && \\
+    mv /opt/m1.start /opt/m1.end
+}
+
+function uninstall_docker_compose() {
+  touch /opt/uninstall_docker_compose.start && \\
+    apt remove -y docker-compose && \\
+    mv /opt/uninstall_docker_compose.start /opt/uninstall_docker_compose.end
+}
+
+function install_docker_compose() {
+  touch /opt/docker_compose.start && \\
+    curl -L \"https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-\$(uname -s)-\$(uname -m)\" -o /usr/local/bin/docker-compose && \\
+    chmod +x /usr/local/bin/docker-compose && \\
+    docker --version && \\
+    docker-compose --version && \\
+    mv /opt/docker_compose.start /opt/docker_compose.end
+}
+
+go
+
+" >> /tmp/m1.sh
+
+chmod 755 /tmp/m1.sh
+
+sudo /tmp/m1.sh
