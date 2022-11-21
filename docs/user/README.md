@@ -1,6 +1,6 @@
 # Eclipse PASS Demo Instructions
 
-1. Login: `nih-user` // `moo` 
+1. Login with username: `nih-user` and password: `moo` 
 2. Enter submission workflow by clicking on the "Start new submission" button
 3. Enter DOI `10.1039/c7an01256j` into the DOI input field
 4. DOI service should retrieve data and populate submission 'title' and 'journal' after it returns
