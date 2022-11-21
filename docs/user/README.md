@@ -3,7 +3,7 @@
 1. Login with username: `nih-user` and password: `moo` 
 2. Enter submission workflow by clicking on the "Start new submission" button
 3. Enter DOI `10.1039/c7an01256j` into the DOI input field
-4. DOI service should retrieve data and populate submission 'title' and 'journal' after it returns
+4. PASS will retrieve data and populate the submission 'title' and 'journal' fields. You may need to wait a moment for this to occur.
 5. Grants step: go to next step and select an NIH grant: Click anywhere on the row to select grant: R07EY012124 - Regulation of Synaptic Plasticity in Visual Cortex
   - When a grant is selected, it should appear in a separate “Grants added to submission” table, appearing above the “Available grants” table
 7. Policies step: accept the currently selected policies, click Next to move on
