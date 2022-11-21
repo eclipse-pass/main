@@ -12,7 +12,7 @@
   - JScholarship should be selected by default
 7. Metadata (details) step: accept the pre-filled metadata, click Next to move on
   - Metadata form should have most fields pre-populated with data from the DOI with each such field being read-only
-8. Files step: add any file to the submission), click Next to move on
+8. Files step: add any file to the submission, click Next to move on.
 9. Review step: click Submit
   - Accept the Deposit Requirements for JScholarship popup by selecting the checkbox and clicking Next
   - Click "Confirm" on the next popup
