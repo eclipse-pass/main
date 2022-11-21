@@ -9,7 +9,7 @@
 7. Policies step: accept the currently selected policies, click Next to move on
   - Default selection for NIH policy is expected in most cases
 8. Repositories step: accept the selected repositories, click Next to move on
-  - J10P should be selected by default
+  - JScholarship should be selected by default
 7. Metadata (details) step: accept the pre-filled metadata, click Next to move on
   - Metadata form should have most fields pre-populated with data from the DOI with each such field being read-only
 8. Files step: add any file to the submission), click Next to move on
