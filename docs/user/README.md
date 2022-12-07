@@ -1,4 +1,6 @@
-# Eclipse PASS Demo 
+# Eclipse PASS Demo
+
+You can find more information about the Eclipse PASS demo [here](https://demo.eclipse-pass.org/demo.html). You can login to the Eclipse PASS demo directly [here](https://demo.eclipse-pass.org/login/jhu).
 
 ## Submission Workflow
 
