@@ -63,12 +63,13 @@ We run a number of Shibboleth service providers, one for each environment.
 | Support: Pass messaging support | JAR | [`pass-messaging-support`](https://github.com/eclipse-pass/pass-messaging-support) | Generates three JARs: <br> `org.dataconservancy.pass.support.messaging.*` - `json`, `cri`, `constants` <br> Included in [`pass-deposit-services`](https://github.com/eclipse-pass/pass-deposit-services), [`pass-notification-services`](https://github.com/eclipse-pass/pass-notification-services) |
 | Support: Java client | JAR | [`pass-java-client`](https://github.com/eclipse-pass/pass-java-client) | Artifacts for Java projects to interact with the data. Generates JARs: <br> `org.dataconservancy.pass`<br> `pass-json-adpater`, `pass-client-api`, `pass-data-client`, `pass-model`, `pass-status-service` |
 
+### Production Deployment (Kubernetes)
+
+We will soon be upgrading our initial production instance (which is based on Fedora) to the new PASS architecture described above. Part of this transition will also be to move from ECS to EKS, in order to deploy in a more standardized Kubernetes environment. This will also allow us to explore support for other cloud providers (such as Azure) in the future. We welcome questions, discussion, and pull requests in this area.
+
 ## Going Forward
 
-As we move towards an Eclipse Foundation hosted Open-Access PASS there will be
-changes to the PASS architecture, changes to the infrasture and the
-deployment process.   This will be documented here, as well as within our
-[PASS Development Pipeline](/docs/infra/pipeline.md).
+As we move towards an Eclipse Foundation hosted Open-Access PASS there will be changes to the PASS architecture, changes to the infrastructure, and changes to the deployment process. This will be documented here, as well as within our [PASS Development Pipeline](/docs/infra/pipeline.md).
 
 ## References
 
