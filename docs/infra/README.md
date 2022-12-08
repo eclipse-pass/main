@@ -1,51 +1,37 @@
 # PASS Infrastructure
 
-The following documents aggregate documentation from Derek Belrose and Aaron Birkland at JHU.
+At a high level, PASS is decomposed into the following parts:
 
-At a high level, PASS is decomposed into the following parts (v1).
-
-![PASS Architecture V1](/docs/assets/architecture/overview_v1.png)
-
-## Detailed Infrastructure
-
-A more detailed deployment view is below.
-
-![PASS Detailed Deployment](/docs/assets/architecture/detail_schematic.png)
+![PASS Architecture V1](/docs/assets/architecture/pass-architecture-simple-v2.jpg)
 
 ### Infrastructure
 
-The following describes the current PASS Infrasture.
+The following describes the current PASS Infrastructure.
 
 #### EC2
 
 EC2 virtual machines provide access to internal resources within the AWS VPC.
-Ops and devs can ssh to this server to directly talk to the resources without going through the Load Balancer.
 
 Learn more about [deploying pass-docker via EC2](/docs/infra/ec2.md).
 
 #### ECS
 
-PASS was developed using Docker containers and running within Amazon's ECS infrastructure running as a single task (multiple containers) under 1 service.
+PASS was developed using Docker containers and running within Amazon's ECS infrastructure running as a single task (multiple containers) under 1 service. Future development is expected to transition to using Kubernetes and utilizing Amazon's EKS.
 
 #### RDS
 
-PASS uses Fedora Commons repository software and PostgreSQL database instance under RDS to store metadata for fcrepo.
+PASS uses a PostgreSQL database instance under RDS to store metadata and system information.
 
 #### Amazon MQ
 
-PASS uses Amazon MQ as a queue that emmits changes that fcrepo makes. It is picked up by the indexer which updates the Elasticsearch index.
-
-#### Amazon Elasticsearch Service
-
-Elasticsearch is an index for the web application to search and find information in fcrepo.
+PASS uses Amazon MQ as a queue to capture publication events that are read and executed by the deposit service.
 
 #### S3
 
 The object storage is within AWS's S3 infrastructure.  In particular,
 
-* Used to store binary data for fcrepo
-* Stores boot time configuration for some of the docker containers
-* Stores current deployment templates for CloudFormation
+* Used to store binary data that is managed by OCFL
+* Stores deployment configuration
 
 #### Application Load Balancer
 
@@ -70,7 +56,6 @@ We run a number of Shibboleth service providers, one for each environment.
 | Sync service: Policy service | Docker image (`oapass/policy-service`) | [`pass-policy-service`](https://github.com/eclipse-pass/pass-policy-service) | Generates Go app, packaged in Docker image |
 | Sync service: Metadata schema service | Docker image (`oapass/schema-service`) | [`pass-metadata-schemas`](https://github.com/eclipse-pass/pass-metadata-schemas) | Generates Go app, packaged in Docker image  |
 | Sync service: Download service | Docker image (`oapass/download-service`) | [`pass-download-service`](https://github.com/eclipse-pass/pass-download-service) | Generates Go app, packaged in Docker image |
-| Fedora | Docker image compiles many Java project artifacts | Docker image created in [`pass-docker`](https://github.com/eclipse-pass/pass-docker), other dependnecies: [`pass-authz`](https://github.com/eclipse-pass/pass-authz), [`pass-fcrepo-jms`](https://github.com/eclipse-pass/pass-fcrepo-jms), [`eclipse-pass/modeshape`](https://github.com/eclipse-pass/modeshape) (fork), [`pass-fcrepo-module-rbacl`](https://github.com/eclipse-pass/pass-fcrepo-module-auth-rbacl), [`pass-fcrepo-jsonld`](https://github.com/eclipse-pass/pass-fcrepo-jsonld) | Base `fcrepo` WAR from the Fedora project is unpacked, select pieces added or substituted |
 | Batch service: COEUS | JAR | [`pass-grant-loader`](https://github.com/eclipse-pass/pass-grant-loader) | Task run manually or cron job |
 | Batch service: NIHMS loader (formerly NIHMS ETL) | JAR | [`pass-nihms-loader`](https://github.com/eclipse-pass/pass-nihms-loader) | Task run manually or cron job |
 | Batch service: Journal loader | JAR | [`pass-journal-loader`](https://github.com/eclipse-pass/pass-journal-loader) | Task run manually or cron job |
@@ -84,19 +69,6 @@ As we move towards an Eclipse Foundation hosted Open-Access PASS there will be
 changes to the PASS architecture, changes to the infrasture and the
 deployment process.   This will be documented here, as well as within our
 [PASS Development Pipeline](/docs/infra/pipeline.md).
-
-### Architecture V2
-
-Our team is looking to replace Fedora is just Postgres, as well
-as moving our Data Loaders to integrate with JSON and cloud
-storage (e.g. S3).
-
-![PASS Architecture V2](/docs/assets/architecture/overview_v2.png)
-
-### On-Prem Kubernetes Cluster
-
-We are also moving off AWS and onto an on-premise Kubernetes cluster
-hosted by the Eclipse Foundation./
 
 ## References
 
