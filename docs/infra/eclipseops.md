@@ -26,6 +26,42 @@ to help debug an issue with the above, please refer to
 This is managed with [GitHub Pages](https://pages.github.com)
 from the [eclipse-pass.github.io](https://github.com/eclipse-pass/eclipse-pass.github.io) repo.
 
+#### Sync Demo To Marketing
+
+The [demo.eclipse-pass.org](https://demo.eclipse-pass.org) site includes marketing
+information about PASS that we currently synchronize with the main [eclipse-pass.org](https://pages.github.com) site.
+
+1. Download the publically acessible site.
+
+This can be done with a tool like [SiteSucker](https://apps.apple.com/us/app/sitesucker/id442168834) on a Mac.
+
+![Download site with SiteSucker](/docs/assets/eclipsesync/sitesucker.png)
+
+2. Update the [eclipse-pass.github.io](https://github.com/eclipse-pass/eclipse-pass.github.io) repo.
+
+In a new branch, copy all files from the download site.
+
+3. Fix references to the demo site
+
+Any link to "idp" for login purposes, such as
+
+```html
+<a href="idp/..." class="btn btn-primary my-3 pl-4 pr-4 ember-view">Use the Demo</a>
+```
+
+Should be updated to
+
+```html
+<a href="https://demo.eclipse-pass.org/login/jhu" class="btn btn-primary my-3 pl-4 pr-4 ember-view">Use the Demo</a>
+```
+
+3. PR branch into main
+
+Once the code is in main, the site will automatically be deployed to [eclipse-pass.org](https://eclipse-pass.org).
+
+![Updates deployed on merge](/docs/assets/eclipsesync/github_pages_actions_deploy.png)
+
+
 ### demo.eclipse-pass.org
 
 The [demo.eclipse-pass.org](https://demo.eclipse-pass.org) site is deployed
