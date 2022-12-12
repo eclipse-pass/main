@@ -31,7 +31,7 @@ from the [eclipse-pass.github.io](https://github.com/eclipse-pass/eclipse-pass.g
 The [demo.eclipse-pass.org](https://demo.eclipse-pass.org) site includes marketing
 information about PASS that we currently synchronize with the main [eclipse-pass.org](https://pages.github.com) site.
 
-1. Download the publically acessible site.
+1. Download the publicly accessible site.
 
 This can be done with a tool like [SiteSucker](https://apps.apple.com/us/app/sitesucker/id442168834) on a Mac.
 
