@@ -20,10 +20,7 @@ Make sure the following software is installed:
 
 |Name | Version |
 | --- | --- |
-| Go  | 1.12 |
 | Java | 11 |
-| Node | 14.x | 
-| Npm | 6.14.x |
 | Maven | 3.8.x |
 | Docker | 20.10.x |
 | Docker Compose | 1.29.2 | 
@@ -31,7 +28,8 @@ Make sure the following software is installed:
 ## Sonatype
 
 Developers will need a Sonatype account to release Java projects.
-Maven must be configured to use the account by modifying your ~/.m2/settings.xml.
+Maven must be configured to use the account by modifying your ~/.m2/settings.xml. Documentation for Sonatype publishing
+is available here: https://central.sonatype.org/publish/publish-guide/
 
 ```
 <settings>
@@ -57,14 +55,9 @@ Maven must be configured to use the account by modifying your ~/.m2/settings.xml
 </settings>
 
 ```
+## GitHub Container Registry (GHCR)
 
-## Docker Hub
-
-Developers will need a Docker Hub account which is a member of the the oapass organization.
-
-## NPM
-
-Developers will need an NPM account with access to any Node packages being published. At the moment, this is only ember-fedora-adapter (pass-ember-adapter).
+Developers will need a GitHub account which is a member of the [eclipse-pass](https://github.com/eclipse-pass) organization. 
 
 # Process
 
@@ -75,21 +68,9 @@ Developers will need an NPM account with access to any Node packages being publi
 * Test the release
 * Publish release notes
 
-## Dependency ordering
+A new release for each relevant project should be created in the GitHub user interface until automation is put in place.
 
-Generally, dependencies are simple and the ordering can be figured out manually. Java project dependencies can be determined from their Maven pom. Every Java project depends on
-the main PASS project pom. The Fedora repository image depends on pass-authz, pass-java-client, pass-fcrepo-jms, and pass-fcrepo-jsonld. Pretty much every Java component depends
-on pass-java-client. The pass-package-providers library depends on pass-deposit-services. Then pass-deposit-services, pass-notification-services, and pass-package-providers
-depend on pass-messaging-support.
-
-A complication is the dependencies introduced by integration tests. Integration tests use Docker images to setup the testing environment. The images should be from the release being built. This introduces a new dependency on the image in turn adds dependency on the PASS component encapsulated by the image. Unfortunately this can cause circular
-dependencies between Java artifacts and Docker images. For example, the fcrepo image contains a servlet filter and user service from pass-authz, and pass-authz integration tests
-use the fcrepo image. In order to get around this problem, integration tests could be run using older Docker images or integration testing could be skipped until after the Docker images in question are built. The integration test dependencies could be better accounted for by adding them explicitly as test dependencies to the poms.
-
-Below is an attempt at the release order which ignores circular dependencies:
-
-The main project pom, pass-java-client, pass-authz, pass-fcrepo-jms, pass-fcrepo-jsonld, fcrepo,  pass-indexer, pass-indexer-checker, pass-messaging-support, pass-doi-service, pass-download-service, pass-notification-services, pass-policy-service, pass-deposit-services, pass-grant-loader, pass-journal-loader, pass-nihms-loader, pass-metadata-schemas, pass-ember-adapter, pass-ui-public, pass-ui.
-
+The release notes are generated automatically by GitHub, but references to the release artifacts should be added manually.
 ## Java release
 The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image.
 The release process is determined by the decision made to have versions for all Java artifacts be the same for a release. The parent pom in `main` sets the version to be inherited by all its children.
@@ -133,54 +114,7 @@ mvn deploy -P release
 At this point, we should have deployed the release to Sonatype (and eventually to Maven Central), pushed a tag to GitHub, and deployed the new development release to Sonatype.
 
 
-In addition, the project may also be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
-
-## Go
-
-Set the Git tag to the release version.
-
-Build and run integration tests:
-```
-docker-compose up -d
-go test -tags=integration ./..
-```
-
-Tag and push the docker image
-```
-sh ./scripts/docker-push.sh
-```
-
-## Docker image release
-
-The only images which have to built manually are fcrepo and pass-indexer.
-
-In pass-docker edit docker-compose.yml such that the image in question has the release version.
-
-Build the image:
-```
-docker-compose build IMAGE_NAME
-```
-
-Push the image:
-```
-docker push IMAGE_NAME:VERSION
-```
-
-## Node package release
-
-Edit package.json to set the version to the release version.
-
-Build:
-```
-npm install
-npm build
-```
-
-Publish to the NPM registry:
-
-```
-npm publish
-```
+In addition, the project may be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
 
 # Update pass-docker
 
@@ -198,53 +132,6 @@ Updating a single image within [`pass-docker`](https://github.com/eclipse-pass/p
 * Push the new image: `docker-compose push <service-name>`
   Example above: `docker-compose push fcrepo`
   This will return the hash that can be appended to the image property in the docker-compose file to pin the version, since Docker image tags can be overwritten at any time
-
-
-### Sequencing
-
-Image depdendency / usage diagram: https://www.figma.com/file/ibkDXjJ6AkXMpvPvL96gmi/Docker-Image-IT-dependencies?node-id=0%3A1
-
-1. The following images can be created in this step in any order. In other words, they don't have any direct dependence on other image nor do they have any testing dependence. For example, most of our Java projects depend on the `fcrepo` image when running integration tests, so that image should be updated before verifying those code repositories when cutting releases.
-   Once new images are built in this step, update their references in `eclipse-pass/main`. 
-   * `activemq`
-   * `assets`
-   * `dspace`
-   * `ember`
-   * `fcrepo`
-   * `ftpserver`
-   * `proxy`
-   * `idp`
-   * `ldap`
-   * `sp`
-   * `mail`
-   * `postgres`
-   * `static-html`
-2. The `indexer` should be updated next. ITs for this code repository only rely on `fcrepo`, but the built Docker image is used in nearly all other sets of integration tests.
-   * The ITs for `indexer` run against a custom docker-compose environment, which must be updated manually
-   * The `indexer` image should be updated in the `eclipse-pass/main` POM
-3. The next set of project code ITs can be run to verify. All new images up to this point can be modified from the main POM and the versions will be inherited for tests:
-	  * `eclipse-pass/pass-java-client`
-	  * `eclipse-pass/pass-nihms-loader`
-	  * `eclipse-pass/pass-journal-loader` - runs against custom docker-compose environment, must be updated manually
-	  * `eclipse-pass/pass-grant-loader`
-	  * `eclipse-pass/pass-notification-services`
-	  * `eclipse-pass/pass-authz`
-		  * Authz is a special case. Its ITs use `fcrepo` and `indexer` images. However, it wraps `fcrepo` in a custom built image where it injects its own updated artifacts. Sequencing the update of this repository is very tricky and may require some iteration of images
-	  * `eclipse-pass/pass-doi-service`
-	  * `eclipse-pass/pass-indexer-checker`
-	* Golang projects run ITs against custom docker-compose files which will have to be updated manually:
-	   * `eclipse-pass/pass-metadata-schemas`
-	   * `eclipse-pass/pass-download-service`
-	   * `eclipse-pass/pass-policy-service`
-4. Publish a set of new images:  
-   * `authz`
-   * `notification`
-   * `schemaservice`
-   * `policyservice`
-   * `doiservice`
-   * `downloadservice`
-
-Note that deposit services is missing from this list. This should be handled separately, as it takes some extra steps.
 
 ---
 
@@ -266,25 +153,6 @@ Note that deposit services is missing from this list. This should be handled sep
 
 Here's what you need to change manually before building a new image version in order to bring in code changes. If the docker-compose service is not mentioned here, you shouldn't need to make any manual changes. All images must be built manually using docker-compose, following the [docker-compose rebuilding / updating](#docker-compose-rebuilding--updating) steps.
 
-#### `fcrepo`
-A new image is required if you there are code changes to: json-ld filters, jms-addons, authz core, (authz) user service, (authz) roles
-
-1. Update Dockerfile: [`/fcrepo/4.7.5/Dockerfile`](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile)
-	* Update the JSON-LD servlet filter:
-		* Maven Central: [Line 4](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L4) (version number)
-		* SNAPSHOT: [Line 73](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L73-L74) (artifact download URL) && [Line 75](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L75) (associated SHA1 hash)
-	* JMS addons:
-		* Maven Central: [Line 6](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L6) (version number)
-		* SNAPSHOT: [Line 95](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L95-L96) (artifact download URL) && [Line 97](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L97) (associated SHA1 hash)
-	* Update Authz codebase - `pass-authz-core`,  `pass-user-service`, and `pass-authz-roles` must have the same version number, as they are published from the same project
-		* Maven Central: [Line 5](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L5) (release version number)
-		* SNAPSHOT:
-			* Authz core: [Line 77](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L77-L78) (shaded JAR URL) && [Line 79](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L79) (sha1 hash)
-			* Authz roles: [Line 81](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L81-L82) (JAR URL) && [Line 83](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L83) (sha1 hash)
-			* User service: [Line 86](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L85-L86) (WAR URL) && [Line 87](https://github.com/eclipse-pass/pass-docker/blob/main/fcrepo/4.7.5/Dockerfile#L87) (sha1 hash)
-
-2. [Building a single image](#Building-a-single-image): [Line 8](https://github.com/eclipse-pass/pass-docker/blob/main/docker-compose.yml#L8)
-
 #### `activemq`
 Should only need to be updated if updating the ActiveMQ version, which is only referenced as an [environment variable in the Dockerfile](https://github.com/eclipse-pass/pass-docker/blob/main/activemq/Dockerfile#L3).
 
@@ -294,38 +162,16 @@ In `.env`, update the value of `EMBER_GIT_BRANCH`. You can use the name of a tag
 #### `static-html`
 In `.env` update the `STATIC_HTML_BRANCH` value. You can use a tag or commit hash
 
-#### `ftpserver`
-Shouldn't need to update, as this is intended to be only used during integration tests. Can re-tag the image by either rebuilding from the [Dockerfile](https://github.com/eclipse-pass/pass-docker/blob/main/ftpserver/Dockerfile) or [Retag without rebuild](#retag-without-rebuild)
-
-#### `indexer`
-* Update the `PI_VERSION` var in the Dockerfile
-* Update [artifact URL](https://github.com/eclipse-pass/pass-docker/blob/main/indexer/Dockerfile#L14)
-* Update [sha1 hash](https://github.com/eclipse-pass/pass-docker/blob/main/indexer/Dockerfile#L15)
-* If necessary, update the `ESCONFIG_VERSION` var in the Dockerfile.
-
-#### `assets`
-??
-
 #### `deposit`
-[Handling Deposit Services](Handling-Deposit-Services)
-
-#### `authz`
-For new Authz code release:
-
-* Update[ `VERSION` var](https://github.com/eclipse-pass/pass-docker/blob/main/authz/Dockerfile#L2)
-* Update sha1 hash of the [`pass-authz-listener-<version>-exe.jar`](https://github.com/eclipse-pass/pass-docker/blob/main/authz/Dockerfile#L15)
-
-#### `mail`
-??
+TODO
 
 #### `notification`
-* Update [`NOTIFICATION_SERVICE_VERSION` var](https://github.com/eclipse-pass/pass-docker/blob/main/notification-services/0.1.0-3.4/Dockerfile#L3)
-* Update [`JSONLD_CONTEXT_VERSION`](https://github.com/eclipse-pass/pass-docker/blob/main/notification-services/0.1.0-3.4/Dockerfile#L4) if necessary
-* Update [artifact URL](https://github.com/eclipse-pass/pass-docker/blob/main/notification-services/0.1.0-3.4/Dockerfile#L24)
+TODO
 
 # Testing
 
-Manual testing can be done using the newly updated pass-docker to run the release locally.
+Manual testing can be done using the newly updated pass-docker to run the release locally. Acceptance testing is run automatically on GitHub
+against pass-docker/main
 
 # Post Release
 
