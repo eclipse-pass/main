@@ -11,4 +11,5 @@ Some major changes for v0.2.0 are
 * Elimination of functionality written in Go in previous releases. These have
 either been implemented in Java or eliminated
 * Refactoring of authorization functionality in javascript, closer to the UI
+* Separating local static html pages to make branding for various institutions easier
 
