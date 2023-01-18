@@ -1,6 +1,6 @@
 ## Release v0.2.0
 
-This release is really a partial release - complete coverage of the functionality is the 0.1.0 release 
+This release is really a partial release - complete coverage of the functionality in the 0.1.0 release 
 has not yet been completed. For test and demo purposes, this missing functionality is currently mocked, and
 will be fully implemented in a future release.
 
