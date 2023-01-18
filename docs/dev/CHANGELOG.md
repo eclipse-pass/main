@@ -7,7 +7,7 @@ The structure of the projects making up the PASS application have also been stre
 release and deployment procedures. These changes require updates to be made across the application,
 such as replacing all uses of the Fedora API within PASS with calls to the new API. For 0.2.0, 
 this work is completed sufficiently to provide a demonstration of PASS application capabilities, 
-but certain parts of the application, as described below, are currently mocked. Full functionality 
+but certain parts of the application are currently mocked. Full functionality 
 will be restored in a future release.
 
 
