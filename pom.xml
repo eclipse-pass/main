@@ -4,7 +4,7 @@
 
   <groupId>org.eclipse.pass</groupId>
   <artifactId>eclipse-pass-parent</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Eclipse-PASS Parent</name>
