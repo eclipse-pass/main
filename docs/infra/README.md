@@ -48,20 +48,13 @@ We run a number of Shibboleth service providers, one for each environment.
 | UI | Docker image, Nginx w/web app | Source code from [`pass-ui`](https://github.com/eclipse-pass/pass-ui), artifact created in [`pass-docker`](https://github.com/eclipse-pass/pass-docker) | Includes NPM package we publish from [`pass-emnber-adapter`](https://github.com/eclipse-pass/pass-ember-adapter) |
 | Ember assets | Docker image, Nginx | Source code from [`pass-ui-public`](https://github.com/eclipse-pass/pass-ui-public), artifact created in [`pass-docker`](https://github.com/eclipse-pass/pass-docker) |  |
 | Apache HTTPd reverse proxy | Docker image, Apache | [`pass-docker`](https://github.com/eclipse-pass/pass-docker) |  |
-| Async Service: [`pass-indexer`](https://github.com/eclipse-pass/pass-indexer) | JAR / Docker image | [`pass-indexer`](https://github.com/eclipse-pass/pass-indexer) GH repo. Maven build, file attached to a GH release |  |
 | Async Service: deposit services | Docker image, multiple intermediate Docker images (not deployed) | [`pass-deposit-services`](https://github.com/eclipse-pass/pass-deposit-services), [`pass-package-providers`](https://github.com/eclipse-pass/pass-package-providers) (intermediate) | Maven builds intermediate Docker images, [`pass-docker`](https://github.com/eclipse-pass/pass-docker) builds final image |
-| Async service: [`pass-authz-listener`](https://github.com/eclipse-pass/pass-authz/tree/main/pass-authz-listener) | Docker image (`authz`) | [`pass-authz/pass-authz-listener`](https://github.com/eclipse-pass/pass-authz/tree/main/pass-authz-listener) | Maven build, release to Maven Central |
 | Async service: notification services | Docker image  | [`pass-notification-services`](https://github.com/eclipse-pass/pass-notification-services) | Docker image created in [`pass-docker`](https://github.com/eclipse-pass/pass-docker) from Spring Boot JAR created by Maven build in [`pass-notification-services`](https://github.com/eclipse-pass/pass-notification-services), released to Sonatype |
-| Sync service: DOI service | Docker image (`oapass/doi-service`) | [`pass-doi-service`](https://github.com/eclipse-pass/pass-doi-service) | Generates WAR, packaged in Docker image |
-| Sync service: Policy service | Docker image (`oapass/policy-service`) | [`pass-policy-service`](https://github.com/eclipse-pass/pass-policy-service) | Generates Go app, packaged in Docker image |
-| Sync service: Metadata schema service | Docker image (`oapass/schema-service`) | [`pass-metadata-schemas`](https://github.com/eclipse-pass/pass-metadata-schemas) | Generates Go app, packaged in Docker image  |
-| Sync service: Download service | Docker image (`oapass/download-service`) | [`pass-download-service`](https://github.com/eclipse-pass/pass-download-service) | Generates Go app, packaged in Docker image |
+| Sync service: REST API | Docker image (`ghcr.io/eclipse-pass/pass-core-main`) | [`pass-core`](https://github.com/eclipse-pass/pass-core) | Generates an executable JAR |
 | Batch service: COEUS | JAR | [`pass-grant-loader`](https://github.com/eclipse-pass/pass-grant-loader) | Task run manually or cron job |
 | Batch service: NIHMS loader (formerly NIHMS ETL) | JAR | [`pass-nihms-loader`](https://github.com/eclipse-pass/pass-nihms-loader) | Task run manually or cron job |
 | Batch service: Journal loader | JAR | [`pass-journal-loader`](https://github.com/eclipse-pass/pass-journal-loader) | Task run manually or cron job |
-| Tool: Dupe checker | JAR | [`pass-dupe-checker`](https://github.com/eclipse-pass/pass-dupe-checker) | Run manually |
-| Support: Pass messaging support | JAR | [`pass-messaging-support`](https://github.com/eclipse-pass/pass-messaging-support) | Generates three JARs: <br> `org.dataconservancy.pass.support.messaging.*` - `json`, `cri`, `constants` <br> Included in [`pass-deposit-services`](https://github.com/eclipse-pass/pass-deposit-services), [`pass-notification-services`](https://github.com/eclipse-pass/pass-notification-services) |
-| Support: Java client | JAR | [`pass-java-client`](https://github.com/eclipse-pass/pass-java-client) | Artifacts for Java projects to interact with the data. Generates JARs: <br> `org.dataconservancy.pass`<br> `pass-json-adpater`, `pass-client-api`, `pass-data-client`, `pass-model`, `pass-status-service` |
+| Support: Java client | JAR | [`pass-data-client`](https://github.com/eclipse-pass/pass-support/pass-data-client) | JAR for interacting with objects in the PASS data model over JSON API |
 
 ### Production Deployment (Kubernetes)
 
