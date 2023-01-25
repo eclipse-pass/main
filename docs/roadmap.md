@@ -6,19 +6,22 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # Completed Releases
 ## [0.1.0](https://github.com/eclipse-pass/main/releases/tag/release-v0.1.0)
+## [0.2.0](https://github.com/eclipse-pass/main/releases/tag/v0.2.0)
 
 # Planned Releases
-## 0.2.0
-This release will focus on the replacement of the primary data management system used to maintain application data and state.
-* Fedora 4 replacement - update the data management layer of the stack
-* PASS API enhancement - definition of the primary interface to sit in front of the new data management system
+
+## 0.3.0
+This release will focus on making the REST API feature complete and removing the mocking of services in the user interface.
+* Automating the release process
+* Access control for REST API
+* Dependency updates - update project dependencies and introduce automated convergence checks
 
 ## 1.0.0
-The first major release of the Eclipse PASS project will focus on stability by building consistency within the project codebase and enabling automation to simplify and speed the development process.
-* Harmonize Docker image generation - ensure Docker images are generated in a consistent way across all project components
-* Automating the maven release and docker image building process - introducing additional automation to ensure consistency and reduce effort in the release of Maven artifacts and the generation of Docker images
-* Verify consistent Java version - ensure all Java components and docker images require Java 11, as preparation to upgrade to more current Java versions
-* Dependency updates - update project dependencies and introduce automated convergence checks
+This release aims to be a fully functional system.
+* Data loaders ported to new framework
+* Notification service ported to new framework
+* Deposit service ported to new frameword
+* Archive old repositories
 
 ## 1.1.0
 This release will focus on setup and improvement of application testing environments as well as moving towards greater codebase language consistency.
