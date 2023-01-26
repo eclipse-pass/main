@@ -239,12 +239,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
           <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-            <!--
-              When migrating to Java 11, remove <source> and <target> and replace with
-              <release>11</release>
-              -->
+            <source>11</source>
+            <target>11</target>
           </configuration>
         </plugin>
       </plugins>
