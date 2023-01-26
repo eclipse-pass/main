@@ -76,15 +76,15 @@ The release notes are generated automatically by GitHub, but references to the r
 
 The Java projects must follow a strict sequence, following its dependency hierarchy. Other Javascript based projects can be released in any order. Both the Java and non-Java releases can be done in parallel, as there are no direct code dependencies between them.
 
-1. `main`
+1. [`main`](https://github.com/eclipse-pass/main)
 2. Java projects
-   1. `pass-core`
-   2. `pass-support`
+   1. [`pass-core`](https://github.com/eclipse-pass/pass-core)
+   2. [`pass-support`](https://github.com/eclipse-pass/pass-support)
 3. Non-Java projects
-   * `pass-ui`
-   * `pass-auth`
-   * `pass-acceptance-testing`
-4. `pass-docker`
+   * [`pass-ui`](https://github.com/eclipse-pass/pass-ui)
+   * [`pass-auth`](https://github.com/eclipse-pass/pass-auth)
+   * [`pass-acceptance-testing`](https://github.com/eclipse-pass/pass-acceptance-testing)
+4. [`pass-docker`](https://github.com/eclipse-pass/pass-docker)
 
 
 ## Java release
