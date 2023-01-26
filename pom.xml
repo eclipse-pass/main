@@ -80,58 +80,11 @@
     <spring-boot-maven-plugin.version>2.1.2.RELEASE</spring-boot-maven-plugin.version>
     <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
 
-    <!-- PASS dependency versions -->
-    <pass-authz.version>${project.version}</pass-authz.version>
-    <pass-deposit-services.version>${project.version}</pass-deposit-services.version>
-    <pass-doi-service.version>${project.version}</pass-doi-service.version>
-    <pass-fcrepo-jms.version>${project.version}</pass-fcrepo-jms.version>
-    <pass-fcrepo-jsonld.version>${project.version}</pass-fcrepo-jsonld.version>
-    <pass-grant-loader.version>${project.version}</pass-grant-loader.version>
-    <pass-indexer.version>${project.version}</pass-indexer.version>
-    <pass-indexer-checker.version>${project.version}</pass-indexer-checker.version>
-    <pass-java-client.version>${project.version}</pass-java-client.version>
-    <pass-journal-loader.version>${project.version}</pass-journal-loader.version>
-    <pass-messaging-support.version>${project.version}</pass-messaging-support.version>
-    <pass-nihms-loader.version>${project.version}</pass-nihms-loader.version>
-    <pass-notification-services.version>${project.version}</pass-notification-services.version>
-    <pass-package-providers.version>${project.version}</pass-package-providers.version>
-
     <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
     <logback.version>1.2.11</logback.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j2.version>2.14.1</log4j2.version>
-
-    <!-- Docker images for ITs -->
-    <it.image.fcrepo.name>
-      oapass/fcrepo:0.1.0@sha256:56730754843aec0a3d48bfcefd13d72f1bb34708aea9b47d2280d2da61a1eb54
-    </it.image.fcrepo.name>
-    <it.image.indexer.name>
-      oapass/indexer:0.1.0@sha256:5ad45a9d227d9e48a607d9344b72a6bf9eeb66388a8088794bdbd5e4eab5de2d
-    </it.image.indexer.name>
-    <it.image.elasticsearch.name>
-      docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.3
-    </it.image.elasticsearch.name>
-    <it.image.mail.name>
-      oapass/docker-mailserver:20181105-1@sha256:5be8a080a8f7d70c3d8a315f2241ca49ea9051c9efbb940a9099cf64f2bf975d
-    </it.image.mail.name>
-    <it.image.ldap.name>
-      oapass/ldap:0.1.0@sha256:fd66cb1255b81b81ae602d1ccf56d8534e80a6ee27bccc1de014efab58cbf28c
-    </it.image.ldap.name>
-    <it.image.ftp.name>
-      oapass/ftpserver:0.1.0@sha256:f095b1944aca9c7dd8f68641f682dcba36a0d779b3ba8cb79475a84e4632ab57
-    </it.image.ftp.name>
-    <it.image.dspace.name>
-      oapass/dspace:0.1.0@sha256:ffb21fc796f0ff0149fe89958c0cc425826325b96b2b8336522b9028e44876c9
-    </it.image.dspace.name>
-    <it.image.postgres.name>
-      oapass/postgres:0.1.0@sha256:ace6225676b8da663fb3eff8de7b0d21ff5fec564875b108580fb16e31573711
-    </it.image.postgres.name>
-    
-    <!-- Intermediate image used when creating new package-provider images -->
-    <docker.image.deposit-services-core.name>
-      oapass/deposit-services-core:0.1.0@sha256:cef627bd720350108ab3e17111d3d7513d121955f3f0cbd9180215ecd0929791
-    </docker.image.deposit-services-core.name>
   </properties>
 
   <dependencyManagement>
