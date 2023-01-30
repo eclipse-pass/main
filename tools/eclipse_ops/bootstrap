@@ -40,8 +40,11 @@ function install_docker() {
     apt-get install -y gnupg2 pass docker.io && \\
     curl -L \"https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-\$(uname -s)-\$(uname -m)\" -o /usr/local/bin/docker-compose && \\
     chmod +x /usr/local/bin/docker-compose && \\
+    mkdir -p /usr/local/lib/docker/cli-plugins && \\
+    ln -fs /usr/local/bin/docker-compose /usr/local/lib/docker/cli-plugins/docker-compose && \\
     docker --version && \\
     docker-compose --version && \\
+    docker compose version && \\
     mv /opt/docker.start /opt/docker.end
 }
 
