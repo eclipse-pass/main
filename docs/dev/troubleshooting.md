@@ -79,15 +79,37 @@ git push --force-with-lease
 
 ## Issue Running Pass-core in Docker on Windows
 
-There is a known issue with running pass-core in docker on Windows. After performing the `Building` and `Running with Docker` steps the following error may occur:
+There is a known issue with running pass-core in docker on Windows. After performing the `Building` 
+and `Running with Docker` steps the following error may occur:
 
-`Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "./entrypoint.sh": permission denied: unknown`
+`Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: 
+unable to start container process: exec: "./entrypoint.sh": permission denied: unknown`
 
 or
 
 `exec ./entrypoint.sh: no such file or directory`
 
-This is caused by several files required to run the docker image that have Windows style line breaks  (CRLF) and Unix/MacOSX line breaks are required (LF). These files are located in the pass-core-main directory. Changing the line breaks for the following files and rebuilding the image will resolve the issue:
+This is caused by several files required to run the docker image that have Windows style line breaks (CRLF) and 
+Unix/MacOSX line breaks are required (LF). These files are located in the pass-core-main directory. Changing the line 
+breaks for the following files and rebuilding the image will resolve the issue:
 
 - `entrypoint.sh`
 - `init_postgres.sh`
+
+On a Windows OS, the default Git system configuration clones/checkouts files with CRLF line breaks and will commit files 
+with LF line breaks. It is important that all files are committed with LF line breaks. To verify the configuration
+run the following Git command:
+
+`git config --system --list`
+
+In the configuration the following line should be present: `core.autocrlf=true`. If this line is not present, add it by
+running the following command: `git config --system core.autocrlf true`. If the files are manually changed to LF or CRLF
+Git will prevent the files from being committed.
+
+It is also possible to check out and commit files as LF line breaks by running the following Git commands: 
+
+`git config --system core.autocrlf input`
+
+It is important to note that checking out files as LF line breaks on a Windows OS has not been tested fully with 
+the pass-core project. For more information on Git line break configuration see the following link:
+[Git SCM Formatting](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration#_formatting_and_whitespace)
