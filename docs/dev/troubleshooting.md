@@ -76,3 +76,18 @@ And finally, push your changes:
 ```bash
 git push --force-with-lease
 ```
+
+## Issue Running Pass-core in Docker on Windows
+
+There is a known issue with running pass-core in docker on Windows. After performing the `Building` and `Running with Docker` steps the following error may occur:
+
+`Error response from daemon: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "./entrypoint.sh": permission denied: unknown`
+
+or
+
+`exec ./entrypoint.sh: no such file or directory`
+
+This is caused by several files required to run the docker image that have Windows style line breaks  (CRLF) and Unix/MacOSX line breaks are required (LF). These files are located in the pass-core-main directory. Changing the line breaks for the following files and rebuilding the image will resolve the issue:
+
+- `entrypoint.sh`
+- `init_postgres.sh`
