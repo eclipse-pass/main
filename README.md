@@ -34,7 +34,7 @@ All documentation should be written within this [main repo](https://github.com/e
 or referenced here.  For example, please include links (with a small description) to
 any relevant websites, external references, and other cloud storages (e.g. Google Docs).
 
-* [Developer documentation](/docs/dev)
-* [Deployment and Infrastructure](/docs/infra)
-* [User documentation](/docs/user)
+* [Developer documentation](docs/dev)
+* [Deployment and Infrastructure](docs/infra)
+* [User documentation](docs/user)
 
