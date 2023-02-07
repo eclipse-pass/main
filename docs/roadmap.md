@@ -15,6 +15,9 @@ This release will focus on making the REST API feature complete and removing the
 * Automating the release process
 * Access control for REST API
 * Dependency updates - update project dependencies and introduce automated convergence checks
+* New file service (with support for both local and S3 storage)
+* Replacement of all Golang web services.
+* Remove mocking of the REST API from the user interface
 
 ## 1.0.0
 This release aims to be a fully functional system.
