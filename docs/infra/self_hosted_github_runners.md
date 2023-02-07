@@ -9,7 +9,7 @@ This can be useful for
 To use self-hosted runners, you will need to be an administrator of the GitHub project.
 If you can access `/settings/actions/runners` then you have the right access permissions.
 
-![GitHub Settings Runners](/docs/assets/github/github_settings_runners.png)
+![GitHub Settings Runners](../assets/github/github_settings_runners.png)
 
 ## Create Self-Hosted Runner
 
@@ -20,7 +20,7 @@ URL below to your organization/project).
 https://github.com/eclipse-pass/pass-docker/settings/actions/runners/new
 ```
 
-![GitHub Setup Runner Code](/docs/assets/github/create_self_runner_code.png)
+![GitHub Setup Runner Code](../assets/github/create_self_runner_code.png)
 
 Please refer to the latest self-hosted action runner setup instructions directly
 from GitHub, what follows is a (slightly modified) copy of the
@@ -120,7 +120,7 @@ If everything is configured correctly, then you should see the runners (assumes 
 https://github.com/eclipse-pass/pass-docker/settings/actions/runners
 ```
 
-![Passdemo runner on GitHub.com](/docs/assets/github/passdemo_runner.png)
+![Passdemo runner on GitHub.com](../assets/github/passdemo_runner.png)
 
 
 ## View Runners via API

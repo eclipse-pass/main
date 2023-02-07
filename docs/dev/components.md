@@ -50,5 +50,5 @@ The following repositories have been forked from others
 
 Dependency tree for the Java components in PASS.
 
-![Java component hierarchy](/docs/assets/java_project_hierarchy.png)
+![Java component hierarchy](../assets/java_project_hierarchy.png)
 

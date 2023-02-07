@@ -2,7 +2,7 @@
 
 At a high level, PASS is decomposed into the following parts:
 
-![PASS Architecture V1](/docs/assets/architecture/pass-architecture-simple-v2.jpg)
+![PASS Architecture V1](../assets/architecture/pass-architecture-simple-v2.jpg)
 
 ### Infrastructure
 
@@ -12,7 +12,7 @@ The following describes the current PASS Infrastructure.
 
 EC2 virtual machines provide access to internal resources within the AWS VPC.
 
-Learn more about [deploying pass-docker via EC2](/docs/infra/ec2.md).
+Learn more about [deploying pass-docker via EC2](ec2.md).
 
 #### ECS
 
@@ -69,13 +69,13 @@ We will soon be upgrading our initial production instance (which is based on Fed
 
 ## Going Forward
 
-As we move towards an Eclipse Foundation hosted Open-Access PASS there will be changes to the PASS architecture, changes to the infrastructure, and changes to the deployment process. This will be documented here, as well as within our [PASS Development Pipeline](/docs/infra/pipeline.md).
+As we move towards an Eclipse Foundation hosted Open-Access PASS there will be changes to the PASS architecture, changes to the infrastructure, and changes to the deployment process. This will be documented here, as well as within our [PASS Development Pipeline](pipeline.md).
 
 ## References
 
-* [Deployment Pipeline](/docs/infra/pipeline.md)
-* [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](/docs/infra/docker-composer-to-k8s-manifest.md)
-* [Working with GitHub secrets](/docs/infra/github-secrets.md)
-* [Self-Hosted GitHub Runners](/docs/infra/self_hosted_github_runners.md)
-* [Eclipse Foundation ops](/docs/infra/eclipseops.md)
-* [Ansible](/docs/infra/ansible.md)
+* [Deployment Pipeline](pipeline.md)
+* [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](docker-composer-to-k8s-manifest.md)
+* [Working with GitHub secrets](github-secrets.md)
+* [Self-Hosted GitHub Runners](self_hosted_github_runners.md)
+* [Eclipse Foundation ops](eclipseops.md)
+* [Ansible](ansible.md)

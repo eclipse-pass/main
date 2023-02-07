@@ -1,6 +1,6 @@
 # Developer Documentation
 
-Developer focused documentation should be written in this `docs/dev/` directory. Separate documentation pages can be added in this directory and referenced here. If a given component has many documentation pages, please add a directory for it within the [docs/dev/](/docs/dev) directory.
+Developer focused documentation should be written in this `docs/dev/` directory. Separate documentation pages can be added in this directory and referenced here. If a given component has many documentation pages, please add a directory for it within the [docs/dev/](.) directory.
 
 ## Development Guidelines
 
@@ -26,10 +26,10 @@ Only Committers on the PASS Eclipse project are able to make changes to the code
 
 ## Articles
 
-* [PASS Demo Setup](/docs/dev/local_demo.md) - Setting Up a Local Demo System
-* [PASS Parent POM](/docs/dev/parent-pom.md) - Common deps between Java projects
-* [PASS Playground](/docs/dev/playground.md) - Ops playground
-* [PASS UI](/docs/dev/pass-ui.md) - PASS Ember application
-* [Troubleshooting](/docs/dev/troubleshooting.md) - Common errors and how to fix them
-* [Docker Dependencies](/docs/dev/integration-test-docker-dependencies.md) - Integration Testing and Docker Dependencies
-* [Components](/docs/dev/components.md) - PASS project components
+* [PASS Demo Setup](local_demo.md) - Setting Up a Local Demo System
+* [PASS Parent POM](parent-pom.md) - Common deps between Java projects
+* [PASS Playground](playground.md) - Ops playground
+* [PASS UI](pass-ui.md) - PASS Ember application
+* [Troubleshooting](troubleshooting.md) - Common errors and how to fix them
+* [Docker Dependencies](integration-test-docker-dependencies.md) - Integration Testing and Docker Dependencies
+* [Components](components.md) - PASS project components

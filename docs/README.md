@@ -4,17 +4,17 @@ All documentation should be written within this [main repo](https://github.com/e
 or referenced here.  For example, please include links (with a small description) to
 any relevant websites, external references, and other cloud storages (e.g. Google Docs).
 
-* [Developer documentation](/docs/dev)
-* [Deployment and Infrastructure](/docs/infra)
-* [User documentation](/docs/user)
+* [Developer documentation](dev)
+* [Deployment and Infrastructure](infra)
+* [User documentation](user)
 * [Project Roadmap](roadmap.md)
 
 ## Articles of Interest
 
-* [Setting up a local instance of the PASS demo](/docs/dev/local_demo.md)
-* [How to deploy to demo.eclipse-pass.org](/docs/infra/deploy_demo.md)
-* [Working with GitHub secrets](/docs/infra/github-secrets.md)
-* [Troubleshooting dev issues](/docs/dev/troubleshooting.md)
-* [Deployment Pipeline](/docs/infra/pipeline.md)
-* [PASS via EC2](/docs/infra/ec2.md)
-* [PASS via Digital Ocean](/docs/infra/digitalocean.md)
+* [Setting up a local instance of the PASS demo](dev/local_demo.md)
+* [How to deploy to demo.eclipse-pass.org](infra/deploy_demo.md)
+* [Working with GitHub secrets](infra/github-secrets.md)
+* [Troubleshooting dev issues](dev/troubleshooting.md)
+* [Deployment Pipeline](infra/pipeline.md)
+* [PASS via EC2](infra/ec2.md)
+* [PASS via Digital Ocean](infra/digitalocean.md)

@@ -13,7 +13,7 @@ As different environments (cd, nightly, dev, demo, pre-production, production) a
 introduced this documentation will be updated to reflect those differences (for
 example cd, nightly, dev, demo will all use a _fake_ nihms FTP server).
 
-The [docker containers should be migrated based on eclipse-pass dependencies](/docs/dev/integration-test-docker-dependencies.md).
+The [docker containers should be migrated based on eclipse-pass dependencies](../dev/integration-test-docker-dependencies.md).
 
 ### Application Reposibilities
 
@@ -23,7 +23,7 @@ The PASS application will be responsible for
 * Updating environment manifests (e.g a new container image to upgrade the deposit service)
 * Deoploying to a setup environment (based on the manifest)
 
-![Application pipeline actions](/docs/assets/pipeline/pipeline_app.png)
+![Application pipeline actions](../assets/pipeline/pipeline_app.png)
 
 Note that the `pass-app` currently refers to the [pass-docker repo](https://github.com/eclipse-pass/pass-docker).
 The recommendation is that `pass-docker` be renamed (and enhanced) to
@@ -46,7 +46,7 @@ The individual projects will be responsible for
 * Building project artefacts (e.g. Java JARs, Docker images, Golang binaries)
 * Notifying the application of the update
 
-![Project pipeline actions](/docs/assets/pipeline/pipeline_project.png)
+![Project pipeline actions](../assets/pipeline/pipeline_project.png)
 
 The artefacts will be stored in a consistent manner so the application
 can correct grab the appropriate versions when orchestrating a release.
@@ -126,7 +126,7 @@ The following projects will manage building their own containers.
 ## Component CI/CD Capabilities
 
 The table below will document the progression from source code commits to
-a production running application for the many [PASS components](/docs/dev#components).
+a production running application for the many [PASS components](../dev#components).
 
 | Project | Build | UTs |ITs | Deploy |
 | --- | --- | --- | --- | --- |
@@ -260,9 +260,9 @@ The following repositories have been forked from others
 
 ## References
 
-* [Deploying pass-docker via EC2](/docs/infra/ec2.md)
-* [Deploying pass-docker via Digital Ocean](/docs/infra/digitalocean.md)
-* [Deploying pass-docker via Eclipse Foundation (EF)](/docs/infra/eclipseops.md)
-* [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](/docs/infra/docker-composer-to-k8s-manifest.md)
+* [Deploying pass-docker via EC2](ec2.md)
+* [Deploying pass-docker via Digital Ocean](digitalocean.md)
+* [Deploying pass-docker via Eclipse Foundation (EF)](eclipseops.md)
+* [Our attempt to use Komposer to migrate Docker Compose to k8s manifest](docker-composer-to-k8s-manifest.md)
 * [Travis configs for pass-ui](https://travis-ci.org/github/OA-PASS/pass-ember/jobs/770188235/config)
 * [Coveralls for pass-ui (pass-ember URL no longer valid)](https://coveralls.io/)
