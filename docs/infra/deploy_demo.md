@@ -7,7 +7,7 @@ for automatable deploys of PASS demo system.
 
 For information on actually deploying updates to a _running_ demo system
 such as [demo.eclipse-pass.org](https://demo.eclipse-pass.org)
-please refer to [Eclipse Foundation infrastructure](/docs/infra/eclipseops.md)
+please refer to [Eclipse Foundation infrastructure](eclipseops.md)
 
 ## Self-Hosted Demo Code
 
@@ -64,7 +64,7 @@ From here, you can run the application (any version of it)
 docker-compose up
 ```
 
-Please refer to the specifics of the [Eclipse Foundation infrastructure](/docs/infra/eclipseops.md)
+Please refer to the specifics of the [Eclipse Foundation infrastructure](eclipseops.md)
 for the actual commands to run on a specific environment.  For example, this
 is the specific script that (currently) runs [demo.eclipse-pass.org](https://demo.eclipse-pass.org)
 

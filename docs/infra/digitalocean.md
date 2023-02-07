@@ -1,7 +1,7 @@
 # PASS Digital Ocean Deployment
 
 This will document how to run PASS in [Digital Ocean](https://www.digitalocean.com)
-as [Self-Hosted GitHub Runners](/docs/infra/self_hosted_github_runners.md).
+as [Self-Hosted GitHub Runners](self_hosted_github_runners.md).
 
 ## Create Server
 
@@ -49,7 +49,7 @@ cd /src/pass-docker && \
 ## Install GitHub Runner Scripts
 
 If you also wanted to use this server as a
-[self-Hosted GitHub Runners software](/docs/infra/self_hosted_github_runners.md)
+[self-Hosted GitHub Runners software](self_hosted_github_runners.md)
 then run
 
 ```bash

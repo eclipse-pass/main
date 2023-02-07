@@ -17,7 +17,7 @@ The underlying infrastructure for each is documented here
 
 If you are looking for more detailed developer-oriented instructions
 to help debug an issue with the above, please refer to
-[managing our demo servers](/docs/infra/deploy_demo.md) documentation.
+[managing our demo servers](deploy_demo.md) documentation.
 
 ## Deployment
 
@@ -35,7 +35,7 @@ information about PASS that we currently synchronize with the main [eclipse-pass
 
 This can be done with a tool like [SiteSucker](https://apps.apple.com/us/app/sitesucker/id442168834) on a Mac.
 
-![Download site with SiteSucker](/docs/assets/eclipsesync/sitesucker.png)
+![Download site with SiteSucker](../assets/eclipsesync/sitesucker.png)
 
 2. Update the [eclipse-pass.github.io](https://github.com/eclipse-pass/eclipse-pass.github.io) repo.
 
@@ -59,7 +59,7 @@ Should be updated to
 
 Once the code is in main, the site will automatically be deployed to [eclipse-pass.org](https://eclipse-pass.org).
 
-![Updates deployed on merge](/docs/assets/eclipsesync/github_pages_actions_deploy.png)
+![Updates deployed on merge](../assets/eclipsesync/github_pages_actions_deploy.png)
 
 
 ### demo.eclipse-pass.org
@@ -76,15 +76,15 @@ including the [Deploy passdemo action](https://github.com/eclipse-pass/pass-dock
 
 To publish an update, access the actions page.
 
-![pass-docker actions](/docs/assets/demo/passdocker_actions.png)
+![pass-docker actions](../assets/demo/passdocker_actions.png)
 
 You can then [run the workflow](https://github.com/eclipse-pass/pass-docker/actions/workflows/deploy_passdemo.yml)
 
-![run workflow](/docs/assets/demo/run_workflow.png)
+![run workflow](../assets/demo/run_workflow.png)
 
 And watch the deploy.
 
-![deployed actions](/docs/assets/demo/deploy_actions.png)
+![deployed actions](../assets/demo/deploy_actions.png)
 
 #### Locally Run Via Docker Compose
 
@@ -101,7 +101,7 @@ cd pass-docker && \
 ```
 
 For more information debugging the deployment to our demo servers
-please refer to our [demo deploy documentation](/docs/infra/deploy_demo.md).
+please refer to our [demo deploy documentation](deploy_demo.md).
 
 ### nightly.eclipse-pass.org
 
@@ -130,7 +130,7 @@ cd pass-docker && \
 
 For more information debugging the deployment to our demo servers
 (such as [nightly.eclipse-pass.org](https://nightly.eclipse-pass.org))
-please refer to our [demo deploy documentation](/docs/infra/deploy_demo.md).
+please refer to our [demo deploy documentation](deploy_demo.md).
 
 
 ## Infrastructure
@@ -142,9 +142,9 @@ project
 Which will do the following
 
 * Install docker
-* Install [github self-hosted runners](/docs/infra/self_hosted_github_runners.md)
+* Install [github self-hosted runners](self_hosted_github_runners.md)
 * Intall [pass-docker](https://github.com/eclipse-pass/pass-docker)
-* Configure [pass docker for a GH runner](/docs/infra/self_hosted_github_runners.md)
+* Configure [pass docker for a GH runner](self_hosted_github_runners.md)
 
 To configure the self-hosted runner you will need the GITHUB token,
 replacing the `XXX` with the actual token value.

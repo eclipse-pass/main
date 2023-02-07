@@ -27,7 +27,7 @@ docker run -p 8080:80 html-app
 
 And then you can visit http://127.0.0.1:8080
 
-![HTML App running in browser](/docs/assets/html_app_nginx.png)
+![HTML App running in browser](../assets/html_app_nginx.png)
 
 ## EmberJS Application
 
@@ -101,7 +101,7 @@ Babel: @ember-data/store (2)                  | 279ms (139 ms)
 
 And then you can visit http://127.0.0.1:4200
 
-![EmberJS App running in browser](/docs/assets/emberjs_app.png)
+![EmberJS App running in browser](../assets/emberjs_app.png)
 
 ### Testing the application
 

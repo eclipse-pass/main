@@ -103,15 +103,15 @@ loader exited with code 0
 
 In your browser, navigate to [pass.local](https://pass.local).
 
-![Welcome to PASS](/docs/assets/passapp/welcome_screen.png)
+![Welcome to PASS](../assets/passapp/welcome_screen.png)
 
 You can click on login and enter `nih-user` / `moo`.
 
-![Login as nih-user / moo](/docs/assets/passapp/login_nih-user_moo.png)
+![Login as nih-user / moo](../assets/passapp/login_nih-user_moo.png)
 
 And then you are authenticated and can view the PASS dashboard.
 
-![PASS dashbaord](/docs/assets/passapp/dashboard.png)
+![PASS dashbaord](../assets/passapp/dashboard.png)
 
 
 ## Shutting down the demo
