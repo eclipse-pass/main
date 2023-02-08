@@ -23,7 +23,7 @@ This release will focus on making the REST API feature complete and removing the
 This release aims to be a fully functional system.
 * Data loaders ported to new framework
 * Notification service ported to new framework
-* Deposit service ported to new frameword
+* Deposit service ported to new framework
 * Archive old repositories
 
 ## 1.1.0
