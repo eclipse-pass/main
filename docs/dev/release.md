@@ -91,11 +91,11 @@ The Java projects must follow a strict sequence, following its dependency hierar
 The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image. The release process is determined by the decision made to have versions for all Java artifacts be the same for a release. The parent pom in `main` sets the version to be inherited by all its children. This project therefore needs to be released first, as all other projects need to reference it. After this is released, other projects are released in an order which guarantees that all PASS dependencies for them have already been released.
 
 The process itself can be described as follows: release `main`, then use the maven release and versions plugins to perform the process. For convenience we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
-For each of these child projects, we first clone the source from GitHub, and operating on the principal branch (usually `main`, sometimes `master` for older projects).
+For each of these child projects, we first clone the source from GitHub, and operating on the principal branch (usually `main`).
 
 We would then update the parent version in these projects by:
 ```
-mvn:versions  update-parent;
+mvn versions:update-parent;
 git commit -a -m "update parent version for release";
 ```
 After this, we prepare and perform the release:
@@ -123,6 +123,37 @@ mvn deploy -P release
 At this point, we should have deployed the release to Sonatype (and eventually to Maven Central), pushed a tag to GitHub, and deployed the new development release to Sonatype.
 
 In addition, the project may be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
+
+``` sh
+export $RELEASE=0.2.0
+export $NEXT=0.3.0-SNAPSHOT
+
+# Release the main project POM
+cd ./main/
+
+mvn --batch-mode release:prepare \
+  -DreleaseVersion=$RELEASE \
+  -Dtag=$RELEASE \
+  -DdevelopmentVersion=$NEXT
+mvn release:perform -Dgoals=deploy
+
+git push origin --tags
+
+# Release pass-core
+cd ../pass-core/
+#-- Update parent POM ref and commit
+mvn versions:update-parent
+git add pom.xml
+git commit -m "Update parent version to latest release"
+
+mvn --batch-mode release:prepare \
+  -DreleaseVersion=$RELEASE \
+  -Dtag=$RELEASE \
+  -DdevelopmentVersion=$NEXT \
+  -DautoVersionSubmodules=true
+mvn release:perform -Dgoals=deploy
+
+```
 
 # Update pass-docker
 
