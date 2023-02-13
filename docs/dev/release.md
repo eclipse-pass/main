@@ -198,6 +198,9 @@ mvn release:perform -Dgoals=deploy
 # New Docker image will have been created during the release process
 docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
 
+# Question: substitute options?
+#   >> mvn versions:set -DallowSnapshots=true
+#   >> mvn versions:use-latest-versions -DprocessParent=true -DallowSnapshots=true
 mvn versions:update-parent -DallowSnapshots=true # Update to new dev version
 mvn versions:update-child-modules -DallowSnapshots=true # Is this correct?
 
