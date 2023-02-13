@@ -124,11 +124,47 @@ At this point, we should have deployed the release to Sonatype (and eventually t
 
 In addition, the project may be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
 
+----
+
+### `main`
+
+* Update POM version to release version
+* Push update to GH
+* Maven release
+* Push release tag and update to new snapshot version to GH
+* Maven deploy new snapshot
+
+### `pass-core`
+
+* Update POM version to release
+* Push update to GH
+* Maven release (include submodules)
+* Push generated release Docker image to GHCR
+* Push release tag to GH
+* Update top level and submodule POMs, allowing SNAPSHOTS
+* Push version updates on main to GH
+* Maven deploy new snapshot
+* Push snapshot Docker image to GHCR
+
+This follows the same general release procedure as `main` with a few extra steps to account for submodules and Docker images
+
+### `pass-support`
+
+See procedure for `pass-core`, but without Docker images
+
 ``` sh
 export $RELEASE=0.2.0
 export $NEXT=0.3.0-SNAPSHOT
 
+#=======================================================
+# Setup
+#=======================================================
+
+echo "${GHCR_PASSWORD}" docker login ghcr.io --username GHCR_USERNAME --password-stdin
+
+#=======================================================
 # Release the main project POM
+#=======================================================
 cd ./main/
 
 mvn --batch-mode release:prepare \
@@ -137,12 +173,18 @@ mvn --batch-mode release:prepare \
   -DdevelopmentVersion=$NEXT
 mvn release:perform -Dgoals=deploy
 
-git push origin --tags
+git push origin --tags # Will push the newly created release tag
+git push origin main # Need to push `main` here to introduce new dev version
 
+mvn clean deploy -P release # Push new SNAPSHOT to Sonatype
+
+#=======================================================
 # Release pass-core
+#=======================================================
 cd ../pass-core/
-#-- Update parent POM ref and commit
-mvn versions:update-parent
+# Update parent POM ref and commit
+mvn versions:update-parent 
+
 git add pom.xml
 git commit -m "Update parent version to latest release"
 
@@ -150,9 +192,20 @@ mvn --batch-mode release:prepare \
   -DreleaseVersion=$RELEASE \
   -Dtag=$RELEASE \
   -DdevelopmentVersion=$NEXT \
-  -DautoVersionSubmodules=true
+  -DautoVersionSubmodules=true # _should_ update submodule POMs with correct versions
 mvn release:perform -Dgoals=deploy
 
+# New Docker image will have been created during the release process
+docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
+
+mvn versions:update-parent -DallowSnapshots=true # Update to new dev version
+mvn versions:update-child-modules -DallowSnapshots=true # Is this correct?
+
+git push origin main
+git push origin --tags
+
+mvn clean deploy -P release # Push new SNAPSHOT to Sonatype
+docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT # Push new snapshot docker image
 ```
 
 # Update pass-docker
