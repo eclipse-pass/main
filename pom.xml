@@ -254,6 +254,10 @@
           </executions>
           <configuration>
             <useAgent>true</useAgent>
+            <gpgArguments>
+                <arg>--pinentry-mode</arg>
+                <arg>loopback</arg>
+            </gpgArguments>
           </configuration>
         </plugin>
 
