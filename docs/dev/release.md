@@ -126,6 +126,8 @@ In addition, the project may be released on GitHub. This provides a way to add r
 
 ----
 
+See an example script that runs through these steps at [/tools/release.sh](/tools/release.sh)
+
 ### `main`
 
 * Update POM version to release version
@@ -152,64 +154,6 @@ This follows the same general release procedure as `main` with a few extra steps
 
 See procedure for `pass-core`, but without Docker images
 
-``` sh
-export $RELEASE=0.2.0
-export $NEXT=0.3.0-SNAPSHOT
-
-#=======================================================
-# Setup
-#=======================================================
-
-echo "${GHCR_PASSWORD}" docker login ghcr.io --username GHCR_USERNAME --password-stdin
-
-#=======================================================
-# Release the main project POM
-#=======================================================
-cd ./main/
-
-mvn --batch-mode release:prepare \
-  -DreleaseVersion=$RELEASE \
-  -Dtag=$RELEASE \
-  -DdevelopmentVersion=$NEXT
-mvn release:perform -Dgoals=deploy
-
-git push origin --tags # Will push the newly created release tag
-git push origin main # Need to push `main` here to introduce new dev version
-
-mvn clean deploy -P release # Push new SNAPSHOT to Sonatype
-
-#=======================================================
-# Release pass-core
-#=======================================================
-cd ../pass-core/
-# Update parent POM ref and commit
-mvn versions:update-parent 
-
-git add pom.xml
-git commit -m "Update parent version to latest release"
-
-mvn --batch-mode release:prepare \
-  -DreleaseVersion=$RELEASE \
-  -Dtag=$RELEASE \
-  -DdevelopmentVersion=$NEXT \
-  -DautoVersionSubmodules=true # _should_ update submodule POMs with correct versions
-mvn release:perform -Dgoals=deploy
-
-# New Docker image will have been created during the release process
-docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
-
-# Question: substitute options?
-#   >> mvn versions:set -DallowSnapshots=true
-#   >> mvn versions:use-latest-versions -DprocessParent=true -DallowSnapshots=true
-mvn versions:update-parent -DallowSnapshots=true # Update to new dev version
-mvn versions:update-child-modules -DallowSnapshots=true # Is this correct?
-
-git push origin main
-git push origin --tags
-
-mvn clean deploy -P release # Push new SNAPSHOT to Sonatype
-docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT # Push new snapshot docker image
-```
 
 # Update pass-docker
 
