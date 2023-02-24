@@ -1,4 +1,4 @@
-name: Publish a release to Maven Central
+name: "Publish: manual full release OR automatic snapshot"
 
 on:
   workflow_dispatch:
@@ -9,19 +9,21 @@ on:
       nextversion:
         description: 'Next dev version'
         required: true
+  push:
+    branches:
+      - 'main'
 
 env:
   RELEASE: ${{ inputs.releaseversion }}
   NEXT: ${{ inputs.nextversion }}
 
 jobs:
-  publish:
+  setup:
     runs-on: ubuntu-latest
-
+    outputs:
+      # Output project version from the POM to conditionally run dependent steps
+      project-version: ${{ steps.project_version.outputs.version }}
     steps:
-      # =============================================================================
-      # Setup
-      # =============================================================================
       - name: Checkout latest code
         uses: actions/checkout@v3
 
@@ -35,7 +37,34 @@ jobs:
           server-password: MAVEN_PASSWORD
           gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
-          
+      
+      - name: Get project version from POM
+        id: project_version
+        run: echo "VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`" >> $GITHUB_OUTPUT
+
+  # Run only if project POM has version ending in "-SNAPSHOT"
+  snapshot:
+    needs: setup
+    if: github.event_name == 'push' && endsWith(needs.setup.outputs.project-version, '-SNAPSHOT')
+    runs-on: ubuntu-latest
+    steps:
+      # =============================================================================
+      # TODO: Refactor to be reusable action
+      # :: shared among ALL publishing workflows
+      # =============================================================================
+      - name: Publish SNAPSHOT
+        run: mvn -B --no-transfer-progress clean deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+  # Run for manual trigger (workflow dispatch), since you'll have release and next dev versions specified
+  release:
+    needs: setup
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
       # =============================================================================
       # Start the release
       # =============================================================================
@@ -48,5 +77,14 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
+      - name: Build and publish new dev version
+        run: mvn -B -U -V -ntp deploy -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
       - name: Push new release tag GH
-        run: git push origin --tags
+        run: |
+          git push 
+          git push origin --tags
