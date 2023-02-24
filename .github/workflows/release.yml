@@ -83,7 +83,9 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
+      - name: Push release plugin commits
+        if: github.ref_type == 'branch' && github.ref_protected == false
+        run: git push origin ${{ github.ref_name }}
+
       - name: Push new release tag GH
-        run: |
-          git push 
-          git push origin --tags
+        run: git push origin --tags
