@@ -28,6 +28,7 @@ jobs:
         with:
           java-version: 11
           distribution: 'temurin'
+          cache: 'maven'
           server-id: ossrh
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
@@ -56,6 +57,7 @@ jobs:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
   # Run for manual trigger (workflow dispatch), since you'll have release and next dev versions specified
+  # All commits will have a -SNAPSHOT project version anyway, since the releases will be handled here
   release:
     needs: setup
     if: github.event_name == 'workflow_dispatch'
