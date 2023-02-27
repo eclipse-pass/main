@@ -29,11 +29,6 @@ jobs:
           java-version: 11
           distribution: 'temurin'
           cache: 'maven'
-          server-id: ossrh
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
-          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
-          gpg-passphrase: MAVEN_GPG_PASSPHRASE
       
       - name: Get project version from POM
         id: project_version
@@ -45,10 +40,21 @@ jobs:
     if: github.event_name == 'push' && endsWith(needs.setup.outputs.project-version, '-SNAPSHOT')
     runs-on: ubuntu-latest
     steps:
-      # =============================================================================
-      # TODO: Refactor to be reusable action
-      # :: shared among ALL publishing workflows
-      # =============================================================================
+      - name: Checkout latest code
+        uses: actions/checkout@v3
+
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
       - name: Publish SNAPSHOT
         run: mvn -B --no-transfer-progress clean deploy
         env:
@@ -66,6 +72,20 @@ jobs:
       RELEASE: ${{ inputs.releaseversion }}
       NEXT: ${{ inputs.nextversion }}
     steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v3
+
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
       # =============================================================================
       # Start the release
       # =============================================================================
