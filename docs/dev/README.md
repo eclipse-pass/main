@@ -33,3 +33,4 @@ Only Committers on the PASS Eclipse project are able to make changes to the code
 * [Troubleshooting](troubleshooting.md) - Common errors and how to fix them
 * [Docker Dependencies](integration-test-docker-dependencies.md) - Integration Testing and Docker Dependencies
 * [Components](components.md) - PASS project components
+* [Releasing PASS](release.md) - Releasing the PASS project
