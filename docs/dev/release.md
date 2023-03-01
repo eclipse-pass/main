@@ -188,9 +188,12 @@ docker build --no-cache -t ghcr.io/eclipse-pass/pass-auth:<your-version-tag>
 ```
 Push that image to ghcr.
 
+### `pass-acceptance-testing`
+All that's required is to tag a new release in the Github UI.
+
 After pushing the images to ghcr, update the appropriate image lines in `docker-compose.yml` in `pass-docker` with the new sha's returned by the pushes to ghcr. Open a pull request against `pass-docker` with these updates.
 
-Once acceptance-tests successfully run in CI in your `pass-docker` PR, and preferrably once you've done some additional manual spot checking while running `pass-docker` locally, go ahead and tag a new release in the Github UI. 
+Once acceptance-tests successfully run in CI in your `pass-docker` PR, and preferrably once you've done some additional manual spot checking while running `pass-docker` locally, go ahead and tag a new release in the Github UI for each of `pass-ui`, `pass-ui-public`, `pass-auth` and `pass-acceptance-testing`. 
 
 # Update pass-docker
 
