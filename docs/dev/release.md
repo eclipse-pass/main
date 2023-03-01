@@ -154,6 +154,46 @@ This follows the same general release procedure as `main` with a few extra steps
 
 See procedure for `pass-core`, but without Docker images
 
+## JavaScript projects
+
+The following projects can be released by performing the following steps manually until there is automation in place or when the release needs to be performed manually otherwsie.
+
+### `pass-ui`
+
+Update the version in `package.json` and in `build.sh`, and commit those changes via a PR to the `pass-ui` repo.
+
+Build a new docker image from within the `pass-ui` repo by running:
+```
+sh build.sh ~/pass-docker/.env
+```
+Note, you might want to ensure `node_modules` are removed first to ensure a clean build.
+
+Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-ui:<your-version-tag-here>`
+
+### `pass-ui-public`
+In `docker-compose.yml` in the `pass-docker` repo remove the sha from the image line, update the version tag at the end of the line to the version you are releasing.
+
+Build a new docker image from within the root of the `pass-docker` repo by running:
+```
+docker compose build pass-ui-public
+```
+Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-ui-public:<your-version-tag-here>`
+
+### `pass-auth`
+Update the version in `package.json`, and commit that change via a PR to the `pass-auth` repo.
+
+Build a new docker image from within the `pass-auth`, for example by running:
+```
+docker build --no-cache -t ghcr.io/eclipse-pass/pass-auth:<your-version-tag>
+```
+Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-auth:<your-version-tag-here>`
+
+### `pass-acceptance-testing`
+All that's required is to tag a new release in the Github UI.
+
+After pushing the images to ghcr, update the appropriate image lines in `docker-compose.yml` in `pass-docker` with the new sha's returned by the pushes to ghcr. Open a pull request against `pass-docker` with these updates.
+
+Once acceptance-tests successfully run in CI in your `pass-docker` PR, and preferrably once you've done some additional manual spot checking while running `pass-docker` locally, go ahead and tag a new release in the Github UI for each of `pass-ui`, `pass-ui-public`, `pass-auth` and `pass-acceptance-testing`. 
 
 # Update pass-docker
 
@@ -199,11 +239,10 @@ docker push ghcr.io/eclipse-pass/pass-core-main:0.3.0
 Here's what you need to change manually before building a new image version in order to bring in code changes. If the docker compose service is not mentioned here, you do not need to make any manual changes. All images must be built manually using docker compose, following the [docker compose rebuilding / updating](#docker compose-rebuilding--updating) steps except `pass-core` which is built by Maven.
 
 #### `pass-ui`
-In `.env`, update the value of `EMBER_GIT_BRANCH`. You can use the name of a tag or a specific commit hash here
-TODO: subject to change
+In `.env`, by default, `EMBER_GIT_BRANCH` should have a value of `main`. If you need to point to a specific branch update the value of `EMBER_GIT_BRANCH`. You can use the name of a tag or a specific commit hash.
 
 #### `pass-ui-public`
-In `.env` update the `STATIC_HTML_BRANCH` value. You can use a tag or commit hash
+In `.env`, by default, `STATIC_HTML_BRANCH` should have a value of `main`. If you need to point to a specific branch update the value of `STATIC_HTML_BRANCH`. You can use the name of a tag or a specific commit hash.
 
 #### `deposit`
 TODO
