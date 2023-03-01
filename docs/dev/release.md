@@ -160,7 +160,7 @@ The following projects can be released by performing the following steps.
 
 ### `pass-ui`
 
-Update the version in `package.json` and in `build.sh`.
+Update the version in `package.json` and in `build.sh`, and commit those changes via a PR to the `pass-ui` repo.
 
 Build a new docker image from within the `pass-ui` repo by running:
 ```
@@ -180,7 +180,7 @@ docker compose build pass-ui-public
 Push that image to ghcr.
 
 ### `pass-auth`
-Update the version in `package.json`.
+Update the version in `package.json`, and commit that change via a PR to the `pass-auth` repo.
 
 Build a new docker image from within the `pass-auth`, for example by running:
 ```
