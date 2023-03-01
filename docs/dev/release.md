@@ -156,7 +156,7 @@ See procedure for `pass-core`, but without Docker images
 
 ## JavaScript projects
 
-The following projects can be released by performing the following steps.
+The following projects can be released by performing the following steps manually until there is automation in place or when the release needs to be performed manually otherwsie.
 
 ### `pass-ui`
 
@@ -168,7 +168,7 @@ sh build.sh ~/pass-docker/.env
 ```
 Note, you might want to ensure `node_modules` are removed first to ensure a clean build.
 
-Push that image to ghcr.
+Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-ui:<your-version-tag-here>`
 
 ### `pass-ui-public`
 In `docker-compose.yml` in the `pass-docker` repo remove the sha from the image line, update the version tag at the end of the line to the version you are releasing.
@@ -177,7 +177,7 @@ Build a new docker image from within the root of the `pass-docker` repo by runni
 ```
 docker compose build pass-ui-public
 ```
-Push that image to ghcr.
+Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-ui-public:<your-version-tag-here>`
 
 ### `pass-auth`
 Update the version in `package.json`, and commit that change via a PR to the `pass-auth` repo.
@@ -186,7 +186,7 @@ Build a new docker image from within the `pass-auth`, for example by running:
 ```
 docker build --no-cache -t ghcr.io/eclipse-pass/pass-auth:<your-version-tag>
 ```
-Push that image to ghcr.
+Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-auth:<your-version-tag-here>`
 
 ### `pass-acceptance-testing`
 All that's required is to tag a new release in the Github UI.
