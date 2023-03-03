@@ -4,6 +4,7 @@ This release introduces a new file handling service for dealing with file upload
 
 * Release automations using GitHub workflows. Snapshot versions are published automatically and releases can be triggered manually in the GitHub UI
 * Add file API to pass-core for handling file related create, read, and delete operations
+* Add service to pass-core to look for publicly available manuscripts for a given DOI
 
 Tickets Completed: https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.3.0%22
 
