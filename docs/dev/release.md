@@ -67,6 +67,9 @@ Developers will need a GitHub account which is a member of the [eclipse-pass](ht
 * Update images in pass-docker
 * Test the release
 * Publish release notes
+* Post a message about the release to the [PASS Google Group](https://groups.google.com/g/pass-general)
+  * Release manager will draft the message, allowing the technical lead to provide feedback before posting
+  * Message should include at least: an overview of the high level changes in the release, plans for the next release, and a link to the changelog for the release
 
 A new release for each relevant project should be created in the GitHub user interface until automation is put in place.
 
