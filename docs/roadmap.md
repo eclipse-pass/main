@@ -34,7 +34,6 @@ This release aims to be a fully functional system.
 This release will focus on setup and improvement of application testing environments as well as moving towards greater codebase language consistency.
 * Harmonize Integration Test setup - updating the method for executing integration tests to ensure consistent and streamlined launch and execution
 * Addition of system tests - adding a mechanism and tests to support full-system verification
-* Go project replacement - transition existing Go modules to use Java in order to unify the project codebase
 
 ## 1.2.0
 This release will focus on ensuring that those operating and maintaining the PASS application have the information needed to visualize system activity
