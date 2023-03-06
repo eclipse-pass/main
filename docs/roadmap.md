@@ -12,7 +12,7 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 # Planned Releases
 
 ## 0.4.0
-This release will focus on making the REST API feature complete and updating pass-ui
+This release will focus on making the REST API feature complete and connecting the UI to the completed API
 * Access control for REST API
 * Replacement of all Golang web services.
 * Remove mocking of the REST API from the user interface
