@@ -19,7 +19,7 @@ This release will focus on making the REST API feature complete and updating pas
 
 ## 0.5.0
 This release will focus on tools to load data
-* Data loaders ported to new framework
+* Data loaders ported to utilize the new REST API and backend framework
 
 ## 0.6.0
 This release will focus on the deposit and notification services
