@@ -7,23 +7,30 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 # Completed Releases
 ## [0.1.0](https://github.com/eclipse-pass/main/releases/tag/0.1.0)
 ## [0.2.0](https://github.com/eclipse-pass/main/releases/tag/0.2.0)
+## [0.3.0](https://github.com/eclipse-pass/main/releases/tag/0.3.0)
 
 # Planned Releases
 
-## 0.3.0
-This release will focus on making the REST API feature complete and removing the mocking of services in the user interface.
-* Automating the release process
+## 0.4.0
+This release will focus on making the REST API feature complete and updating pass-ui
 * Access control for REST API
-* Dependency updates - update project dependencies and introduce automated convergence checks
-* New file service (with support for both local and S3 storage)
 * Replacement of all Golang web services.
 * Remove mocking of the REST API from the user interface
 
-## 1.0.0
-This release aims to be a fully functional system.
+## 0.5.0
+This release will focus on tools to load data
 * Data loaders ported to new framework
+
+## 0.6.0
+This release will focus on the deposit and notification services
 * Notification service ported to new framework
 * Deposit service ported to new framework
+
+## 1.0.0
+This release aims to be a fully functional system.
+* Address technical debt
+* Dependency updates - update project dependencies and introduce automated convergence checks
+* Move to Java 17
 * Archive old repositories
 
 ## 1.1.0
