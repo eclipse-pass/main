@@ -13,9 +13,9 @@ Release Components:
 * pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/0.3.0
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.3.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.3.0
-* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/v0.3.0
-* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/v0.3.0
-* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/v0.3.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.3.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.3.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.3.0
 
 ## Release v0.2.0
 ### Date: January 18, 2023
