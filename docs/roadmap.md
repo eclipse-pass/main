@@ -4,10 +4,7 @@ This roadmap defines the primary initiatives of the Eclipse PASS Project, organi
 
 If you are interested in helping to define and/or contribute to this roadmap, please get in touch. We're always happy to welcome new project contributors!
 
-# Completed Releases
-## [0.1.0](https://github.com/eclipse-pass/main/releases/tag/0.1.0)
-## [0.2.0](https://github.com/eclipse-pass/main/releases/tag/0.2.0)
-## [0.3.0](https://github.com/eclipse-pass/main/releases/tag/0.3.0)
+# [Completed Releases](docs/dev/release.md)
 
 # Planned Releases
 
