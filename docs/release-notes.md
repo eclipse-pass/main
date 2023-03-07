@@ -66,7 +66,33 @@ Initial documentation - providing a starting point for development and deploymen
 Tickets Completed: https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.1.0%22
 
 Release Components:
+<!--
+  TODO: Need to review to make sure all repos have BOTH 0.1.0 tag + GH release
+-->
 * main - https://github.com/eclipse-pass/main/releases/tag/0.1.0
 * pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/v0.1.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/v0.1.0
 * pass-ember-adapter - https://github.com/eclipse-pass/pass-ember-adapter/releases/tag/v0.1.0
+* pass-java-client - https://github.com/eclipse-pass/pass-java-client/releases/tag/0.1.0
+* pass-authz - https://github.com/eclipse-pass/pass-authz/releases/tag/0.1.0
+* pass-deposit-services - https://github.com/eclipse-pass/pass-deposit-services/releases/tag/0.1.0
+* pass-messaging-support - https://github.com/eclipse-pass/pass-messaging-support/releases/tag/0.1.0
+* pass-notification-services - https://github.com/eclipse-pass/pass-notification-services/releases/tag/0.1.0
+* pass-package-providers - https://github.com/eclipse-pass/pass-package-providers/releases/tag/0.1.0
+* pass-doi-service - https://github.com/eclipse-pass/pass-doi-service/releases/tag/0.1.0
+* pass-indexer-checker - https://github.com/eclipse-pass/pass-indexer-checker/releases/tag/0.1.0
+* pass-indexer - https://github.com/eclipse-pass/pass-indexer/releases/tag/0.1.0
+* pass-journal-loader - https://github.com/eclipse-pass/pass-journal-loader/releases/tag/0.1.0
+* pass-nihms-loader - https://github.com/eclipse-pass/pass-nihms-loader/releases/tag/0.1.0
+* pass-grant-loader - https://github.com/eclipse-pass/pass-grant-loader/releases/tag/0.1.0
+* pass-fcrepo-jsonld - https://github.com/eclipse-pass/pass-fcrepo-jsonld/releases/tag/0.1.1
+* pass-fcrepo-jms - https://github.com/eclipse-pass/pass-fcrepo-jms/releases/tag/0.1.0
+
+<!--
+  TODO: These should be tagged, released in GH
+-->
+* pass-download-service - https://github.com/eclipse-pass/pass-download-service
+* pass-policy-service - https://github.com/eclipse-pass/pass-policy-service
+* pass-fcrepo-module-auth-rbacl - https://github.com/eclipse-pass/pass-fcrepo-module-auth-rbacl
+* modeshape - https://github.com/eclipse-pass/modeshape
+* pass-docker - does not have a `0.1.0` tag, here is the last commit before work began on `0.2.0` https://github.com/eclipse-pass/pass-docker/commit/90557db2bc774ec824b700f9b0ff9b54ee687325
