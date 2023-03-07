@@ -4,10 +4,11 @@ All documentation should be written within this [main repo](https://github.com/e
 or referenced here.  For example, please include links (with a small description) to
 any relevant websites, external references, and other cloud storages (e.g. Google Docs).
 
+* [Release Notes](release-notes.md)
+* [Project Roadmap](roadmap.md)
 * [Developer documentation](dev)
 * [Deployment and Infrastructure](infra)
 * [User documentation](user)
-* [Project Roadmap](roadmap.md)
 
 ## Articles of Interest
 
