@@ -17,6 +17,10 @@ This release will focus on making the REST API feature complete and connecting t
 ## 0.5.0
 This release will focus on tools to load data
 * Data loaders ported to utilize the new REST API and backend framework
+  * Grant loader - loads grant data from the institution
+  * Journal loader - loads Journal information
+  * Nihms loader - loads data from the National Institute of Health Manuscript Submission System
+* PASS data requirements for insitutions documented
 
 ## 0.6.0
 This release will focus on the deposit and notification services
