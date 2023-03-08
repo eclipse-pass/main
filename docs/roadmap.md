@@ -4,7 +4,7 @@ This roadmap defines the primary initiatives of the Eclipse PASS Project, organi
 
 If you are interested in helping to define and/or contribute to this roadmap, please get in touch. We're always happy to welcome new project contributors!
 
-# [Completed Releases](dev/CHANGELOG.md)
+# [Completed Releases](release-notes.md)
 
 # Planned Releases
 
