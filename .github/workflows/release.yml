@@ -72,6 +72,11 @@ jobs:
       RELEASE: ${{ inputs.releaseversion }}
       NEXT: ${{ inputs.nextversion }}
     steps:
+      - name: Output version targets
+        run: |
+          echo "Release: $RELEASE"
+          echo "Dev: $NEXT"
+
       - name: Checkout latest code
         uses: actions/checkout@v3
 
