@@ -1,3 +1,14 @@
+## Release v0.4.0
+### Date: March 30, 2023
+This release introduces a new user service and access control. The release also upgraded ember to the latest LTS Ember 4.
+
+* Updated Ember packages and 3rd party dependencies
+* Fixed styling post Ember 4 upgrade 
+* Introduces User Service Integration 
+* Introduces Access Control 
+* Standardized the entrypoint of dockerfiles to point at an entrypoint.sh file
+
+
 ## Release v0.3.0
 ### Date: February 28, 2023
 This release introduces a new file handling service for dealing with file uploads in PASS. Releases are now largely automated using GitHub workflows.
