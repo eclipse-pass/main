@@ -8,6 +8,17 @@ This release introduces a new user service and access control. The release also 
 * Introduces Access Control 
 * Standardized the entrypoint of dockerfiles to point at an entrypoint.sh file
 
+Tickets Completed: https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.4.0%22
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/0.4.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/0.4.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/0.4.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.4.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.4.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.4.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.4.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.4.0
 
 ## Release v0.3.0
 ### Date: February 28, 2023
