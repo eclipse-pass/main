@@ -6,7 +6,7 @@
 
 Authentication for the user interface occurs through the use of an authentication service provider (SP), [pass-auth](https://github.com/eclipse-pass/pass-auth), written as a node application employing the express framework and acting as a reverse proxy in front of pass-core and other api services.
 
-`pass-auth` is configured to initiate a SAML exchange with a known identity provider (IDP) that supports [Shibboleth](https://shibboleth.atlassian.net/wiki/spaces/CONCEPT/overview). In response to a valid `authn` assertion against an IDP, `pass-auth` expects to receive and validate a Shibboleth SAML assertion against its assertion consumer service (ACS) URL. This assertion is expected to contain the following Shibboleth attributes:
+`pass-auth` is configured to initiate a SAML exchange with a known identity provider (IDP) that supports [Shibboleth](https://shibboleth.atlassian.net/wiki/spaces/CONCEPT/overview). Although `pass-auth` itself is not a Shibboleth service provider specifically, it is a generalized SAML service provider that can handle specific Shibboleth interactions with an IDP. In response to a valid `authn` assertion against an IDP, `pass-auth` expects to receive and validate a Shibboleth SAML assertion against its assertion consumer service (ACS) URL. This assertion is expected to contain the following Shibboleth attributes:
 
 ```
 'urn:oid:2.16.840.1.113730.3.1.241': 'displayName'
@@ -43,7 +43,7 @@ This series of interactions is depicted as follows:
 
 ![pass auth interactions diagram](https://user-images.githubusercontent.com/6305935/229145661-22fdb275-27b9-47c7-ab8a-67c117a23583.png)
 
-### Basic Authentication
+### `pass-core` Authentication
 
 TODO
 
