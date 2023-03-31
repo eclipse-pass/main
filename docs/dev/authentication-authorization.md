@@ -41,7 +41,7 @@ These headers are required by `pass-core` to authenticate and authorize requests
 
 This series of interactions is depicted as follows:
 
-![pass auth interactions diagram](https://user-images.githubusercontent.com/6305935/229136863-dfae51f7-a032-4400-be71-66ad64169163.png)
+![pass auth interactions diagram](https://user-images.githubusercontent.com/6305935/229145661-22fdb275-27b9-47c7-ab8a-67c117a23583.png)
 
 ### Basic Authentication
 
