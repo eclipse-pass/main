@@ -32,7 +32,7 @@ The release notes are generated automatically by GitHub, but references to the r
 
 # Release requirements
 
-Make sure the following software is installed:
+Most of the PASS release process is automated new, but if we need to do parts of the process manually, make sure the following software is installed:
 
 |Name | Version |
 | --- | --- |
