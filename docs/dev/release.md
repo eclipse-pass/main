@@ -14,6 +14,22 @@ The version should be chosen based on those guidelines.
 * Ensure all code commits and PRs intended for the release have been merged.
 * Issue a code freeze statement on the Eclipse PASS slack #general channel to notify all developers that a release is imminent and that no further changes will be considered.
 
+# Process
+
+* Choose a release version that communicates the magnitude of the change.
+* Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
+* For each project in the list, do the release.
+* Update images in pass-docker
+* Test the release
+* Publish release notes
+* Post a message about the release to the [PASS Google Group](https://groups.google.com/g/pass-general)
+  * Release manager will draft the message, allowing the [technical lead](https://github.com/markpatton) and [community manager](https://github.com/kineticsquid) to provide feedback before posting
+  * Message should include at least: an overview of the high level changes in the release, plans for the next release, and a link to the changelog for the release
+
+A new release for each relevant project should be created in the GitHub user interface until automation is put in place.
+
+The release notes are generated automatically by GitHub, but references to the release artifacts should be added manually.
+
 # Release requirements
 
 Make sure the following software is installed:
@@ -26,6 +42,8 @@ Make sure the following software is installed:
 | Docker Compose | 2.x | 
 
 ## Sonatype
+
+This is setup by the `setup-java` action in automations, so manual setup of this file is only necessary if handling a Java release manually.
 
 Developers will need a Sonatype account to release Java projects.
 Maven must be configured to use the account by modifying your ~/.m2/settings.xml. Documentation for Sonatype publishing
@@ -58,22 +76,6 @@ is available here: https://central.sonatype.org/publish/publish-guide/
 ## GitHub Container Registry (GHCR)
 
 Developers will need a GitHub account which is a member of the [eclipse-pass](https://github.com/eclipse-pass) organization. 
-
-# Process
-
-* Choose a release version that communicates the magnitude of the change.
-* Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
-* For each project in the list, do the release.
-* Update images in pass-docker
-* Test the release
-* Publish release notes
-* Post a message about the release to the [PASS Google Group](https://groups.google.com/g/pass-general)
-  * Release manager will draft the message, allowing the technical lead to provide feedback before posting
-  * Message should include at least: an overview of the high level changes in the release, plans for the next release, and a link to the changelog for the release
-
-A new release for each relevant project should be created in the GitHub user interface until automation is put in place.
-
-The release notes are generated automatically by GitHub, but references to the release artifacts should be added manually.
 
 ### Release sequence
 
