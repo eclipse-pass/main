@@ -14,7 +14,8 @@ jobs:
 
       - name: DRYRUN -- Release main POM
         run: |
-          mvn -B -U -V -ntp release:prepare -DdryRun=true -DreleaseVersion=0.001 -Dtag=0.001 -DdevelopmentVersion=0.002 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+          mvn -B -U -V -ntp release:prepare -DreleaseVersion=0.0 -Dtag=0.0 -DdevelopmentVersion=0.0 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+          mvn -B -U -V -ntp release:perform -P release -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAMEX }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORDX }}
