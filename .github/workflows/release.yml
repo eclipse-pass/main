@@ -12,6 +12,11 @@ jobs:
           echo "Using OSSRH_USERNAME ${{ secrets.OSSRH_USERNAME }}"
           echo "Using GH_USER ${{ secrets.GH_USER }}"
 
+      - name: Config git user
+        run: |
+          git config user.name ${{ github.actor }}
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
       - name: DRYRUN -- Release main POM
         run: |
           mvn -B -U -V -ntp release:prepare -DreleaseVersion=0.0 -Dtag=0.0 -DdevelopmentVersion=0.0 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
