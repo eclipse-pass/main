@@ -89,8 +89,11 @@ The Java projects must follow a strict sequence, following its dependency hierar
    * [`pass-acceptance-testing`](https://github.com/eclipse-pass/pass-acceptance-testing)
 4. [`pass-docker`](https://github.com/eclipse-pass/pass-docker)
 
+These projects have GitHub workflow automations in place to perform releases that need to be triggered manually. See more detailed [release steps with automations](./release-steps-with-automations.md)
 
 ## Java release
+The release automations will follow these steps. You will only need to follow this process if the automations fail.
+
 The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image. The release process is determined by the decision made to have versions for all Java artifacts be the same for a release. The parent pom in `main` sets the version to be inherited by all its children. This project therefore needs to be released first, as all other projects need to reference it. After this is released, other projects are released in an order which guarantees that all PASS dependencies for them have already been released.
 
 The process itself can be described as follows: release `main`, then use the maven release and versions plugins to perform the process. For convenience we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
