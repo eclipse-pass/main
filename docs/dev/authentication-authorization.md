@@ -21,7 +21,7 @@ Authentication for the user interface occurs through the use of an authenticatio
 'urn:oid:0.9.2342.19200300.100.1.1': 'uniqueIdType'
 ```
 
-These Shibboleth attributes are used to locate a user in `pass-core` and set up a user object on the session. Initially, `pass-auth` will use the `eppn` attribute to locate a user in `pass-core` via a request that uses basic authentication. On all subsequent requests to `pass-core`, `pass-auth` will add the following headers using the Shibboleth attributes stored on a session:
+These Shibboleth attributes are used to locate a user in `pass-core` and set up a user object on the session. Initially, `pass-auth` will use these attributes to build shibboleth headers that allow the user service in `pass-core` to locate a user. Additionally, on all subsequent requests to `pass-core`, `pass-auth` will add the following headers using the Shibboleth attributes stored on a session:
 
 ```
 'Displayname'
