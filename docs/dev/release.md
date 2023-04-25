@@ -89,7 +89,7 @@ The Java projects must follow a strict sequence, following its dependency hierar
    * [`pass-acceptance-testing`](https://github.com/eclipse-pass/pass-acceptance-testing)
 4. [`pass-docker`](https://github.com/eclipse-pass/pass-docker)
 
-These projects have GitHub workflow automations in place to perform releases that need to be triggered manually. See more detailed [release steps with automations](./release-steps-with-automations.md)
+These projects have GitHub workflow automations in place to perform releases that need to be triggered manually. See more detailed [release steps with automations](/docs/dev/release-steps-with-automations.md)
 
 ## Java release
 The release automations will follow these steps. You will only need to follow this process if the automations fail.

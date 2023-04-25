@@ -47,7 +47,7 @@ This must be released last because it relies on some Docker images that will be 
 
 You will have to manually create a GitHub release through the GitHub web interface to complete the release of each of these components. This can generally be done any time after the release automation completes successfully, since the release will be made against a tag created by the automation.
 
-![Code release section](../assets/github/releases/code-release-section.png)
+![Code release section](/docs/assets/github/releases/code-release-section.png)
 
 * Navigate to the Releases section of the repository
 * Click the "Draft new release" button near the top of the page
@@ -68,4 +68,4 @@ Take [`eclipse-pass/main`](https://github.com/eclipse-pass/main) as an example.
 
 It is recommended that you monitor the automation after triggering it to make sure it completes successfully before moving on to release the next component.
 
-![Release page screenshot](../assets/github/releases/main-release-page.png)
+![Release page screenshot](/docs/assets/github/releases/main-release-page.png)
