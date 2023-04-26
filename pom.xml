@@ -36,6 +36,12 @@
       <organization>The Sheridan Libraries, Johns Hopkins University</organization>
       <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
     </developer>
+    <developer>
+      <name>Tim Sanders</name>
+      <email>tsande16@jhu.edu</email>
+      <organization>The Sheridan Libraries, Johns Hopkins University</organization>
+      <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
+    </developer>
   </developers>
 
   <scm>

@@ -17,6 +17,7 @@ The version should be chosen based on those guidelines.
 # Process
 
 * Choose a release version that communicates the magnitude of the change.
+* Create a release checklist from the [Release Manager Actions Checklist Template](../release/release-actions-template.md). Version the release as `release-actions-X.X.X.md`. Update the template with any new steps made during the release process.
 * Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
 * For each project in the list, do the release.
 * Update images in pass-docker
