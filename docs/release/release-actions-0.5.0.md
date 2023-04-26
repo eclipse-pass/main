@@ -1,7 +1,7 @@
 # Release Manager Actions Checklist 0.5.0
 
 ## Release Process Overview
-This is the full detailed release process, including the steps that are performed by the GitHub automation: [Release](/docs/dev/release.md)
+This is the full detailed release process, including the steps that are performed by the GitHub automation: [Release](../dev/release.md)
 
 ## Pre-release
 
@@ -10,9 +10,9 @@ This is the full detailed release process, including the steps that are performe
 - [ ] Issue a code freeze statement on the Eclipse PASS slack #general channel to notify all developers that a release is imminent.
 
 ## Release Java Projects
-[Release Steps with Automations](/docs/dev/release-steps-with-automations.md)
+[Release Steps with Automations](../dev/release-steps-with-automations.md)
 
-Release Workflow Example: [Triggering a GitHub workflow](/docs/dev/release-steps-with-automations.md#triggering-a-gitHub-workflow)
+Release Workflow Example: [Triggering a GitHub workflow](../dev/release-steps-with-automations.md#triggering-a-gitHub-workflow)
 
 - [ ] Release Main - [Main Release workflow](https://github.com/eclipse-pass/main/actions/workflows/release.yml)
 - [ ] Main GitHub Release Page - Perform after the Main release is complete - [Main GitHub Release Page](https://github.com/eclipse-pass/main/releases)
@@ -37,6 +37,7 @@ Release Workflow Example: [Triggering a GitHub workflow](/docs/dev/release-steps
 ## Post-release
 
 - [ ] Test the release by using the newly updated pass-docker to run the release locally.
-- [ ] Write release notes in the [Release Notes doc](/docs/release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
+- [ ] Write release notes in the [Release Notes doc](../release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
 - [ ] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
-- [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](/docs/dev/release.md#process)
+- [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
+- [ ] Update template if any steps were missed or if any new tasks were added. Also make note of these new steps in the release-actions-X.X.X.md file.
