@@ -2,7 +2,6 @@
 ### Date: April 27, 2023
 This release introduces the Metadata Schema Service and the Policy Service API. Release Automations have been expanded to include Pass-Acceptance-Testing and Pass-Docker.
 
-* Allow manuscript download endpoint to handle encoded URLs
 * More release automations added to include Pass-Acceptance-Testing and Pass-Docker
 * Introduces Metadata Schema Service Integration
 * Introduces Policy Service API
