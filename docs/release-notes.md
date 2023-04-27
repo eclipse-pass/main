@@ -1,3 +1,24 @@
+## Release v0.5.0
+### Date: April 27, 2023
+This release introduces the Metadata Schema Service and the Policy Service API. Release Automations have been expanded to include Pass-Acceptance-Testing and Pass-Docker.
+
+* Allow manuscript download endpoint to handle encoded URLs
+* More release automations added to include Pass-Acceptance-Testing and Pass-Docker
+* Introduces Metadata Schema Service Integration
+* Introduces Policy Service API
+
+Tickets Completed: https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.5.0%22
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/0.5.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/0.5.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/0.5.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.5.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.5.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.5.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.5.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.5.0
+
 ## Release v0.4.0
 ### Date: March 30, 2023
 This release introduces a new user service and access control. The release also upgraded ember to the latest LTS Ember 4.

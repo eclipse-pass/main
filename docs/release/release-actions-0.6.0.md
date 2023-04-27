@@ -1,4 +1,4 @@
-# Release Manager Actions Checklist Template
+# Release Manager Actions Checklist 0.6.0
 
 ## Release Process Overview
 This is the full detailed release process, including the steps that are performed by the GitHub automation: [Release](../dev/release.md)
