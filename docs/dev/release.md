@@ -12,7 +12,7 @@ The version should be chosen based on those guidelines.
 
 * Assign a Release Manager, the person who will be responsible for the release process. The Release Manager must be a PASS committer.
 * Ensure all code commits and PRs intended for the release have been merged.
-* Issue a code freeze statement on the Eclipse PASS slack #general channel to notify all developers that a release is imminent and that no further changes will be considered.
+* Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent and that no further changes will be considered.
 
 # Process
 
