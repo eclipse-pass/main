@@ -1,6 +1,6 @@
 ## Release v0.5.0
 ### Date: April 27, 2023
-This release introduces the Metadata Schema Service and the Policy Service API. Release Automations have been expanded to include Pass-Acceptance-Testing and Pass-Docker.
+This release introduces the Metadata Schema Service and the Policy Service API. Release Automation has been expanded to include [pass-acceptance-testing](https://github.com/eclipse-pass/pass-acceptance-testing) and [pass-docker](https://github.com/eclipse-pass/pass-docker).
 
 * More release automations added to include Pass-Acceptance-Testing and Pass-Docker
 * Introduces Metadata Schema Service Integration
