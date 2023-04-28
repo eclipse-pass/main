@@ -7,7 +7,7 @@ This is the full detailed release process, including the steps that are performe
 
 - [ ] Identify the version to be utilized for the release.
 - [ ] Ensure all code commits and PRs intended for the release have been merged.
-- [ ] Issue a code freeze statement on the Eclipse PASS slack #general channel to notify all developers that a release is imminent.
+- [ ] Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent.
 
 ## Release Java Projects
 [Release Steps with Automations](../dev/release-steps-with-automations.md)
@@ -48,8 +48,10 @@ Note: This must be released last because it relies on some Docker images that wi
 ## Post-release
 
 - [ ] Test the release by using the newly updated pass-docker to run the release locally.
-- [ ] Create label for release. Add labels to Issues in Eclipse-Pass/Main (Kanban Board) that are associated with the release.
+- [ ] Create label for release. Add labels to Issues in Eclipse-Pass/Main (Kanban Board) that are associated with the release. [Eclipse Pass KanBan Board](https://github.com/orgs/eclipse-pass/projects/4/views/2)
 - [ ] Write release notes in the [Release Notes doc](../release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
 - [ ] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
 - [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
 - [ ] Update template if any steps were missed or if any new tasks were added. Also make note of these new steps in the release-actions-X.X.X.md file.
+- [ ] Update [Pass Demo](https://demo.eclipse-pass.org) to new release.
+- [ ] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
