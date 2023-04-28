@@ -1,10 +1,9 @@
 ## Release v0.5.0
 ### Date: April 27, 2023
-This release introduces the Metadata Schema Service and the Policy Service API. Release Automation has been expanded to include [pass-acceptance-testing](https://github.com/eclipse-pass/pass-acceptance-testing) and [pass-docker](https://github.com/eclipse-pass/pass-docker).
-
-* More release automations added to include Pass-Acceptance-Testing and Pass-Docker
-* Introduces Metadata Schema Service Integration
-* Introduces Policy Service API
+This release introduces the Metadata Schema Service and the Policy Service API. The Metadata Schema Service provides 
+JSON schemas intended to describe PASS submission metadata. The Policy Service API determines the policies applicable to a given Submission, 
+as well as the repositories that a Submission must be deposited into. Release Automation has been expanded to include [pass-acceptance-testing](https://github.com/eclipse-pass/pass-acceptance-testing) 
+and [pass-docker](https://github.com/eclipse-pass/pass-docker).
 
 Tickets Completed: https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.5.0%22
 
