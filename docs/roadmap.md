@@ -8,14 +8,9 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # Planned Releases
 
-## 0.5.0
-This release will finish the REST API and connect the UI to the completed API
-* Add token support to the user service so submission work can be delegated
-* Finish the policy and metadata services
-* Remove mocking of the REST API from the user interface
-
 ## 0.6.0
 This release will focus on tools to load data into PASS.
+* Finish removal of the mocked REST API from the user interface
 * Data loaders ported to utilize the new REST API and backend framework
   * Grant loader - loads grant data from the institution
   * Journal loader - loads Journal information
