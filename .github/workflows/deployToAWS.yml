@@ -1,3 +1,14 @@
 name: "Publish to SNS Topic: Triggers Deployment to AWS"
 
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment'
+        required: true
 
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'Publish to SNS  Topic'
