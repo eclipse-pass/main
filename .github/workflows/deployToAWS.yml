@@ -11,4 +11,20 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - run: echo 'Publish to SNS  Topic'
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Python Packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install boto3
+
+      - name: Run Python SNS Publish Script
+        env:
+          TOPIC_ARN: ${{ secrets.AWS_TOPIC_ARN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: python tools/aws_sns_publish_topic.py
+        
