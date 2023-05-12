@@ -2,4 +2,21 @@ import json
 import boto3
 import os
 
-print("Python Script Called Successfully from GitHub Action")
+ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
+SECRET_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+TOPIC_ARN = os.getenv('AWS_TOPIC_ARN')
+DEPLOYMENT_ENVIRONMENT = os.getenv('DEPLOYMENT_ENVIRONMENT')
+REGION=os.getenv('AWS_REGION')
+
+MESSAGE = {"action": "DeployStart", "commitRef": "main", "deployEnv": DEPLOYMENT_ENVIRONMENT}
+
+client = boto3.client('sns',
+    region_name=REGION,
+    aws_access_key_id=ACCESS_KEY,
+    aws_secret_access_key=SECRET_KEY
+    )
+response = client.publish(
+    TopicArn=TOPIC_ARN,
+    Message=json.dumps({'default': json.dumps(MESSAGE)}),
+    MessageStructure='json'
+)

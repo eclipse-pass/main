@@ -3,7 +3,7 @@ name: "Publish to SNS Topic: Triggers Deployment to AWS"
 on:
   workflow_dispatch:
     inputs:
-      environment:
+      DEPLOYMENT_ENVIRONMENT:
         description: 'Environment'
         required: true
 
@@ -11,20 +11,22 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
       - name: Setup python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-
       - name: Install Python Packages
         run: |
           python -m pip install --upgrade pip
           pip install boto3
-
       - name: Run Python SNS Publish Script
+        working-directory: ${{ github.workspace }}
         env:
-          TOPIC_ARN: ${{ secrets.AWS_TOPIC_ARN }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_TOPIC_ARN: ${{ secrets.AWS_TOPIC_ARN }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DEPLOYMENT_ENVIRONMENT: ${{ inputs.DEPLOYMENT_ENVIRONMENT }}
         run: python tools/aws_sns_publish_topic.py
-        
