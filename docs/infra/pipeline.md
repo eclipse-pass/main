@@ -246,7 +246,7 @@ The following repositories have been forked from others
 | Element | Current Version | Latest Version | Notes
 | --- | --- | --- | --- |
 | Go | 1.12 | [1.18](https://go.dev/dl/) | Programming language
-| Java | 11 | [22](https://www.java.com/releases/) | Programming language
+| Java | 17 | [22](https://www.java.com/releases/) | Programming language
 | Fedora | 4.7.5 | [6.1.1](https://github.com/fcrepo/fcrepo/releases) | Document store (database) for PASS
 | Postgres | 13.3 | [14.2](https://www.postgresql.org/docs/release/) | Underlying storage of Fedora
 | Node | 14.x | [18.x](https://nodejs.org/en/about/releases/) | JavaScript runtime, unconfirmed on desired version

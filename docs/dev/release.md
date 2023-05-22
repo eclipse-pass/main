@@ -36,8 +36,8 @@ The release notes are generated automatically by GitHub, but references to the r
 Most of the PASS release process is automated new, but if we need to do parts of the process manually, make sure the following software is installed:
 
 |Name | Version |
-| --- | --- |
-| Java | 11 |
+| --- |----|
+| Java | 17 |
 | Maven | 3.8.x |
 | Docker | 20.10.x |
 | Docker Compose | 2.x | 
