@@ -43,10 +43,65 @@ This series of interactions is depicted as follows:
 
 ![pass auth interactions diagram](https://user-images.githubusercontent.com/6305935/234353077-519a6987-96bc-44df-80e1-ee06920bcb40.png)
 
-### `pass-core` Authentication
+### REST API Authentication
 
-TODO
+Every request to the [REST API](https://github.com/eclipse-pass/pass-core) must be authenticated. If it is not authenticated, it is denied.
+
+Requests to the API come from two types of clients, backend services and users. Requests from users must have already been authenticated with Shibboleth and have the headers specified above. If a request contains Shibboleth headers, it is considered trusted, authentication succeeds, it is associated with a user, and given the SUBMITTER role. If the user does not exist, it is created. If the user does exist, it is updated to reflect the information in the headers. If the request does not contain the Shibboleth headers, it undergoes HTTP basic authentication. There is one HTTP basic user defined with the BACKEND role for the backend services.
+
+Mapping from Shibboleth headers to PASS users:
+  * displayName: Displayname header
+  * email: Mail header
+  * firstName: Givenname header
+  * lastName: Sn header
+  * username: Eppn header
+  * affiliations:  DOMAIN, all values after splitting affiliation header on `;`
+  * locatorIds: UNIQUE ID, INSTITUTIONAL_ID, EMPLOYEE_ID
+  * role: SUBMITTER
+
+The DOMAIN is the value of the Eppn header after `@`.
+The UNIQUE_ID is `DOMAIN:unique-id:` joined to the value of the unique id header before `@`.
+The INSTITUTIONAL_ID is `DOMAIN:eppn` joined to the value of the Eppn header before the `@`.
+The EMOLOYEE_ID is `DOMAIN:employeeid` joined to the value of the Employeenumber header.
+
+The locatorIds are used to find an existing user in the system. If any of the locatorIds match an existing user, the user is considered to match.
+
+### Example mapping
+
+Request headers:
+  * Eppn: sallysubmitter@johnshopkins.edu
+  * Displayname: Sally M. Submitter
+  * Mail: sally232@jhu.edu
+  * Givenname: Sally
+  * Sn: Submitter
+  * Affiliation: FACULTY@johnshopkins.edu
+  * Employeenumber: 02342342
+  * unique-id: sms2323@johnshopkins.edu
+
+Resulting User:
+  * affiliation: FACULTY@johnshopkins.edu, johnshopkins.edu
+  * displayName: Sally M. Submitter
+  * email: sally232@jhu.edu
+  * firstName: Sally
+  * lastName: Submitter
+  * locatorIds: johnshopkins.edu:unique-id:sms2323, johnshopkins.edu:eppn:sallysubmitter, johnshopkins.edu:employeeid:02342342
+  * roles: SUBMITTER
+  * username: sallysubmitter@johnshopkins.edu
 
 ## Authorization
 
-TODO
+Requests either have a SUBMITTER or BACKEND role. The BACKEND can do everything.
+The SUBMITTER is restricted to creating and modifying certain objects in the data model.
+The SUBMITTER has full access to all other services.
+
+Object permissions:
+
+| Type    | Create  | Read | Update  | Delete  |
+| ------- | ------- | ---- | ------- | ------- |
+| Submission | BACKEND or SUBMITTER | any | BACKEND or owns submission | BACKEND |
+| SubmissionEvent | BACKEND or owns submission | any | BACKEND or owns submission | BACKEND |
+| File | BACKEND or owns submission | any | BACKEND  or owns submission | BACKEND |
+| Publication | BACKEND or SUBMITTER | any | BACKEND or SUBMITTER | BACKEND |
+| *       | BACKEND | any  | BACKEND | BACKEND |
+
+The permissions are all role based with the exception of "owns submission". By "owns submission" what is meant is that the user is the submitter or a preparer on a submission associated with the object. A submitter is the target of the submitter relationship on a Submission. A preparer is the target of the preparers relationship on a Submission. SubmissionEvent and File are associated with a submission through a submission relationship. The intent is to make sure submitters can only modify submissions which they have created or are explicitly allowed to help on.
