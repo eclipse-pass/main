@@ -6,27 +6,18 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # [Completed Releases](release-notes.md)
 
-# Planned Releases
-
-## 0.6.0
-This release will focus on tools to load data into PASS.
-* Finish removal of the mocked REST API from the user interface
-* Data loaders ported to utilize the new REST API and backend framework
-  * Grant loader - loads grant data from the institution
-  * Journal loader - loads Journal information
-  * Nihms loader - loads data from the National Institute of Health Manuscript Submission System
-* PASS data requirements for insitutions documented
-
 ## 0.7.0
 This release will focus on the deposit and notification services
 * Notification service ported to new framework
 * Deposit service ported to new framework
+* Deploy a staging environment which runs the data loaders
+* Test staging environment interactions with IDP
 
 ## 1.0.0
 This release aims to be a fully functional system.
+* PASS data requirements for insitutions documented
 * Address technical debt
 * Dependency updates - update project dependencies and introduce automated convergence checks
-* Move to Java 17
 * Archive old repositories
 
 ## 1.1.0
