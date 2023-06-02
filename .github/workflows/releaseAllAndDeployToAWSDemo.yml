@@ -1,0 +1,57 @@
+name: "Publish: Manual Full Release OR Automatic Snapshot for All Eclipse Projects"
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseversion:
+        description: 'Release version'
+        required: true
+      nextversion:
+        description: 'Next dev version'
+        required: true
+      runtests:
+        description: 'Run acceptance tests against release version before pushing images?'
+        type: boolean
+   
+jobs:
+  run-main-release:
+    uses: eclipse-pass/main/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+  run-pass-core-release:
+    uses: eclipse-pass/pass-core/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+  run-pass-support-release:
+    uses: eclipse-pass/pass-support/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+  run-pass-ui-release:
+    uses: eclipse-pass/pass-ui/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+  run-pass-auth-release:
+    uses: eclipse-pass/pass-auth/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+  run-pass-acceptance-testing-release:
+    uses: eclipse-pass/pass-acceptance-testing/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+  run-pass-docker-release:
+    uses: eclipse-pass/pass-docker/.github/workflows/release.yml@main
+    with:
+      releaseversion: ${{ inputs.releaseversion }}
+      nextversion: ${{ inputs.nextversion }}
+      runtests: ${{ inputs.runtests }}
+  run-deploy-release-to-aws-demo:
+    uses: eclipse-pass/main/.github/workflows/deployToAWS.yml@main
+    with:
+      DEPLOYMENT_ENVIRONMENT: demo
+
