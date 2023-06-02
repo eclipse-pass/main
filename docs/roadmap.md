@@ -15,7 +15,7 @@ This release will focus on the deposit and notification services
 
 ## 1.0.0
 This release aims to be a fully functional system.
-* Document PASS data requirements
+* Manual testing with stakeholders
 * Address technical debt
 * Dependency updates - update project dependencies and introduce automated convergence checks
 * Archive old repositories
