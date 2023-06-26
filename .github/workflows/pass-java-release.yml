@@ -39,9 +39,9 @@ on:
         required: true
       OSSRH_PASSWORD:
         required: true
-      GITHUB_TOKEN:
-        description: Token needed for pushing commits to various PASS Java repositories
-        required: true
+      # GH_PAT:
+      #   description: Token needed for pushing commits to various PASS Java repositories
+      #   required: true
 
 env:
   RELEASE: ${{ inputs.releaseversion }}
