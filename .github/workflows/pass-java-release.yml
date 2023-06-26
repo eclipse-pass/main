@@ -1,4 +1,19 @@
-name: PASS Java release
+name: Perform release for PASS Java projects
+
+# Java project releases are grouped together in this workflow because of their dependency
+# hierarchy. Building the projects together in the same workflow (on the same runner)
+# allows local dependency resolution, avoiding having to wait for syncing with Maven
+# Central.
+# 
+# We avoid having to duplicate secrets with a single workflow as well.
+
+# TODO: How are we going to get the correct credentials to push to other Java repos?
+# For this repo, we can easily use secrets.GITHUB_TOKEN, provided automatically to the
+# workflow. This token is assotiated with the user that manually triggers the workflow,
+# but is scope-limited to only the repository that hosts the workflow. Manipulation
+# other repositories will need credentials to be provided (a username/PAT).
+# Should we include documentation for the release manager to create a short-lived PAT 
+# then update the TOKEN secret?
 
 on:
   workflow_call:
@@ -25,6 +40,7 @@ on:
       OSSRH_PASSWORD:
         required: true
       GITHUB_TOKEN:
+        description: Token needed for pushing commits to various PASS Java repositories
         required: true
 
 env:
@@ -36,15 +52,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with: ${{ inputs.repository }}
-
       # Setup
       - name: Config git user
         run: |
-          git config user.name ${{ github.actor }}
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Setup Java & Maven
         uses: actions/setup-java@v3
@@ -57,7 +69,163 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      # Start work
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # =============================================================================
+      # main
+      # =============================================================================
+      - name: Checkout 'main'
+        uses: actions/checkout@v3
+        with:
+          repository: eclipse-pass/main
+          path: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish release
+        run: | # Newlines for readability
+          mvn -B -U -V -ntp release:prepare \
+            -DreleaseVersion=$RELEASE \
+            -Dtag=$RELEASE \
+            -DdevelopmentVersion=$NEXT \
+            -DautoVersionSubmodules=true 
+          mvn -B -U -V -ntp release:perform -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Build and publish new dev version
+        run: mvn -B -U -V -ntp deploy -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Push release plugin commits
+        if: github.ref_type == 'branch' && github.ref_protected == false
+        run: git push origin ${{ github.ref_name }}
+
+      - name: Push new release tag GH
+        run: git push origin --tags
+
+      # =============================================================================
+      # pass-core
+      # =============================================================================
+      - name: Checkout pass-core
+        uses: actions/checkout@v3
+        with:
+          repository: eclipse-pass/pass-core
+          path: pass-core
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       # Version:update-parent will grab the latest specified release (non-snapshot)
       - name: Bump version to release
         run: mvn -B -U -V -ntp versions:update-parent -DparentVersion=$RELEASE
+
+      - name: Commit release version bump
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: pom.xml **/pom.xml
+          message: "Update parent version to release"
+
+      - name: Publish release
+        run: |
+          mvn -B -U -V -ntp release:prepare \
+            -DreleaseVersion=$RELEASE \
+            -Dtag=$RELEASE \
+            -DdevelopmentVersion=$NEXT \
+            -DautoVersionSubmodules=true 
+          mvn -B -U -V -ntp release:perform -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      
+      # Project & submodule POMs already updated to correct dev version
+      # But reference to parent POM (eclipse-pass-parent) needs to be updated
+      - name: Update parent POM to new dev version
+        run: mvn -B -U -V -ntp versions:update-parent -DparentVersion=$NEXT -DallowSnapshots=true
+
+      - name: Commit snapshot version bump and push commits
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: pom.xml **/pom.xml
+          message: "Update parent version to next development version"
+          push: true
+
+      # Will produce a new Docker image for the new dev version
+      - name: Build and publish new dev version
+        run: mvn -B -U -V -ntp deploy -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Push new release tag GH
+        run: git push origin --tags
+
+      - name: Push Docker image to GHCR
+        run: |
+          docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT
+
+      # =============================================================================
+      # pass-support
+      # =============================================================================
+      - name: Checkout pass-support
+        uses: actions/checkout@v3
+        with:
+          repository: eclipse-pass/pass-support
+          path: pass-support
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Version:update-parent will grab the latest specified release (non-snapshot)
+      - name: Bump version to release
+        run: mvn -B -U -V -ntp versions:update-parent -DparentVersion=$RELEASE
+
+      - name: Commit release version bump
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: pom.xml **/pom.xml
+          message: "Update parent version to release"
+
+      - name: Publish release
+        run: |
+          mvn -B -U -V -ntp release:prepare \
+            -DreleaseVersion=$RELEASE \
+            -Dtag=$RELEASE \
+            -DdevelopmentVersion=$NEXT \
+            -DautoVersionSubmodules=true 
+          mvn -B -U -V -ntp release:perform -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      
+      # Project & submodule POMs already updated to correct dev version
+      # But reference to parent POM (eclipse-pass-parent) needs to be updated
+      - name: Update parent POM to new dev version
+        run: mvn -B -U -V -ntp versions:update-parent -DparentVersion=$NEXT -DallowSnapshots=true
+
+      - name: Commit snapshot version bump and push commits
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: pom.xml **/pom.xml
+          message: "Update parent version to next development version"
+          push: true
+
+      # Will produce a new Docker image for the new dev version
+      - name: Build and publish new dev version
+        run: mvn -B -U -V -ntp deploy -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Push new release tag GH
+        run: git push origin --tags
