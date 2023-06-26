@@ -1,10 +1,63 @@
-name: Placeholder for consolidated Java release
+name: PASS Java release
 
 on:
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      repository:
+        description: 'org/repo name of the repository to release (e.g. eclipse-pass/pass-core)'
+        type: string
+        required: true
+      releaseversion:
+        description: 'Release version (e.g. 0.7.0)'
+        type: string
+        required: true
+      nextversion:
+        description: 'Next dev version (e.g. 0.8.0-SNAPSHOT)'
+        type: string
+        required: true
+    secrets:
+      MAVEN_GPG_KEY:
+        required: true
+      MAVEN_GPG_PASSPHRASE:
+        required: true
+      OSSRH_USERNAME:
+        required: true
+      OSSRH_PASSWORD:
+        required: true
+      GITHUB_TOKEN:
+        required: true
+
+env:
+  RELEASE: ${{ inputs.releaseversion }}
+  NEXT: ${{ inputs.nextversion }}
 
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "Hello Moo!"
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with: ${{ inputs.repository }}
+
+      # Setup
+      - name: Config git user
+        run: |
+          git config user.name ${{ github.actor }}
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-pasword: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      # Start work
+      # Version:update-parent will grab the latest specified release (non-snapshot)
+      - name: Bump version to release
+        run: mvn -B -U -V -ntp versions:update-parent -DparentVersion=$RELEASE

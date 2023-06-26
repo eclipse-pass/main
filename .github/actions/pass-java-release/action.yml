@@ -1,0 +1,12 @@
+name: "Release PASS Java project"
+description: >
+  Release a PASS Java project. This will tag and release the "release" version 
+  then release the next development (-SNAPSHOT) version. Assumes that the environment 
+  has already been setup
+
+inputs:
+
+runs:
+  using: composite
+  steps:
+    
