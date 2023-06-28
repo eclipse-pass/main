@@ -18,10 +18,6 @@ name: Perform release for PASS Java projects
 on:
   workflow_call:
     inputs:
-      repository:
-        description: 'org/repo name of the repository to release (e.g. eclipse-pass/pass-core)'
-        type: string
-        required: true
       releaseversion:
         description: 'Release version (e.g. 0.7.0)'
         type: string
@@ -42,6 +38,10 @@ on:
       # GH_PAT:
       #   description: Token needed for pushing commits to various PASS Java repositories
       #   required: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   RELEASE: ${{ inputs.releaseversion }}

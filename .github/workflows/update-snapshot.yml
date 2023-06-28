@@ -1,4 +1,4 @@
-name: "Publish: manual full release OR automatic snapshot"
+name: "Publish: automatic snapshot"
 
 on:
   push:
