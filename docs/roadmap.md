@@ -6,10 +6,9 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # [Completed Releases](release-notes.md)
 
-## 0.7.0
-This release will focus on the deposit and notification services
-* Notification service ported to new framework
-* Deposit service ported to new framework
+## 0.8.0
+This release will focus on deposit service and staging environment
+* Finish porting deposit service to new framework
 * Deploy a staging environment which runs the data loaders
 * Test staging environment interactions with IDP
 
