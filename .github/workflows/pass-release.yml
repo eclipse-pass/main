@@ -66,3 +66,9 @@ jobs:
     uses: .github/workflows/deployToAWS.yml@main
     with:
       DEPLOYMENT_ENVIRONMENT: demo
+      targetCommitRef: ${{ inputs.releaseversion }}
+    secrets:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_TOPIC_ARN: ${{ secrets.AWS_TOPIC_ARN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
