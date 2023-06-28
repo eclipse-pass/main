@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       releaseversion:
-        description: 'Release version'
+        description: 'Release version (e.g. 0.1.0)'
         required: true
       nextversion:
-        description: 'Next dev version'
+        description: 'Next dev version (e.g. 0.2.0-SNAPSHOT)'
         required: true
       runtests:
         description: 'Run acceptance tests against release version before pushing images?'
