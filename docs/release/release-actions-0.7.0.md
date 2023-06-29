@@ -52,7 +52,7 @@ Note: This must be released last because it relies on some Docker images that wi
 - [X] Create label for release. Add labels to Issues in Eclipse-Pass/Main (Kanban Board) that are associated with the release. [Eclipse Pass KanBan Board](https://github.com/orgs/eclipse-pass/projects/4/views/2)
 - [X] Write release notes in the [Release Notes doc](../release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
 - [X] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
-- [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
+- [X] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
 - [X] Update template if any steps were missed or if any new tasks were added. Also make note of these new steps in the release-actions-X.X.X.md file.
 - [X] Update [Pass Demo](https://demo.eclipse-pass.org) to new release - [Publish to SNS Topic action](https://github.com/eclipse-pass/main/actions/workflows/deployToAWS.yml) using `Environment: demo`
-- [ ] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
+- [X] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
