@@ -49,7 +49,7 @@ Note: This must be released last because it relies on some Docker images that wi
 ## Post-release
 
 - [ ] Test the release by using the newly updated pass-docker to run the release locally.
-- [ ] Create label for release. Add labels to Issues in Eclipse-Pass/Main (Kanban Board) that are associated with the release. [Eclipse Pass KanBan Board](https://github.com/orgs/eclipse-pass/projects/4/views/2)
+- [ ] Create label for release. Add labels to Issues in Eclipse-Pass/Main (Kanban Board) that are associated with the release. [Github Release Label and Ticket Update](../dev/release.md#update-release-notes)
 - [ ] Write release notes in the [Release Notes doc](../release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
 - [ ] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
 - [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
