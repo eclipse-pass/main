@@ -1,3 +1,20 @@
+## Release v0.7.0
+### Date: June 29, 2023
+
+This release introduces updated java implementations of the pass-nihms-loader and pass-notification-services projects. This release also introduces support for sending submission and deposit JMS message from pass-core, adds access control to the file-service, removes pass-ui-public from pass-docker, and cleans up the SAML configuration in pass-auth.
+
+Tickets Completed: https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.7.0%22
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/0.7.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/0.7.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/0.7.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.7.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.7.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.7.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.7.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.7.0
+
 ## Release v0.6.0
 ### Date: May 31, 2023
 
