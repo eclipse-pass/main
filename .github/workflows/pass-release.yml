@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   run-java-release:
-    uses: ./github/workflows/pass-java-release.yml # Should version these workflows
+    uses: ./github/workflows/pass-java-release.yml@main # Should version these workflows
     with:
       releaseversion: ${{ inputs.releaseversion }}
       nextversion: ${{ inputs.nextversion }}
