@@ -1,0 +1,10 @@
+name: Placeholder for consolidated Java release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello Moo!"
