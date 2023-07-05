@@ -20,7 +20,7 @@ concurrency:
 
 jobs:
   run-java-release:
-    uses: ./.github/workflows/pass-java-release.yml@main # Should version these workflows
+    uses: ./.github/workflows/pass-java-release.yml # Should version these workflows
     with:
       releaseversion: ${{ inputs.releaseversion }}
       nextversion: ${{ inputs.nextversion }}
@@ -63,7 +63,7 @@ jobs:
   run-deploy-release-to-aws-demo:
     needs: 
       - 'run-pass-docker-release'
-    uses: ./.github/workflows/deployToAWS.yml@main
+    uses: ./.github/workflows/deployToAWS.yml
     with:
       DEPLOYMENT_ENVIRONMENT: demo
       targetCommitRef: ${{ inputs.releaseversion }}
