@@ -59,3 +59,4 @@ As a user, I can
 * Enter metadata required by all target repositories during the submission process
 * Add the manuscript file and zero or more supporting files to the submission during the submission process
 * See the submissions status after I complete the submission
+* See identifiers assigned to a successful submission by a repository.
