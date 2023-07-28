@@ -1,3 +1,20 @@
+## Release v0.8.0
+### Date: July 28, 2023
+
+This release introduces updated Java implementations of pass-deposit-services. All of the major functionality of PASS has now been ported to the new framework. In addition more testing was added to the pass-core file service and support for the file service was added to pass-data-client.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/11
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/0.8.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/0.8.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/0.8.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.8.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.8.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.8.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.8.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.8.0
+
 ## Release v0.7.0
 ### Date: June 29, 2023
 
