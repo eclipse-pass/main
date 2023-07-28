@@ -271,8 +271,8 @@ Manual testing can be done using the newly updated pass-docker to run the releas
 
 ### Update release notes
 
-1. Create a new label in GitHub issues by going to https://github.com/eclipse-pass/main/labels, selecting "New Label" and naming it "Release X.X.X" (using the new release number).
+1. Ensure that there is a milestone for the release
 2. Get a list of all issues that are closed and in the eclipse-pass project by going to: https://github.com/eclipse-pass/main/issues?page=1&q=is%3Aissue+is%3Aclosed+project%3Aeclipse-pass%2F4
-3. Apply the new label by selecting all, selecting the "Label" dropdown, and choosing the release label. If there are multiple pages of tickets, you'll need to do this on each page.
+3. Check that the correct tickets are in the release milestone
 4. Archive the release tickets in the Project by going to the Kanban Board https://github.com/orgs/eclipse-pass/projects/4/views/2, scrolling to the Done column, verifying that all tickets in the list have the new version tag, then selecting the ellipsis button and "Archive all cards"
-5. Include in the Release Notes a link to the issues resolved by the release, e.g. https://github.com/eclipse-pass/main/issues?q=label%3A%22Release+0.1.0%22
+5. Include in the Release Notes a link to the issues resolved by the release, e.g. https://github.com/eclipse-pass/main/milestone/11
