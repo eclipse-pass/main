@@ -1,3 +1,20 @@
+## Release v0.9.0
+### Date: August 30, 2023
+
+This release focused on setting up a staging environment for the PASS application. We deployed PASS to the new environment, integrated single sign-on and the data loaders, and fixed a number of bugs that were discovered in the refactored codebase.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/13?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/0.9.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/0.9.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/0.9.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.9.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.9.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.9.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.9.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.9.0
+
 ## Release v0.8.0
 ### Date: July 28, 2023
 

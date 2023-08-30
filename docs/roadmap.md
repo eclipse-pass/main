@@ -6,11 +6,6 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # [Completed Releases](release-notes.md)
 
-## 0.9.0
-This release will focus on setting up a staging environment
-* Deploy a staging environment which runs the data loaders
-* Test staging environment interactions with IDP
-
 ## 1.0.0
 This release aims to be a fully functional system.
 * Manual testing with stakeholders
