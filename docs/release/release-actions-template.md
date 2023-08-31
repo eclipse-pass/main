@@ -1,5 +1,10 @@
 # Release Manager Actions Checklist Template
 
+|  |  |
+| --- | --- |
+| Release version |  |
+| Next dev version |  |
+
 ## Release Process Overview
 This is the full detailed release process, including the steps that are performed by the GitHub automation: [Release](../dev/release.md)
 
@@ -18,10 +23,14 @@ Release Workflow Example: [Triggering a GitHub workflow](../dev/release-steps-wi
 - [ ] Verify Main Artifacts on Maven Central - [Main Artifacts on Maven Central](https://central.sonatype.com/artifact/org.eclipse.pass/eclipse-pass-parent)
 - [ ] Main GitHub Release Page - Perform after the Main release is complete - [Main GitHub Release Page](https://github.com/eclipse-pass/main/releases)
 
+ ---
+
 - [ ] Release Pass-Core - [Pass-Core Release workflow](https://github.com/eclipse-pass/pass-core/actions/workflows/release.yml)
 - [ ] Verify Pass-Core Artifacts on Maven Central - [Pass-Core Artifacts on Maven Central](https://central.sonatype.com/artifact/org.eclipse.pass/pass-core)
 - [ ] Pass-Core GitHub Release Page - Perform after the Pass Core release is complete - [Pass Core GitHub Release Page](https://github.com/eclipse-pass/pass-core/releases)
 
+ ---
+ 
 - [ ] Release Pass Support - [Pass Support Release workflow](https://github.com/eclipse-pass/pass-support/actions/workflows/release.yml)
 - [ ] Verify Pass Support Artifacts on Maven Central - [Pass Support Artifacts on Maven Central](https://central.sonatype.com/artifact/org.eclipse.pass/pass-support)
 - [ ] Pass Support GitHub Release Page - Perform after the Pass Support release is complete - [Pass Support GitHub Release Page](https://github.com/eclipse-pass/pass-support/releases)
@@ -32,10 +41,14 @@ Release Workflow Example: [Triggering a GitHub workflow](../dev/release-steps-wi
 - [ ] Verify Pass UI packages [Pass UI Packages](https://github.com/eclipse-pass/pass-ui/pkgs/container/pass-ui)
 - [ ] Pass UI Release Page - Perform after the Pass UI release is complete - [Pass UI GitHub Release Page](https://github.com/eclipse-pass/pass-ui/releases)
 
+ ---
+ 
 - [ ] Release Pass Auth - [Pass Auth workflow](https://github.com/eclipse-pass/pass-auth/actions/workflows/release.yml)
 - [ ] Verify Pass Auth packages [Pass Auth Packages](https://github.com/eclipse-pass/pass-auth/pkgs/container/pass-auth)
 - [ ] Pass Auth Release Page - Perform after the Pass Auth release is complete - [Pass Auth GitHub Release Page](https://github.com/eclipse-pass/pass-auth/releases)
 
+ ---
+ 
 - [ ] Release Pass Acceptance Testing - [Pass Acceptance Testing workflow](https://github.com/eclipse-pass/pass-acceptance-testing/actions/workflows/release.yml)
 - [ ] Verify Pass Acceptance Testing Tag [Pass Acceptance Testing Tag](https://github.com/eclipse-pass/pass-acceptance-testing/tags)
 - [ ] Pass Acceptance Testing Release Page - Perform after the Pass Acceptance Testing release is complete - [Pass Acceptance Testing GitHub Release Page](https://github.com/eclipse-pass/pass-acceptance-testing/releases)
