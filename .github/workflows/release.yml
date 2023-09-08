@@ -32,9 +32,6 @@ jobs:
         run: |
           echo "Using OSSRH_USERNAME ${{ secrets.OSSRH_USERNAME }}"
           echo "AND OSSRH_PASSWORD ${{ secrets.OSSRH_PASSWORD }}"
-          echo "AND MAVEN_GPG_PASSPHRASE ${{ secrets.MAVEN_GPG_PASSPHRASE }}"
-          echo "Using GH_USER ${{ secrets.GH_USER }}"
-          echo "Show what missing secret looks like ${{ secrets.GOOP }}"
 
   # Run for manual trigger (workflow dispatch), since you'll have release and next dev versions specified
   # All commits will have a -SNAPSHOT project version anyway, since the releases will be handled here
