@@ -38,10 +38,29 @@ jobs:
           else
             echo "OSSRH_PASSWORD is available."
           fi
+      - name: Check if OSSRH_PASSWORD is available
+        run: |
+          if [[ -z "$MAVEN_GPG_PASSPHRASE" ]]; then
+            echo "OSSRH_PASSWORD is not available!"
+          else
+            echo "OSSRH_PASSWORD is available."
+          fi
+      - name: Check if MAVEN_GPG_PASSPHRASE is available
+        run: |
+          if [[ -z $MAVEN_GPG_PASSPHRASE ]]; then
+            echo "MAVEN_GPG_PASSPHRASE is not available!"
+          else
+            echo "MAVEN_GPG_PASSPHRASE is available."
+          fi
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
       - name: Sign with our MAVEN_GPG_PASSPHRASE as an env variable
         run: |
-          echo "1234" | gpg --no-use-agent -o /dev/null --local-user ${{ secrets.MAVEN_GPG_PASSPHRASE }} -as -
+          echo "1234" | gpg --no-use-agent -o /dev/null --local-user $MAVEN_GPG_PASSPHRASE -as -
           echo "The correct passphrase was entered for this key"
+        env:
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
 
   # Run for manual trigger (workflow dispatch), since you'll have release and next dev versions specified
   # All commits will have a -SNAPSHOT project version anyway, since the releases will be handled here
