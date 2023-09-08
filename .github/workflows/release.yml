@@ -4,28 +4,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  # setup:
-  #   runs-on: ubuntu-latest
-  #   outputs:
-  #     # Output project version from the POM to conditionally run dependent steps
-  #     project-version: ${{ steps.project_version.outputs.version }}
-  #   steps:
-  #     - name: Checkout latest code
-  #       uses: actions/checkout@v3
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      # Output project version from the POM to conditionally run dependent steps
+      project-version: ${{ steps.project_version.outputs.version }}
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v3
 
-  #     - name: Setup Java & Maven
-  #       uses: actions/setup-java@v3
-  #       with:
-  #         java-version: 17
-  #         distribution: 'temurin'
-  #         cache: 'maven'
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
 
-  #     - name: Get project version from POM
-  #       id: project_version
-  #       run: echo "VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`" >> $GITHUB_OUTPUT
+      - name: Get project version from POM
+        id: project_version
+        run: echo "VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`" >> $GITHUB_OUTPUT
 
   check_vars:
-     # needs: setup
+     needs: setup
      runs-on: ubuntu-latest
      steps:
       - name: Show OSSRH_USERNAME
