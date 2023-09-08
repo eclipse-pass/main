@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "Using OSSRH_USERNAME ${{ secrets.OSSRH_USERNAME }}"
           echo "AND OSSRH_PASSWORD ${{ secrets.OSSRH_PASSWORD }}"
-          echo "AND MAVEN_GPG_PASSPHRASE ${{ secrets.MAVEN_GPG_PASSPHRASE }}"
+          echo "AND X ${{ secrets.X }}"
 
   # Run for manual trigger (workflow dispatch), since you'll have release and next dev versions specified
   # All commits will have a -SNAPSHOT project version anyway, since the releases will be handled here
