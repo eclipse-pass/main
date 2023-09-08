@@ -54,7 +54,6 @@ jobs:
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-
   # release:
   #   needs: check_vars
   #   if: github.event_name == 'workflow_dispatch'
