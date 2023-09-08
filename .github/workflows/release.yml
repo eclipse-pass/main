@@ -1,27 +1,86 @@
 name: "Publish: manual full release OR automatic snapshot"
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
 
 jobs:
-  deploy_code:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      # Output project version from the POM to conditionally run dependent steps
+      project-version: ${{ steps.project_version.outputs.version }}
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v3
+
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Get project version from POM
+        id: project_version
+        run: echo "VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`" >> $GITHUB_OUTPUT
+
+  check_vars:
+     needs: setup
      runs-on: ubuntu-latest
      steps:
       - uses: actions/checkout@v2
       - name: Check users available
         run: |
           echo "Using OSSRH_USERNAME ${{ secrets.OSSRH_USERNAME }}"
+          echo "AND OSSRH_PASSWORD ${{ secrets.OSSRH_PASSWORD }}"
+          echo "AND MAVEN_GPG_PASSPHRASE ${{ secrets.MAVEN_GPG_PASSPHRASE }}"
           echo "Using GH_USER ${{ secrets.GH_USER }}"
+          echo "Show what missing secret looks like ${{ secrets.GOOP }}"
+
+  # Run for manual trigger (workflow dispatch), since you'll have release and next dev versions specified
+  # All commits will have a -SNAPSHOT project version anyway, since the releases will be handled here
+  release:
+    needs: check_vars
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      RELEASE: ${{ inputs.releaseversion }}
+      NEXT: ${{ inputs.nextversion }}
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v3
 
       - name: Config git user
         run: |
           git config user.name ${{ github.actor }}
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: DRYRUN -- Release main POM
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+      # =============================================================================
+      # Start the release
+      # =============================================================================
+      - name: Release main POM
         run: |
-          mvn -B -U -V -ntp release:prepare -DreleaseVersion=0.0 -Dtag=0.0 -DdevelopmentVersion=0.0 -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+          mvn -B -U -V -ntp release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
           mvn -B -U -V -ntp release:perform -P release -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAMEX }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORDX }}
-          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASEX }}
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Build and publish new dev version
+        run: mvn -B -U -V -ntp deploy -P release
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
