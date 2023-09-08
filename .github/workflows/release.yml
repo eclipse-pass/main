@@ -30,17 +30,17 @@ jobs:
      steps:
       - name: Show OSSRH_USERNAME
         run: |
-          echo "Using OSSRH_USERNAME ${{ secrets.OSSRH_USERNAME }}"
+          echo "Using OSSRH_USERNAME ${secrets.OSSRH_USERNAME}"
       - name: Check if OSSRH_PASSWORD is available
         run: |
-          if [[ -z "${{ secrets.OSSRH_PASSWORD }}" ]]; then
+          if [[ -z "${secrets.OSSRH_PASSWORD}" ]]; then
             echo "OSSRH_PASSWORD is not available!"
           else
             echo "OSSRH_PASSWORD is available."
           fi
       - name: Check if MAVEN_GPG_PASSPHRASE is available
         run: |
-          if [[ -z "${{ secrets.MAVEN_GPG_PASSPHRASE }}" ]]; then
+          if [[ -z "${secrets.MAVEN_GPG_PASSPHRASE}" ]]; then
             echo "MAVEN_GPG_PASSPHRASE is not available!"
           else
             echo "MAVEN_GPG_PASSPHRASE is available."
