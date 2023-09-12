@@ -19,6 +19,22 @@ If you are looking for more detailed developer-oriented instructions
 to help debug an issue with the above, please refer to
 [managing our demo servers](deploy_demo.md) documentation.
 
+## Configurations
+
+The [.eclipsefdn](http://github.com/eclipse-pass/.eclipsefdn) project allows our team to
+[self-service several aspect of our organization](https://www.eclipse.org/projects/handbook/#resources-github-self-service)
+via a tool called [Otterdog](/docs/infra/otterdog.md).
+
+This repo / tool gives access to:
+
+* Organization Settings
+* Organization Webhooks
+* Repositories and their settings
+* Branch Protection Rules
+
+Learn more about [Otterdog here](/docs/infra/otterdog.md).
+
+
 ## Deployment
 
 ### eclipse-pass.org
