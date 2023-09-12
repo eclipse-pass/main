@@ -6,6 +6,8 @@ Here is an outline of passwords we are tracking
 (duplicating here as can better document the integrations with other services
 like [Otterdog](/docs/infra/otterdog.md) and Github Actions).
 
+![Bitwarden Secrets User Interface](/docs/assets/bitwarden/ui.png)
+
 | Secret | Description |
 | --- | --- |
 | HELLO_WORLD | A test secret for demontsrating how secrets are managed |
