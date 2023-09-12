@@ -23,9 +23,9 @@ to help debug an issue with the above, please refer to
 
 The [.eclipsefdn](http://github.com/eclipse-pass/.eclipsefdn) project allows our team to
 [self-service several aspect of our organization](https://www.eclipse.org/projects/handbook/#resources-github-self-service)
-via a tool called [Otterdog](/docs/infra/otterdog.md).
+via a tool called [Otterdog](/docs/infra/otterdog.md) and secrets in [Bitwarden](/docs/infra/bitwarden.md).
 
-This repo / tool gives access to:
+These [.eclipsefdn](http://github.com/eclipse-pass/.eclipsefdn) repo / tools gives access to:
 
 * Organization Settings
 * Organization Webhooks
