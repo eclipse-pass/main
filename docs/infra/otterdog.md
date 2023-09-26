@@ -5,6 +5,13 @@ using the [Otterdog tool](https://gitlab.eclipse.org/eclipsefdn/security/otterdo
 
 Our first project will be to manage secrets via [bitwarden](/docs/infra/bitwarden.md).
 
+## Pushing GitHub Infra Changes
+
+To make changes, you must push a [forked PR like this one](https://github.com/eclipse-pass/.eclipsefdn/pull/1).
+
+![Sample PR](/docs/assets/otterdog/otterdog_sample_pr.png)
+
+
 ## Configurations
 
 The base configuration is [eclipse-pass.jsonnet](https://github.com/eclipse-pass/.eclipsefdn/blob/main/otterdog/eclipse-pass.jsonnet),
@@ -12,37 +19,42 @@ and can be monitored at [eclipse-pass.org/.eclipsefdn](https://eclipse-pass.org/
 
 ![Otterdog Config Monitoring](/docs/assets/otterdog/dashboard.png)
 
+The base entry for jsonnett configs is via
+
+```javascript
+local orgs = import 'otterdog-defaults.libsonnet';
+```
+
 ### Bitwarden Configs
 
 To integrate [bitwarden into otterdog configs](https://gitlab.eclipse.org/eclipsefdn/security/otterdog#bitwarden)
+the request is to add an _"organization"_ directly to the JSON, but instead lets use the jsonnett based
+on the outputs from the [otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/).
 
-```jsonnet
-"organizations": [
-  {
-    "name": "eclise-pass",
-    "github_id": "101810562",
-    "credentials": {
+```javascript
+orgs.newOrg('eclipse-pass') {
+  credentials+: [{
       "provider": "bitwarden",
       "item_id" : "23801ca4-fd27-446c-b5af-b07b0108f443"
-    }
-  }
-]
+    },
+  ],
+}
 ```
+
+And then we can specify secrets based on the structure of `bitwarden:<item_id>@<field_name>`.
 
 ### Organizational Secrets
 
 Here is documentation on managing [organization secrets](https://otterdog.readthedocs.io/en/latest/reference/organization/secret/)
 
-```jsonnet
+```javascript
 orgs.newOrg('eclipse-pass') {
   secrets+: [
     orgs.newOrgSecret('HELLO_WORLD_QUEST') {
       value: "bitwarden:23801ca4-fd27-446c-b5af-b07b0108f443@quest",
-      visibility: "public",
     },
     orgs.newOrgSecret('HELLO_WORLD_COLOR') {
       value: "bitwarden:23801ca4-fd27-446c-b5af-b07b0108f443@color",
-      visibility: "public",
     },
   ],
 }
