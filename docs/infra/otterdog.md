@@ -19,11 +19,11 @@ To integrate [bitwarden into otterdog configs](https://gitlab.eclipse.org/eclips
 ```jsonnet
 "organizations": [
   {
-    "name": "<org name>",
-    "github_id": "<github org id>",
+    "name": "eclise-pass",
+    "github_id": "101810562",
     "credentials": {
       "provider": "bitwarden",
-      "item_id" : "<bitwarden item id>"
+      "item_id" : "23801ca4-fd27-446c-b5af-b07b0108f443"
     }
   }
 ]
@@ -138,3 +138,8 @@ mkdir -p ~/.local/bin
 PATH="$HOME/.local/bin:$PATH"
 ```
 
+#### How do I get the github organization ID from the UI
+
+You will need to **Inpsect** the org page and look for `organization:`
+
+![GitHub Organization ID](/docs/assets/github/ui_get_org_id.png)
