@@ -10,7 +10,7 @@ like [Otterdog](/docs/infra/otterdog.md) and Github Actions).
 ![Bitwarden Secrets User Interface](/docs/assets/bitwarden/ui.png)
 
 | Item Name | Item Id | Field | Description |
-| --- | --- |
+| --- | --- | --- | --- |
 | HELLO_WORLD | 23801ca4-fd27-446c-b5af-b07b0108f443 | quest | A test secret of `holy_grail` for demontsrating how secrets are managed |
 | HELLO_WORLD | 23801ca4-fd27-446c-b5af-b07b0108f443 | color | Another test secret of `blue_no_ahh` |
 
