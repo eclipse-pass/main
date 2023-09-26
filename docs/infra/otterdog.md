@@ -12,6 +12,23 @@ and can be monitored at [eclipse-pass.org/.eclipsefdn](https://eclipse-pass.org/
 
 ![Otterdog Config Monitoring](/docs/assets/otterdog/dashboard.png)
 
+### Bitwarden Configs
+
+To integrate [bitwarden into otterdog configs](https://gitlab.eclipse.org/eclipsefdn/security/otterdog#bitwarden)
+
+```jsonnet
+"organizations": [
+  {
+    "name": "<org name>",
+    "github_id": "<github org id>",
+    "credentials": {
+      "provider": "bitwarden",
+      "item_id" : "<bitwarden item id>"
+    }
+  }
+]
+```
+
 ### Organizational Secrets
 
 Here is documentation on managing [organization secrets](https://otterdog.readthedocs.io/en/latest/reference/organization/secret/)
