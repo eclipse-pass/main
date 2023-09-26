@@ -12,6 +12,27 @@ and can be monitored at [eclipse-pass.org/.eclipsefdn](https://eclipse-pass.org/
 
 ![Otterdog Config Monitoring](/docs/assets/otterdog/dashboard.png)
 
+### Organizational Secrets
+
+Here is documentation on managing [organization secrets](https://otterdog.readthedocs.io/en/latest/reference/organization/secret/)
+
+```jsonnet
+orgs.newOrg('eclipse-pass') {
+  secrets+: [
+    orgs.newOrgSecret('HELLO_WORLD_QUEST') {
+      value: "bitwarden:23801ca4-fd27-446c-b5af-b07b0108f443@quest",
+      visibility: "public",
+    },
+    orgs.newOrgSecret('HELLO_WORLD_COLOR') {
+      value: "bitwarden:23801ca4-fd27-446c-b5af-b07b0108f443@color",
+      visibility: "public",
+    },
+  ],
+}
+```
+
+Please refer to [bitwarden for specifics on password management](/docs/infra/bitwarden.md)
+
 ## Playground (Online Editor)
 
 From the [monitoring application]((https://eclipse-pass.org/.eclipsefdn/)) you can access a [otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/)

@@ -9,9 +9,10 @@ like [Otterdog](/docs/infra/otterdog.md) and Github Actions).
 
 ![Bitwarden Secrets User Interface](/docs/assets/bitwarden/ui.png)
 
-| Secret | Description |
+| Item Name | Item Id | Field | Description |
 | --- | --- |
-| HELLO_WORLD | A test secret for demontsrating how secrets are managed |
+| HELLO_WORLD | 23801ca4-fd27-446c-b5af-b07b0108f443 | quest | A test secret of `holy_grail` for demontsrating how secrets are managed |
+| HELLO_WORLD | 23801ca4-fd27-446c-b5af-b07b0108f443 | color | Another test secret of `blue_no_ahh` |
 
 
 ## Installing CLI
@@ -28,3 +29,12 @@ To install it via [homebrew](https://brew.sh) you can run
 ```bash
 brew install bitwarden-cli
 ```
+
+## Troubleshooting
+
+### How do I get the ID of a item from the UI
+
+You will need to **Inspect** the page and watch for the network traffic
+after you edit the item.
+
+![Bitwarden Secrets User Interface](/docs/assets/bitwarden/ui_get_id.png)
