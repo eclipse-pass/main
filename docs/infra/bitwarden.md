@@ -12,3 +12,19 @@ like [Otterdog](/docs/infra/otterdog.md) and Github Actions).
 | Secret | Description |
 | --- | --- |
 | HELLO_WORLD | A test secret for demontsrating how secrets are managed |
+
+
+## Installing CLI
+
+Some instructions for installing the [bitwarden cli are here](https://github.com/bitwarden/clients).
+The tools command line name is `bw` and you can see which version you are running with
+
+```bash
+bw -v
+```
+
+To install it via [homebrew](https://brew.sh) you can run
+
+```bash
+brew install bitwarden-cli
+```
