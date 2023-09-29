@@ -68,4 +68,5 @@ Note: This must be released last because it relies on some Docker images that wi
 - [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
 - [ ] Update template if any steps were missed or if any new tasks were added. Also make note of these new steps in the release-actions-X.X.X.md file.
 - [ ] Update [Pass Demo](https://demo.eclipse-pass.org) to new release - [Publish to SNS Topic action](https://github.com/eclipse-pass/main/actions/workflows/deployToAWS.yml) using `Environment: demo`
+- [ ] Update [JHU Staging](https://stage.pass.jhu.edu) to new release - You will have to go to the _private_ JHU repository and run the [Publish to SNS Topic: Triggers Deployment to AWS](https://github.com/jhu-library-devops/JHU-PASS-Deployment/actions) selecting staging environment in the `Select the Environment` select input.
 - [ ] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
