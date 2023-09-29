@@ -6,19 +6,18 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # [Completed Releases](release-notes.md)
 
-## 1.0.0
-This release aims to be a fully functional system.
-* Manual testing with stakeholders
-* Address technical debt
-* Dependency updates - update project dependencies and introduce automated convergence checks
-* Archive old repositories
-
 ## 1.1.0
-This release will focus on setup and improvement of application testing environments as well as moving towards greater codebase language consistency.
+This release will have a continued focus on the production readiness of the project and see the first production partner institution (JHU) go live.
+* Ensure that the full stack, including deposit services, is functioning with production repositories
+* Fix any bugs remaining after the 1.0.0 release in the user interface, backend services, and API
+* Refine accessibility for the user interface
+
+## 1.2.0
+This release will focus on the setup and improvement of application testing environments as well as moving towards greater codebase language consistency.
 * Harmonize Integration Test setup - updating the method for executing integration tests to ensure consistent and streamlined launch and execution
 * Addition of system tests - adding a mechanism and tests to support full-system verification
 
-## 1.2.0
+## 1.3.0
 This release will focus on ensuring that those operating and maintaining the PASS application have the information needed to visualize system activity
 * Logging improvement - ensure logging is configured, captured, and utilized consistently across the project
 * Monitoring and observability - define, capture, and expose metrics required for understanding performance, system utilization, and tracking errors
