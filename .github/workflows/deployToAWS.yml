@@ -4,7 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       DEPLOYMENT_ENVIRONMENT:
+        type: choice
         description: 'Environment'
+        options:
+        - demo
+        - development
         required: true
 
 jobs:
