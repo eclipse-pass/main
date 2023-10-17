@@ -2,6 +2,13 @@ name: "Publish: manual full release OR automatic snapshot"
 
 on:
   workflow_dispatch:
+    inputs:
+      releaseversion:
+        description: 'Release version'
+        required: true
+      nextversion:
+        description: 'Next dev version'
+        required: true
 
 jobs:
   setup:
