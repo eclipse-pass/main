@@ -86,8 +86,8 @@ jobs:
       # =============================================================================
       - name: Release main POM
         run: |
-          mvn -B -U -V -ntp release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
-          mvn -B -U -V -ntp release:perform -P release -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
+          mvn -B -U -V -ntp release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT
+          mvn -B -U -V -ntp release:perform -P release
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
