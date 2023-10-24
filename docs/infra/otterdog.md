@@ -25,11 +25,20 @@ The base entry for jsonnett configs is via
 local orgs = import 'otterdog-defaults.libsonnet';
 ```
 
-### Bitwarden Configs
+### Managing Passwords
 
-To integrate [bitwarden into otterdog configs](https://gitlab.eclipse.org/eclipsefdn/security/otterdog#bitwarden)
-the request is to add an _"organization"_ directly to the JSON, but instead lets use the jsonnett based
-on the outputs from the [otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/).
+#### Bitwarden Configs in Otterdog
+
+At present, we cannot share Bitwarden passwords directly in our
+[eclipse foundation otterdog configs](https://gitlab.eclipse.org/eclipsefdn/security/otterdog#bitwarden)
+
+When we can, let's revisit these confirmations.
+
+##### Add Bitwarden Items
+
+Using jsonnett based on the outputs from the
+[otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/).
+we can add a new organization and then incorporate items.
 
 ```javascript
 orgs.newOrg('eclipse-pass') {
@@ -41,9 +50,9 @@ orgs.newOrg('eclipse-pass') {
 }
 ```
 
-And then we can specify secrets based on the structure of `bitwarden:<item_id>@<field_name>`.
+##### Add Organization Secrets
 
-### Organizational Secrets
+And then we can specify secrets based on the structure of `bitwarden:<item_id>@<field_name>`.
 
 Here is documentation on managing [organization secrets](https://otterdog.readthedocs.io/en/latest/reference/organization/secret/)
 
