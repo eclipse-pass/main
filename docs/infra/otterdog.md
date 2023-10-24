@@ -27,6 +27,74 @@ local orgs = import 'otterdog-defaults.libsonnet';
 
 ### Managing Passwords
 
+#### Bitwarden Secrets Manager
+
+We will use
+[bitwarden to store our passwords](/docs/infra/bitwarden.md)
+and share those.
+
+![Naming conventions](/docs/assets/bitwarden/naming_conventions.png)
+
+Ideally these passwords are then integrated directly into our
+[.eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn) as document
+far below, but for now we have an interim step to manage the
+passwords indirectly using the [pass(word store)](https://www.passwordstore.org)
+notation.
+
+#### PASSword Configs in Otterdog
+
+Our
+[eclipse foundation otterdog configs](https://gitlab.eclipse.org/eclipsefdn/security/otterdog#bitwarden)
+supports the [pass(word store)](https://www.passwordstore.org) application for secrets management.
+
+An [example pull request adding a password](https://github.com/eclipse-pass/.eclipsefdn/pull/1) shows
+the desired end-state of our to add secrets.  Make sure to use the
+[otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/)
+to help write _correct_ jsonnett.
+
+The structure for passwords is
+
+```jsonnett
+orgs.newOrgSecret('<NAME>_<CUSTOMFIELD>') {
+  value: "pass:bots/technology.pass/<name>/<customfield>",
+},
+```
+
+For example,
+
+```jsonnett
+orgs.newOrgSecret('HELLOWORLD_QUEST') {
+  value: "pass:bots/technology.pass/helloworld/quest",
+},
+orgs.newOrgSecret('HELLOWORLD_COLOR') {
+  value: "pass:bots/technology.pass/helloworld/color",
+},
+```
+
+#### Merging Passwords
+
+We will have shared a `secret_handshake` with Eclipse Foundation.
+
+![Secret handshake](/docs/assets/bitwarden/secret_handshake.png)
+
+That secret should be used to _share our helloworld_ password.
+
+![Create a secret share](/docs/assets/bitwarden/create_secret_share.png)
+
+And the grab the url
+
+![Secret share URL](/docs/assets/bitwarden/secret_share_url.png)
+
+And the URL will look like
+
+```
+https://send.bitwarden.com/#R9KxxMqJiESP87ClATIJ-g/7_fOjgbzNTDWzyJqALdy_A
+```
+
+This should be dropped into the [.eclipsefdn project](https://github.com/eclipse-pass/.eclipsefdn)
+for the configs pull request ([an example PR here](https://github.com/eclipse-pass/.eclipsefdn/pull/1))
+
+
 #### Bitwarden Configs in Otterdog
 
 At present, we cannot share Bitwarden passwords directly in our
@@ -73,7 +141,7 @@ Please refer to [bitwarden for specifics on password management](/docs/infra/bit
 
 ## Playground (Online Editor)
 
-From the [monitoring application]((https://eclipse-pass.org/.eclipsefdn/)) you can access a [otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/)
+From the [monitoring application](https://eclipse-pass.org/.eclipsefdn/) you can access a [otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/)
 
 ![Otterdog Playground](/docs/assets/otterdog/playground.png)
 
