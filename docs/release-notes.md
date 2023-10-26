@@ -1,3 +1,20 @@
+## Release v1.1.0
+### Date: October 26, 2023
+
+This release focused on getting PASS ready for deployment in production. We did a great deal of testing of the user interface, backend services, and interactions with repositories. We found and fixed a large number of bugs. We significantly improved the performance of grant loading. We made accessibility improvements to the user interface.  In addition, we added support for depositing to a repositories without requiring a journal be entered by the user.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/15?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.1.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.1.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.1.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.1.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.1.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.1.0
+* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/1.1.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.1.0
+
 ## Release v1.0.0
 ### Date: September 29, 2023
 

@@ -6,12 +6,6 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 
 # [Completed Releases](release-notes.md)
 
-## 1.1.0
-This release will have a continued focus on the production readiness of the project and see the first production partner institution (JHU) go live.
-* Ensure that the full stack, including deposit services, is functioning with production repositories
-* Fix any bugs remaining after the 1.0.0 release in the user interface, backend services, and API
-* Refine accessibility for the user interface
-
 ## 1.2.0
 This release will focus on the setup and improvement of application testing environments as well as moving towards greater codebase language consistency.
 * Harmonize Integration Test setup - updating the method for executing integration tests to ensure consistent and streamlined launch and execution
