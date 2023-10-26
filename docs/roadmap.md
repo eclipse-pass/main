@@ -7,11 +7,17 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 # [Completed Releases](release-notes.md)
 
 ## 1.2.0
+This release will focus on updating integrations with external services
+* Update the NIH Manuscript Submission client to the latest specification
+* Update the JHU grant loader to use the new grant database Fibi.
+* Address technical debt and improve documentation in order to get ready for potential partners
+
+## 1.3.0
 This release will focus on the setup and improvement of application testing environments as well as moving towards greater codebase language consistency.
 * Harmonize Integration Test setup - updating the method for executing integration tests to ensure consistent and streamlined launch and execution
 * Addition of system tests - adding a mechanism and tests to support full-system verification
 
-## 1.3.0
+## 1.4.0
 This release will focus on ensuring that those operating and maintaining the PASS application have the information needed to visualize system activity
 * Logging improvement - ensure logging is configured, captured, and utilized consistently across the project
 * Monitoring and observability - define, capture, and expose metrics required for understanding performance, system utilization, and tracking errors
