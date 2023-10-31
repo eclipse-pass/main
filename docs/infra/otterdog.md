@@ -98,6 +98,29 @@ Separately, we need to share that `secret_handshake` over email using `gpg encry
 Se can use [this gpg public key](https://keyserver.ubuntu.com/pks/lookup?search=thomas.neidhart%40eclipse-foundation.org&fingerprint=on&op=index)
 for sending those emails.
 
+A sample email (please replace the placeholdrs)
+
+```
+Hi Thomas,
+
+This secret
+
+ABC123
+
+Will decrypt our passwords in
+https://send.bitwarden.com/#R9KxxMqJiESP87ClATIJ-g/7_fOjgbzNTDWzyJqALdy_A
+
+As part of this pull-request
+https://github.com/eclipse-pass/.eclipsefdn/pull/1
+
+When ready, please approve the merge and apply the
+changes in our PR.
+
+Thank you,
+
+Open Access PASS Team
+```
+
 
 #### Bitwarden Configs in Otterdog
 
