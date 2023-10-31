@@ -3,20 +3,6 @@
 Using [otterdog in .eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn)
 here is the process of adding secrets to our GitHub organization.
 
-## Bitwarden Secrets Manager
-
-We will use
-[bitwarden to store our passwords](/docs/infra/bitwarden.md)
-and share those.
-
-![Naming conventions](/docs/assets/bitwarden/naming_conventions.png)
-
-Ideally these passwords are then integrated directly into our
-[.eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn) as document
-far below, but for now we have an interim step to manage the
-passwords indirectly using the [pass(word store)](https://www.passwordstore.org)
-notation.
-
 ## PASSword Configs in Otterdog
 
 Our
@@ -47,7 +33,48 @@ orgs.newOrgSecret('HELLOWORLD_COLOR') {
 },
 ```
 
-## Merging Passwords
+## Storing Secrets
+
+### Sharing Directly via PGP Encrypted email.
+
+Until Bitwarden is configured, secrets will be sent directly
+using `gpg encrypted mail` and [this gpg public key](https://keyserver.ubuntu.com/pks/lookup?search=thomas.neidhart%40eclipse-foundation.org&fingerprint=on&op=index)
+to encrypt the email.
+
+If Bitwarden is configured, please skip to the next section
+
+```
+Hi Thomas,
+
+Can you add these secrets to our .eclipsefdn account based on this pull request.
+https://github.com/eclipse-pass/.eclipsefdn/pull/1
+
+pass:bots/technology.pass/helloworld/quest : Holy Grail
+pass:bots/technology.pass/helloworld/color : Blue Not Green
+
+When ready, please approve the merge and apply the
+changes in our PR.
+
+Thank you,
+
+Open Access PASS Team
+```
+
+### Storing Secrets in Bitwarden Secrets Manager
+
+We will use
+[bitwarden to store our passwords](/docs/infra/bitwarden.md)
+and share those.
+
+![Naming conventions](/docs/assets/bitwarden/naming_conventions.png)
+
+Ideally these passwords are then integrated directly into our
+[.eclipsefdn](https://github.com/eclipse-pass/.eclipsefdn) as document
+far below, but for now we have an interim step to manage the
+passwords indirectly using the [pass(word store)](https://www.passwordstore.org)
+notation.
+
+###a Merging Passwords
 
 We can use the `secret_handshake` for sharing secrets with Eclipse Foundation (EF).
 
@@ -104,7 +131,7 @@ At present, we cannot share Bitwarden passwords directly in our
 
 When we can, let's revisit these confirmations.
 
-##### Add Bitwarden Items
+### Add Bitwarden Items
 
 Using jsonnett based on the outputs from the
 [otterdog playground](http://eclipse-pass.org/.eclipsefdn/playground/).
@@ -120,7 +147,7 @@ orgs.newOrg('eclipse-pass') {
 }
 ```
 
-##### Add Organization Secrets
+### Add Organization Secrets
 
 And then we can specify secrets based on the structure of `bitwarden:<item_id>@<field_name>`.
 
