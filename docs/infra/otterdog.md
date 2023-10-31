@@ -73,15 +73,15 @@ orgs.newOrgSecret('HELLOWORLD_COLOR') {
 
 #### Merging Passwords
 
-We will have shared a `secret_handshake` with Eclipse Foundation.
+We can use the `secret_handshake` for sharing secrets with Eclipse Foundation (EF).
 
 ![Secret handshake](/docs/assets/bitwarden/secret_handshake.png)
 
-That secret should be used to _share our helloworld_ password.
+We can then use that `secret_handshake` to encrypt our (for eaxmple) _helloworld_ password with EF.
 
 ![Create a secret share](/docs/assets/bitwarden/create_secret_share.png)
 
-And the grab the url
+We will need that URL
 
 ![Secret share URL](/docs/assets/bitwarden/secret_share_url.png)
 
@@ -91,8 +91,12 @@ And the URL will look like
 https://send.bitwarden.com/#R9KxxMqJiESP87ClATIJ-g/7_fOjgbzNTDWzyJqALdy_A
 ```
 
-This should be dropped into the [.eclipsefdn project](https://github.com/eclipse-pass/.eclipsefdn)
+This can be dropped into the [.eclipsefdn project](https://github.com/eclipse-pass/.eclipsefdn)
 for the configs pull request ([an example PR here](https://github.com/eclipse-pass/.eclipsefdn/pull/1))
+
+Separately, we need to share that `secret_handshake` over email using `gpg encrypted mail`.
+Se can use [this gpg public key](https://keyserver.ubuntu.com/pks/lookup?search=thomas.neidhart%40eclipse-foundation.org&fingerprint=on&op=index)
+for sending those emails.
 
 
 #### Bitwarden Configs in Otterdog
