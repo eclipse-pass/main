@@ -34,3 +34,4 @@ Only Committers on the PASS Eclipse project are able to make changes to the code
 * [Docker Dependencies](integration-test-docker-dependencies.md) - Integration Testing and Docker Dependencies
 * [Components](components.md) - PASS project components
 * [Releasing PASS](release.md) - Releasing the PASS project
+* [Data model](model/README.md) - Data model of the PASS project
