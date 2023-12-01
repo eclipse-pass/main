@@ -7,7 +7,7 @@ If you are interested in helping to define and/or contribute to this roadmap, pl
 # [Completed Releases](release-notes.md)
 
 ## 1.3.0
-This release will focus enhancing the NIHMS interface and security. There will be maintenance to address technical debt and bug fixes.
+This release will focus on enhancing the interfaces to NIHMS and on application security. As usual, there will also be updates to address technical debt and fix a few bugs.
 
 * Design and implementation of NIHMS error handling of deposits
 * Add funder and grant information on NIHMS deposits
