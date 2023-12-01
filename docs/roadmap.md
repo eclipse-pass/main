@@ -13,4 +13,5 @@ This release will focus on enhancing the interfaces to NIHMS and on application 
 * Add funder and grant information on NIHMS deposits
 * Address and remediate security vulnerabilities
 * Investigate simplifying pass-proxy and pass-auth and merging into pass-core
-* Various bug fixes and IT/Acceptance Test improvements
+* Improvements to integration and acceptance tests
+* Various bug fixes
