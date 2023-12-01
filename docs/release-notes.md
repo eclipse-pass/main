@@ -1,7 +1,7 @@
 ## Release v1.2.0
 ### Date: November 30, 2023
 
-This release focused on increasing the security of PASS and making interactions with external services more robust, notably the interface with NIHMS. Parameterized queries were added to the grant loader to enhance security. We've made substantial upgrades to the NIHMS data transfer within our Deposit Services and enhancements to the NIHMS loader. Updates were made to the data model documentation. A new JHU logo has been introduced and client-side pagination support has been added in the UI.
+This release focused on increasing the security of PASS and making interactions with external services more robust, notably the interface with NIHMS. Parameterized queries were added to the grant loader to enhance security. We've made substantial upgrades to the NIHMS data transfer within our Deposit Services and enhancements to the NIHMS loader. Updates were made to the data model documentation and client-side pagination support has been added in the UI.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/16?closed=1
 
