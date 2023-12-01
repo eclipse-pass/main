@@ -1,3 +1,19 @@
+## Release v1.2.0
+### Date: November 30, 2023
+
+This release focused on increasing the security of PASS and making interactions with external services more robust, notably the interface with NIHMS. Parameterized queries were added to the grant loader to enhance security. We've made substantial upgrades to the NIHMS data transfer within our Deposit Services and enhancements to the NIHMS loader. Updates were made to the data model documentation. A new JHU logo has been introduced and client-side pagination support has been added in the UI.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/16?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.2.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.2.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.2.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.2.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.2.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.2.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.2.0
+
 ## Release v1.1.0
 ### Date: October 26, 2023
 
@@ -12,7 +28,6 @@ Release Components:
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.1.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.1.0
 * pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.1.0
-* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/1.1.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.1.0
 
 ## Release v1.0.0
@@ -29,7 +44,6 @@ Release Components:
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.0.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.0.0
 * pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.0.0
-* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/1.0.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.0.0
 
 ## Release v0.9.0
@@ -46,7 +60,6 @@ Release Components:
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.9.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.9.0
 * pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.9.0
-* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.9.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.9.0
 
 ## Release v0.8.0
@@ -63,7 +76,6 @@ Release Components:
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.8.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.8.0
 * pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.8.0
-* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.8.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.8.0
 
 ## Release v0.7.0
@@ -80,7 +92,6 @@ Release Components:
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/0.7.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/0.7.0
 * pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/0.7.0
-* pass-ui-public - https://github.com/eclipse-pass/pass-ui-public/releases/tag/0.7.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/0.7.0
 
 ## Release v0.6.0
