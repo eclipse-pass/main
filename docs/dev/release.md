@@ -149,9 +149,10 @@ See the [/.github/workflows/release.yml] for the details on the exact commands t
 * Update POM to dev version
 * Commit dev version update
 * Build and deploy to Sonatype
+* Wait for artifacts in Maven Central
 * Push any generated Docker images to GHCR
 * Push commits to GitHub
-* Wait for artifacts in Maven Central
+
 
 ## JavaScript projects
 
