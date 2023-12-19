@@ -4,12 +4,11 @@ Actions listed below are to be done by the release manager.
 
 ### Java projects
 
-You will need to release these in the order defined here due to dependencies. Between each of these releases, you will need to wait for the Java artifacts to appear on Maven Central. This will give you enough time to do other release activities, such as releasing non-Java artifacts.
+You will need to release these in the order defined here due to dependencies. Between each of these releases, you will need to wait for the Java artifacts to appear on Maven Central. This will give you enough time to do other release activities, such as releasing non-Java artifacts. The release workflows should wait for you, but is good to check anyway.
 
 1. [`main`](https://github.com/eclipse-pass/main)
    * [Release workflow](https://github.com/eclipse-pass/main/actions/workflows/release.yml)
    * [Maven central](https://central.sonatype.com/artifact/org.eclipse.pass/eclipse-pass-parent)
-   * Package: n/a
 2. [`pass-core`](https://github.com/eclipse-pass/pass-core)
    * [Release workflow](https://github.com/eclipse-pass/pass-core/actions/workflows/release.yml)
    * [Maven Central](https://central.sonatype.com/artifact/org.eclipse.pass/pass-core-main/0.4.0)
@@ -17,7 +16,19 @@ You will need to release these in the order defined here due to dependencies. Be
 3. [`pass-support`](https://github.com/eclipse-pass/pass-support)
    * [Release workflow](https://github.com/eclipse-pass/pass-support/actions/workflows/release.yml)
    * [Maven Central](https://central.sonatype.com/artifact/org.eclipse.pass/pass-support)
-   * Package: n/a
+   * https://github.com/eclipse-pass/pass-support/pkgs/container/pass-notification-service
+   * https://github.com/orgs/eclipse-pass/packages/container/package/jhu-grant-loader
+   * https://github.com/orgs/eclipse-pass/packages/container/package/deposit-services-core
+   * https://github.com/orgs/eclipse-pass/packages/container/package/pass-journal-loader
+   * https://github.com/orgs/eclipse-pass/packages/container/package/pass-nihms-loader
+
+You can instead use a [combined Java workflow](https://github.com/eclipse-pass/main/actions/workflows/pass-java-release.yml) which combines all the Java projects together and then releases them. This workflow depends on the JAVA_RELEASE_PAT secret having permission to access all the eclipse-pass repositories and write packages. You have have to create a new classic PAT to do the release. If you do so, scope it to only last a few days and make sure it has repo and write package permissions.
+
+How to set the secret using the gh command line tool:
+```
+gh login
+gh secret set JAVA_RELEASE_PAT --body PAT_VALUE --repo eclipse-pass/main
+```
 
 ### Non-Java projects
 These can be released in any order. You should release these between releasing Java components, while waiting for artifacts to become available in Maven Central.
@@ -30,7 +41,6 @@ These can be released in any order. You should release these between releasing J
   * [Package](https://github.com/eclipse-pass/pass-auth/pkgs/container/pass-auth)
 * [`pass-acceptance-testing`](https://github.com/eclipse-pass/pass-acceptance-testing)
   * [Release workflow](https://github.com/eclipse-pass/pass-acceptance-testing/actions/workflows/release.yml)
-  * Package: n/a
 
 ### Other projects
 This must be released last because it relies on some Docker images that will be published during the release process of some of the above projects.

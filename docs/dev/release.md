@@ -44,12 +44,13 @@ Most of the PASS release process is automated new, but if we need to do parts of
 
 ## Sonatype
 
-This is setup by the `setup-java` action in automations, so manual setup of this file is only necessary if handling a Java release manually.
+Sonatype deployment is handled by the automations. This information is provided for doing a Java release manually.
 
 Developers will need a Sonatype account to release Java projects.
 Maven must be configured to use the account by modifying your ~/.m2/settings.xml. Documentation for Sonatype publishing
 is available here: https://central.sonatype.org/publish/publish-guide/
 
+Example pom setup:
 ```
 <settings>
   <servers>
@@ -97,71 +98,60 @@ These projects have GitHub workflow automations in place to perform releases tha
 ## Java release
 The release automations will follow these steps. You will only need to follow this process if the automations fail.
 
-The Maven release plugin is used to perform releases. It builds, tests, and pushes release artifacts. In addition it tags the release in the source and increments version numbers. Most of the Maven projects also use Maven to automatically build and push a Docker image. The release process is determined by the decision made to have versions for all Java artifacts be the same for a release. The parent pom in `main` sets the version to be inherited by all its children. This project therefore needs to be released first, as all other projects need to reference it. After this is released, other projects are released in an order which guarantees that all PASS dependencies for them have already been released.
+Maven is used to perform many of the release tasks. It sets versions and builds, tests, and pushes release artifacts. Maven may also build Docker images.
 
-The process itself can be described as follows: release `main`, then use the maven release and versions plugins to perform the process. For convenience we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
+The versions of all the Java artifacts are the same for a release. The parent pom in `main` sets the version to be inherited by all its children. This project therefore needs to be released first, as all other projects need to reference it. After this is released, other projects are released in an order which guarantees that all PASS dependencies for them have already been released. You will need to wait for artifacts to show up in Maven Central before building a module which depends on them.
+
+The process itself can be described as follows: release `main`, . For convenience we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
 For each of these child projects, we first clone the source from GitHub, and operating on the principal branch (usually `main`).
 
-We would then update the parent version in these projects by:
+Update the reference to the parent pom and set the release version.
 ```
-mvn versions:update-parent;
-git commit -a -m "update parent version for release";
-```
-After this, we prepare and perform the release:
-
-```
-mvn release:prepare -DreleaseVersion=$RELEASE -Dtag=$RELEASE -DdevelopmentVersion=$NEXT 
-mvn release:perform -Dgoals=deploy 
+mvn versions:update-parent -DparentVersion=$RELEASE
+mvn versions:set -DnewVersion=$RELEASE
 ```
 
-If integration tests need to be skipped, `-DskipITs=true` can be added to the commands above.
+After this, we do build and push the artifacts to Sonatype, commit the version change, and tag it:
+```
+mvn -ntp -P release clean deploy
+git commit -am "Update version to $RELEASE"
+git tag $RELEASE
+```
 
-Push tags to GitHub:
+Push any created images to GHCR after logging in. See [https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry] for information.
 ```
-git push git@github.com:eclipse-pass/<PROJECT> --tags
+docker push IMAGE_NAME:$RELEASE
 ```
 
-Finally, the new development code needs to be pushed to GitHub. Since we are using the `main` pom to set versions, we need to have the new development version of `main` deployed to Sonatype before pushing the new development version of its children. once `mvn deploy -P release` has been run on main with the new development version set, it will be available in Sonatype for other projects to consume. The last step for these children is to update the parent version from the new snapshot version of `main` - so for each child, we do:
+Push commits and tags to GitHub:
+```
+git push origin
+git push origin --tags
+```
 
-```
-mvn versions:update-parent -DallowSnapshots=true
-git push git@github.com:eclipse-pass/<PROJECT> main (or master)
-mvn deploy -P release
-```
+Finally, the new development code needs to be pushed to built and pushed GitHub. Repeat the process above with the dev version, but do not create the tag.
 
 At this point, we should have deployed the release to Sonatype (and eventually to Maven Central), pushed a tag to GitHub, and deployed the new development release to Sonatype.
 
 In addition, the project may be released on GitHub. This provides a way to add release notes for a particular project. A GitHub release is done manually by uploading artifacts through the UI. The release version and tag should be the same used for Maven Central. Release notes can be automatically generated from commit messages and then customized.
 
+See the [/.github/workflows/release.yml] for the details on the exact commands that are run.
+
 ----
 
-See an example script that runs through these steps at [/tools/release.sh](/tools/release.sh)
+### `main`, `pass-core`, `pass-support`
 
-### `main`
-
-* Update POM version to release version
-* Push update to GH
-* Maven release
-* Push release tag and update to new snapshot version to GH
-* Maven deploy new snapshot
-
-### `pass-core`
-
-* Update POM version to release
-* Push update to GH
-* Maven release (include submodules)
-* Push generated release Docker image to GHCR
-* Push release tag to GH
-* Update top level and submodule POMs, allowing SNAPSHOTS
-* Push version updates on main to GH
-* Maven deploy new snapshot
-* Push snapshot Docker image to GHCR
-
-This follows the same general release procedure as `main` with a few extra steps to account for submodules and Docker images
-
-### `pass-support`
-
-See procedure for `pass-core`, but without Docker images
+* Update POM to release version
+* Commit release version update
+* Tag release version
+* Build and deploy to Sonatype
+* Push any generated Docker images to GHCR
+* Update POM to dev version
+* Commit dev version update
+* Build and deploy to Sonatype
+* Push any generated Docker images to GHCR
+* Push commits to GitHub
+* Wait for artifacts in Maven Central
 
 ## JavaScript projects
 
@@ -179,15 +169,6 @@ Note, you might want to ensure `node_modules` are removed first to ensure a clea
 
 Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-ui:<your-version-tag-here>`
 
-### `pass-ui-public`
-In `docker-compose.yml` in the `pass-docker` repo remove the sha from the image line, update the version tag at the end of the line to the version you are releasing.
-
-Build a new docker image from within the root of the `pass-docker` repo by running:
-```
-docker compose build pass-ui-public
-```
-Push that image to ghcr. For example: `docker push ghcr.io/eclipse-pass/pass-ui-public:<your-version-tag-here>`
-
 ### `pass-auth`
 Update the version in `package.json`, and commit that change via a PR to the `pass-auth` repo.
 
@@ -204,44 +185,7 @@ After pushing the images to ghcr, update the appropriate image lines in `docker-
 
 Once acceptance-tests successfully run in CI in your `pass-docker` PR, and preferrably once you've done some additional manual spot checking while running `pass-docker` locally, go ahead and tag a new release in the Github UI for each of `pass-ui`, `pass-ui-public`, `pass-auth` and `pass-acceptance-testing`. 
 
-# Update pass-docker
-
-Each released image must be updated in the `pass-docker` `docker compose.yml`. Each image is specified with a version and hash identifier. The versions should just be able to be updated to the new release version. The hash can be found using `docker inspect`.
-
-### Building a single image
-
-Updating a single image within [`pass-docker`](https://github.com/eclipse-pass/pass-docker) is largely done manually, for all images.
-
-* Remove the `@sha256:...` from the end of the `image` property for the service. Update the image tag. 
-	* Example: we want to update the current pass-core image to `0.3.0`: `ghcr.io/eclipse-pass/pass-core-main:0.2.0@sha256:56730754843aec0a3d48bfcefd13d72f1bb34708aea9b47d2280d2da61a1eb54` would be changed to `ghcr.io/eclipse-pass/pass-core-main:0.3.0`
-* Build the image: `docker compose build <service-name>`
-  For the fcrepo example above, you'd run `docker compose build pass-core`
-* Push the new image: `docker compose push <service-name>`
-  Example above: `docker compose push pass-core`
-  This will return the hash that can be appended to the image property in the docker compose file to pin the version, since Docker image tags can be overwritten at any time
-
 ---
-
-## docker compose rebuilding / updating
-1. Remove the `@sha256` hash from the end of the image reference
-2. Update the image tag to new tag
-3. `docker compose build <service_name>`
-4. `docker compose push <service_name>`: Copy the returned `sha256` hash
-5. Append the copied hash to the image reference
-
-## Retag without rebuild
-* Grab the `image` reference from the docker compose file, *without the hash*. Ex: `ghcr.io/eclipse-pass/pass-core-main:0.2.0`
-* `docker pull <image>:<tag>` - just makes sure you have the tag downloaded locally
-* `docker tag <image>:<old_tag> <image>:<new_tag>` - creates the new tag
-* `docker push <image>:<new_tag>` - pushes to your Docker repository. This will return a hash for the new tag
-* You can now update the docker compose file with the new tag + hash
-
-Example:
-``` sh
-docker pull ghcr.io/eclipse-pass/pass-core-main:0.2.0
-docker tag ghcr.io/eclipse-pass/pass-core-main:0.2.0 ghcr.io/eclipse-pass/pass-core-main:0.3.0
-docker push ghcr.io/eclipse-pass/pass-core-main:0.3.0
-```
 
 ## Per-image customization
 
@@ -249,15 +193,6 @@ Here's what you need to change manually before building a new image version in o
 
 #### `pass-ui`
 In `.env`, by default, `EMBER_GIT_BRANCH` should have a value of `main`. If you need to point to a specific branch update the value of `EMBER_GIT_BRANCH`. You can use the name of a tag or a specific commit hash.
-
-#### `pass-ui-public`
-In `.env`, by default, `STATIC_HTML_BRANCH` should have a value of `main`. If you need to point to a specific branch update the value of `STATIC_HTML_BRANCH`. You can use the name of a tag or a specific commit hash.
-
-#### `deposit`
-TODO
-
-#### `notification`
-TODO
 
 # Testing
 
