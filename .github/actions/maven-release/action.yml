@@ -1,0 +1,64 @@
+name: Release Maven module
+description: |
+  Releases a Maven module and waits for it to appear in Sonatype.
+
+inputs:
+  repodir:
+    description: 'Directory of repository to release'
+    required: false
+    default: '.'
+
+runs:
+  using: composite
+  steps:
+    - name: Get the artifact from POM
+      shell: bash
+      working-directory: ${{ inputs.repodir }}      
+      run: |
+        echo "ARTIFACT=`mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout`" >> $GITHUB_ENV
+
+      # Build and deploy to sonatype if the release does not already exist.
+      # Attempt to handle case of Sonatype failing to close the repository, but still succeeding
+    - name: Release Maven module and push to Sonatype
+      shell: bash
+      working-directory: ${{ inputs.repodir }}
+      run: |
+        goal="deploy"
+
+        if curl -f -s https://repo1.maven.org/maven2/org/eclipse/pass/$ARTIFACT/$RELEASE/ > /dev/null; then
+          echo "Release $RELEASE already exists"
+          goal="install"
+        fi
+
+        mvn -B -U -V -ntp -P release -DstagingProgressTimeoutMinutes=15 clean $goal | tee release.log
+        code=${PIPESTATUS[0]}
+
+        marker1="Remote staging repositories are being released"
+        marker2="Failed to execute goal org.sonatype.plugins:nexus-staging-maven-plugin"
+
+        if [ "$code" -ne "0" ]; then
+          if grep -q "$marker1" release.log && grep -q "$marker2" release.log; then
+            echo "Failed cleaning up after pushing to Sonatype, but it may have succeeded anyway."
+          else
+            exit "$code"
+          fi
+        fi
+
+    - name: Wait for Maven Central
+      shell: bash
+      run: |
+        echo "Waiting for $ARTIFACT $RELEASE to be released."
+
+        counter=0
+        until curl -f -s https://repo1.maven.org/maven2/org/eclipse/pass/$ARTIFACT/$RELEASE/ > /dev/null
+        do
+          sleep 60
+          echo "."
+          counter=$((counter+1))
+
+          if [ "$counter" -gt 30 ]; then
+            echo "Timed out waiting for release"
+            exit 1
+          fi
+        done
+        echo "$ARTIFACT $RELEASE has been released."
