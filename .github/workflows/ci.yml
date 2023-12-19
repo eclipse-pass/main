@@ -23,13 +23,7 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+          cache: 'maven'
 
       - name: Run Tests
         run: mvn -U -B -V -ntp verify
