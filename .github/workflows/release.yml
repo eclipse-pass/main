@@ -77,7 +77,7 @@ jobs:
           git tag $RELEASE
 
       - name: Release Java modules
-        uses: eclipse-pass/main/.github/actions/maven-release@combined-release
+        uses: eclipse-pass/main/.github/actions/maven-release@main
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
