@@ -1,0 +1,62 @@
+name: "Publish: manual OR automatic snapshot"
+
+# If images are given (separated by spaces), then they are assumed to be produced by
+# Maven and have release and dev tags.
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      images:
+        description: 'Images to push'
+        required: false
+        type: string
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout latest code
+        uses: actions/checkout@v3
+
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      - name: Get project version from POM
+        id: project_version
+        run: echo "VERSION=`mvn help:evaluate -Dexpression=project.version -q -DforceStdout`" >> $GITHUB_OUTPUT
+
+      # Only execute for -SNAPSHOT versions
+      - name: Publish SNAPSHOT
+        if: ${{ endsWith(steps.project_version.outputs.version, '-SNAPSHOT') }}
+        run: mvn -B -ntp clean deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Docker images to GHCR
+        run: |
+          for name in ${{ inputs.images }}
+          do
+            docker push $name:${{ steps.project_version.outputs.version }}
+          done

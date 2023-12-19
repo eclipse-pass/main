@@ -1,33 +1,35 @@
 name: main Continuous Integration
-on: [ pull_request, workflow_dispatch ]
+on: [pull_request, workflow_dispatch, workflow_call]
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  print-workflow-description:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "This is a CI build of branch ${{ github.ref }} in repository ${{ github.repository }}"
-      - run: echo "This job was triggered by a ${{ github.event_name }} event and is running on a ${{ runner.os }} server"
-
-  call-tests:
+  test:
     name: Run Unit & Integration Tests
     runs-on: ubuntu-latest
     steps:
+      - name: Print description
+        run: |
+          echo "This is a CI build of branch ${{ github.ref }} in repository ${{ github.repository }}"
+          echo "This job was triggered by a ${{ github.event_name }} event and is running on a ${{ runner.os }} server"
+
       - name: Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: 17
           distribution: 'temurin'
+
       - name: Cache Maven packages
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Run Tests
-        run: mvn -V -ntp verify --file pom.xml
+        run: mvn -U -B -V -ntp verify
