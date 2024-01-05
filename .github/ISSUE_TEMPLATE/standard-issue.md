@@ -17,7 +17,7 @@ Please answer the following questions for yourself before submitting an issue.
 
 # What? 
 
-Can be written as a user story (“As a user, I want to, so that I can…) or a simple goal/purpose.
+Can be written as a user story (“As a user, I want to, so that I can…") or a simple goal/purpose.
 
 # Why?
 
