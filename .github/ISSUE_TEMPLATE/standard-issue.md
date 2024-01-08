@@ -25,7 +25,7 @@ Why we are doing this work (the value this gives to the user - whether an end-us
 
 # How?
 
-Implementation details
+Implementation details - If you have an approach in mind, list it here. This is optional.
 
 # Acceptance Criteria 
 
