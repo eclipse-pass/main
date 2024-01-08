@@ -29,4 +29,4 @@ Implementation details - If you have an approach in mind, list it here. This is 
 
 # Acceptance Criteria 
 
-The issue is done when these things are accomplished. This is only added if applicable, as sometime the issue itself - especially purely technical issues - are the acceptance criteria.
+What must be true for this work to be considered complete and correct? Include if applicable.
