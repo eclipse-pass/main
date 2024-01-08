@@ -21,7 +21,7 @@ Can be written as a user story (“As a user, I want to, so that I can…") or a
 
 # Why?
 
-Why we are doing this work (the value this gives to the user - whether an end-user, the development team, other institutions, etc.)
+Why should this work be done (the value this provides to end users or other project participants)
 
 # How?
 
