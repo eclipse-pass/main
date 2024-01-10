@@ -7,13 +7,15 @@ assignees: ''
 
 ---
 
-Please answer the following questions for yourself before submitting an issue. 
-**YOU SHOULD DELETE THE PREREQUISITES SECTION.**
-
 # Prerequisites
 
-- [ ] Is the title clear and understandable at a glance?
-- [ ] Is a label present?
+Please answer the following questions for yourself before submitting an issue:
+  * Is the title clear and understandable at a glance?
+  * Is a label present if appropriate?
+
+Labels are not required for all tickets, but they are helpful for prioritization. Please check the labels drop-down to see if any of the pre-set labels work for your ticket.
+
+**YOU SHOULD DELETE THE PREREQUISITES SECTION.**
 
 # What? 
 
@@ -30,3 +32,9 @@ Implementation details - If you have an approach in mind, list it here. This is 
 # Acceptance Criteria 
 
 What must be true for this work to be considered complete and correct? Include if applicable.
+
+# Related Issues
+
+  * #123 is related because of xyz.
+
+List related issues here.
