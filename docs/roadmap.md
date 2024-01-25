@@ -4,14 +4,29 @@ This roadmap defines the primary initiatives of the Eclipse PASS Project, organi
 
 If you are interested in helping to define and/or contribute to this roadmap, please get in touch. We're always happy to welcome new project contributors!
 
-# [Completed Releases](release-notes.md)
+## Priorities and goals
 
-## 1.3.0
-This release will focus on enhancing the interfaces to NIHMS and on application security. As usual, there will also be updates to address technical debt and fix a few bugs.
+User engagement
+* Engage with users or potential users of PASS to better understand their needs and the ways in which PASS can be improved to solve the challenges they face
 
-* Design and implementation of NIHMS error handling of deposits
-* Add funder and grant information on NIHMS deposits
-* Address and remediate security vulnerabilities
-* Investigate simplifying pass-proxy and pass-auth and merging into pass-core
-* Improvements to integration and acceptance tests
-* Various bug fixes
+Community engagement
+* Engage with and build out the broader community of institutions that have interest in utilizing PASS
+* Provide a baseline method for other institutions to import the necessary data into PASS
+* Prepare PASS to be deployed, used, implemented at other institutions
+* Add at least one additional IR deposit target
+
+System Administration
+* Provide improved tooling and support for administering the PASS system
+* Deployment infrastructure
+* System Monitoring and Alerting
+* Provide a mechanism to be able to visualize and share submission statistics,Design/mockups
+
+Application Improvements
+* Integrate with at least one additional funder repository
+* Improve technical process (CI/CD, automation)
+* Ensure the NIH integration is solid
+* Work on tech debt and ensure system components are kept up-to-date
+* Security/Testing
+
+Documentation
+* Improve documentation to prepare for collaboration
