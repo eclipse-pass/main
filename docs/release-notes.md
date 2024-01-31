@@ -1,3 +1,19 @@
+## Release v1.3.0
+### Date: January 31, 2024
+
+This release focused on updating the interactions with NIHMS. A service was added to handle email messages from NIHMS about submission status. We made GitHub actions for Java snapshot and release builds consistent and more robust. We switched the grant loader to a CSV format which will make it easier to import grant data from other systems. For the UI, we improved the accessibility of the UI and the interaction with external links in the workflow.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/17?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.3.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.3.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.3.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.3.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.3.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.3.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.3.0
+
 ## Release v1.2.0
 ### Date: November 30, 2023
 
