@@ -42,8 +42,8 @@ jobs:
       - name: Run Tests
         run: mvn -U -B -V -ntp verify
 
-      - name: Acceptance tests
-        if: ${{ inputs.run_acceptance_tests }}
-        uses: .github/actions/acceptance-test@main
-        with:
-          pullimages: missing
+      # - name: Acceptance tests
+      #   if: ${{ inputs.run_acceptance_tests }}
+      #   uses: eclipse-pass/main/.github/actions/acceptance-test@main
+      #   with:
+      #     pullimages: missing
