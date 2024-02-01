@@ -1,5 +1,19 @@
 name: main Continuous Integration
-on: [pull_request, workflow_dispatch, workflow_call]
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      run_acceptance_tests:
+        description: Should acceptance tests be run?
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      run_acceptance_tests:
+        description: Should acceptance tests be run?
+        type: boolean
+        default: true
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
@@ -27,3 +41,9 @@ jobs:
 
       - name: Run Tests
         run: mvn -U -B -V -ntp verify
+
+      - name: Acceptance tests
+        if: ${{ inputs.run_acceptance_tests }}
+        uses: .github/actions/acceptance-test@main
+        with:
+          pullimages: missing

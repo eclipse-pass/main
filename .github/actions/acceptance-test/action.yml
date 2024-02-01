@@ -1,0 +1,64 @@
+name: PASS acceptance tests
+description: Run pass-acceptance-tests
+
+# TODO: Would be nice to allow replacement images
+
+inputs:
+  timeouts:
+    description: 'Testing timeouts (ms)'
+    default: '60000'
+
+runs:
+  using: composite
+  steps:
+    - run: |
+        echo "Set timeouts: ${{ inputs.timeouts }}"
+      shell: bash
+
+    - name: Append hosts file to enable "pass.local" on localhost
+      shell: bash
+      run: echo "127.0.0.1    pass.local" | sudo tee -a /etc/hosts
+
+    - name: Checkout pass-docker
+      uses: actions/checkout@v3
+      with:
+        repository: eclipse-pass/pass-docker
+        path: pass-docker
+
+    - name: Checkout pass-acceptance-testing
+      uses: actions/checkout@v3
+      with:
+        repository: eclipse-pass/pass-acceptance-testing
+        path: pass-acceptance-testing
+
+    - name: Run pass-docker
+      shell: bash
+      working-directory: pass-docker
+      run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml up -d --no-build --quiet-pull
+    
+    # Show both views to see which images are in use by docker compose but with extra info like time created from docker
+    - name: Print Docker images
+      shell: bash
+      working-directory: pass-docker
+      run: |
+        docker images
+        docker compose images
+
+    - name: Run acceptance tests
+      shell: bash
+      working-directory: pass-acceptance-testing
+      run: |
+        yarn install --frozen-lockfile
+        npx testcafe \
+          'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
+          --hostname localhost \
+          tests/*Tests.js \
+          --selector-timeout ${{ inputs.timeouts}} \
+          --assertion-timeout ${{ inputs.timeouts}} \
+          --ajax-request-timeout ${{ inputs.timeouts}}
+
+    - name: Stop pass-docker
+      if: always()
+      shell: bash
+      working-directory: pass-docker
+      run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml down -v
