@@ -42,6 +42,12 @@
       <organization>The Sheridan Libraries, Johns Hopkins University</organization>
       <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
     </developer>
+    <developer>
+      <name>Russ Poetker</name>
+      <email>rpoetke1@jhu.edu</email>
+      <organization>The Sheridan Libraries, Johns Hopkins University</organization>
+      <organizationUrl>https://www.library.jhu.edu/</organizationUrl>
+    </developer>
   </developers>
 
   <scm>
@@ -62,24 +68,25 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
     <!-- Plugin versions -->
-    <build-helper-maven-plugin.version>3.3.0</build-helper-maven-plugin.version>
-    <docker-maven-plugin.version>0.40.1</docker-maven-plugin.version>
-    <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <maven-enforcer-plugin.version>3.0.0</maven-enforcer-plugin.version>
-    <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
-    <maven-javadoc-plugin.version>3.4.0</maven-javadoc-plugin.version>
-    <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-    <maven-source-plugin.version>3.2.1</maven-source-plugin.version>
-    <maven.spring.plugin.version>2.7.4</maven.spring.plugin.version>
+    <build-helper-maven-plugin.version>3.5.0</build-helper-maven-plugin.version>
+    <docker-maven-plugin.version>0.43.4</docker-maven-plugin.version>
+    <maven-checkstyle-plugin.version>3.3.1</maven-checkstyle-plugin.version>
+    <maven-compiler-plugin.version>3.12.1</maven-compiler-plugin.version>
+    <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
+    <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
+    <maven-gpg-plugin.version>3.1.0</maven-gpg-plugin.version>
+    <maven-javadoc-plugin.version>3.6.3</maven-javadoc-plugin.version>
+    <maven-release-plugin.version>3.0.1</maven-release-plugin.version>
+    <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
     <nexus-staging-maven-plugin.version>1.6.13</nexus-staging-maven-plugin.version>
-    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-    <maven-war-plugin.version>3.2.3</maven-war-plugin.version>
-    <tidy-maven-plugin.version>1.1.0</tidy-maven-plugin.version>
+    <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
+    <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+    <tidy-maven-plugin.version>1.2.0</tidy-maven-plugin.version>
 
     <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
+
+    <!-- These will all be removed since they are being pushed down to each deployable project -->
     <logback.version>1.2.11</logback.version>
     <slf4j.version>1.7.36</slf4j.version>
     <log4j2.version>2.14.1</log4j2.version>
@@ -90,6 +97,7 @@
   </properties>
 
   <dependencyManagement>
+    <!-- These will all be removed since they are being pushed down to each deployable project -->
     <dependencies>
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -153,7 +161,7 @@
           <configuration>
             <configLocation>duraspace-checkstyle/checkstyle.xml</configLocation>
             <suppressionsLocation>duraspace-checkstyle/checkstyle-suppressions.xml</suppressionsLocation>
-            <encoding>UTF-8</encoding>
+            <inputEncoding>UTF-8</inputEncoding>
             <consoleOutput>true</consoleOutput>
             <logViolationsToConsole>true</logViolationsToConsole>
             <failOnViolation>true</failOnViolation>
