@@ -85,51 +85,7 @@
 
     <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
-
-    <!-- These will all be removed since they are being pushed down to each deployable project -->
-    <logback.version>1.2.11</logback.version>
-    <slf4j.version>1.7.36</slf4j.version>
-    <log4j2.version>2.14.1</log4j2.version>
-    <spring.version>2.5.6</spring.version>
-    <okhttp.version>4.10.0</okhttp.version>
-    <junit.jupiter.version>5.7.2</junit.jupiter.version>
-    <elide.version>6.1.12</elide.version>
   </properties>
-
-  <dependencyManagement>
-    <!-- These will all be removed since they are being pushed down to each deployable project -->
-    <dependencies>
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>slf4j-api</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>log4j-over-slf4j</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.logging.log4j</groupId>
-        <artifactId>log4j-to-slf4j</artifactId>
-        <version>${log4j2.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.slf4j</groupId>
-        <artifactId>jcl-over-slf4j</artifactId>
-        <version>${slf4j.version}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>ch.qos.logback</groupId>
-        <artifactId>logback-classic</artifactId>
-        <version>${logback.version}</version>
-      </dependency>
-    </dependencies>
-  </dependencyManagement>
 
   <build>
     <pluginManagement>
@@ -208,7 +164,6 @@
               </goals>
               <configuration>
                 <rules>
-<!--                  <dependencyConvergence />-->
                   <bannedDependencies>
                     <searchTransitive>true</searchTransitive>
                     <excludes>
