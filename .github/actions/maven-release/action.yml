@@ -30,7 +30,7 @@ runs:
           goal="install"
         fi
 
-        mvn -B -U -V -ntp -P release -DstagingProgressTimeoutMinutes=15 clean $goal | tee release.log
+        mvn -B -U -V -ntp -P release -DstagingProgressTimeoutMinutes=15 clean $goal 2>&1 | tee release.log
         code=${PIPESTATUS[0]}
 
         marker1="Remote staging repositories are being released"
