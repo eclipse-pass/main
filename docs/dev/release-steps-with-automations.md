@@ -22,12 +22,16 @@ You will need to release these in the order defined here due to dependencies. Be
    * https://github.com/orgs/eclipse-pass/packages/container/package/pass-journal-loader
    * https://github.com/orgs/eclipse-pass/packages/container/package/pass-nihms-loader
 
-You can instead use a [combined Java workflow](https://github.com/eclipse-pass/main/actions/workflows/pass-java-release.yml) which combines all the Java projects together and then releases them. This workflow depends on the JAVA_RELEASE_PAT secret having permission to access all the eclipse-pass repositories and write packages. You have have to create a new classic PAT to do the release. If you do so, scope it to only last a few days and make sure it has repo and write package permissions.
+You can instead use a [combined Java workflow](https://github.com/eclipse-pass/main/actions/workflows/pass-java-release.yml) which combines all the Java projects together and then releases them. 
+This workflow depends on the JAVA_RELEASE_PAT secret having permission to access all the eclipse-pass repositories and write packages. 
+You have to create a new classic Personal Access Token (PAT) to do the release (GitHub/Settings/Developer Settings/Personal access tokens/Tokens (classic)). 
+If you do so, set the expiration to 7 days, check the `repo` and the `write:packages` scope (subscopes under `repo` 
+and `write:packages` will be selected too).
 
-How to set the secret using the gh command line tool:
+How to set the secret using the gh command line tool [GitHub CLI](https://cli.github.com/):
 ```
-gh login
-gh secret set JAVA_RELEASE_PAT --body PAT_VALUE --repo eclipse-pass/main
+gh auth login
+gh secret set JAVA_RELEASE_PAT --body <PAT_VALUE> --repo eclipse-pass/main
 ```
 
 ### Non-Java projects
