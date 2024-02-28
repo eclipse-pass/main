@@ -45,13 +45,14 @@ Release Workflow Example: [Triggering a GitHub workflow](../dev/release-steps-wi
 Note: This must be released last because it relies on some Docker images that will be published during the release process.
 
 - [ ] Release Pass Docker - Select checkbox for acceptance tests - [Release workflow](https://github.com/eclipse-pass/pass-docker/actions/workflows/release.yml)
+- [ ] Verify Pass Docker Tag [Pass Docker Tag](https://github.com/eclipse-pass/pass-docker/tags)
 - [ ] Pass Docker Release Page - Perform after the Pass Docker release is complete - [Pass Docker GitHub Release Page](https://github.com/eclipse-pass/pass-docker/releases)
 
 ## Post-release
 
 - [ ] Test the release by using the newly updated pass-docker to run the release locally.
 - [ ] Check that correct tickets are in the release milestone. [Github Ticket Update](../dev/release.md#update-release-notes)
-- [ ] Write release notes in the [Release Notes doc](../release-notes.md), update the [Roadmap](../roadmap.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
+- [ ] Write release notes in the [Release Notes doc](../release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
 - [ ] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
 - [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
 - [ ] Update template if any steps were missed or if any new tasks were added. Also make note of these new steps in the release-actions-X.X.X.md file.
