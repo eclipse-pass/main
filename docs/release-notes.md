@@ -1,3 +1,24 @@
+## Release v1.4.0
+### Date: February 28, 2024
+
+Release Manager: Russ Poetker, JHU
+
+This release focused on updating dependency versions and enforcing clean dependency management in the PASS backend repositories. 
+The required configuration architecture was simplified for the nihms and grant data loaders by making these Spring applications. 
+We began working on a new documentation repository supported by GitBook, more to come on this in the near future.
+We improved the file delete action on the UI by deleting such files from the backend.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/18?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.4.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.4.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.4.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.4.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.4.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.4.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.4.0
+
 ## Release v1.3.0
 ### Date: January 31, 2024
 
