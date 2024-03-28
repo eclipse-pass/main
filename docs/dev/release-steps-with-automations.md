@@ -15,7 +15,7 @@ gh auth login
 gh secret set JAVA_RELEASE_PAT --body <PAT_VALUE> --repo eclipse-pass/main
 ```
 
-If needed, the individual java components can be release individually.Release these in the order defined here due to 
+If needed, the individual java components can be released individually. Release these in the order defined here due to 
 dependencies. Between each of these releases, you will need to wait for the Java artifacts to appear on Maven Central. 
 This will give you enough time to do other release activities, such as releasing non-Java artifacts. The release 
 workflows should wait for you, but is good to check anyway.

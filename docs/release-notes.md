@@ -1,3 +1,26 @@
+## Release v1.5.0
+### Date: March 28, 2024
+
+Release Manager: Timothy Sanders, JHU
+
+This release focused on use cases for the planned Admin UI, documentation for the PASS Welcome Guide, 
+and enhancements to the grant and nihms data loaders. We added updated parameters to the nihms loader for scheduled 
+environments, and revised the nihms email processing. The grant loader had updates to its aggregation rules, CSV ingest, 
+and extended test coverage. We simplified our CI/CD pipeline by creating a single action to deploy all PASS components 
+to a specified environment. Began consolidating the authentication process to integrate Spring Security into pass-core, 
+enhancing flexibility and security.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/19?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.5.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.5.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.5.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.5.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.5.0
+* pass-auth - https://github.com/eclipse-pass/pass-auth/releases/tag/1.5.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.5.0
+
 ## Release v1.4.0
 ### Date: February 28, 2024
 
