@@ -10,9 +10,9 @@ This is the full detailed release process, including the steps that are performe
 
 ## Pre-release
 
-- [ ] Identify the version to be utilized for the release.
-- [ ] Ensure all code commits and PRs intended for the release have been merged.
-- [ ] Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent.
+- [X] Identify the version to be utilized for the release.
+- [X] Ensure all code commits and PRs intended for the release have been merged.
+- [X] Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent.
 
 
 ## Release Java Projects

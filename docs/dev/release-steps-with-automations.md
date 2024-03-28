@@ -3,8 +3,22 @@
 Actions listed below are to be done by the release manager.
 
 ### Java projects
+The [combined Java workflow](https://github.com/eclipse-pass/main/actions/workflows/pass-java-release.yml) combines all the Java projects together and then releases them in one single workflow.
+This workflow depends on the JAVA_RELEASE_PAT secret having permission to access all the eclipse-pass repositories and write packages.
+You have to create a new classic Personal Access Token (PAT) to do the release (GitHub/Settings/Developer Settings/Personal access tokens/Tokens (classic)).
+If you do so, set the expiration to 7 days, check the `repo` and the `write:packages` scope (subscopes under `repo`
+and `write:packages` will be selected too).
 
-You will need to release these in the order defined here due to dependencies. Between each of these releases, you will need to wait for the Java artifacts to appear on Maven Central. This will give you enough time to do other release activities, such as releasing non-Java artifacts. The release workflows should wait for you, but is good to check anyway.
+How to set the secret using the gh command line tool [GitHub CLI](https://cli.github.com/):
+```
+gh auth login
+gh secret set JAVA_RELEASE_PAT --body <PAT_VALUE> --repo eclipse-pass/main
+```
+
+If needed, the individual java components can be release individually.Release these in the order defined here due to 
+dependencies. Between each of these releases, you will need to wait for the Java artifacts to appear on Maven Central. 
+This will give you enough time to do other release activities, such as releasing non-Java artifacts. The release 
+workflows should wait for you, but is good to check anyway.
 
 1. [`main`](https://github.com/eclipse-pass/main)
    * [Release workflow](https://github.com/eclipse-pass/main/actions/workflows/release.yml)
@@ -22,17 +36,6 @@ You will need to release these in the order defined here due to dependencies. Be
    * https://github.com/orgs/eclipse-pass/packages/container/package/pass-journal-loader
    * https://github.com/orgs/eclipse-pass/packages/container/package/pass-nihms-loader
 
-You can instead use a [combined Java workflow](https://github.com/eclipse-pass/main/actions/workflows/pass-java-release.yml) which combines all the Java projects together and then releases them. 
-This workflow depends on the JAVA_RELEASE_PAT secret having permission to access all the eclipse-pass repositories and write packages. 
-You have to create a new classic Personal Access Token (PAT) to do the release (GitHub/Settings/Developer Settings/Personal access tokens/Tokens (classic)). 
-If you do so, set the expiration to 7 days, check the `repo` and the `write:packages` scope (subscopes under `repo` 
-and `write:packages` will be selected too).
-
-How to set the secret using the gh command line tool [GitHub CLI](https://cli.github.com/):
-```
-gh auth login
-gh secret set JAVA_RELEASE_PAT --body <PAT_VALUE> --repo eclipse-pass/main
-```
 
 ### Non-Java projects
 These can be released in any order. You should release these between releasing Java components, while waiting for artifacts to become available in Maven Central.
