@@ -15,10 +15,6 @@ runs:
         echo "Set timeouts: ${{ inputs.timeouts }}"
       shell: bash
 
-    - name: Append hosts file to enable "pass.local" on localhost
-      shell: bash
-      run: echo "127.0.0.1    pass.local" | sudo tee -a /etc/hosts
-
     - name: Checkout pass-docker
       uses: actions/checkout@v3
       with:
