@@ -37,7 +37,7 @@ Mapping from Shibboleth attributes to PASS users:
   * firstName: Given name
   * lastName: Surname 
   * username: Eppn
-  * affiliations:  DOMAIN, all values after splitting affiliation on `;`
+  * affiliations:  DOMAIN, all values
   * locatorIds: UNIQUE ID, INSTITUTIONAL_ID, EMPLOYEE_ID
   * role: SUBMITTER
 
