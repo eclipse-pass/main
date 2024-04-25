@@ -4,7 +4,7 @@ In order to run pass-ui outside of the docker environment:
 
 You will need to configure `pass-core` to load the UI from `localhost:4200`.
 
-This can be done by seting the environment variable `PASS_CORE_APP_LOCATION` to `http://host.docker.internal:4200/` in `.env`.
+This can be done by seting the environment variable `PASS_CORE_APP_LOCATION` to `http://host.docker.internal:4200/app/` in `.env`. This will bypass the `pass-ui` container.
 
 Then simply use docker compose like normal.
 
