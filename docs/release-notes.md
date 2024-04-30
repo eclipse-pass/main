@@ -1,3 +1,23 @@
+## Release v1.6.0
+### Date: April 30, 2024
+
+Release Manager: Mark Patton, JHU
+
+This release focused on simplifying authentication support, writing documentation to make collaboration easier, and
+automated testing against a live PASS instance. The pass-core component took over the responsibilty for authentication
+and mediating access to pass-ui resources. This allowed us to to remove the no longer needed pass-auth component.
+The deposit services now also cleanup after the new automated tests.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/20?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.6.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.6.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.6.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.6.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.6.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.6.0
+
 ## Release v1.5.0
 ### Date: March 28, 2024
 
