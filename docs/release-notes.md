@@ -3,10 +3,7 @@
 
 Release Manager: Mark Patton, JHU
 
-This release focused on simplifying authentication support, writing documentation to make collaboration easier, and
-automated testing against a live PASS instance. The pass-core component took over the responsibilty for authentication
-and mediating access to pass-ui resources. This allowed us to to remove the no longer needed pass-auth component.
-The deposit services now also cleanup after the new automated tests.
+This release focused on simplifying authentication support, writing documentation to make collaboration easier, and automated testing against a live PASS instance. The pass-core component took over the responsibilty for authentication and mediating access to pass-ui resources. This allowed us to to remove the no longer needed pass-auth component. The deposit services now also cleanup after the new automated tests.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/20?closed=1
 
@@ -23,12 +20,7 @@ Release Components:
 
 Release Manager: Timothy Sanders, JHU
 
-This release focused on use cases for the planned Admin UI, documentation for the PASS Welcome Guide, 
-and enhancements to the grant and nihms data loaders. We added updated parameters to the nihms loader for scheduled 
-environments, and revised the nihms email processing. The grant loader had updates to its aggregation rules, CSV ingest, 
-and extended test coverage. We simplified our CI/CD pipeline by creating a single action to deploy all PASS components 
-to a specified environment. Began consolidating the authentication process to integrate Spring Security into pass-core, 
-enhancing flexibility and security.
+This release focused on use cases for the planned Admin UI, documentation for the PASS Welcome Guide, and enhancements to the grant and nihms data loaders. We added updated parameters to the nihms loader for scheduled environments, and revised the nihms email processing. The grant loader had updates to its aggregation rules, CSV ingest, and extended test coverage. We simplified our CI/CD pipeline by creating a single action to deploy all PASS components to a specified environment. Began consolidating the authentication process to integrate Spring Security into pass-core, enhancing flexibility and security.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/19?closed=1
 
@@ -46,10 +38,7 @@ Release Components:
 
 Release Manager: Russ Poetker, JHU
 
-This release focused on updating dependency versions and enforcing clean dependency management in the PASS backend repositories. 
-The required configuration architecture was simplified for the nihms and grant data loaders by making these Spring applications. 
-We began working on a new documentation repository supported by GitBook, more to come on this in the near future.
-We improved the file delete action on the UI by deleting such files from the backend.
+This release focused on updating dependency versions and enforcing clean dependency management in the PASS backend repositories. The required configuration architecture was simplified for the nihms and grant data loaders by making these Spring applications. We began working on a new documentation repository supported by GitBook, more to come on this in the near future. We improved the file delete action on the UI by deleting such files from the backend.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/18?closed=1
 
