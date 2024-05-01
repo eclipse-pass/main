@@ -43,9 +43,6 @@ These can be released in any order. You should release these between releasing J
 * [`pass-ui`](https://github.com/eclipse-pass/pass-ui)
   * [Release workflow](https://github.com/eclipse-pass/pass-ui/actions/workflows/release.yml)
   * [Package](https://github.com/eclipse-pass/pass-ui/pkgs/container/pass-ui)
-* [`pass-auth`](https://github.com/eclipse-pass/pass-auth)
-  * [Release workflow](https://github.com/eclipse-pass/pass-auth/actions/workflows/release.yml)
-  * [Package](https://github.com/eclipse-pass/pass-auth/pkgs/container/pass-auth)
 * [`pass-acceptance-testing`](https://github.com/eclipse-pass/pass-acceptance-testing)
   * [Release workflow](https://github.com/eclipse-pass/pass-acceptance-testing/actions/workflows/release.yml)
 
@@ -55,7 +52,6 @@ This must be released last because it relies on some Docker images that will be 
 1. [`pass-docker`](https://github.com/eclipse-pass/pass-docker)
    * [Release workflow](https://github.com/eclipse-pass/pass-docker/actions/workflows/release.yml)
    * Packages:
-      * [proxy](https://github.com/orgs/eclipse-pass/packages/container/package/proxy)
       * [pass-ui-public](https://github.com/orgs/eclipse-pass/packages/container/package/pass-ui-public)
       * [idp](https://github.com/orgs/eclipse-pass/packages/container/package/idp)
       * [demo-ldap](https://github.com/orgs/eclipse-pass/packages/container/package/demo-ldap)

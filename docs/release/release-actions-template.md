@@ -10,9 +10,9 @@ This is the full detailed release process, including the steps that are performe
 
 ## Pre-release
 
-- [ ] Identify the version to be utilized for the release.
-- [ ] Ensure all code commits and PRs intended for the release have been merged.
-- [ ] Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent.
+- [x] Identify the version to be utilized for the release.
+- [x] Ensure all code commits and PRs intended for the release have been merged.
+- [x] Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent.
 
 
 ## Release Java Projects
@@ -31,12 +31,6 @@ Java Modules:
 - [ ] Release Pass UI - [Pass UI workflow](https://github.com/eclipse-pass/pass-ui/actions/workflows/release.yml)
 - [ ] Verify Pass UI packages [Pass UI Packages](https://github.com/eclipse-pass/pass-ui/pkgs/container/pass-ui)
 - [ ] Pass UI Release Page - Perform after the Pass UI release is complete - [Pass UI GitHub Release Page](https://github.com/eclipse-pass/pass-ui/releases)
-
- ---
- 
-- [ ] Release Pass Auth - [Pass Auth workflow](https://github.com/eclipse-pass/pass-auth/actions/workflows/release.yml)
-- [ ] Verify Pass Auth packages [Pass Auth Packages](https://github.com/eclipse-pass/pass-auth/pkgs/container/pass-auth)
-- [ ] Pass Auth Release Page - Perform after the Pass Auth release is complete - [Pass Auth GitHub Release Page](https://github.com/eclipse-pass/pass-auth/releases)
 
  ---
  
