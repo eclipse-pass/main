@@ -76,7 +76,7 @@ jobs:
           (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
           (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
           (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
-          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git status && git tag $RELEASE)
           (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
           (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
 
