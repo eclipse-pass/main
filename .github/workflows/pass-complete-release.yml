@@ -1,4 +1,4 @@
-name: "Publish: Release All"
+name: "(In development - Don't Use) Publish: Release All"
 run-name: Release All Modules (${{ inputs.releaseversion }} -> ${{ inputs.nextversion}})
 
 on:
