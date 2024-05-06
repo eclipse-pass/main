@@ -35,10 +35,10 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-      - name: Config git user
-        run: |
-          git config user.name ${{ github.actor }}
-          git config user.email "${{ github.actor }}@users.noreply.github.com"
+#      - name: Config git user
+#        run: |
+#          git config user.name ${{ github.actor }}
+#          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
       - name: Setup Node & Yarn
         uses: actions/setup-node@v3
