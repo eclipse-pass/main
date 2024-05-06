@@ -40,12 +40,6 @@ jobs:
 #          git config user.name ${{ github.actor }}
 #          git config user.email "${{ github.actor }}@users.noreply.github.com"
 
-      - name: Setup Node & Yarn
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'yarn'
-
       - name: Get the artifact from the main POM
         working-directory: main
         run: |
@@ -89,6 +83,12 @@ jobs:
 #          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Setup Node & Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
 
       - name: Build pass-ui
         uses: ./combined/pass-ui/.github/actions/build-pass-ui
