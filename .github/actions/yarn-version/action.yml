@@ -1,0 +1,30 @@
+name: Update yarn version for release
+description: |
+  Updates yarn version which automatically does a commit and this action tags
+
+inputs:
+  repository_dir:
+    description: 'Directory of repository to update'
+    required: true
+  skip_tag:
+    description: 'Skip git tag'
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Update yarn version and tag ${{ env.RELEASE }}
+      shell: bash
+      working-directory: ${{ inputs.repository_dir }}
+      env:
+        SKIP_TAG: ${{ inputs.skip_tag }}
+      run: |
+        yarn install --frozen-lockfile
+        yarn config set version-git-tag false
+        yarn version --new-version $RELEASE
+        git commit --allow-empty -am "Update version to $RELEASE"
+        if [ "$SKIP_TAG" == "false" ]; then
+          echo "Tagging yarn version $RELEASE"
+          git tag $RELEASE
+        fi
