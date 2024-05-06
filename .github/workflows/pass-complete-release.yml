@@ -1,0 +1,155 @@
+name: "Publish: Release All"
+run-name: Release All Modules (${{ inputs.releaseversion }} -> ${{ inputs.nextversion}})
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseversion:
+        description: 'Release version'
+        required: true
+      nextversion:
+        description: 'Next dev version'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      RELEASE: ${{ inputs.releaseversion }}
+      NEXT: ${{ inputs.nextversion }}
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v3
+        with:
+          path: main
+
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      - name: Config git user
+        run: |
+          git config user.name ${{ github.actor }}
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Setup Node & Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Get the artifact from the main POM
+        working-directory: main
+        run: |
+          echo "ARTIFACT=`mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout`" >> $GITHUB_ENV
+
+      - name: Configure git user
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      # Combine modules together so maven can do everything at once for Java repos
+      - name: Create combined module
+        run: |
+          mkdir combined
+          cp main/pom.xml combined
+          sed -i '/<\/developers>/a <modules><module>pass-core</module><module>pass-support</module></modules>' combined/pom.xml
+
+      - name: Checkout all released PASS repos
+        run: |
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-core.git combined/pass-core
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-support.git combined/pass-support
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-ui.git combined/pass-ui
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
+
+      - name: Set the release version, commit the change, and tag it
+        run: |
+          (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
+          (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+
+#      - name: Release Java modules
+#        uses: ./main/.github/actions/maven-release
+#        with:
+#          repodir: combined
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Build pass-ui
+        uses: ./combined/pass-ui/.github/actions/build-pass-ui
+        with:
+          is-prod: true
+
+      - name: Build new pass-docker images
+        working-directory: combined/pass-docker
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
+
+      - name: Set the next dev version and commit the change
+        run: |
+          (cd main && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT && git commit -am "Update version to $NEXT")
+          (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
+          (cd combined/pass-core && git commit -am "Update version to $NEXT")
+          (cd combined/pass-support && git commit -am "Update version to $NEXT")
+          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $NEXT && git commit -am "Update version to $NEXT" && git tag $NEXT)
+          (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $NEXT && git commit -am "Update version to $NEXT" && git tag $NEXT)
+          (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env && git commit -am "Update version to $NEXT" && git tag $NEXT)
+
+      #      - name: Release dev Java modules
+#        working-directory: combined
+#        run: |
+#          mvn -B -V -ntp -P release clean deploy -DskipTests -DskipITs
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+#      - name: Login to GHCR
+#        uses: docker/login-action@v2
+#        with:
+#          registry: ghcr.io
+#          username: ${{ github.actor }}
+#          password: ${{ secrets.JAVA_RELEASE_PAT }}
+#
+#      - name: Push Docker images to GHCR
+#        run: |
+#          docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT
+#          docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
+#          docker push ghcr.io/eclipse-pass/deposit-services-core:$NEXT
+#          docker push ghcr.io/eclipse-pass/pass-notification-service:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-notification-service:$NEXT
+#          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
+#          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$NEXT
+#          docker push ghcr.io/eclipse-pass/pass-journal-loader:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-journal-loader:$NEXT
+#          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$NEXT
+#
+#      - name: Push the commits and tags
+#        run: |
+#          (cd main && git push origin && git push origin --tags)
+#          (cd combined/pass-core && git push origin && git push origin --tags)
+#          (cd combined/pass-support && git push origin && git push origin --tags)
+#
+#      - name: Create GitHub main release
+#        run: |
+#          gh release create "$RELEASE" --repo=eclipse-pass/main --generate-notes
+#          gh release create "$RELEASE" --repo=eclipse-pass/pass-core --generate-notes
+#          gh release create "$RELEASE" --repo=eclipse-pass/pass-support --generate-notes
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
