@@ -79,6 +79,7 @@ jobs:
           (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git tag $RELEASE)
           (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git tag $RELEASE)
           (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+          (cd combined/pass-docker && cat .env)
 
 #      - name: Release Java modules
 #        uses: ./main/.github/actions/maven-release
@@ -104,8 +105,8 @@ jobs:
           (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
           (cd combined/pass-core && git commit -am "Update version to $NEXT")
           (cd combined/pass-support && git commit -am "Update version to $NEXT")
-          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $NEXT && git commit -am "Update version to $NEXT")
-          (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $NEXT && git commit -am "Update version to $NEXT")
+          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $NEXT)
+          (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $NEXT)
           (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env && git commit -am "Update version to $NEXT")
 
       #      - name: Release dev Java modules
