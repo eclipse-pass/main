@@ -1,3 +1,22 @@
+## Release v1.6.1
+### Date: May 7, 2024
+
+Release Manager: Mark Patton, JHU
+
+This release fixes a problem caused by the format of the ember simple auth session cookie changing and tweaks timeouts for monitoring NIHMS email.
+
+Tickets Completed:
+* https://github.com/eclipse-pass/main/issues/930
+* https://github.com/eclipse-pass/main/issues/974
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.6.1
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.6.1
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.6.1
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.6.1
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.6.1
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.6.1
+
 ## Release v1.6.0
 ### Date: April 30, 2024
 
