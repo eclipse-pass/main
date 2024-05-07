@@ -71,22 +71,29 @@ jobs:
           node-version: 18
 
       - name: Set the release version, commit the change, and tag it
-        id: release-update
         run: |
           (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
           (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
           (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
           (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
-          (echo "## Updating pass-ui")
+          (echo "## Updating pass-ui ##")
           (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git tag $RELEASE)
-          (echo "## Updating pass-acceptance-testing")
+          (echo "## Updating pass-acceptance-testing ##")
           (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --verbose --new-version $RELEASE && git tag $RELEASE)
-          (echo "## Updating pass-docker")
+          (echo "## Updating pass-docker ##")
           (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
-          (cd combined/pass-docker && echo "pass-docker-env=$(cat .env)" >> $GITHUB_OUTPUT)
+
+      - name: Set pass-docker .env
+        id: set-docker-env
+        run: |
+          {
+            echo 'PASS_DOCKER_ENV<<EOF'
+            cat ./combined/pass-docker/.env
+            echo EOF
+          } >> "$GITHUB_OUTPUT"
 
       - name: Echo pass-docker .env
-        run: echo ${{ steps.release-update.outputs.pass-docker-env }}
+        run: echo ${{ steps.set-docker-env.outputs.PASS_DOCKER_ENV }}
 
 #      - name: Release Java modules
 #        uses: ./main/.github/actions/maven-release
