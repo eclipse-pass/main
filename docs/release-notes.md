@@ -3,7 +3,7 @@
 
 Release Manager: Mark Patton, JHU
 
-This release fixes a problem caused by the format of the ember simple auth session cookie changing and tweaks timeouts for monitoring NIHMS email.
+This release fixes a bug which may prevent login and tweaks timeouts for monitoring NIHMS email.
 
 Tickets Completed:
 * https://github.com/eclipse-pass/main/issues/930
