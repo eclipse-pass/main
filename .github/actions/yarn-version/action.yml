@@ -23,7 +23,7 @@ runs:
         yarn install --frozen-lockfile
         yarn config set version-git-tag false
         yarn version --new-version $RELEASE
-        if [ "$SKIP_TAG" == "false" ] then
+        if [ "$SKIP_TAG" == "false" ]; then
           echo "Tagging yarn version $RELEASE"
           git tag $RELEASE
         fi
