@@ -18,81 +18,72 @@ jobs:
       RELEASE: ${{ inputs.releaseversion }}
       NEXT: ${{ inputs.nextversion }}
     steps:
-#      - name: Checkout main
-#        uses: actions/checkout@v3
-#        with:
-#          path: main
-#
-#      - name: Setup Java & Maven
-#        uses: actions/setup-java@v3
-#        with:
-#          java-version: 17
-#          distribution: 'temurin'
-#          cache: 'maven'
-#          server-id: ossrh
-#          server-username: MAVEN_USERNAME
-#          server-password: MAVEN_PASSWORD
-#          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
-#          gpg-passphrase: MAVEN_GPG_PASSPHRASE
-#
-#      - name: Get the artifact from the main POM
-#        working-directory: main
-#        run: |
-#          echo "ARTIFACT=`mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout`" >> $GITHUB_ENV
-#
-#      - name: Configure git user
-#        run: |
-#          git config --global user.name ${{ github.actor }}
-#          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+      - name: Checkout main
+        uses: actions/checkout@v3
+        with:
+          path: main
 
-      # Combine modules together so maven can do everything at once for Java repos
-#      - name: Create combined module
-#        run: |
-#          mkdir combined
-#          cp main/pom.xml combined
-#          sed -i '/<\/developers>/a <modules><module>pass-core</module><module>pass-support</module></modules>' combined/pom.xml
+      - name: Setup Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+          cache: 'maven'
+          server-id: ossrh
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-#      - name: Checkout all released PASS repos
-#        run: |
-#          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-core.git combined/pass-core
-#          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-support.git combined/pass-support
-#          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-ui.git combined/pass-ui
-#          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
-#          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
-
-      - name: Checkout sandbox
+      - name: Get the artifact from the main POM
+        working-directory: main
         run: |
-          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/rpoet-jh/my-sandbox.git my-sandbox
+          echo "ARTIFACT=`mvn help:evaluate -Dexpression=project.artifactId -q -DforceStdout`" >> $GITHUB_ENV
 
-#      - name: Setup Node & Yarn
-#        uses: actions/setup-node@v3
-#        with:
-#          node-version: 18
-
-      - name: Set ${{ env.RELEASE }}/commit/tag ~ sandbox
+      - name: Configure git user
         run: |
-          (cd my-sandbox && git tag --force $RELEASE)
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
 
-#      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
-#        uses: ./main/.github/actions/yarn-version
-#        with:
-#          repository_dir: combined/pass-ui
-#        env:
-#          RELEASE: ${{ env.RELEASE }}
-#
-#      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-acceptance-testing
-#        uses: ./main/.github/actions/yarn-version
-#        with:
-#          repository_dir: combined/pass-acceptance-testing
-#        env:
-#          RELEASE: ${{ env.RELEASE }}
-#
-#      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-docker
-#        run: |
-#          cd combined/pass-docker
-#          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
-#          git commit -am "Update version to $RELEASE"
-#          git tag --force $RELEASE
+      - name: Create combined module
+        run: |
+          mkdir combined
+          cp main/pom.xml combined
+          sed -i '/<\/developers>/a <modules><module>pass-core</module><module>pass-support</module></modules>' combined/pom.xml
+
+      - name: Checkout all released PASS repos
+        run: |
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-core.git combined/pass-core
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-support.git combined/pass-support
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-ui.git combined/pass-ui
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
+
+      - name: Setup Node & Yarn
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-ui
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-acceptance-testing
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-acceptance-testing
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-docker
+        run: |
+          cd combined/pass-docker
+          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
+          git commit -am "Update version to $RELEASE"
+          git tag --force $RELEASE
 
 #      - name: Release Java modules
 #        uses: ./main/.github/actions/maven-release
@@ -103,44 +94,44 @@ jobs:
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-#      - name: Build ${{ env.RELEASE }} pass-ui
-#        uses: ./main/.github/actions/yarn-build
-#        with:
-#          repository_dir: combined/pass-ui
-#          env_path: ../pass-docker/.env
-#
-#      - name: Build ${{ env.RELEASE }} pass-docker images
-#        working-directory: combined/pass-docker
-#        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-#
-#      - name: Set dev ${{ env.NEXT }}/commit ~ Java Repositories
-#        run: |
-#          (cd main && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT && git commit -am "Update version to $NEXT")
-#          (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
-#          (cd combined/pass-core && git commit -am "Update version to $NEXT")
-#          (cd combined/pass-support && git commit -am "Update version to $NEXT")
-#
-#      - name: Set dev ${{ env.NEXT }}/commit ~ pass-ui
-#        uses: ./main/.github/actions/yarn-version
-#        with:
-#          repository_dir: combined/pass-ui
-#          skip_tag: "true"
-#        env:
-#          RELEASE: ${{ env.NEXT }}
-#
-#      - name: Set dev ${{ env.NEXT }}/commit ~ pass-acceptance-testing
-#        uses: ./main/.github/actions/yarn-version
-#        with:
-#          repository_dir: combined/pass-acceptance-testing
-#          skip_tag: "true"
-#        env:
-#          RELEASE: ${{ env.NEXT }}
-#
-#      - name: Set dev ${{ env.NEXT }}/commit ~ pass-docker
-#        run: |
-#          cd combined/pass-docker
-#          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
-#          git commit -am "Update version to $NEXT"
+      - name: Build ${{ env.RELEASE }} pass-ui
+        uses: ./main/.github/actions/yarn-build
+        with:
+          repository_dir: combined/pass-ui
+          env_path: ../pass-docker/.env
+
+      - name: Build ${{ env.RELEASE }} pass-docker images
+        working-directory: combined/pass-docker
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
+
+      - name: Set dev ${{ env.NEXT }}/commit ~ Java Repositories
+        run: |
+          (cd main && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT && git commit -am "Update version to $NEXT")
+          (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
+          (cd combined/pass-core && git commit -am "Update version to $NEXT")
+          (cd combined/pass-support && git commit -am "Update version to $NEXT")
+
+      - name: Set dev ${{ env.NEXT }}/commit ~ pass-ui
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-ui
+          skip_tag: "true"
+        env:
+          RELEASE: ${{ env.NEXT }}
+
+      - name: Set dev ${{ env.NEXT }}/commit ~ pass-acceptance-testing
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-acceptance-testing
+          skip_tag: "true"
+        env:
+          RELEASE: ${{ env.NEXT }}
+
+      - name: Set dev ${{ env.NEXT }}/commit ~ pass-docker
+        run: |
+          cd combined/pass-docker
+          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
+          git commit -am "Update version to $NEXT"
 
 #      - name: Release dev Java modules
 #        working-directory: combined
@@ -151,23 +142,23 @@ jobs:
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-#      - name: Build ${{ env.NEXT }} pass-ui
-#        uses: ./main/.github/actions/yarn-build
-#        with:
-#          repository_dir: combined/pass-ui
-#          env_path: ../pass-docker/.env
-#          is_dev: "true"
-#
-#      - name: Build ${{ env.NEXT }} pass-docker images
-#        working-directory: combined/pass-docker
-#        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-#
-#      - name: Login to GHCR
-#        uses: docker/login-action@v2
-#        with:
-#          registry: ghcr.io
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.JAVA_RELEASE_PAT }}
+      - name: Build ${{ env.NEXT }} pass-ui
+        uses: ./main/.github/actions/yarn-build
+        with:
+          repository_dir: combined/pass-ui
+          env_path: ../pass-docker/.env
+          is_dev: "true"
+
+      - name: Build ${{ env.NEXT }} pass-docker images
+        working-directory: combined/pass-docker
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
+
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.JAVA_RELEASE_PAT }}
 
 #      - name: Push Docker images to GHCR
 #        run: |
@@ -189,7 +180,7 @@ jobs:
 #          docker push ghcr.io/eclipse-pass/demo-ldap:$NEXT
 #          docker push ghcr.io/eclipse-pass/idp:$RELEASE
 #          docker push ghcr.io/eclipse-pass/idp:$NEXT
-
+#
 #      - name: Push the commits and tags
 #        run: |
 #          (cd main && git push origin && git push origin --tags --force)
@@ -201,22 +192,17 @@ jobs:
 #
 #      - name: Create GitHub main release
 #        run: |
+#          gh release delete "$RELEASE" --repo=eclipse-pass/main
 #          gh release create "$RELEASE" --repo=eclipse-pass/main --generate-notes
+#          gh release delete "$RELEASE" --repo=eclipse-pass/pass-core
 #          gh release create "$RELEASE" --repo=eclipse-pass/pass-core --generate-notes
+#          gh release delete "$RELEASE" --repo=eclipse-pass/pass-support
 #          gh release create "$RELEASE" --repo=eclipse-pass/pass-support --generate-notes
+#          gh release delete "$RELEASE" --repo=eclipse-pass/pass-ui
 #          gh release create "$RELEASE" --repo=eclipse-pass/pass-ui --generate-notes
+#          gh release delete "$RELEASE" --repo=eclipse-pass/pass-acceptance-testing
 #          gh release create "$RELEASE" --repo=eclipse-pass/pass-acceptance-testing --generate-notes
+#          gh release delete "$RELEASE" --repo=eclipse-pass/pass-docker
 #          gh release create "$RELEASE" --repo=eclipse-pass/pass-docker --generate-notes
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
-
-      - name: Push the commits and tags
-        run: |
-          (cd my-sandbox && git push origin && git push origin --tags --force)
-
-      - name: Create GitHub main release
-        run: |
-          gh release delete "$RELEASE" --repo=rpoet-jh/my-sandbox
-          gh release create "$RELEASE" --repo=rpoet-jh/my-sandbox --generate-notes
-        env:
-          GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
