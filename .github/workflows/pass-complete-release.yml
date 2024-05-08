@@ -155,6 +155,7 @@ jobs:
         with:
           repository_dir: combined/pass-ui
           env_path: ../pass-docker/.env
+          is_dev: "true"
 
       - name: Build ${{ env.NEXT }} pass-docker images
         working-directory: combined/pass-docker

@@ -9,6 +9,10 @@ inputs:
   env_path:
     description: 'Path to .env file'
     required: true
+  is_dev:
+    description: 'Is dev build'
+    required: false
+    default: "false"
 
 runs:
   using: composite
@@ -18,8 +22,15 @@ runs:
       working-directory: ${{ inputs.repository_dir }}
       env:
         ENV_FILE_PATH: ${{ inputs.env_path }}
+        IS_DEV: ${{ inputs.is_dev }}
       run: |
+        grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH
         export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
         yarn install --frozen-lockfile
-        yarn run build
+        if [ "$IS_DEV" == "true" ]; then
+          yarn run build:dev
+        else
+          yarn run build
+        fi
+          
         yarn run build:docker
