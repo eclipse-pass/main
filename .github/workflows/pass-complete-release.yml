@@ -93,14 +93,14 @@ jobs:
           git commit -am "Update version to $RELEASE"
           git tag $RELEASE
 
-#      - name: Release Java modules
-#        uses: ./main/.github/actions/maven-release
-#        with:
-#          repodir: combined
-#        env:
-#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      - name: Release Java modules
+        uses: ./main/.github/actions/maven-release
+        with:
+          repodir: combined
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Build ${{ env.RELEASE }} pass-ui
         uses: ./main/.github/actions/yarn-build
@@ -141,14 +141,14 @@ jobs:
           sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
           git commit -am "Update version to $NEXT"
 
-      #      - name: Release dev Java modules
-#        working-directory: combined
-#        run: |
-#          mvn -B -V -ntp -P release clean deploy -DskipTests -DskipITs
-#        env:
-#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+      - name: Release dev Java modules
+        working-directory: combined
+        run: |
+          mvn -B -V -ntp -P release clean deploy -DskipTests -DskipITs
+        env:
+          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Build ${{ env.NEXT }} pass-ui
         uses: ./main/.github/actions/yarn-build
@@ -161,38 +161,50 @@ jobs:
         working-directory: combined/pass-docker
         run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
-#      - name: Login to GHCR
-#        uses: docker/login-action@v2
-#        with:
-#          registry: ghcr.io
-#          username: ${{ github.actor }}
-#          password: ${{ secrets.JAVA_RELEASE_PAT }}
-#
-#      - name: Push Docker images to GHCR
-#        run: |
-#          docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
-#          docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT
-#          docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
-#          docker push ghcr.io/eclipse-pass/deposit-services-core:$NEXT
-#          docker push ghcr.io/eclipse-pass/pass-notification-service:$RELEASE
-#          docker push ghcr.io/eclipse-pass/pass-notification-service:$NEXT
-#          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
-#          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$NEXT
-#          docker push ghcr.io/eclipse-pass/pass-journal-loader:$RELEASE
-#          docker push ghcr.io/eclipse-pass/pass-journal-loader:$NEXT
-#          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
-#          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$NEXT
-#
-#      - name: Push the commits and tags
-#        run: |
-#          (cd main && git push origin && git push origin --tags)
-#          (cd combined/pass-core && git push origin && git push origin --tags)
-#          (cd combined/pass-support && git push origin && git push origin --tags)
-#
-#      - name: Create GitHub main release
-#        run: |
-#          gh release create "$RELEASE" --repo=eclipse-pass/main --generate-notes
-#          gh release create "$RELEASE" --repo=eclipse-pass/pass-core --generate-notes
-#          gh release create "$RELEASE" --repo=eclipse-pass/pass-support --generate-notes
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
+      - name: Login to GHCR
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.JAVA_RELEASE_PAT }}
+
+      - name: Push Docker images to GHCR
+        run: |
+          docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT
+          docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
+          docker push ghcr.io/eclipse-pass/deposit-services-core:$NEXT
+          docker push ghcr.io/eclipse-pass/pass-notification-service:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-notification-service:$NEXT
+          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
+          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$NEXT
+          docker push ghcr.io/eclipse-pass/pass-journal-loader:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-journal-loader:$NEXT
+          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$NEXT
+          docker push ghcr.io/eclipse-pass/pass-ui:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-ui:$NEXT
+          docker push ghcr.io/eclipse-pass/demo-ldap:$RELEASE
+          docker push ghcr.io/eclipse-pass/demo-ldap:$NEXT
+          docker push ghcr.io/eclipse-pass/idp:$RELEASE
+          docker push ghcr.io/eclipse-pass/idp:$NEXT
+
+      - name: Push the commits and tags
+        run: |
+          (cd main && git push origin && git push origin --tags)
+          (cd combined/pass-core && git push origin && git push origin --tags)
+          (cd combined/pass-support && git push origin && git push origin --tags)
+          (cd combined/pass-ui && git push origin && git push origin --tags)
+          (cd combined/pass-acceptance-testing && git push origin && git push origin --tags)
+          (cd combined/pass-docker && git push origin && git push origin --tags)
+
+      - name: Create GitHub main release
+        run: |
+          gh release create "$RELEASE" --repo=eclipse-pass/main --generate-notes
+          gh release create "$RELEASE" --repo=eclipse-pass/pass-core --generate-notes
+          gh release create "$RELEASE" --repo=eclipse-pass/pass-support --generate-notes
+          gh release create "$RELEASE" --repo=eclipse-pass/pass-ui --generate-notes
+          gh release create "$RELEASE" --repo=eclipse-pass/pass-acceptance-testing --generate-notes
+          gh release create "$RELEASE" --repo=eclipse-pass/pass-docker --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
