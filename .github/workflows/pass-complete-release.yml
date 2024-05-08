@@ -35,11 +35,6 @@ jobs:
           gpg-private-key: ${{ secrets.MAVEN_GPG_KEY }}
           gpg-passphrase: MAVEN_GPG_PASSPHRASE
 
-#      - name: Config git user
-#        run: |
-#          git config user.name ${{ github.actor }}
-#          git config user.email "${{ github.actor }}@users.noreply.github.com"
-
       - name: Get the artifact from the main POM
         working-directory: main
         run: |
@@ -107,15 +102,13 @@ jobs:
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-      - name: Build pass-ui
-        working-directory: combined/pass-ui
-        run: |
-          export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' ../pass-docker/.env | xargs -d '\n')
-          yarn install --frozen-lockfile
-          yarn run build
-          yarn run build:docker
+      - name: Build ${{ env.RELEASE }} pass-ui
+        uses: ./main/.github/actions/yarn-build
+        with:
+          repository_dir: combined/pass-ui
+          env_path: ../pass-docker/.env
 
-      - name: Build new pass-docker images
+      - name: Build ${{ env.RELEASE }} pass-docker images
         working-directory: combined/pass-docker
         run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
@@ -156,6 +149,16 @@ jobs:
 #          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Build ${{ env.NEXT }} pass-ui
+        uses: ./main/.github/actions/yarn-build
+        with:
+          repository_dir: combined/pass-ui
+          env_path: ../pass-docker/.env
+
+      - name: Build ${{ env.NEXT }} pass-docker images
+        working-directory: combined/pass-docker
+        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
 #      - name: Login to GHCR
 #        uses: docker/login-action@v2

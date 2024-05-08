@@ -1,0 +1,25 @@
+name: Build yarn module for release
+description: |
+  Build yarn module
+
+inputs:
+  repository_dir:
+    description: 'Directory of repository to build'
+    required: true
+  env_path:
+    description: 'Path to .env file'
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Builds yarn module
+      shell: bash
+      working-directory: ${{ inputs.repository_dir }}
+      env:
+        ENV_FILE_PATH: ${{ inputs.env_path }}
+      run: |
+        export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
+        yarn install --frozen-lockfile
+        yarn run build
+        yarn run build:docker
