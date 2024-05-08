@@ -25,5 +25,5 @@ runs:
         yarn version --new-version $RELEASE
         if [ "$SKIP_TAG" == "false" ]; then
           echo "Tagging yarn version $RELEASE"
-          git tag $RELEASE
+          git tag --force $RELEASE
         fi
