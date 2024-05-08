@@ -70,30 +70,33 @@ jobs:
         with:
           node-version: 18
 
-      - name: Set the release version, commit the change, and tag it
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ Java Repositories
         run: |
           (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
           (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
           (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
           (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
-          (echo "## Updating pass-ui ##")
-          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $RELEASE && git tag $RELEASE)
-          (echo "## Updating pass-acceptance-testing ##")
-          (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --verbose --new-version $RELEASE && git tag $RELEASE)
-          (echo "## Updating pass-docker ##")
-          (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
 
-      - name: Set pass-docker .env
-        id: set-docker-env
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-ui
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-acceptance-testing
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-acceptance-testing
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-docker
         run: |
-          {
-            echo 'PASS_DOCKER_ENV<<EOF'
-            cat ./combined/pass-docker/.env
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Echo pass-docker .env
-        run: echo ${{ steps.set-docker-env.outputs.PASS_DOCKER_ENV }}
+          cd combined/pass-docker
+          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
+          git commit -am "Update version to $RELEASE"
+          git tag $RELEASE
 
 #      - name: Release Java modules
 #        uses: ./main/.github/actions/maven-release
@@ -105,23 +108,45 @@ jobs:
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Build pass-ui
-        uses: ./combined/pass-ui/.github/actions/build-pass-ui
-        with:
-          is-prod: true
+        working-directory: combined/pass-ui
+        run: |
+          export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' ../pass-docker/.env | xargs -d '\n')
+          yarn install --frozen-lockfile
+          yarn run build
+          yarn run build:docker
 
       - name: Build new pass-docker images
         working-directory: combined/pass-docker
         run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
-      - name: Set the next dev version and commit the change
+      - name: Set dev ${{ env.$NEXT }}/commit ~ Java Repositories
         run: |
           (cd main && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT && git commit -am "Update version to $NEXT")
           (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
           (cd combined/pass-core && git commit -am "Update version to $NEXT")
           (cd combined/pass-support && git commit -am "Update version to $NEXT")
-          (cd combined/pass-ui && yarn install --frozen-lockfile && yarn version --new-version $NEXT)
-          (cd combined/pass-acceptance-testing && yarn install --frozen-lockfile && yarn version --new-version $NEXT)
-          (cd combined/pass-docker && sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env && git commit -am "Update version to $NEXT")
+
+      - name: Set dev ${{ env.RELEASE }}/commit ~ pass-ui
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-ui
+          skip_tag: "true"
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
+      - name: Set dev ${{ env.RELEASE }}/commit ~ pass-acceptance-testing
+        uses: ./main/.github/actions/yarn-version
+        with:
+          repository_dir: combined/pass-acceptance-testing
+          skip_tag: "true"
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
+      - name: Set dev ${{ env.RELEASE }}/commit ~ pass-docker
+        run: |
+          cd combined/pass-docker
+          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
+          git commit -am "Update version to $RELEASE"
 
       #      - name: Release dev Java modules
 #        working-directory: combined
