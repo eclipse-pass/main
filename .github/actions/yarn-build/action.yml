@@ -24,7 +24,6 @@ runs:
         ENV_FILE_PATH: ${{ inputs.env_path }}
         IS_DEV: ${{ inputs.is_dev }}
       run: |
-        grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH
         export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
         yarn install --frozen-lockfile
         if [ "$IS_DEV" == "true" ]; then
@@ -32,5 +31,4 @@ runs:
         else
           yarn run build
         fi
-          
         yarn run build:docker
