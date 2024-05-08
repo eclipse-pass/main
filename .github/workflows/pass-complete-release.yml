@@ -216,6 +216,7 @@ jobs:
 
       - name: Create GitHub main release
         run: |
+          gh release delete "$RELEASE" --repo=rpoet-jh/my-sandbox
           gh release create "$RELEASE" --repo=rpoet-jh/my-sandbox --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
