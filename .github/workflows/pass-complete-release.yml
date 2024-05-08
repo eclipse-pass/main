@@ -64,6 +64,13 @@ jobs:
         with:
           node-version: 18
 
+      - name: Set ${{ env.RELEASE }}/commit/tag ~ Java Repositories
+        run: |
+          (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag --force $RELEASE)
+          (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
+          (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag --force $RELEASE)
+          (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag --force $RELEASE)
+
       - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
         uses: ./main/.github/actions/yarn-version
         with:
