@@ -74,7 +74,7 @@ jobs:
 
       - name: Check for tags
         run: |
-          (cd main && echo "MAIN_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd main && echo "MAIN_TAG_EXISTS=$(git tag -l "foobar")" >> $GITHUB_ENV)
           (cd combined/pass-core && echo "PASS_CORE_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
           (cd combined/pass-support && echo "PASS_SUPPORT_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
 
