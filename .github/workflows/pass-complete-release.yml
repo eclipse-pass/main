@@ -64,81 +64,135 @@ jobs:
         with:
           node-version: 18
 
-      - name: Set ${{ env.RELEASE }}/commit/tag ~ Java Repositories
-        run: |
-          (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag --force $RELEASE)
-          (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
-          (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag --force $RELEASE)
-          (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag --force $RELEASE)
-
-      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
-        uses: ./main/.github/actions/yarn-version
+      - name: Login to GHCR
+        uses: docker/login-action@v2
         with:
-          repository_dir: combined/pass-ui
-        env:
-          RELEASE: ${{ env.RELEASE }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.JAVA_RELEASE_PAT }}
 
-      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-acceptance-testing
-        uses: ./main/.github/actions/yarn-version
-        with:
-          repository_dir: combined/pass-acceptance-testing
-        env:
-          RELEASE: ${{ env.RELEASE }}
-
-      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-docker
+      - name: Check for tags
         run: |
-          cd combined/pass-docker
-          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
-          git commit -am "Update version to $RELEASE"
-          git tag --force $RELEASE
+          (echo "ROOT_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd main && echo "MAIN_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd combined/pass-core && echo "PASS_CORE_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd combined/pass-support && echo "PASS_SUPPORT_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
 
-#      - name: Release Java modules
-#        uses: ./main/.github/actions/maven-release
+      - name: Echo tag values
+        run: |
+          echo "ROOT_TAG_EXISTS: ${{ env.ROOT_TAG_EXISTS }}"
+          echo "MAIN_TAG_EXISTS: ${{ env.MAIN_TAG_EXISTS }}"
+          echo "PASS_CORE_TAG_EXISTS: ${{ env.PASS_CORE_TAG_EXISTS }}"
+          echo "PASS_SUPPORT_TAG_EXISTS: ${{ env.PASS_SUPPORT_TAG_EXISTS }}"
+
+# make the set/publish/docker/push steps conditional on release tag not being in main
+      # mark: is there any correlation between git commits/tags and maven central artifact?  Don't think so
+      # could end up with duplicate commits in main on re-run - if commit push was good, but tag push failed
+      # should we check main, pass-core, pass-support for tags, to cover failure after main push?
+#      - name: Set ${{ env.RELEASE }}/commit/tag ~ Java Repositories
+#        run: |
+#          (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+#          (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
+#          (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+#          (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+
+      #      - name: Release Java modules
+      #        uses: ./main/.github/actions/maven-release
+      #        with:
+      #          repodir: combined
+      #        env:
+      #          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+#      - name: Push Docker images to GHCR
+#        run: |
+#          docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
+#          docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-notification-service:$RELEASE
+#          docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-journal-loader:$RELEASE
+#          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
+#
+#      - name: Push the commits and tags
+#        run: |
+#          (cd main && git push origin && git push origin --tags)
+#          (cd combined/pass-core && git push origin && git push origin --tags)
+#          (cd combined/pass-support && git push origin && git push origin --tags)
+
+
+# pass-ui - same tag check
+#      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
+#        uses: ./main/.github/actions/yarn-version
 #        with:
-#          repodir: combined
+#          repository_dir: combined/pass-ui
 #        env:
-#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+#          RELEASE: ${{ env.RELEASE }}
+#
+#      - name: Build ${{ env.RELEASE }} pass-ui
+#        uses: ./main/.github/actions/yarn-build
+#        with:
+#          repository_dir: combined/pass-ui
+#          env_path: ../pass-docker/.env
+#
+#      - name: Push Docker images to GHCR
+#        run: |
+#          docker push ghcr.io/eclipse-pass/pass-ui:$RELEASE
+#
+#      - name: Push the commits and tags
+#        run: |
+#          (cd combined/pass-ui && git push origin && git push origin --tags)
+#
+          
 
-      - name: Build ${{ env.RELEASE }} pass-ui
-        uses: ./main/.github/actions/yarn-build
-        with:
-          repository_dir: combined/pass-ui
-          env_path: ../pass-docker/.env
+#      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-acceptance-testing
+#        uses: ./main/.github/actions/yarn-version
+#        with:
+#          repository_dir: combined/pass-acceptance-testing
+#        env:
+#          RELEASE: ${{ env.RELEASE }}
+#
+#      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-docker
+#        run: |
+#          cd combined/pass-docker
+#          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
+#          git commit -am "Update version to $RELEASE"
+#          git tag --force $RELEASE
+#
+#      - name: Build ${{ env.RELEASE }} pass-docker images
+#        working-directory: combined/pass-docker
+#        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
-      - name: Build ${{ env.RELEASE }} pass-docker images
-        working-directory: combined/pass-docker
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
-      - name: Set dev ${{ env.NEXT }}/commit ~ Java Repositories
-        run: |
-          (cd main && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT && git commit -am "Update version to $NEXT")
-          (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
-          (cd combined/pass-core && git commit -am "Update version to $NEXT")
-          (cd combined/pass-support && git commit -am "Update version to $NEXT")
-
-      - name: Set dev ${{ env.NEXT }}/commit ~ pass-ui
-        uses: ./main/.github/actions/yarn-version
-        with:
-          repository_dir: combined/pass-ui
-          skip_tag: "true"
-        env:
-          RELEASE: ${{ env.NEXT }}
-
-      - name: Set dev ${{ env.NEXT }}/commit ~ pass-acceptance-testing
-        uses: ./main/.github/actions/yarn-version
-        with:
-          repository_dir: combined/pass-acceptance-testing
-          skip_tag: "true"
-        env:
-          RELEASE: ${{ env.NEXT }}
-
-      - name: Set dev ${{ env.NEXT }}/commit ~ pass-docker
-        run: |
-          cd combined/pass-docker
-          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
-          git commit -am "Update version to $NEXT"
+# conditional if commit message is not there with message
+#      - name: Set dev ${{ env.NEXT }}/commit ~ Java Repositories
+#        run: |
+#          (cd main && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT && git commit -am "Update version to $NEXT")
+#          (cd combined && mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT)
+#          (cd combined/pass-core && git commit -am "Update version to $NEXT")
+#          (cd combined/pass-support && git commit -am "Update version to $NEXT")
+#
+#      - name: Set dev ${{ env.NEXT }}/commit ~ pass-ui
+#        uses: ./main/.github/actions/yarn-version
+#        with:
+#          repository_dir: combined/pass-ui
+#          skip_tag: "true"
+#        env:
+#          RELEASE: ${{ env.NEXT }}
+#
+#      - name: Set dev ${{ env.NEXT }}/commit ~ pass-acceptance-testing
+#        uses: ./main/.github/actions/yarn-version
+#        with:
+#          repository_dir: combined/pass-acceptance-testing
+#          skip_tag: "true"
+#        env:
+#          RELEASE: ${{ env.NEXT }}
+#
+#      - name: Set dev ${{ env.NEXT }}/commit ~ pass-docker
+#        run: |
+#          cd combined/pass-docker
+#          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
+#          git commit -am "Update version to $NEXT"
 
 #      - name: Release dev Java modules
 #        working-directory: combined
@@ -149,23 +203,18 @@ jobs:
 #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
 #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
-      - name: Build ${{ env.NEXT }} pass-ui
-        uses: ./main/.github/actions/yarn-build
-        with:
-          repository_dir: combined/pass-ui
-          env_path: ../pass-docker/.env
-          is_dev: "true"
+#      - name: Build ${{ env.NEXT }} pass-ui
+#        uses: ./main/.github/actions/yarn-build
+#        with:
+#          repository_dir: combined/pass-ui
+#          env_path: ../pass-docker/.env
+#          is_dev: "true"
+#
+#      - name: Build ${{ env.NEXT }} pass-docker images
+#        working-directory: combined/pass-docker
+#        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
-      - name: Build ${{ env.NEXT }} pass-docker images
-        working-directory: combined/pass-docker
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
-      - name: Login to GHCR
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.JAVA_RELEASE_PAT }}
 
 #      - name: Push Docker images to GHCR
 #        run: |
