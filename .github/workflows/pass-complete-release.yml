@@ -83,6 +83,11 @@ jobs:
           echo "PASS_CORE_TAG_EXISTS: ${{ env.PASS_CORE_TAG_EXISTS }}"
           echo "PASS_SUPPORT_TAG_EXISTS: ${{ env.PASS_SUPPORT_TAG_EXISTS }}"
 
+      - name: Test step
+        if: ${{ ! (env.MAIN_TAG_EXISTS && env.PASS_CORE_TAG_EXISTS && env.PASS_SUPPORT_TAG_EXISTS) }}
+        run: |
+          echo "Running the test job"
+
 # make the set/publish/docker/push steps conditional on release tag not being in main
       # mark: is there any correlation between git commits/tags and maven central artifact?  Don't think so
       # could end up with duplicate commits in main on re-run - if commit push was good, but tag push failed
