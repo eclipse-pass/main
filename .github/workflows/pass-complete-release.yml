@@ -91,12 +91,11 @@ jobs:
           [[ -z $MAIN_TAG_EXISTS ]] && \
             (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
             echo "main already has tag $RELEASE"
-          (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
           [[ -z $PASS_CORE_TAG_EXISTS ]] && \
-            (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
+            (cd combined/pass-core && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
             echo "pass-core already has tag $RELEASE"
           [[ -z $PASS_SUPPORT_TAG_EXISTS ]] && \
-            (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
+            (cd combined/pass-support && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
             echo "pass-support already has tag $RELEASE";
 
 #      - name: Release Java modules
