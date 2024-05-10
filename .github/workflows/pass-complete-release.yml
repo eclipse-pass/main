@@ -91,12 +91,12 @@ jobs:
 
       - name: Test step
         run: |
-          ([[ -z $MAIN_TAG_EXISTS ]] && \
-            (echo "1Printing in test step NO tag" && echo "1Second statement") || \
-            echo "1Printing in test step second HAS tag")
-          ([[ -z $PASS_CORE_TAG_EXISTS ]] && \
-            (echo "2Printing in test step NO tag" && echo "2Second statement") || \ 
-            echo "2Printing in test step second HAS tag")
+          [[ -z $MAIN_TAG_EXISTS ]] &&
+            (echo "1Printing in test step NO tag" && echo "1Second statement") ||
+            echo "1Printing in test step second HAS tag";
+          [[ -z $PASS_CORE_TAG_EXISTS ]] &&
+            (echo "2Printing in test step NO tag" && echo "2Second statement") ||
+            echo "2Printing in test step second HAS tag";
 
 #      - name: Set ${{ env.RELEASE }}/commit/tag ~ Java Repositories
 #        if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
