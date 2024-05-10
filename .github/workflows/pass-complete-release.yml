@@ -77,47 +77,49 @@ jobs:
           (cd main && echo "MAIN_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
           (cd combined/pass-core && echo "PASS_CORE_TAG_EXISTS=$(git tag -l "foobar")" >> $GITHUB_ENV)
           (cd combined/pass-support && echo "PASS_SUPPORT_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd combined/pass-ui && echo "PASS_UI_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd combined/pass-acceptance-testing && echo "PASS_ACCPT_TEST_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+          (cd combined/pass-docker && echo "PASS_DOCKER_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
 
       - name: Create aggregate tag env vars
         run: |
           echo "ALL_JAVA_REPOS_TAG_EXISTS=${{ env.MAIN_TAG_EXISTS && env.PASS_CORE_TAG_EXISTS && env.PASS_SUPPORT_TAG_EXISTS }}" >> $GITHUB_ENV
 
-      - name: Echo tag values
-        run: |
-          echo "MAIN_TAG_EXISTS: ${{ env.MAIN_TAG_EXISTS }}"
-          echo "PASS_CORE_TAG_EXISTS: ${{ env.PASS_CORE_TAG_EXISTS }}"
-          echo "PASS_SUPPORT_TAG_EXISTS: ${{ env.PASS_SUPPORT_TAG_EXISTS }}"
-          echo "ALL_JAVA_REPOS_TAG_EXISTS: ${{ env.ALL_JAVA_REPOS_TAG_EXISTS }}"
-
       - name: Test step
         run: |
-          [[ -z $MAIN_TAG_EXISTS ]] &&
-            (echo "1Printing in test step NO tag" && echo "1Second statement") ||
-            echo "1Printing in test step second HAS tag";
-          [[ -z $PASS_CORE_TAG_EXISTS ]] &&
-            (echo "2Printing in test step NO tag" && echo "2Second statement") ||
-            echo "2Printing in test step second HAS tag";
+          [[ -z $MAIN_TAG_EXISTS ]] && \
+            (echo "1Printing in test step NO tag" && echo "1Second statement") || \
+            echo "1Printing in test step second HAS tag"
+          [[ -z $PASS_CORE_TAG_EXISTS ]] && \
+            (echo "2Printing in test step NO tag" && echo "2Second statement") || \
+            echo "2Printing in test step second HAS tag"
 
 #      - name: Set ${{ env.RELEASE }}/commit/tag ~ Java Repositories
 #        if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
 #        run: |
-#          ([[ -z $MAIN_TAG_EXISTS ]] && \
-#          (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
-#          echo "main already has tag $RELEASE")
+#          [[ -z $MAIN_TAG_EXISTS ]] && \
+#            (cd main && mvn versions:set -B -ntp -DnewVersion=$RELEASE && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
+#            echo "main already has tag $RELEASE"
 #          (cd combined && mvn versions:set -B -ntp -DnewVersion=$RELEASE)
-#          (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
-#          (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE)
+#          [[ -z $PASS_CORE_TAG_EXISTS ]] && \
+#            (cd combined/pass-core && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
+#            echo "pass-core already has tag $RELEASE"
+#          [[ -z $PASS_SUPPORT_TAG_EXISTS ]] && \
+#            (cd combined/pass-support && git commit -am "Update version to $RELEASE" && git tag $RELEASE) || \
+#            echo "pass-support already has tag $RELEASE";
 
-      #      - name: Release Java modules
-      #        uses: ./main/.github/actions/maven-release
-      #        with:
-      #          repodir: combined
-      #        env:
-      #          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      #          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      #          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+#      - name: Release Java modules
+#        if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
+#        uses: ./main/.github/actions/maven-release
+#        with:
+#          repodir: combined
+#        env:
+#          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+#          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+#          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
 #      - name: Push Docker images to GHCR
+#        if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
 #        run: |
 #          docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
 #          docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
@@ -127,14 +129,14 @@ jobs:
 #          docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
 #
 #      - name: Push the commits and tags
+#        if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
 #        run: |
 #          (cd main && git push origin && git push origin --tags)
 #          (cd combined/pass-core && git push origin && git push origin --tags)
 #          (cd combined/pass-support && git push origin && git push origin --tags)
 
-
-# pass-ui - same tag check
 #      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-ui
+#        if: ${{ ! env.PASS_UI_TAG_EXISTS }}
 #        uses: ./main/.github/actions/yarn-version
 #        with:
 #          repository_dir: combined/pass-ui
@@ -142,29 +144,39 @@ jobs:
 #          RELEASE: ${{ env.RELEASE }}
 #
 #      - name: Build ${{ env.RELEASE }} pass-ui
+#        if: ${{ ! env.PASS_UI_TAG_EXISTS }}
 #        uses: ./main/.github/actions/yarn-build
 #        with:
 #          repository_dir: combined/pass-ui
 #          env_path: ../pass-docker/.env
-#
+
 #      - name: Push Docker images to GHCR
+#        if: ${{ ! env.PASS_UI_TAG_EXISTS }}
 #        run: |
 #          docker push ghcr.io/eclipse-pass/pass-ui:$RELEASE
 #
 #      - name: Push the commits and tags
+#        if: ${{ ! env.PASS_UI_TAG_EXISTS }}
 #        run: |
 #          (cd combined/pass-ui && git push origin && git push origin --tags)
-#
-          
+
 
 #      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-acceptance-testing
+#        if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
 #        uses: ./main/.github/actions/yarn-version
 #        with:
 #          repository_dir: combined/pass-acceptance-testing
 #        env:
 #          RELEASE: ${{ env.RELEASE }}
-#
+
+#      - name: Push the commits and tags
+#        if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
+#        run: |
+#          (cd combined/acceptance-testing && git push origin && git push origin --tags)
+
+
 #      - name: Set ${{ env.RELEASE }}/commit/tag ~ pass-docker
+#        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
 #        run: |
 #          cd combined/pass-docker
 #          sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$RELEASE/" .env
@@ -172,9 +184,20 @@ jobs:
 #          git tag --force $RELEASE
 #
 #      - name: Build ${{ env.RELEASE }} pass-docker images
+#        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
 #        working-directory: combined/pass-docker
 #        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
 
+#      - name: Push Docker images to GHCR
+#        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
+#        run: |
+#          docker push ghcr.io/eclipse-pass/demo-ldap:$RELEASE
+#          docker push ghcr.io/eclipse-pass/idp:$RELEASE
+#
+#      - name: Push the commits and tags
+#        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
+#        run: |
+#          (cd combined/pass-docker && git push origin && git push origin --tags)
 
 # conditional if commit message is not there with message
 #      - name: Set dev ${{ env.NEXT }}/commit ~ Java Repositories
