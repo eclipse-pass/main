@@ -126,8 +126,11 @@ jobs:
       - name: Create GitHub main release ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
         run: |
+          gh release delete "$RELEASE" --repo=eclipse-pass/main
           gh release create "$RELEASE" --repo=eclipse-pass/main --generate-notes
+          gh release delete "$RELEASE" --repo=eclipse-pass/pass-core
           gh release create "$RELEASE" --repo=eclipse-pass/pass-core --generate-notes
+          gh release delete "$RELEASE" --repo=eclipse-pass/pass-support
           gh release create "$RELEASE" --repo=eclipse-pass/pass-support --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
