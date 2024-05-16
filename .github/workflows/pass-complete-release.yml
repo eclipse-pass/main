@@ -120,9 +120,9 @@ jobs:
       - name: Push the Release commits and tags ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
         run: |
-          (cd main && git push --atomic origin --force $RELEASE)
-          (cd combined/pass-core && git push --atomic origin --force $RELEASE)
-          (cd combined/pass-support && git push --atomic origin --force $RELEASE)
+          (cd main && git push --atomic origin main --force $RELEASE)
+          (cd combined/pass-core && git push --atomic origin main --force $RELEASE)
+          (cd combined/pass-support && git push --atomic origin main --force $RELEASE)
 
       - name: Create GitHub main release ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
@@ -158,7 +158,7 @@ jobs:
 
       - name: Push the Release commits and tags ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        run: cd combined/pass-ui && git push --atomic origin --force $RELEASE
+        run: cd combined/pass-ui && git push --atomic origin main --force $RELEASE
 
       - name: Create GitHub main release ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
@@ -177,7 +177,7 @@ jobs:
 
       - name: Push the Release commits and tags ~ pass-acceptance-testing
         if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
-        run: cd combined/pass-acceptance-testing && git push --atomic origin --force $RELEASE
+        run: cd combined/pass-acceptance-testing && git push --atomic origin main --force $RELEASE
 
       - name: Create GitHub main release ~ pass-acceptance-testing
         if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
@@ -206,7 +206,7 @@ jobs:
 
       - name: Push the Release commits and tags ~ pass-docker
         if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        run: cd combined/pass-docker && git push --atomic origin --force $RELEASE
+        run: cd combined/pass-docker && git push --atomic origin main --force $RELEASE
 
       - name: Create GitHub main release ~ pass-docker
         if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
@@ -241,9 +241,9 @@ jobs:
 
       - name: Push the Snapshot commits ~ Java Repositories
         run: |
-          (cd main && git push --atomic origin --force $NEXT_TAG)
-          (cd combined/pass-core && git push --atomic origin --force $NEXT_TAG)
-          (cd combined/pass-support && git push --atomic origin --force $NEXT_TAG)
+          (cd main && git push --atomic origin main --force $NEXT_TAG)
+          (cd combined/pass-core && git push --atomic origin main --force $NEXT_TAG)
+          (cd combined/pass-support && git push --atomic origin main --force $NEXT_TAG)
 
       - name: Set Snapshot/commit ~ pass-ui
         uses: ./main/.github/actions/yarn-version
@@ -264,7 +264,7 @@ jobs:
         run: docker push ghcr.io/eclipse-pass/pass-ui:$NEXT
 
       - name: Push the Snapshot commits ~ pass-ui
-        run: cd combined/pass-ui && git push --atomic origin --force $NEXT_TAG
+        run: cd combined/pass-ui && git push --atomic origin main --force $NEXT_TAG
 
       - name: Set Snapshot/commit ~ pass-acceptance-testing
         uses: ./main/.github/actions/yarn-version
@@ -275,7 +275,7 @@ jobs:
           RELEASE_TAG: ${{ env.NEXT_TAG }}
 
       - name: Push the Snapshot commits ~ pass-acceptance-testing
-        run: cd combined/pass-acceptance-testing && git push --atomic origin --force $NEXT_TAG
+        run: cd combined/pass-acceptance-testing && git push --atomic origin main --force $NEXT_TAG
 
       - name: Set Snapshot/commit ~ pass-docker
         run: |
@@ -294,4 +294,4 @@ jobs:
           docker push ghcr.io/eclipse-pass/idp:$NEXT
 
       - name: Push the Snapshot commits ~ pass-docker
-        run: cd combined/pass-docker && git push --atomic origin --force $NEXT_TAG
+        run: cd combined/pass-docker && git push --atomic origin main --force $NEXT_TAG
