@@ -6,6 +6,10 @@ inputs:
   repository_dir:
     description: 'Directory of repository to update'
     required: true
+  skip_tag:
+    description: 'Skip git tag'
+    required: false
+    default: "false"
 
 runs:
   using: composite
@@ -20,4 +24,7 @@ runs:
         yarn config set version-git-tag false
         yarn version --new-version $RELEASE
         git commit --allow-empty -am "Update version to $RELEASE"
-        git tag --force $RELEASE_TAG
+        if [ "$SKIP_TAG" == "false" ]; then
+          echo "Tagging yarn version $RELEASE"
+          git tag $RELEASE
+        fi
