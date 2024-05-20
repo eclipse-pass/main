@@ -18,9 +18,7 @@ The version should be chosen based on those guidelines.
 
 * Choose a release version that communicates the magnitude of the change.
 * Create a release checklist from the [Release Manager Actions Checklist Template](../release/release-actions-template.md). Version the release as `release-actions-X.X.X.md`. Update the template with any new steps made during the release process.
-* Order the projects to be released by their dependencies into a list such that each project only depend on projects earlier in the list.
-* For each project in the list, do the release.
-* Update images in pass-docker
+* Do the release.
 * Test the release
 * Publish release notes
 * Post a message about the release to the [PASS Google Group](https://groups.google.com/g/pass-general)
@@ -44,7 +42,7 @@ Most of the PASS release process is automated new, but if we need to do parts of
 
 ## Sonatype
 
-Sonatype deployment is handled by the automations. This information is provided for doing a Java release manually.
+The Sonatype deployment is handled by the automations. This information is provided for doing a Java release manually.
 
 Developers will need a Sonatype account to release Java projects.
 Maven must be configured to use the account by modifying your ~/.m2/settings.xml. Documentation for Sonatype publishing
@@ -81,6 +79,10 @@ Developers will need a GitHub account which is a member of the [eclipse-pass](ht
 
 ### Release sequence
 
+**The [Publish: Release All](/.github/workflows/pass-complete-release.yml) GitHub workflow will release all projects in the correct order.**  
+
+However, if for some reason, a manual release is required, an order must be followed.
+
 The Java projects must follow a strict sequence, following its dependency hierarchy. Other Javascript based projects can be released in any order. Both the Java and non-Java releases can be done in parallel, as there are no direct code dependencies between them.
 
 1. [`main`](https://github.com/eclipse-pass/main)
@@ -89,7 +91,6 @@ The Java projects must follow a strict sequence, following its dependency hierar
    2. [`pass-support`](https://github.com/eclipse-pass/pass-support)
 3. Non-Java projects
    * [`pass-ui`](https://github.com/eclipse-pass/pass-ui)
-   * [`pass-auth`](https://github.com/eclipse-pass/pass-auth)
    * [`pass-acceptance-testing`](https://github.com/eclipse-pass/pass-acceptance-testing)
 4. [`pass-docker`](https://github.com/eclipse-pass/pass-docker)
 
@@ -102,7 +103,7 @@ Maven is used to perform many of the release tasks. It sets versions and builds,
 
 The versions of all the Java artifacts are the same for a release. The parent pom in `main` sets the version to be inherited by all its children. This project therefore needs to be released first, as all other projects need to reference it. After this is released, other projects are released in an order which guarantees that all PASS dependencies for them have already been released. You will need to wait for artifacts to show up in Maven Central before building a module which depends on them.
 
-The process itself can be described as follows: release `main`, . For convenience we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
+The process itself can be described as follows: release `main`, . For convenience, we set and export environment variables RELEASE for the release version, and NEXT for the next development version (an example might be executing `export RELEASE=0.1.0` and `export NEXT=0.2.0-SNAPSHOT`)
 For each of these child projects, we first clone the source from GitHub, and operating on the principal branch (usually `main`).
 
 Update the reference to the parent pom and set the release version.
@@ -156,7 +157,7 @@ See the [/.github/workflows/release.yml] for the details on the exact commands t
 
 ## JavaScript projects
 
-The following projects can be released by performing the following steps manually until there is automation in place or when the release needs to be performed manually otherwsie.
+The following projects can be released by performing the following steps when the release needs to be performed manually.
 
 ### `pass-ui`
 
