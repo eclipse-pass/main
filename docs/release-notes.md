@@ -1,3 +1,20 @@
+## Release v1.7.0
+### Date: May 30, 2024
+
+Release Manager: Russ Poetker, JHU
+
+This release focused on adding a GitHub workflow that will complete the release of all PASS components. The pass-core metadata schema service was changed as a first step in supporting InvenioRDM integration. A few smaller bugs were also fixed.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/21?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.7.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.7.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.7.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.7.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.7.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.7.0
+
 ## Release v1.6.1
 ### Date: May 7, 2024
 
@@ -22,7 +39,7 @@ Release Components:
 
 Release Manager: Mark Patton, JHU
 
-This release focused on simplifying authentication support, writing documentation to make collaboration easier, and automated testing against a live PASS instance. The pass-core component took over the responsibilty for authentication and mediating access to pass-ui resources. This allowed us to to remove the no longer needed pass-auth component. The deposit services now also cleanup after the new automated tests.
+This release focused on simplifying authentication support, writing documentation to make collaboration easier, and automated testing against a live PASS instance. The pass-core component took over the responsibility for authentication and mediating access to pass-ui resources. This allowed us to remove the no longer needed pass-auth component. The deposit services now also cleanup after the new automated tests.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/20?closed=1
 
