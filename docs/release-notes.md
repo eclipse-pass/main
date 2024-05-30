@@ -3,7 +3,7 @@
 
 Release Manager: Russ Poetker, JHU
 
-This release focused on adding a GitHub workflow that will complete the release of all PASS components. The pass-core metadata schema service was changed as a first step in supporting InvenioRDM integration. A few smaller bugs were also fixed.
+This release focused on adding a GitHub workflow that will complete the release of all PASS components. The pass-core metadata schema service was changed as a first step in supporting InvenioRDM integration. There were several documentation tasks completed such as a Review Manual, Style Guide, and first round of reviews. There has been steps made to eventually add IaC for PASS. OpenTofu has been selected as the IaC tool; developing the terraform modules is in progress. A few smaller bugs were also fixed.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/21?closed=1
 
