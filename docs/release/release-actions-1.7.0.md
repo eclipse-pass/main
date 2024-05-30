@@ -35,5 +35,5 @@ This is the full detailed release process, including the steps that are performe
 - [x] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
 - [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](../dev/release.md#process)
 - [x] Update template if any steps were missed or if any new tasks were added. Also make note of these new steps in the release-actions-X.X.X.md file.
-- [ ] Update [Pass Demo](https://demo.eclipse-pass.org) to new release - [Publish to SNS Topic action](https://github.com/eclipse-pass/main/actions/workflows/deployToAWS.yml) using `Environment: demo`
+- [x] Update [Pass Demo](https://demo.eclipse-pass.org) to new release - [Publish to SNS Topic action](https://github.com/eclipse-pass/main/actions/workflows/deployToAWS.yml) using `Environment: demo`
 - [ ] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
