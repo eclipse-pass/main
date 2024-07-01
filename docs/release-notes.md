@@ -3,7 +3,7 @@
 
 Release Manager: Jared Galanis, JHU
 
-This release focused on adding CSRF protection to several PASS components. An optional InvenioRDM instance was added to pass-docker. Many deprecations that were preventing an upgrade of pass-ui to Ember v5.x were addressed. The IDP configuration was reworked to be loaded more dynamically via a url instead of a file. The team advanced an overhaul of existing documentation, where many older sources of documentation were reviewed for accuracy, relevance and categorization, and some of which were subsequently sythensized into new forms of documentation.
+This release focused on improving documentation, addressing technical debt, and fixing bugs. CSRF protection was added to several PASS components. An optional InvenioRDM instance was added to pass-docker. Many deprecations that were preventing an upgrade of pass-ui to Ember v5.x were addressed. The IDP configuration was reworked to be loaded more dynamically via a url instead of a file. The team advanced an overhaul of existing documentation, where many older sources of documentation were reviewed for accuracy, relevance and categorization, and some of which were subsequently synthesized into new forms of documentation.
 
 Tickets Completed: https://github.com/eclipse-pass/main/milestone/22?closed=1
 
