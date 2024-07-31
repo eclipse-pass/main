@@ -60,10 +60,10 @@ jobs:
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
 
-      - name: Setup Node & Yarn
-        uses: actions/setup-node@v3
+      - name: Setup Node & pnpm
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Login to GHCR
         uses: docker/login-action@v2
@@ -166,7 +166,7 @@ jobs:
 
       - name: Set Release/commit/tag ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-version
+        uses: ./main/.github/actions/node-version
         with:
           repository_dir: combined/pass-ui
         env:
@@ -174,7 +174,7 @@ jobs:
 
       - name: Build Release pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-build
+        uses: ./main/.github/actions/node-build
         with:
           repository_dir: combined/pass-ui
           env_path: ../pass-docker/.env
@@ -185,7 +185,7 @@ jobs:
 
       - name: Set Snapshot/commit ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-version
+        uses: ./main/.github/actions/node-version
         with:
           repository_dir: combined/pass-ui
           skip_tag: "true"
@@ -194,7 +194,7 @@ jobs:
 
       - name: Build Snapshot pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-build
+        uses: ./main/.github/actions/node-build
         with:
           repository_dir: combined/pass-ui
           env_path: ../pass-docker/.env
@@ -217,7 +217,7 @@ jobs:
 
       - name: Set Release/commit/tag ~ pass-acceptance-testing
         if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-version
+        uses: ./main/.github/actions/node-version
         with:
           repository_dir: combined/pass-acceptance-testing
         env:
@@ -225,7 +225,7 @@ jobs:
 
       - name: Set Snapshot/commit ~ pass-acceptance-testing
         if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-version
+        uses: ./main/.github/actions/node-version
         with:
           repository_dir: combined/pass-acceptance-testing
           skip_tag: "true"

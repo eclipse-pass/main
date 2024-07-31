@@ -1,6 +1,6 @@
-name: Update yarn version for release
+name: Update package version for release
 description: |
-  Updates yarn version which automatically does a commit and this action tags
+  Updates package version which automatically does a commit and this action tags
 
 inputs:
   repository_dir:
@@ -14,17 +14,21 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Update yarn version and tag
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+    - name: Update version and tag
       shell: bash
       working-directory: ${{ inputs.repository_dir }}
       env:
         SKIP_TAG: ${{ inputs.skip_tag }}
       run: |
-        yarn install --frozen-lockfile
-        yarn config set version-git-tag false
-        yarn version --new-version $RELEASE
+        pnpm install --frozen-lockfile
+        pnpm config set version-git-tag false
+        pnpm version --new-version $RELEASE
         git commit --allow-empty -am "Update version to $RELEASE"
         if [ "$SKIP_TAG" == "false" ]; then
-          echo "Tagging yarn version $RELEASE"
+          echo "Tagging version $RELEASE"
           git tag $RELEASE
         fi
