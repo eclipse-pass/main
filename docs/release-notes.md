@@ -1,3 +1,20 @@
+## Release v1.9.0
+### Date: July 31, 2024
+
+Release Manager: Russ Poetker, JHU
+
+This release focused on improving deployment tests, addressing technical debt, and improving documentation. Deployment tests were updated to make deposits into downstream repositories optional. If a deployment test deposit is made into a downstream DSpace repository, it will be automatically deleted after the test completes. More deprecations in pass-ui were fixed which allowed pass-ui to be upgraded to Ember v5.8. The pass-ui module now uses Embroider and pnpm for building. The team continued work on overhauling the existing documentation.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/23?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.9.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.9.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.9.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.9.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.9.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.9.0
+
 ## Release v1.8.0
 ### Date: July 1, 2024
 
