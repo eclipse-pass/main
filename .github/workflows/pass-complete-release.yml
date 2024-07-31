@@ -217,7 +217,7 @@ jobs:
 
       - name: Set Release/commit/tag ~ pass-acceptance-testing
         if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
-        uses: ./main/.github/actions/node-version
+        uses: ./main/.github/actions/yarn-version
         with:
           repository_dir: combined/pass-acceptance-testing
         env:
@@ -225,7 +225,7 @@ jobs:
 
       - name: Set Snapshot/commit ~ pass-acceptance-testing
         if: ${{ ! env.PASS_ACCPT_TEST_TAG_EXISTS }}
-        uses: ./main/.github/actions/node-version
+        uses: ./main/.github/actions/yarn-version
         with:
           repository_dir: combined/pass-acceptance-testing
           skip_tag: "true"
