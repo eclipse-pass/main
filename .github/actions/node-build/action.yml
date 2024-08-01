@@ -30,9 +30,5 @@ runs:
       run: |
         export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
         pnpm install --frozen-lockfile
-        if [ "$IS_DEV" == "true" ]; then
-          pnpm run build:dev
-        else
-          pnpm run build
-        fi
+        pnpm run build
         pnpm run build:docker
