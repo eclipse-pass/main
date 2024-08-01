@@ -1,3 +1,20 @@
+## Release v1.9.1
+### Date: August 1, 2024
+
+Release Manager: Russ Poetker, JHU
+
+This release fixes a bug with the layout of some of the pages in the UI.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/25?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.9.1
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.9.1
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.9.1
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.9.1
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.9.1
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.9.1
+
 ## Release v1.9.0
 ### Date: July 31, 2024
 
