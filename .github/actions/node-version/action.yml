@@ -25,8 +25,7 @@ runs:
         SKIP_TAG: ${{ inputs.skip_tag }}
       run: |
         pnpm install --frozen-lockfile
-        pnpm config set version-git-tag false
-        pnpm version --new-version $RELEASE
+        pnpm version --git-tag-version false --new-version $RELEASE
         git commit --allow-empty -am "Update version to $RELEASE"
         if [ "$SKIP_TAG" == "false" ]; then
           echo "Tagging version $RELEASE"
