@@ -1,3 +1,20 @@
+## Release v1.10.0
+### Date: August 28, 2024
+
+Release Manager: Russ Poetker, JHU
+
+This release focused on a new Deposit Services repository integration, NIHMS Data Loader automation, and Release process and Documentation improvements. Deposit services has been enhanced to be able to deposit into InvenioRDM. This can also be tested locally with pass-docker being able to start a local instance of InvenioRDM. There is a new automation available in NIHMS Data Loader for refreshing the NIHMS API Token. We made a change to the pass-core/pass-support releases to align the maven repackage plugin configuration with its latest recommendations. As part of this change, the repackaged jar file is no longer deployed to Maven Central during release. The team continued work on overhauling and improving the existing documentation.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/24?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.10.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.10.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.10.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.10.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.10.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.10.0
+
 ## Release v1.9.1
 ### Date: August 1, 2024
 
