@@ -115,6 +115,7 @@ jobs:
           docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-journal-loader:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-nihms-token-refresh:$RELEASE
 
       - name: Set Snapshot/commit ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
@@ -143,6 +144,7 @@ jobs:
           docker push ghcr.io/eclipse-pass/jhu-grant-loader:$NEXT
           docker push ghcr.io/eclipse-pass/pass-journal-loader:$NEXT
           docker push ghcr.io/eclipse-pass/pass-nihms-loader:$NEXT
+          docker push ghcr.io/eclipse-pass/pass-nihms-token-refresh:$NEXT
 
       - name: Push the commits and tags ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
