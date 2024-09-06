@@ -253,34 +253,12 @@ jobs:
           git commit --allow-empty -am "Update version to $RELEASE"
           git tag --force $RELEASE
 
-      - name: Build Release pass-docker images
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        working-directory: combined/pass-docker
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-
-      - name: Push Release Docker images to GHCR ~ pass-docker
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        run: |
-          docker push ghcr.io/eclipse-pass/demo-ldap:$RELEASE
-          docker push ghcr.io/eclipse-pass/idp:$RELEASE
-
       - name: Set Snapshot/commit ~ pass-docker
         if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
         run: |
           cd combined/pass-docker
           sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
           git commit --allow-empty -am "Update version to $NEXT"
-
-      - name: Build Snapshot pass-docker images
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        working-directory: combined/pass-docker
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-
-      - name: Push Snapshot Docker images to GHCR ~ pass-docker
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        run: |
-          docker push ghcr.io/eclipse-pass/demo-ldap:$NEXT
-          docker push ghcr.io/eclipse-pass/idp:$NEXT
 
       - name: Push the commits and tags ~ pass-docker
         if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
