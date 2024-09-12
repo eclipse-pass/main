@@ -27,7 +27,7 @@ Indicate the date/time the bug was realized.
 
 # Description
 
-What is the problem? What are the results?
+What is the problem? What are the results? Describe what is currently happening in detail.
 
 # Step to Reproduce
 
