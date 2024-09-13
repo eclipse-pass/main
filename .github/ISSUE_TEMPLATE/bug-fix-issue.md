@@ -19,7 +19,7 @@ Labels are not required for all tickets, but they are helpful for prioritization
 
 # Environment 
 
-Indicate the environment that the bug was realized. This can also be more than environment. Can include the following: OS, browser, local/dev/staging/prod etc.
+Indicate the environment that the bug was realized. This can also be more than environment and may include the following: OS, browser, local/dev/staging/prod etc.
 
 # Date/time occurred
 
@@ -29,7 +29,7 @@ Indicate the date/time the bug was realized.
 
 What is the problem? What are the results? Describe what is currently happening in detail.
 
-# Step to Reproduce
+# Steps to Reproduce
 
 What are the steps performed to reproduce this bug?
 
@@ -39,9 +39,9 @@ What are the expected results? What is the expected behavior?
 
 # Evidence
 
-Please provide screenshots/screen capture or other evidence such as a log files (scrubbed of sensitive information).
+Please provide screenshots/screen capture or other evidence such as log files (scrubbed of sensitive information).
 
 # Estimated Severity
 
-If possible, provide an initial estimate the severity of the issue. This of course can be adjusted after submission. 
+If possible, provide an initial severity estimate of the issue. This of course can be adjusted after submission. 
 
