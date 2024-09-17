@@ -1,17 +1,17 @@
 ---
-name: Bug Fix Issue
-about: A standard Bug Fix template and the types of information that should be captured in a Bug Fix issue.
+name: Bug Report Issue
+about: A standard Bug Report template and the types of information that should be captured in a Bug Report issue.
 title: ''
-labels: ''
+labels: 'bug'
 assignees: ''
 
 ---
 
 # Prerequisites
 
-Please answer the following questions for yourself before submitting a Bug Fix issue:
+Please answer the following questions for yourself before submitting a Bug Report issue:
 * Is the title clear and understandable at a glance?
-* Is a label present if appropriate?
+* Should any other labels be added to this issue?
 
 Labels are not required for all tickets, but they are helpful for prioritization. Please check the labels drop-down to see if any of the pre-set labels work for your ticket.
 
@@ -27,7 +27,7 @@ Indicate the date/time the bug was realized.
 
 # Description
 
-What is the problem? What are the results? Describe what is currently happening in detail.
+What is the problem? Describe what is currently happening in detail.
 
 # Steps to Reproduce
 
@@ -36,6 +36,10 @@ What are the steps performed to reproduce this bug?
 # Expected Results
 
 What are the expected results? What is the expected behavior?
+
+# Actual Results
+
+What are the actual results and provide any evidence of the actual results below.
 
 # Evidence
 
