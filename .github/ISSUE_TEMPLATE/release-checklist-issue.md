@@ -9,9 +9,9 @@ assignees: ''
 
 # Release Manager Actions Checklist
 
-|  |                 |
-| --- |-----------------|
-| Release version | MAJOR.MINOR.PATCH         |
+|                  |                            |
+|------------------|----------------------------|
+| Release version  | MAJOR.MINOR.PATCH          |
 | Next dev version | MAJOR.MINOR.PATCH-SNAPSHOT |
 
 ## Release Process Overview

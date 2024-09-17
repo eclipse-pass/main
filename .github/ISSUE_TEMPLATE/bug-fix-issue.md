@@ -19,7 +19,7 @@ Labels are not required for all tickets, but they are helpful for prioritization
 
 # Environment 
 
-Indicate the environment that the bug was realized. This can also be more than environment and may include the following: OS, browser, local/dev/staging/prod etc.
+Indicate the environment that the bug was realized. This can also be more than the environment and may include the following: OS, browser, local/dev/staging/prod etc.
 
 # Date/time occurred
 
