@@ -47,5 +47,4 @@ Please provide screenshots/screen capture or other evidence such as log files (s
 
 # Estimated Severity
 
-If possible, provide an initial severity estimate of the issue. This of course can be adjusted after submission. 
-
+If possible, provide an initial severity estimate of the issue. This of course can be adjusted after submission.
