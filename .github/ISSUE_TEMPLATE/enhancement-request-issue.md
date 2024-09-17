@@ -2,16 +2,16 @@
 name: Enhancement Request Issue
 about: A standard Enhancement Request template and the types of information that should be captured in a Enhancement Request issue.
 title: ''
-labels: ''
+labels: 'Improvement'
 assignees: ''
 
 ---
 
 # Prerequisites
 
-Please answer the following questions for yourself before submitting a Bug Fix issue:
+Please answer the following questions for yourself before submitting an Enhancement Request issue:
 * Is the title clear and understandable at a glance?
-* Is a label present if appropriate?
+* Should any other labels be added to this issue?
 
 Labels are not required for all tickets, but they are helpful for prioritization. Please check the labels drop-down to see if any of the pre-set labels work for your ticket.
 
@@ -19,7 +19,7 @@ Labels are not required for all tickets, but they are helpful for prioritization
 
 # Description
 
-A description of the enhancement.
+A description of the enhancement. What are the new features/improvements to this enhancement change?
 
 # Value
 
