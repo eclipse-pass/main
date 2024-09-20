@@ -1,6 +1,6 @@
-name: Build yarn module for release
+name: Build package module for release
 description: |
-  Build yarn module
+  Build package module
 
 inputs:
   repository_dir:
@@ -17,7 +17,11 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Builds yarn module
+    - name: Install pnpm
+      uses: pnpm/action-setup@v4
+      with:
+        version: 9
+    - name: Builds module
       shell: bash
       working-directory: ${{ inputs.repository_dir }}
       env:
@@ -25,10 +29,6 @@ runs:
         IS_DEV: ${{ inputs.is_dev }}
       run: |
         export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
-        yarn install --frozen-lockfile
-        if [ "$IS_DEV" == "true" ]; then
-          yarn run build:dev
-        else
-          yarn run build
-        fi
-        yarn run build:docker
+        pnpm install --frozen-lockfile
+        pnpm run build
+        pnpm run build:docker

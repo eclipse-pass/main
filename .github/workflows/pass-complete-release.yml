@@ -60,10 +60,10 @@ jobs:
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
 
-      - name: Setup Node & Yarn
-        uses: actions/setup-node@v3
+      - name: Setup Node & pnpm
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
 
       - name: Login to GHCR
         uses: docker/login-action@v2
@@ -115,6 +115,7 @@ jobs:
           docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-journal-loader:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
+          docker push ghcr.io/eclipse-pass/pass-nihms-token-refresh:$RELEASE
 
       - name: Set Snapshot/commit ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
@@ -143,6 +144,7 @@ jobs:
           docker push ghcr.io/eclipse-pass/jhu-grant-loader:$NEXT
           docker push ghcr.io/eclipse-pass/pass-journal-loader:$NEXT
           docker push ghcr.io/eclipse-pass/pass-nihms-loader:$NEXT
+          docker push ghcr.io/eclipse-pass/pass-nihms-token-refresh:$NEXT
 
       - name: Push the commits and tags ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
@@ -166,7 +168,7 @@ jobs:
 
       - name: Set Release/commit/tag ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-version
+        uses: ./main/.github/actions/node-version
         with:
           repository_dir: combined/pass-ui
         env:
@@ -174,7 +176,7 @@ jobs:
 
       - name: Build Release pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-build
+        uses: ./main/.github/actions/node-build
         with:
           repository_dir: combined/pass-ui
           env_path: ../pass-docker/.env
@@ -185,7 +187,7 @@ jobs:
 
       - name: Set Snapshot/commit ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-version
+        uses: ./main/.github/actions/node-version
         with:
           repository_dir: combined/pass-ui
           skip_tag: "true"
@@ -194,7 +196,7 @@ jobs:
 
       - name: Build Snapshot pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
-        uses: ./main/.github/actions/yarn-build
+        uses: ./main/.github/actions/node-build
         with:
           repository_dir: combined/pass-ui
           env_path: ../pass-docker/.env
@@ -251,34 +253,12 @@ jobs:
           git commit --allow-empty -am "Update version to $RELEASE"
           git tag --force $RELEASE
 
-      - name: Build Release pass-docker images
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        working-directory: combined/pass-docker
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-
-      - name: Push Release Docker images to GHCR ~ pass-docker
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        run: |
-          docker push ghcr.io/eclipse-pass/demo-ldap:$RELEASE
-          docker push ghcr.io/eclipse-pass/idp:$RELEASE
-
       - name: Set Snapshot/commit ~ pass-docker
         if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
         run: |
           cd combined/pass-docker
           sed -i "/^PASS_VERSION/s/.*/PASS_VERSION=$NEXT/" .env
           git commit --allow-empty -am "Update version to $NEXT"
-
-      - name: Build Snapshot pass-docker images
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        working-directory: combined/pass-docker
-        run: docker compose -f docker-compose.yml -f eclipse-pass.local.yml build idp ldap
-
-      - name: Push Snapshot Docker images to GHCR ~ pass-docker
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
-        run: |
-          docker push ghcr.io/eclipse-pass/demo-ldap:$NEXT
-          docker push ghcr.io/eclipse-pass/idp:$NEXT
 
       - name: Push the commits and tags ~ pass-docker
         if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
