@@ -1,3 +1,20 @@
+## Release v1.11.0
+### Date: September 30, 2024
+
+Release Manager: Mark Patton, JHU
+
+This release fixed a few small bugs around retrieving and displaying manuscripts associated with a DOI, added the ability to display a failure message from a repository to a user and refreshed the Shibboleth setup of the local development environment. Work on enhancing our documentation and moving it to Gitbook is ongoing.
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/26?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.11.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.11.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.11.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.11.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.11.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.11.0
+
 ## Release v1.10.0
 ### Date: August 28, 2024
 
