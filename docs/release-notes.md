@@ -1,3 +1,20 @@
+## Release v1.12.0
+### Date: October 31, 2024
+
+Release Manager: Tim Sanders, JHU
+
+With this version, we’ve implemented improvements in security, documentation, and fixed some minor bugs. The DOI service now avoids returning entries that lack a URL, and it provides more reliable functionality for retrieving filenames from URLs. Security enhancements include a review of security alerts, the removal of stack trace outputs on the 404 page, and the elimination of default values from sensitive application properties. Additionally, a new AWS feature allows application properties to be optionally loaded from the AWS SSM Parameter Store. Our documentation revamp is complete and accessible on our [new documentation site](https://docs.eclipse-pass.org)!
+
+Tickets Completed: https://github.com/eclipse-pass/main/milestone/27?closed=1
+
+Release Components:
+* main - https://github.com/eclipse-pass/main/releases/tag/1.12.0
+* pass-core - https://github.com/eclipse-pass/pass-core/releases/tag/1.12.0
+* pass-docker - https://github.com/eclipse-pass/pass-docker/releases/tag/1.12.0
+* pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.12.0
+* pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.12.0
+* pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.12.0
+
 ## Release v1.11.0
 ### Date: September 30, 2024
 
