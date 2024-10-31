@@ -14,6 +14,7 @@ Release Components:
 * pass-acceptance-testing - https://github.com/eclipse-pass/pass-acceptance-testing/releases/tag/1.12.0
 * pass-support - https://github.com/eclipse-pass/pass-support/releases/tag/1.12.0
 * pass-ui - https://github.com/eclipse-pass/pass-ui/releases/tag/1.12.0
+* pass-documentation - https://github.com/eclipse-pass/pass-documentation/releases/tag/1.12.0
 
 ## Release v1.11.0
 ### Date: September 30, 2024
