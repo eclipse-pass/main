@@ -16,8 +16,8 @@ submission workflows, enabling researchers to efficiently meet the diverse compl
 ## Documentation
 
 * [Eclipse PASS Website](https://eclipse-pass.org/index.html)
-* [PASS documentation](https://docs.eclipse-pass.org/)
-* [PASS JHU User guide](https://pass.jhu.edu/guide/)
+* [PASS Documentation](https://docs.eclipse-pass.org/)
+* [PASS JHU User Guide](https://pass.jhu.edu/guide/)
 
 ## Repositories
 
