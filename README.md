@@ -1,4 +1,4 @@
-# Eclipse Public Access Submission System (PASS)
+# Eclipse Public Access Submission System (PASS) ![Pass Main](https://github.com/eclipse-pass/main/actions/workflows/pass-complete-release.yml/badge.svg)
 
 The Public Access Submission System (PASS) is a comprehensive platform designed to help researchers comply with the 
 access policies mandated by their funders and institutions.
@@ -30,7 +30,3 @@ submission workflows, enabling researchers to efficiently meet the diverse compl
 ## License
 
 PASS is Open Source software released under the [Apache 2.0 license](LICENSE).
-
-
-
-
