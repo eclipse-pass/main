@@ -27,6 +27,10 @@ submission workflows, enabling researchers to efficiently meet the diverse compl
 * [PASS Acceptance Testing](https://github.com/eclipse-pass/pass-acceptance-testing/blob/main/README.md)
 * [PASS Docker](https://github.com/eclipse-pass/pass-docker/blob/main/README.md)
 
+## License
+
+PASS is Open Source software released under the [Apache 2.0 license](LICENSE).
+
 
 
 
