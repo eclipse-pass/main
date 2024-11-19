@@ -21,11 +21,11 @@ submission workflows, enabling researchers to efficiently meet the diverse compl
 
 ## Repositories
 
-* [PASS Core](https://github.com/eclipse-pass/pass-core/blob/main/README.md)
-* [PASS UI](https://github.com/eclipse-pass/pass-ui/blob/main/README.md)
-* [PASS Support](https://github.com/eclipse-pass/pass-support/blob/main/README.md)
-* [PASS Acceptance Testing](https://github.com/eclipse-pass/pass-acceptance-testing/blob/main/README.md)
-* [PASS Docker](https://github.com/eclipse-pass/pass-docker/blob/main/README.md)
+* [PASS Core](https://github.com/eclipse-pass/pass-core)
+* [PASS UI](https://github.com/eclipse-pass/pass-ui)
+* [PASS Support](https://github.com/eclipse-pass/pass-support)
+* [PASS Acceptance Testing](https://github.com/eclipse-pass)
+* [PASS Docker](https://github.com/eclipse-pass/pass-docker)
 
 ## License
 
