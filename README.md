@@ -18,14 +18,16 @@ submission workflows, enabling researchers to efficiently meet the diverse compl
 * [Eclipse PASS Website](https://eclipse-pass.org/index.html)
 * [PASS Documentation](https://docs.eclipse-pass.org/)
 * [PASS JHU User Guide](https://pass.jhu.edu/guide/)
+* [Contributing to PASS](https://docs.eclipse-pass.org/welcome-guide/contributing-to-pass)
 
 ## Repositories
 
 * [PASS Core](https://github.com/eclipse-pass/pass-core)
 * [PASS UI](https://github.com/eclipse-pass/pass-ui)
 * [PASS Support](https://github.com/eclipse-pass/pass-support)
-* [PASS Acceptance Testing](https://github.com/eclipse-pass)
+* [PASS Acceptance Testing](https://github.com/eclipse-pass/pass-acceptance-testing)
 * [PASS Docker](https://github.com/eclipse-pass/pass-docker)
+* [PASS Documentation](https://github.com/eclipse-pass/pass-documentation)
 
 ## License
 
