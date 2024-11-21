@@ -291,7 +291,7 @@
             <execution>
               <phase>generate-resources</phase>
               <goals>
-                <goal>makeAggregateBom</goal>
+                <goal>makeBom</goal>
               </goals>
               <configuration>
                 <projectType>application</projectType>
