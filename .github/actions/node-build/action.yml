@@ -9,10 +9,10 @@ inputs:
   env_path:
     description: 'Path to .env file'
     required: true
-  is_dev:
-    description: 'Is dev build'
+  create_sbom:
+    description: 'Create SBOM'
     required: false
-    default: "false"
+    default: "true"
 
 runs:
   using: composite
@@ -26,9 +26,12 @@ runs:
       working-directory: ${{ inputs.repository_dir }}
       env:
         ENV_FILE_PATH: ${{ inputs.env_path }}
-        IS_DEV: ${{ inputs.is_dev }}
+        CREATE_SBOM: ${{ inputs.create_sbom }}
       run: |
         export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
         pnpm install --frozen-lockfile
         pnpm run build
+        if [ "CREATE_SBOM" == "true" ]; then
+          pnpm run create_sbom
+        fi
         pnpm run build:docker
