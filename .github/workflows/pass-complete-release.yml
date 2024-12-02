@@ -200,7 +200,6 @@ jobs:
         with:
           repository_dir: combined/pass-ui
           env_path: ../pass-docker/.env
-          is_dev: "true"
 
       - name: Push Snapshot Docker images to GHCR ~ pass-ui
         if: ${{ ! env.PASS_UI_TAG_EXISTS }}
