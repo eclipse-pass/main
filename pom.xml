@@ -298,6 +298,7 @@
                 <outputDirectory>${project.build.outputDirectory}/META-INF/sbom</outputDirectory>
                 <outputFormat>json</outputFormat>
                 <outputName>application.cdx</outputName>
+                <classifier>cyclonedx-sbom</classifier>
               </configuration>
             </execution>
           </executions>
