@@ -32,7 +32,7 @@ runs:
         pnpm install --frozen-lockfile
         pnpm run build
         if [ "CREATE_SBOM" == "true" ]; then
-          rm -f *-cyclonedx.json
+          rm -f *-cyclonedx-sbom.json
           pnpm run create_sbom
         fi
         pnpm run build:docker
