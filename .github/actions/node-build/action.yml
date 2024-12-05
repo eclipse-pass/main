@@ -31,7 +31,7 @@ runs:
         export $(grep -v '^[#|SIGNING|PASS_CORE_POLICY]' $ENV_FILE_PATH | xargs -d '\n')
         pnpm install --frozen-lockfile
         pnpm run build
-        if [ "CREATE_SBOM" == "true" ]; then
+        if [ "$CREATE_SBOM" == "true" ]; then
           rm -f *-cyclonedx-sbom.json
           pnpm run create_sbom
         fi
