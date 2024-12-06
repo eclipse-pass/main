@@ -117,6 +117,18 @@ jobs:
           docker push ghcr.io/eclipse-pass/pass-nihms-loader:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-nihms-token-refresh:$RELEASE
 
+      - name: Copy Release SBOMs ~ Java Repositories
+        if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
+        run: |
+          cp combined/pass-core/pass-core-main/target/classes/META-INF/sbom/application.cdx.json pass-core-main-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-data-client/target/classes/META-INF/sbom/application.cdx.json pass-data-client-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-deposit-services/deposit-core/target/classes/META-INF/sbom/application.cdx.json deposit-core-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-grant-loader/target/classes/META-INF/sbom/application.cdx.json pass-grant-loader-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-journal-loader/pass-journal-loader-nih/target/classes/META-INF/sbom/application.cdx.json pass-journal-loader-nih-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-nihms-loader/nihms-data-harvest/target/classes/META-INF/sbom/application.cdx.json nihms-data-harvest-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-nihms-loader/nihms-data-transform-load/target/classes/META-INF/sbom/application.cdx.json nihms-data-transform-load-$RELEASE-cyclonedx-sbom.json
+          cp combined/pass-support/pass-notification-service/target/classes/META-INF/sbom/application.cdx.json pass-notification-service-$RELEASE-cyclonedx-sbom.json
+
       - name: Set Snapshot/commit ~ Java Repositories
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
         run: |
@@ -160,23 +172,15 @@ jobs:
           gh release create "$RELEASE" --repo=eclipse-pass/main --generate-notes
           gh release delete "$RELEASE" --repo=eclipse-pass/pass-core || true
           gh release create "$RELEASE" --repo=eclipse-pass/pass-core --generate-notes
-          cp combined/pass-core/pass-core-main/target/classes/META-INF/sbom/application.cdx.json pass-core-main-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-core pass-core-main-$RELEASE-cyclonedx-sbom.json
           gh release delete "$RELEASE" --repo=eclipse-pass/pass-support || true
           gh release create "$RELEASE" --repo=eclipse-pass/pass-support --generate-notes
-          cp combined/pass-support/pass-data-client/target/classes/META-INF/sbom/application.cdx.json pass-data-client-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support pass-data-client-$RELEASE-cyclonedx-sbom.json
-          cp combined/pass-support/pass-deposit-services/deposit-core/target/classes/META-INF/sbom/application.cdx.json deposit-core-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support deposit-core-$RELEASE-cyclonedx-sbom.json
-          cp combined/pass-support/pass-grant-loader/target/classes/META-INF/sbom/application.cdx.json pass-grant-loader-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support pass-grant-loader-$RELEASE-cyclonedx-sbom.json
-          cp combined/pass-support/pass-journal-loader/pass-journal-loader-nih/target/classes/META-INF/sbom/application.cdx.json pass-journal-loader-nih-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support pass-journal-loader-nih-$RELEASE-cyclonedx-sbom.json
-          cp combined/pass-support/pass-nihms-loader/nihms-data-harvest/target/classes/META-INF/sbom/application.cdx.json nihms-data-harvest-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support nihms-data-harvest-$RELEASE-cyclonedx-sbom.json
-          cp combined/pass-support/pass-nihms-loader/nihms-data-transform-load/target/classes/META-INF/sbom/application.cdx.json nihms-data-transform-load-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support nihms-data-transform-load-$RELEASE-cyclonedx-sbom.json
-          cp combined/pass-support/pass-notification-service/target/classes/META-INF/sbom/application.cdx.json pass-notification-service-$RELEASE-cyclonedx-sbom.json
           gh release upload "$RELEASE" --repo=eclipse-pass/pass-support pass-notification-service-$RELEASE-cyclonedx-sbom.json
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
