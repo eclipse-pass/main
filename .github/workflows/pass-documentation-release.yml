@@ -1,0 +1,41 @@
+name: "Publish: Release Documentation"
+run-name: Publish Documentation
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseversion:
+        description: 'Release version'
+        required: true
+      nextversion:
+        description: 'Next dev version'
+        required: true
+        
+permissions:
+  contents: write
+
+jobs:
+  Merge:
+    runs-on: ubuntu-latest
+
+#    env:
+#      MAIN_BRANCH: main
+#      DEVELOPMENT_BRANCH: development
+
+    steps:
+      - name: Checkout Development ( ${{env.DEVELOPMENT_BRANCH}} )
+        uses: actions/checkout@v4
+        with:
+          ref: ${{env.DEVELOPMENT_BRANCH}}
+          fetch-depth: 0 # checkout the entire history
+
+      - name: Configure git user
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Execute production merge
+        run: |
+          git checkout $MAIN_BRANCH
+          git merge $DEVELOPMENT_BRANCH
+          git push origin $MAIN_BRANCH
