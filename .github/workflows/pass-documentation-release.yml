@@ -4,11 +4,11 @@ run-name: Publish Documentation
 on:
   workflow_dispatch:
     inputs:
-      releaseversion:
-        description: 'Release version'
+      MAIN_BRANCH:
+        description: 'Branch Receiving the Merge'
         required: true
-      nextversion:
-        description: 'Next dev version'
+      DEVELOPMENT_BRANCH:
+        description: 'Branch that has content that needs to be Merged'
         required: true
         
 permissions:
@@ -26,6 +26,7 @@ jobs:
       - name: Checkout Development ( ${{env.DEVELOPMENT_BRANCH}} )
         uses: actions/checkout@v4
         with:
+          repository: eclipse-pass/pass-documentation
           ref: ${{env.DEVELOPMENT_BRANCH}}
           fetch-depth: 0 # checkout the entire history
 
