@@ -2,15 +2,11 @@ name: "Publish: Release Documentation"
 run-name: Publish Documentation
 
 on:
-  workflow_dispatch:
-    inputs:
-      MAIN_BRANCH:
-        description: 'Branch Receiving the Merge'
-        required: true
-      DEVELOPMENT_BRANCH:
-        description: 'Branch that has content that needs to be Merged'
-        required: true
-        
+#  workflow_dispatch:
+  push:
+    branches:
+      - "cs/976"
+
 permissions:
   contents: write
 
@@ -18,9 +14,11 @@ jobs:
   Merge:
     runs-on: ubuntu-latest
 
-#    env:
+    env:
 #      MAIN_BRANCH: main
 #      DEVELOPMENT_BRANCH: development
+      MAIN_BRANCH: cs/ReleaseAutomationTest1
+      DEVELOPMENT_BRANCH: cs/ReleaseAutomationTest2
 
     steps:
       - name: Checkout Development ( ${{env.DEVELOPMENT_BRANCH}} )
