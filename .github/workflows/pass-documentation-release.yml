@@ -17,6 +17,7 @@ jobs:
     env:
 #      MAIN_BRANCH: main
 #      DEVELOPMENT_BRANCH: development
+      GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
       MAIN_BRANCH: cs/ReleaseAutomationTest1
       DEVELOPMENT_BRANCH: cs/ReleaseAutomationTest2
 
