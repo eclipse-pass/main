@@ -17,7 +17,6 @@ jobs:
     env:
 #      MAIN_BRANCH: main
 #      DEVELOPMENT_BRANCH: development
-      GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
       MAIN_BRANCH: cs/ReleaseAutomationTest1
       DEVELOPMENT_BRANCH: cs/ReleaseAutomationTest2
 
@@ -25,6 +24,7 @@ jobs:
       - name: Checkout Development ( ${{env.DEVELOPMENT_BRANCH}} )
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.JAVA_RELEASE_PAT }}
           repository: eclipse-pass/pass-documentation
           ref: ${{env.DEVELOPMENT_BRANCH}}
           fetch-depth: 0 # checkout the entire history
