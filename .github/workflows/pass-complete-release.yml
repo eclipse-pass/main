@@ -292,3 +292,8 @@ jobs:
         run: gh release create "$RELEASE" --repo=eclipse-pass/pass-docker --generate-notes
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
+
+      - name: Publish Documentation
+        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
+        uses: ./main/.github/workflows/maven-release/pass-documentation-release.yml
+        secrets: inherit
