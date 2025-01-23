@@ -81,6 +81,10 @@ jobs:
           (cd combined/pass-acceptance-testing && echo "PASS_ACCPT_TEST_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
           (cd combined/pass-docker && echo "PASS_DOCKER_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
 
+      - name: Create Documentation Release tag env vars
+        run: |
+          echo "PASS_DOCUMENTATION_TAG_EXISTS="$RELEASE"" >> $GITHUB_ENV
+
       - name: Create aggregate tag env vars
         run: |
           echo "ALL_JAVA_REPOS_TAG_EXISTS=${{ env.MAIN_TAG_EXISTS && env.PASS_CORE_TAG_EXISTS && env.PASS_SUPPORT_TAG_EXISTS }}" >> $GITHUB_ENV
@@ -294,6 +298,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
 
       - name: Publish Documentation
-        if: ${{ ! env.PASS_DOCKER_TAG_EXISTS }}
+        if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
         uses: ./main/.github/workflows/maven-release/pass-documentation-release.yml
         secrets: inherit
+        
+      - name: Create GitHub Documentation release ~ pass-documentation
+        if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
+        run: gh release create "$RELEASE" --repo=eclipse-pass/pass-documentation --generate-notes
+        env:
+          GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
