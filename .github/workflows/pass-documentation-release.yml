@@ -33,4 +33,4 @@ jobs:
         run: |
           git checkout $MAIN_BRANCH
           git merge $DEVELOPMENT_BRANCH
-          git push origin $MAIN_BRANCH
+          git push --atomic origin $MAIN_BRANCH
