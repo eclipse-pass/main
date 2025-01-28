@@ -299,7 +299,15 @@ jobs:
         if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
         uses: ./main/.github/workflows/maven-release/pass-documentation-release.yml
         secrets: inherit
-        
+
+      - name: Set Release/commit/tag ~ pass-documentation
+        if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
+        uses: ./main/.github/actions/node-version
+        with:
+          repository_dir: combined/pass-documentation
+        env:
+          RELEASE: ${{ env.RELEASE }}
+
       - name: Create GitHub Documentation release ~ pass-documentation
         if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
         run: gh release create "$RELEASE" --repo=eclipse-pass/pass-documentation --generate-notes
