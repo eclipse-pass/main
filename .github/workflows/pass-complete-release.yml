@@ -59,6 +59,7 @@ jobs:
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-ui.git combined/pass-ui
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-documentation.git combined/pass-documentation
 
       - name: Setup Node & pnpm
         uses: actions/setup-node@v4
@@ -80,11 +81,8 @@ jobs:
           (cd combined/pass-ui && echo "PASS_UI_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
           (cd combined/pass-acceptance-testing && echo "PASS_ACCPT_TEST_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
           (cd combined/pass-docker && echo "PASS_DOCKER_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
-
-      - name: Create Documentation Release tag env vars
-        run: |
-          echo "PASS_DOCUMENTATION_TAG_EXISTS="$RELEASE"" >> $GITHUB_ENV
-
+          (cd combined/pass-documentation && echo "PASS_DOCUMENTATION_TAG_EXISTS=$(git tag -l "$RELEASE")" >> $GITHUB_ENV)
+                    
       - name: Create aggregate tag env vars
         run: |
           echo "ALL_JAVA_REPOS_TAG_EXISTS=${{ env.MAIN_TAG_EXISTS && env.PASS_CORE_TAG_EXISTS && env.PASS_SUPPORT_TAG_EXISTS }}" >> $GITHUB_ENV
