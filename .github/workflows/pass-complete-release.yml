@@ -59,6 +59,7 @@ jobs:
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-ui.git combined/pass-ui
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-acceptance-testing.git combined/pass-acceptance-testing
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-docker
+          git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-docker.git combined/pass-documentation
 
       - name: Setup Node & pnpm
         uses: actions/setup-node@v4
@@ -298,7 +299,7 @@ jobs:
         if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
         run: |
           cd combined/pass-documentation
-          git merge development
+          git merge -m "Release $RELEASE Merge" development
           git tag --force $RELEASE
           git push --atomic origin main --force $RELEASE
           gh release create "$RELEASE" --repo=eclipse-pass/pass-documentation --generate-notes
