@@ -310,6 +310,8 @@ jobs:
 
       - name: Create GitHub Documentation release ~ pass-documentation
         if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
-        run: gh release create "$RELEASE" --repo=eclipse-pass/pass-documentation --generate-notes
+        run: |
+            gh release create "$RELEASE" --repo=eclipse-pass/pass-documentation --generate-notes
+            git tag --force $RELEASE
         env:
           GITHUB_TOKEN: ${{ secrets.JAVA_RELEASE_PAT }}
