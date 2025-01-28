@@ -1,4 +1,4 @@
-name: "Publish: Release Documentation"
+name: "Publish: Documentation Merge"
 run-name: Publish Documentation
 
 on:
