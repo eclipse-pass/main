@@ -14,6 +14,11 @@ on:
         description: Should acceptance tests be run?
         type: boolean
         default: true
+      project-key:
+        description: 'The project key that is set in SonarQube for each repository'
+        default: ''
+        required: true
+        type: string
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
