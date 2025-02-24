@@ -45,7 +45,7 @@ jobs:
           cache: 'maven'
 
       - name: Run Tests
-        run: mvn -U -B -V -ntp verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn -U -B -V -ntp verify sonar:sonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
       - name: Acceptance tests
         if: ${{ inputs.run_acceptance_tests }}
