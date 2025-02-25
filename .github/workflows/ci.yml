@@ -45,17 +45,7 @@ jobs:
           cache: 'maven'
 
       - name: Run Tests
-        run: mvn -U -B -V -ntp verify
-
-      - name: SonarQubeScan
-        uses: SonarSource/sonarqube-scan-action@v4
-        with:
-          args: >
-            -Dsonar.projectKey=${{ inputs.project-key }}
-            -Dsonar.organization=eclipse-pass
-            -Dsonar.java.binaries='**/target/classes'
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -U -B -V -ntp verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
       - name: Acceptance tests
         if: ${{ inputs.run_acceptance_tests }}
