@@ -44,6 +44,9 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
+      - name: Fetch full history
+        run: git fetch --unshallow
+
       - name: Run Tests
         run: mvn -U -B -V -ntp verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
