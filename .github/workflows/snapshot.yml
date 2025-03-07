@@ -21,6 +21,8 @@ jobs:
     steps:
       - name: Checkout latest code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup Java & Maven
         uses: actions/setup-java@v3
@@ -41,7 +43,7 @@ jobs:
       # Only execute for -SNAPSHOT versions
       - name: Publish SNAPSHOT
         if: ${{ endsWith(steps.project_version.outputs.version, '-SNAPSHOT') }}
-        run: mvn -B -ntp clean deploy
+        run: mvn -B -ntp clean deploy org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
