@@ -85,6 +85,11 @@
 
     <checkstyle.version>8.41.1</checkstyle.version>
     <duraspace-codestyle.version>1.1.0</duraspace-codestyle.version>
+    <sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
+    <sonar.projectName>eclipse-pass-parent</sonar.projectName>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.organization>eclipse-pass</sonar.organization>
+    <sonar.projectKey>eclipse-pass_main</sonar.projectKey>
   </properties>
 
   <build>
@@ -326,6 +331,12 @@
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>${sonar-maven-plugin.version}</version>
       </plugin>
     </plugins>
   </build>
