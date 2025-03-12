@@ -43,7 +43,7 @@ jobs:
       # Only execute for -SNAPSHOT versions
       - name: Publish SNAPSHOT
         if: ${{ endsWith(steps.project_version.outputs.version, '-SNAPSHOT') }}
-        run: mvn -B -ntp clean deploy org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+        run: mvn -B -ntp clean deploy org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.branch.name=main -Dsonar.token=${{ secrets.SONAR_TOKEN }}
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
