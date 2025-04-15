@@ -21,6 +21,6 @@ assignees: ''
 to ensure there are no outstanding Security Vulnerabilities.
 - [ ] Upgrade Dockerfile base image in pass-core if needed
 - [ ] Upgrade Dockerfile base image in pass-support modules if needed
-- [ ] Upgrade Dockerfile base image pass-ui if needed
+- [ ] Upgrade Dockerfile base image in pass-ui if needed
 - [ ] In pass-core and pass-support modules, check java version to determine if upgrade is needed
 - [ ] In pass-ui and pass-acceptance-testing, check node version to determine if upgrade is needed
