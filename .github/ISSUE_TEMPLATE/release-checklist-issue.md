@@ -46,5 +46,4 @@ This is the full detailed release process, including the steps that are performe
 - [ ] Check that correct tickets are in the release milestone. [GitHub Ticket Update](https://docs.eclipse-pass.org/developer-documentation/release#update-release-notes)
 - [ ] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
 - [ ] Post a message about the release to the PASS Google Group.  [Notes about the PASS Google Group](https://docs.eclipse-pass.org/developer-documentation/release#process)
-- [ ] Update [Pass Demo](https://demo.eclipse-pass.org) to new release - [Publish to SNS Topic action](https://github.com/eclipse-pass/main/actions/workflows/deployToAWS.yml) using `Environment: demo`
 - [ ] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
