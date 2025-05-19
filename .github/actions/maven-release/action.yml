@@ -33,15 +33,8 @@ runs:
         mvn -B -U -V -ntp -P release -DstagingProgressTimeoutMinutes=15 clean $goal 2>&1 | tee release.log
         code=${PIPESTATUS[0]}
 
-        marker1="Remote staging repositories are being released"
-        marker2="Failed to execute goal org.sonatype.plugins:nexus-staging-maven-plugin"
-
         if [ "$code" -ne "0" ]; then
-          if grep -q "$marker1" release.log && grep -q "$marker2" release.log; then
-            echo "Failed cleaning up after pushing to Sonatype, but it may have succeeded anyway."
-          else
-            exit "$code"
-          fi
+          exit "$code"
         fi
 
     - name: Wait for Maven Central
