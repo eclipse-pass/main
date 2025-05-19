@@ -143,7 +143,7 @@ jobs:
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
         working-directory: combined
         run: |
-          mvn -B -V -ntp -P release clean deploy -DskipTests -DskipITs
+          mvn -B -V -ntp clean deploy -DskipTests -DskipITs
         env:
           MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
