@@ -43,6 +43,6 @@ This is the full detailed release process, including the steps that are performe
 
 - [ ] Test the release by using the [acceptance test workflow](https://github.com/eclipse-pass/pass-acceptance-testing/actions/workflows/test.yml). Enter the release number into the Ref field.
 - [ ] Draft release message and have technical & community lead provide feedback. Ensure that a link to the release notes is included in the release message.
-- [ ] Post a message about the release to the [PASS Google Group](https://groups.google.com/g/pass-general).
+- [ ] Post the release message to the [PASS Google Group](https://groups.google.com/g/pass-general).
 - [ ] Archive the release GitHub Issues in the Project by going to the [Kanban Board](https://github.com/orgs/eclipse-pass/projects/4/views/2), scrolling to the Done column, verifying that all issues in the list are in the release Milestone, then selecting the ellipsis button and "Archive all".
 - [ ] Send message to Eclipse PASS slack #pass-dev channel that the release is complete.
