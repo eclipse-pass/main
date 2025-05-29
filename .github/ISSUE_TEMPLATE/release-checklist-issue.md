@@ -22,7 +22,7 @@ This is the full detailed release process, including the steps that are performe
 - [ ] Identify the version to be utilized for the release. This should be the version of the current GitHub Milestone.
 - [ ] Ensure all code commits and PRs intended for the release have been merged.
 - [ ] Issue a code freeze statement on the Eclipse PASS slack #pass-dev channel to notify all developers that a release is imminent.
-- [ ] Check that the correct issues are in the GitHub Milestone for the release.
+- [ ] Verify that the correct issues are in the GitHub Milestone for the release.
 - [ ] Write release notes in the [Release Notes doc](https://github.com/eclipse-pass/pass-documentation/blob/main/community/release-notes.md), submit a PR for the changes, and ensure the PR is merged. Release Notes should be written to be understandable by community members who are not technical.
 
 ## Release Projects
