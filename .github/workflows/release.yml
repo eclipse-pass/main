@@ -8,8 +8,8 @@
 # Various secrets are needed to do the release.
 #
 # Credentials for Sonatype
-#   - OSSRH_USERNAME
-#   - OSSRH_PASSWORD
+#   - CENTRAL_SONATYPE_TOKEN_USERNAME
+#   - CENTRAL_SONATYPE_TOKEN_PASSWORD
 # GPG key + passphrase to sign artifacts for Maven Central
 #   - MAVEN_GPG_PASSPHRASE
 #   - MAVEN_GPG_KEY
@@ -79,8 +79,8 @@ jobs:
       - name: Release Java modules
         uses: eclipse-pass/main/.github/actions/maven-release@main
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_SONATYPE_TOKEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_SONATYPE_TOKEN_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Set the next dev version and commit the change
@@ -93,8 +93,8 @@ jobs:
         run: |
           mvn -B -ntp -P release clean deploy -DskipTests -DskipITs
         env:
-          MAVEN_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_SONATYPE_TOKEN_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_SONATYPE_TOKEN_PASSWORD }}
           MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
       - name: Login to GHCR
