@@ -71,8 +71,8 @@ jobs:
 
       - name: Set the release version, commit the change, and tag it
         run: |
-          mvn versions:update-parent -B -ntp -DparentVersion=$RELEASE
-          mvn versions:set -B -ntp -DnewVersion=$RELEASE
+          mvn versions:update-parent -DskipResolution=true -DparentVersion=$RELEASE
+          mvn versions:update-child-modules
           git commit -am "Update version to $RELEASE"
           git tag $RELEASE
 
@@ -85,8 +85,8 @@ jobs:
 
       - name: Set the next dev version and commit the change
         run: |
-          mvn versions:update-parent -B -ntp -DallowSnapshots=true -DparentVersion=$NEXT
-          mvn versions:set -B -ntp -DallowSnapshots=true -DnewVersion=$NEXT
+          mvn versions:update-parent -DskipResolution=true -DallowSnapshots=true -DparentVersion=$NEXT
+          mvn versions:update-child-modules
           git commit -am "Update version to $NEXT"
 
       - name: Release dev Java modules
