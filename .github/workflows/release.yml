@@ -74,6 +74,7 @@ jobs:
           mvn -B -ntp clean install -DskipTests -DskipITs
           mvn versions:update-parent -DskipResolution=true -DparentVersion=$RELEASE
           mvn versions:update-child-modules
+          mvn versions:update-child-modules
           git commit -am "Update version to $RELEASE"
           git tag $RELEASE
 
@@ -87,6 +88,7 @@ jobs:
       - name: Set the next dev version and commit the change
         run: |
           mvn versions:update-parent -DskipResolution=true -DallowSnapshots=true -DparentVersion=$NEXT
+          mvn versions:update-child-modules
           mvn versions:update-child-modules
           git commit -am "Update version to $NEXT"
 
