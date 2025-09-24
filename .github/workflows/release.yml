@@ -71,6 +71,7 @@ jobs:
 
       - name: Set the release version, commit the change, and tag it
         run: |
+          mvn -B -ntp clean install -DskipTests -DskipITs
           mvn versions:update-parent -DskipResolution=true -DparentVersion=$RELEASE
           mvn versions:update-child-modules
           git commit -am "Update version to $RELEASE"
