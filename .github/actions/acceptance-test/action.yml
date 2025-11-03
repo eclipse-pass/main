@@ -46,7 +46,7 @@ runs:
       run: |
         yarn install --frozen-lockfile
         npx testcafe \
-          'chrome:headless --ignore-certificate-errors --allow-insecure-localhost' \
+          'chrome:headless --ignore-certificate-errors --allow-insecure-localhost --disable-features=LocalNetworkAccessChecks' \
           --hostname localhost \
           --base-url http://localhost:8080 \
           tests/*Tests.js \
