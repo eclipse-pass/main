@@ -16,13 +16,13 @@ runs:
       shell: bash
 
     - name: Checkout pass-docker
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         repository: eclipse-pass/pass-docker
         path: pass-docker
 
     - name: Checkout pass-acceptance-testing
-      uses: actions/checkout@v3
+      uses: actions/checkout@v6
       with:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
