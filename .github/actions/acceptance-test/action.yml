@@ -40,6 +40,13 @@ runs:
         docker images
         docker compose images
 
+    - name: Use Node.js 24
+      uses: actions/setup-node@v5
+      with:
+        node-version: '24'
+        cache: 'yarn'
+        cache-dependency-path: 'pass-acceptance-testing/yarn.lock'
+
     - name: Run acceptance tests
       shell: bash
       working-directory: pass-acceptance-testing
