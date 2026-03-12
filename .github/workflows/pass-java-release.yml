@@ -23,12 +23,12 @@ jobs:
       NEXT: ${{ inputs.nextversion }}
     steps:
       - name: Checkout main
-        uses: actions/checkout@v3
+        uses: actions/checkout@v6
         with:
           path: main
 
       - name: Setup Java & Maven
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: 'temurin'

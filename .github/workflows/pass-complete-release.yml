@@ -19,13 +19,13 @@ jobs:
       NEXT: ${{ inputs.nextversion }}
     steps:
       - name: Checkout main
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: main
           fetch-depth: 0
 
       - name: Setup Java & Maven
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v5
         with:
           java-version: 17
           distribution: 'temurin'
@@ -62,9 +62,9 @@ jobs:
           git clone https://${{ secrets.JAVA_RELEASE_PAT }}@github.com/eclipse-pass/pass-documentation.git combined/pass-documentation
 
       - name: Setup Node & pnpm
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Login to GHCR
         uses: docker/login-action@v2
