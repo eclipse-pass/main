@@ -16,13 +16,13 @@ runs:
       shell: bash
 
     - name: Checkout pass-docker
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: eclipse-pass/pass-docker
         path: pass-docker
 
     - name: Checkout pass-acceptance-testing
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         repository: eclipse-pass/pass-acceptance-testing
         path: pass-acceptance-testing
@@ -41,7 +41,7 @@ runs:
         docker compose images
 
     - name: Use Node.js 24
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5.0.0
       with:
         node-version: '24'
         cache: 'yarn'
