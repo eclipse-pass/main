@@ -299,6 +299,8 @@ jobs:
         if: ${{ ! env.PASS_DOCUMENTATION_TAG_EXISTS }}
         run: |
           cd combined/pass-documentation
+          git checkout main
+          git pull origin main
           git merge -m "Release $RELEASE Merge" origin/development
           git tag --force $RELEASE
           git push --atomic origin main --force $RELEASE
