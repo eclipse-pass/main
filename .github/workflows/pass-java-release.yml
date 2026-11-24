@@ -106,8 +106,6 @@ jobs:
         run: |
           docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT
-          docker push ghcr.io/eclipse-pass/pass-core-main-for-test-only:$RELEASE
-          docker push ghcr.io/eclipse-pass/pass-core-main-for-test-only:$NEXT
           docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
           docker push ghcr.io/eclipse-pass/deposit-services-core:$NEXT
           docker push ghcr.io/eclipse-pass/pass-notification-service:$RELEASE
