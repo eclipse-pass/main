@@ -114,7 +114,6 @@ jobs:
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
         run: |
           docker push ghcr.io/eclipse-pass/pass-core-main:$RELEASE
-          docker push ghcr.io/eclipse-pass/pass-core-main-for-test-only:$RELEASE
           docker push ghcr.io/eclipse-pass/deposit-services-core:$RELEASE
           docker push ghcr.io/eclipse-pass/pass-notification-service:$RELEASE
           docker push ghcr.io/eclipse-pass/jhu-grant-loader:$RELEASE
@@ -156,7 +155,6 @@ jobs:
         if: ${{ ! env.ALL_JAVA_REPOS_TAG_EXISTS }}
         run: |
           docker push ghcr.io/eclipse-pass/pass-core-main:$NEXT
-          docker push ghcr.io/eclipse-pass/pass-core-main-for-test-only:$NEXT
           docker push ghcr.io/eclipse-pass/deposit-services-core:$NEXT
           docker push ghcr.io/eclipse-pass/pass-notification-service:$NEXT
           docker push ghcr.io/eclipse-pass/jhu-grant-loader:$NEXT
